@@ -1,0 +1,22 @@
+configuration: Release
+
+install:
+- choco install GitVersion
+- choco install opencover -source https://nuget.org/api/v2/
+- choco install coveralls.io -source https://nuget.org/api/v2/
+- choco install resharper-clt
+- GitVersion /output buildserver /UpdateAssemblyInfo true
+
+cache:
+- src\packages
+- C:\ProgramData\chocolatey\bin\OpenCover.Console.exe
+- C:\ProgramData\chocolatey\bin\coveralls.net.exe
+- C:\ProgramData\chocolatey\lib
+
+build:
+  project: Vika.sln
+  verbosity: minimal
+
+after_build:
+- inspectcode /o="inspectcodereport.xml" "Vika.sln"
+- NVika\bin\Release\NVika buildserver "inspectcodereport.xml"
