@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.IO;
 
 namespace NVika
 {
+    [Export]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class Logger
     {
         private readonly List<string> categories;

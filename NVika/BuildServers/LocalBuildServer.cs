@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 
 namespace NVika
 {
+    [Export]
     internal sealed class LocalBuildServer : IBuildServer
     {
         private bool _applyToCurrentContext = false;

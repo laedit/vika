@@ -1,18 +1,26 @@
 ﻿using ManyConsole;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace NVika
 {
-    internal sealed class BuildServerCommand : ConsoleCommand
+    [Export(typeof(ConsoleCommand))]
+    public class BuildServerCommand : ConsoleCommand
     {
         private string reportPath;
         private ReportTypes _reportType;
         private IFileSystem _fileSystem;
         private readonly Logger _logger;
 
+        [ImportMany]
+        private IEnumerable<IBuildServer> _buildServers;
+        [Import]
+        private LocalBuildServer _localBuildServer;
+
+        [ImportingConstructor]
         public BuildServerCommand(IFileSystem fileSystem, Logger logger)
         {
             _fileSystem = fileSystem;
@@ -98,22 +106,10 @@ namespace NVika
             return _issueTypes[issueTypeId];
         }
 
-        private IEnumerable<IBuildServer> _buildServers;
-        private IBuildServer _localBuildServer;
-
         private IEnumerable<IBuildServer> GetApplicableBuildServer()
         {
-            if(_buildServers == null)
-            {
-                _localBuildServer = new LocalBuildServer();
-                _buildServers = new List<IBuildServer>
-                {
-                    _localBuildServer,
-                    new AppVeyorBuildServer()
-                };
-            }
-
             var applicableBuildServers = _buildServers.Where(bs => bs.CanApplyToCurrentContext());
+
             if(!applicableBuildServers.Any())
             {
                 applicableBuildServers = new List<IBuildServer> { _localBuildServer };

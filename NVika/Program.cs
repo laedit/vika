@@ -2,8 +2,11 @@
 using NDesk.Options;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.IO.Abstractions;
 using System.Reflection;
+using System.ComponentModel.Composition;
+using System.Linq;
 
 namespace NVika
 {
@@ -14,19 +17,33 @@ namespace NVika
             return new Program().Run(args);
         }
 
-        internal IFileSystem FileSystem { get; private set; }
-        internal Logger Logger { get; private set; }
+        [Import]
+        private Logger _logger;
 
-        public Program()
-        {
-            FileSystem = new FileSystem();
-            Logger = new Logger();
-            Logger.SetWriter(Console.Out);
-            Logger.AddCategory("info");
-            Logger.AddCategory("error");
-        }
+        [ImportMany]
+        private IEnumerable<ConsoleCommand> _commands;
 
         private int Run(string[] args)
+        {
+            Compose();
+
+            InitializeLogger();
+
+            args = SetDebug(args);
+
+            _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
+
+            return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
+        }
+
+        private void InitializeLogger()
+        {
+            _logger.SetWriter(Console.Out);
+            _logger.AddCategory("info");
+            _logger.AddCategory("error");
+        }
+
+        private string[] SetDebug(string[] args)
         {
             var argsList = new List<string>(args);
 
@@ -40,17 +57,29 @@ namespace NVika
             if (debug)
             {
                 argsList.Remove("-debug");
-                Logger.AddCategory("debug");
+                _logger.AddCategory("debug");
             }
 
-            Logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
-
-            return ConsoleCommandDispatcher.DispatchCommand(GetCommands(), argsList.ToArray(), Console.Out);
+            return argsList.ToArray();
         }
 
-        private IEnumerable<ConsoleCommand> GetCommands()
+        private void Compose()
         {
-            return new List<ConsoleCommand> { new BuildServerCommand(FileSystem, Logger) };
+            try
+            {
+                var first = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+                var container = new CompositionContainer(first);
+
+                var batch = new CompositionBatch();
+                batch.AddExportedValue<IFileSystem>(new FileSystem());
+                batch.AddPart(this);
+                container.Compose(batch);
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                _logger.Info(@"Unable to load: \r\n{0}", string.Join("\r\n", ex.LoaderExceptions.Select(e => e.Message)));
+                throw;
+            }
         }
     }
 }
