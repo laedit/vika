@@ -24,16 +24,16 @@ namespace NVika
             return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"));
         }
 
-        public async void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
+        public void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("APPVEYOR_API_URL"));
 
-                var response = await httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName });
+                var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Result;
 
                 _logger.Debug("AppVeyor CompilationMessage Response: {0}", response.StatusCode);
-                _logger.Debug(await response.Content.ReadAsStringAsync());
+                _logger.Debug(response.Content.ReadAsStringAsync().Result);
             }
         }
     }
