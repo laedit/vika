@@ -20,5 +20,5 @@ build:
   verbosity: minimal
 
 after_build:
-- inspectcode /o="inspectcodereport.xml" "Vika.sln"
+- C:\ProgramData\chocolatey\lib\resharper-clt.portable.8.2.1000.4527\tools\inspectcode /o="inspectcodereport.xml" "Vika.sln"
 - NVika\bin\Release\NVika buildserver "inspectcodereport.xml" -debug
