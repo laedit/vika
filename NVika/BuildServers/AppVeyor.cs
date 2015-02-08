@@ -58,9 +58,8 @@ namespace NVika
                 _logger.Debug("Category: {0}", category);
                 _logger.Debug("FileName: {0}", filename);
                 _logger.Debug("Line: {0}", line);
-                _logger.Debug("Column: {0}", offset);
                 _logger.Debug("ProjectName: {0}", projectName);
-                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = details, Category = category, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Wait();
+                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = details, Category = category, FileName = filename, Line = line, ProjectName = projectName }).Wait();
 
             }
         }
