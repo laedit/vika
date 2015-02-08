@@ -29,11 +29,12 @@ namespace NVika
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("APPVEYOR_API_URL"));
+                _logger.Debug("AppVeyor API url: {0}", httpClient.BaseAddress);
 
-                var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Result;
-
-                _logger.Debug("AppVeyor CompilationMessage Response: {0}", response.StatusCode);
-                _logger.Debug(response.Content.ReadAsStringAsync().Result);
+                var responseTask = httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName });
+                responseTask.Wait();
+                _logger.Debug("AppVeyor CompilationMessage Response: {0}", responseTask.Result.StatusCode);
+                _logger.Debug(responseTask.Result.Content.ReadAsStringAsync().Result);
             }
         }
     }
