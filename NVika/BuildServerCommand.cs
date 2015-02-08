@@ -1,4 +1,6 @@
 ﻿using ManyConsole;
+using NVika.Parsers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO.Abstractions;
@@ -11,7 +13,6 @@ namespace NVika
     public class BuildServerCommand : ConsoleCommand
     {
         private string reportPath;
-        private ReportTypes _reportType;
         private IFileSystem _fileSystem;
         private readonly Logger _logger;
 
@@ -20,6 +21,8 @@ namespace NVika
         private IEnumerable<IBuildServer> _buildServers;
         [Import]
         private LocalBuildServer _localBuildServer;
+        [ImportMany]
+        private IEnumerable<IReportParser> _parsers;
 #pragma warning restore 0649
 
         [ImportingConstructor]
@@ -29,9 +32,7 @@ namespace NVika
             _logger = logger;
 
             this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
-            this.HasOption("r|report=", "Report to analyze", s => reportPath = s);
             this.HasAdditionalArguments(1, "Report to analyze");
-            this.HasOption<ReportTypes>("t|type=", "Type of the report", s => _reportType = s);
 
             // TODO
             // force display warnings to console additionally to the build server
@@ -41,82 +42,79 @@ namespace NVika
 
         public override int Run(string[] remainingArguments)
         {
-            if(string.IsNullOrWhiteSpace(reportPath) && remainingArguments.Length == 1)
+            if (string.IsNullOrWhiteSpace(reportPath) && remainingArguments.Length == 1)
             {
                 reportPath = remainingArguments[0];
             }
-
             _logger.Debug("Report path is '{0}'", reportPath);
 
-            if(!_fileSystem.File.Exists(reportPath))
+            if (!_fileSystem.File.Exists(reportPath))
             {
                 _logger.Error("The report '{0}' was not found.", reportPath);
                 return 1;
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
-            _logger.Debug("The following build servers will be used:");
+            _logger.Info("The following build servers will be used:");
             foreach (var buildServer in applicableBuildServers)
             {
-                _logger.Debug("\t- {0}", buildServer.Name);
+                _logger.Info("\t- {0}", buildServer.Name);
             }
 
-            var doc = XDocument.Load(reportPath);
+            XDocument report = null;
+            try
+            {
+                report = XDocument.Load(reportPath);
+            }
+            catch(Exception ex)
+            {
+                _logger.Error("An exception happened when loading the report: {0}", ex);
+                return 2;
+            }
+
+            if (report == null || string.IsNullOrWhiteSpace(report.ToString()))
+            {
+                _logger.Error("The report file is empty");
+                return 2;
+            }
 
             // Report type Detection
-            if(doc.FirstNode is XComment && ((XComment)doc.FirstNode).Value.Contains("InspectCode"))
+            var parser = GetParser(report);
+            if (parser == null)
             {
-                _reportType = ReportTypes.InspectCode;
+                _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
+                return 3;
             }
+            _logger.Info("Report type is '{0}'", parser.Name);
 
-            _logger.Debug("Report type is '{0}'", _reportType);
+            var issues = parser.Parse(report);
+            _logger.Debug("{0} issues types was found", issues.Count());
 
-            // Parsing TODO export to another lib
-            var issuesType = doc.Descendants("IssueType");
-            _logger.Debug("{0} issues types was found", issuesType.Count());
-
-            foreach (var project in doc.Descendants("Project"))
+            foreach (var issue in issues)
             {
-                foreach (var issue in project.Descendants("Issue"))
+                foreach (var buildServer in applicableBuildServers)
                 {
-                    var issueType = GetIssueType(issuesType, issue.Attribute("TypeId").Value);
-                    
-                    var lineAttribute = issue.Attribute("Line");
-                    var line = lineAttribute == null ? string.Empty : lineAttribute.Value;
-
-                    var offsetAttribute = issue.Attribute("Offset");
-                    var offset = offsetAttribute == null ? string.Empty : offsetAttribute.Value;
-
-                    foreach (var buildServer in applicableBuildServers)
-                    {
-                        buildServer.WriteMessage(issue.Attribute("TypeId").Value, issueType.Attribute("Severity").Value, issue.Attribute("Message").Value, issue.Attribute("File").Value, line, offset, project.Attribute("Name").Value);
-                    }
+                    buildServer.WriteMessage(issue);
                 }
             }
             
-            return issuesType.Any(it => it.Attribute("Severity").Value == "ERROR") ? 1 : 0;
-        }
-
-        private Dictionary<string, XElement> _issueTypes = new Dictionary<string,XElement>();
-
-        private XElement GetIssueType(IEnumerable<XElement> issueTypes, string issueTypeId)
-        {
-            if(!_issueTypes.ContainsKey(issueTypeId))
-            {
-                _issueTypes.Add(issueTypeId, issueTypes.First(it => it.Attribute("Id").Value == issueTypeId));
-            }
-            return _issueTypes[issueTypeId];
+            return issues.Any(i => i.Severity == IssueSeverity.Error) ? 4 : 0;
         }
 
         private IEnumerable<IBuildServer> GetApplicableBuildServer()
         {
             var applicableBuildServers = _buildServers.Where(bs => bs.CanApplyToCurrentContext());
 
-            if(!applicableBuildServers.Any())
+            if (!applicableBuildServers.Any())
             {
                 applicableBuildServers = new List<IBuildServer> { _localBuildServer };
             }
             return applicableBuildServers;
+        }
+
+        private IReportParser GetParser(XDocument document)
+        {
+            return _parsers.FirstOrDefault(p => p.CanParse(document));
         }
     }
 }

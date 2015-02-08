@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NVika.Parsers;
+using System;
 using System.ComponentModel.Composition;
 using System.Net.Http;
 
@@ -26,40 +27,38 @@ namespace NVika
             return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"));
         }
 
-        public void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
+        public void WriteMessage(Issue issue)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(_appVeyorAPIUrl);
 
-                var dashIndex = offset.IndexOf("-");
-                if (dashIndex > -1)
+                string category = "information";
+                switch (issue.Severity)
                 {
-                    offset = offset.Substring(0, dashIndex);
-                }
-
-                // TODO convert category to an enum
-                switch (category)
-                {
-                    case "ERROR": category = "error";
+                    case IssueSeverity.Error: category = "error";
                         break;
 
-                    case "WARNING": category = "warning";
-                        break;
-
-                    default: category = "information";
+                    case IssueSeverity.Warning: category = "warning";
                         break;
                 }
 
-                filename = filename.Replace(projectName + @"\", string.Empty);
+                string filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
 
                 _logger.Debug("Send compilation message to AppVeyor:");
-                _logger.Debug("Message: {0}", message);
+                _logger.Debug("Message: {0}", issue.Message);
                 _logger.Debug("Category: {0}", category);
-                _logger.Debug("FileName: {0}", filename);
-                _logger.Debug("Line: {0}", line);
-                _logger.Debug("ProjectName: {0}", projectName);
-                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = details, Category = category, FileName = filename, Line = line, ProjectName = projectName }).Wait();
+                _logger.Debug("FileName: {0}", filePath);
+                _logger.Debug("Line: {0}", issue.Line);
+                _logger.Debug("ProjectName: {0}", issue.Project);
+                httpClient.PostAsJsonAsync("api/build/compilationmessages", new 
+                { 
+                    Message = issue.Message, 
+                    Category = category, 
+                    FileName = filePath, 
+                    Line = issue.Line, 
+                    ProjectName = issue.Project 
+                }).Wait();
 
             }
         }

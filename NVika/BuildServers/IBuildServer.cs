@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using NVika.Parsers;
+using System.ComponentModel.Composition;
 
 namespace NVika
 {
@@ -9,6 +10,6 @@ namespace NVika
 
         bool CanApplyToCurrentContext();
 
-        void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName);
+        void WriteMessage(Issue issue);
     }
 }

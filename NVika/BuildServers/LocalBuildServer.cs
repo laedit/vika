@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NVika.Parsers;
+using System;
 using System.ComponentModel.Composition;
 
 namespace NVika
@@ -18,9 +19,9 @@ namespace NVika
             return _applyToCurrentContext;
         }
 
-        public void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
+        public void WriteMessage(Issue issue)
         {
-            Console.WriteLine("{0} {1} '{2}' - Line {3}: {4}", category, message, filename, line, details);
+            Console.WriteLine("{0} {1} '{2}' - Line {3}: {4}", issue.Severity, issue.Message, issue.FilePath, issue.Line, issue.Message);
         }
     }
 }

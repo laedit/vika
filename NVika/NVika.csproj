@@ -63,9 +63,12 @@
     <Compile Include="BuildServers\IBuildServer.cs" />
     <Compile Include="BuildServers\LocalBuildServer.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Parsers\InspectCodeParser.cs" />
+    <Compile Include="Parsers\IReportParser.cs" />
+    <Compile Include="Parsers\Issue.cs" />
+    <Compile Include="Parsers\IssueSeverity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
