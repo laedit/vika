@@ -51,15 +51,16 @@ namespace NVika
                         break;
                 }
 
+                filename = filename.Replace(projectName + @"\", string.Empty);
+
                 _logger.Debug("Send compilation message to AppVeyor:");
                 _logger.Debug("Message: {0}", message);
                 _logger.Debug("Category: {0}", category);
-                _logger.Debug("Details: {0}", details);
                 _logger.Debug("FileName: {0}", filename);
                 _logger.Debug("Line: {0}", line);
                 _logger.Debug("Column: {0}", offset);
                 _logger.Debug("ProjectName: {0}", projectName);
-                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Wait();
+                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = details, Category = category, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Wait();
 
             }
         }

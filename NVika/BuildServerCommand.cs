@@ -15,10 +15,12 @@ namespace NVika
         private IFileSystem _fileSystem;
         private readonly Logger _logger;
 
+#pragma warning disable 0649
         [ImportMany]
         private IEnumerable<IBuildServer> _buildServers;
         [Import]
         private LocalBuildServer _localBuildServer;
+#pragma warning restore 0649
 
         [ImportingConstructor]
         public BuildServerCommand(IFileSystem fileSystem, Logger logger)

@@ -2,11 +2,11 @@
 using NDesk.Options;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO.Abstractions;
-using System.Reflection;
-using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reflection;
 
 namespace NVika
 {
@@ -17,11 +17,13 @@ namespace NVika
             return new Program().Run(args);
         }
 
+#pragma warning disable 0649
         [Import]
         private Logger _logger;
 
         [ImportMany]
         private IEnumerable<ConsoleCommand> _commands;
+#pragma warning restore 0649
 
         private int Run(string[] args)
         {
