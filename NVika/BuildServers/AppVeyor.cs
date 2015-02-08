@@ -26,11 +26,30 @@ namespace NVika
             return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"));
         }
 
-        public async void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
+        public void WriteMessage(string message, string category, string details, string filename, string line, string offset, string projectName)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(_appVeyorAPIUrl);
+
+                var dashIndex = offset.IndexOf("-");
+                if (dashIndex > -1)
+                {
+                    offset = offset.Substring(0, dashIndex);
+                }
+
+                // TODO convert category to an enum
+                switch (category)
+                {
+                    case "ERROR": category = "error";
+                        break;
+
+                    case "WARNING": category = "warning";
+                        break;
+
+                    default: category = "information";
+                        break;
+                }
 
                 _logger.Debug("Send compilation message to AppVeyor:");
                 _logger.Debug("Message: {0}", message);
@@ -40,7 +59,8 @@ namespace NVika
                 _logger.Debug("Line: {0}", line);
                 _logger.Debug("Column: {0}", offset);
                 _logger.Debug("ProjectName: {0}", projectName);
-                await httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName });
+                httpClient.PostAsJsonAsync("api/build/compilationmessages", new { Message = message, Category = category, Details = details, FileName = filename, Line = line, Column = offset, ProjectName = projectName }).Wait();
+
             }
         }
     }
