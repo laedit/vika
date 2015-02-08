@@ -5,6 +5,11 @@ namespace NVika
 {
     internal sealed class AppVeyorBuildServer : IBuildServer
     {
+        public string Name
+        {
+            get { return "AppVeyor"; }
+        }
+
         public bool CanApplyToCurrentContext()
         {
             return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"));

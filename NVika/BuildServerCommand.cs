@@ -1,9 +1,8 @@
 ﻿using ManyConsole;
-using System;
-using System.IO.Abstractions;
-using System.Xml.Linq;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO.Abstractions;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace NVika
 {
@@ -12,11 +11,12 @@ namespace NVika
         private string reportPath;
         private ReportTypes _reportType;
         private IFileSystem _fileSystem;
-        // TODO log
+        private readonly Logger _logger;
 
-        public BuildServerCommand(IFileSystem fileSystem)
+        public BuildServerCommand(IFileSystem fileSystem, Logger logger)
         {
             _fileSystem = fileSystem;
+            _logger = logger;
 
             this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
             this.HasOption("r|report=", "Report to analyze", s => reportPath = s);
@@ -36,13 +36,20 @@ namespace NVika
                 reportPath = remainingArguments[0];
             }
 
+            _logger.Debug("Report path is '{0}'", reportPath);
+
             if(!_fileSystem.File.Exists(reportPath))
             {
-                // display log and return
+                _logger.Error("The report '{0}' was not found.", reportPath);
                 return 1;
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
+            _logger.Debug("The following build servers will be used:");
+            foreach (var buildServer in applicableBuildServers)
+            {
+                _logger.Debug("\t- {0}", buildServer.Name);
+            }
 
             var doc = XDocument.Load(reportPath);
 
@@ -52,8 +59,12 @@ namespace NVika
                 _reportType = ReportTypes.InspectCode;
             }
 
+            _logger.Debug("Report type is '{0}'", _reportType);
+
             // Parsing TODO export to another lib
             var issuesType = doc.Descendants("IssueType");
+            _logger.Debug("{0} issues types was found", issuesType.Count());
+
             foreach (var project in doc.Descendants("Project"))
             {
                 foreach (var issue in project.Descendants("Issue"))

@@ -6,6 +6,11 @@ namespace NVika
     {
         private bool _applyToCurrentContext = false;
 
+        public string Name
+        {
+            get { return "Local console"; }
+        }
+
         public bool CanApplyToCurrentContext()
         {
             return _applyToCurrentContext;
