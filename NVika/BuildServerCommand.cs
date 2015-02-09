@@ -9,12 +9,10 @@ using System.Xml.Linq;
 
 namespace NVika
 {
-    [Export(typeof(ConsoleCommand))]
-    public class BuildServerCommand : ConsoleCommand
+    public class BuildServerCommand : BaseCommand
     {
         private string reportPath;
         private IFileSystem _fileSystem;
-        private readonly Logger _logger;
 
 #pragma warning disable 0649
         [ImportMany]
@@ -27,6 +25,7 @@ namespace NVika
 
         [ImportingConstructor]
         public BuildServerCommand(IFileSystem fileSystem, Logger logger)
+            : base(logger)
         {
             _fileSystem = fileSystem;
             _logger = logger;
@@ -40,7 +39,7 @@ namespace NVika
             // warning as error
         }
 
-        public override int Run(string[] remainingArguments)
+        protected override int Execute(string[] remainingArguments)
         {
             if (string.IsNullOrWhiteSpace(reportPath) && remainingArguments.Length == 1)
             {
@@ -66,7 +65,7 @@ namespace NVika
             {
                 report = XDocument.Load(reportPath);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.Error("An exception happened when loading the report: {0}", ex);
                 return 2;
@@ -97,7 +96,7 @@ namespace NVika
                     buildServer.WriteMessage(issue);
                 }
             }
-            
+
             return issues.Any(i => i.Severity == IssueSeverity.Error) ? 4 : 0;
         }
 

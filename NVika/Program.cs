@@ -1,5 +1,4 @@
 ﻿using ManyConsole;
-using NDesk.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -31,8 +30,6 @@ namespace NVika
 
             InitializeLogger();
 
-            args = SetDebug(args);
-
             _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
 
             return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
@@ -43,26 +40,6 @@ namespace NVika
             _logger.SetWriter(Console.Out);
             _logger.AddCategory("info");
             _logger.AddCategory("error");
-        }
-
-        private string[] SetDebug(string[] args)
-        {
-            var argsList = new List<string>(args);
-
-            var debug = false;
-            var defaultSet = new OptionSet
-                {
-                    {"debug", "Enable debugging", p => debug = true}
-                };
-            defaultSet.Parse(args);
-
-            if (debug)
-            {
-                argsList.Remove("-debug");
-                _logger.AddCategory("debug");
-            }
-
-            return argsList.ToArray();
         }
 
         private void Compose()
@@ -79,7 +56,7 @@ namespace NVika
             }
             catch (ReflectionTypeLoadException ex)
             {
-                _logger.Info(@"Unable to load: \r\n{0}", string.Join("\r\n", ex.LoaderExceptions.Select(e => e.Message)));
+                _logger.Error(@"Unable to load: \r\n{0}", string.Join("\r\n", ex.LoaderExceptions.Select(e => e.Message)));
                 throw;
             }
         }

@@ -30,7 +30,6 @@ namespace NVika.Parsers
                 {
                     var issueType = GetIssueType(issuesType, issue.Attribute("TypeId").Value);
 
-
                     issues.Add(new Issue
                     {
                         Project = project.Attribute("Name").Value,
@@ -75,7 +74,7 @@ namespace NVika.Parsers
             {
                 start = offsetAttribute.Value;
             }
-
+            // TODO convert to Offset from beginning of the line, not the file?
             return new Offset
             {
                 Start = string.IsNullOrWhiteSpace(start) ? null : (uint?)uint.Parse(start),
