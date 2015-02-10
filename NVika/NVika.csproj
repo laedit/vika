@@ -73,9 +73,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCommand.cs" />
+    <Compile Include="CommandBase.cs" />
     <Compile Include="BuildServerCommand.cs" />
     <Compile Include="BuildServers\AppVeyor.cs" />
+    <Compile Include="BuildServers\BuildServerBase.cs" />
     <Compile Include="BuildServers\IBuildServer.cs" />
     <Compile Include="BuildServers\LocalBuildServer.cs" />
     <Compile Include="Logger.cs" />

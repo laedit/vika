@@ -1,7 +1,7 @@
 ﻿using NVika.Parsers;
 using System.ComponentModel.Composition;
 
-namespace NVika
+namespace NVika.BuildServers
 {
     [InheritedExport]
     internal interface IBuildServer
@@ -9,6 +9,8 @@ namespace NVika
         string Name { get; }
 
         bool CanApplyToCurrentContext();
+
+        void ApplyParameters(bool includeSourceInMessage);
 
         void WriteMessage(Issue issue);
     }

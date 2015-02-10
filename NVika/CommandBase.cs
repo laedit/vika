@@ -4,12 +4,12 @@ using System.ComponentModel.Composition;
 namespace NVika
 {
     [InheritedExport(typeof(ConsoleCommand))]
-    public abstract class BaseCommand : ConsoleCommand
+    public abstract class CommandBase : ConsoleCommand
     {
         private bool _isInDebugMode;
         protected Logger _logger;
 
-        public BaseCommand(Logger logger)
+        public CommandBase(Logger logger)
         {
             _logger = logger;
             this.HasOption("debug", "Enable debugging", s => _isInDebugMode = true);

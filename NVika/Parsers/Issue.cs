@@ -14,6 +14,7 @@ namespace NVika.Parsers
         public string Description { get; set; }
         public Uri HelpUri { get; set; }
         public string Project { get; set; }
+        public string Source { get; set; }
     }
 
     public class Offset

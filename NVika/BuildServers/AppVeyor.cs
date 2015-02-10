@@ -3,14 +3,14 @@ using System;
 using System.ComponentModel.Composition;
 using System.Net.Http;
 
-namespace NVika
+namespace NVika.BuildServers
 {
-    internal sealed class AppVeyorBuildServer : IBuildServer
+    internal sealed class AppVeyorBuildServer : BuildServerBase
     {
         private readonly Logger _logger;
         private readonly string _appVeyorAPIUrl;
 
-        public string Name
+        public override string Name
         {
             get { return "AppVeyor"; }
         }
@@ -22,12 +22,12 @@ namespace NVika
             _appVeyorAPIUrl = Environment.GetEnvironmentVariable("APPVEYOR_API_URL");
         }
 
-        public bool CanApplyToCurrentContext()
+        public override bool CanApplyToCurrentContext()
         {
             return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPVEYOR"));
         }
 
-        public void WriteMessage(Issue issue)
+        protected override void WriteIntegration(Issue issue)
         {
             using (var httpClient = new HttpClient())
             {
@@ -51,13 +51,13 @@ namespace NVika
                 _logger.Debug("FileName: {0}", filePath);
                 _logger.Debug("Line: {0}", issue.Line);
                 _logger.Debug("ProjectName: {0}", issue.Project);
-                httpClient.PostAsJsonAsync("api/build/compilationmessages", new 
-                { 
-                    Message = issue.Message, 
-                    Category = category, 
-                    FileName = filePath, 
-                    Line = issue.Line, 
-                    ProjectName = issue.Project 
+                httpClient.PostAsJsonAsync("api/build/compilationmessages", new
+                {
+                    Message = issue.Message,
+                    Category = category,
+                    FileName = filePath,
+                    Line = issue.Line,
+                    ProjectName = issue.Project
                 }).Wait();
 
             }

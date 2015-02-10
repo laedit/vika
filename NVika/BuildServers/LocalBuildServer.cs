@@ -1,27 +1,28 @@
-﻿using NVika.Parsers;
+﻿using NVika.BuildServers;
+using NVika.Parsers;
 using System;
 using System.ComponentModel.Composition;
 
-namespace NVika
+namespace NVika.BuildServers
 {
     [Export]
-    internal sealed class LocalBuildServer : IBuildServer
+    internal sealed class LocalBuildServer : BuildServerBase
     {
         private bool _applyToCurrentContext = false;
 
-        public string Name
+        public override string Name
         {
             get { return "Local console"; }
         }
 
-        public bool CanApplyToCurrentContext()
+        public override bool CanApplyToCurrentContext()
         {
             return _applyToCurrentContext;
         }
 
-        public void WriteMessage(Issue issue)
+        protected override void WriteIntegration(Issue issue)
         {
-            Console.WriteLine("{0} {1} '{2}' - Line {3}: {4}", issue.Severity, issue.Message, issue.FilePath, issue.Line, issue.Message);
+            Console.WriteLine("{0} {1} '{2}' - Line {3}: {4}", issue.Severity, issue.Name, issue.FilePath, issue.Line, issue.Message);
         }
     }
 }

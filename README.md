@@ -5,12 +5,13 @@ Also means 'bug' in Finnish.
 [![Build status](https://ci.appveyor.com/api/projects/status/3rd6pj5qqk1349ne?svg=true)](https://ci.appveyor.com/project/laedit/vika)
 
 ## What it is
-Right now it's just a tiny tool which parse analysis report and send message to the build server, or in console if it's not executed on a build server.
+Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
 
 You can use it like this: `NVika buildserver "inspectcodereport.xml"`
 
 ### additional params:
  - --debug: active the debug category on logger, useful for debugging
+ - --includesource: include the build server name in messages
 
 ## Analysis tools
 ### Supported

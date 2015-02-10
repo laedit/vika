@@ -1,4 +1,4 @@
-﻿using ManyConsole;
+﻿using NVika.BuildServers;
 using NVika.Parsers;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,11 @@ using System.Xml.Linq;
 
 namespace NVika
 {
-    public class BuildServerCommand : BaseCommand
+    public class BuildServerCommand : CommandBase
     {
         private string reportPath;
         private IFileSystem _fileSystem;
+        private bool _includeSourceInMessage;
 
 #pragma warning disable 0649
         [ImportMany]
@@ -32,6 +33,7 @@ namespace NVika
 
             this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
             this.HasAdditionalArguments(1, "Report to analyze");
+            this.HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
 
             // TODO
             // force display warnings to console additionally to the build server
@@ -41,7 +43,7 @@ namespace NVika
 
         protected override int Execute(string[] remainingArguments)
         {
-            if (string.IsNullOrWhiteSpace(reportPath) && remainingArguments.Length == 1)
+            if (remainingArguments.Length == 1)
             {
                 reportPath = remainingArguments[0];
             }
@@ -108,6 +110,12 @@ namespace NVika
             {
                 applicableBuildServers = new List<IBuildServer> { _localBuildServer };
             }
+
+            foreach (var buildServer in applicableBuildServers)
+            {
+                buildServer.ApplyParameters(_includeSourceInMessage);
+            }
+
             return applicableBuildServers;
         }
 

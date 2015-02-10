@@ -8,7 +8,7 @@ install:
 - GitVersion /output buildserver /UpdateAssemblyInfo true
 
 cache:
-- packages
+- packages -> **\packages.config
 - C:\ProgramData\chocolatey\bin\OpenCover.Console.exe
 - C:\ProgramData\chocolatey\bin\coveralls.net.exe
 - C:\ProgramData\chocolatey\bin\GitVersion.exe
@@ -21,4 +21,4 @@ build:
 
 after_build:
 - inspectcode /o="inspectcodereport.xml" "Vika.sln"
-- NVika\bin\Release\NVika buildserver "inspectcodereport.xml" -debug
+- NVika\bin\Release\NVika buildserver "inspectcodereport.xml" --debug --includesource

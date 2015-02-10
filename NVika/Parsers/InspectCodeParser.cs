@@ -42,6 +42,7 @@ namespace NVika.Parsers
                         Name = issue.Attribute("TypeId").Value,
                         Severity = GetSeverity(issueType.Attribute("Severity")),
                         Offset = GetOffset(issue.Attribute("Offset")),
+                        Source = Name,
                     });
 
                 }
