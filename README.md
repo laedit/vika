@@ -18,9 +18,9 @@ You can use it like this: `NVika buildserver "inspectcodereport.xml"`
  - [InspectCode](https://chocolatey.org/packages/resharper-clt): example of usage `inspectcode /o="inspectcodereport.xml" "Vika.sln"`
  
 ### To come
- - FxCop
- - CodeCracker
- - StyleCop
+ - [FxCop](https://github.com/laedit/vika/issues/6)
+ - [CodeCracker](https://github.com/laedit/vika/issues/8)
+ - [StyleCop](https://github.com/laedit/vika/issues/7)
  - NDepend
  - DupFinder (if someone wants it reaaaally bad)
  
@@ -30,9 +30,9 @@ You can use it like this: `NVika buildserver "inspectcodereport.xml"`
 ![AppVeyor example](AppVeyor.png)
   
 ### To come
- - TeamCity?
- - ContinuaCI?
- - MyGet?
+ - [TeamCity](https://github.com/laedit/vika/issues/4)?
+ - [ContinuaCI](https://github.com/laedit/vika/issues/3)?
+ - [MyGet](https://github.com/laedit/vika/issues/5)?
 
 I really wondering if there is any value to supporting these three, because there doesn't support to add build message like AppVeyor but only log message.
 And they support custom HTML report, so an xsl transformation is enough.
