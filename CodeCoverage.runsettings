@@ -34,6 +34,7 @@ Included items must then not match any entries in the exclude list to remain inc
 							</Include>
 							<Exclude>
 								<ModulePath>.*Tests.*</ModulePath>
+								<ModulePath>.*manyconsole.*</ModulePath>
 							</Exclude>
 						</ModulePaths>
 
