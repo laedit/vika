@@ -74,6 +74,7 @@
     <Compile Include="Mocks\MockBuildServer.cs" />
     <Compile Include="Parsers\InspectCodeParserTest.cs" />
     <Compile Include="BuildServers\LocalBuildServerTest.cs" />
+    <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

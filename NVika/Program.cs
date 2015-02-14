@@ -32,7 +32,7 @@ namespace NVika
 
 #pragma warning restore 0649
 
-        private int Run(string[] args)
+        internal int Run(string[] args)
         {
             try
             {
