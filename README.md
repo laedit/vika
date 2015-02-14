@@ -2,7 +2,7 @@
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/3rd6pj5qqk1349ne?svg=true)](https://ci.appveyor.com/project/laedit/vika)
+[![Build status](https://ci.appveyor.com/api/projects/status/3rd6pj5qqk1349ne?svg=true)](https://ci.appveyor.com/project/laedit/vika) [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika)
 
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
@@ -43,3 +43,6 @@ A website will be added for displaying a nice and shiny aggregated report from a
 There also will be a solution to upload a temporary report stored for a week.
 
 And the client may push reports through the website public API.
+
+## Contributing
+PRs gladly accepted but beware of code coverage and style.

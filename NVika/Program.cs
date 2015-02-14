@@ -9,33 +9,33 @@ using System.Reflection;
 
 namespace NVika
 {
-    class Program
-    {
-        static int Main(string[] args)
+    internal class Program : IPartImportsSatisfiedNotification
+	{
+        private static int Main(string[] args)
         {
             return new Program().Run(args);
         }
 
 #pragma warning disable 0649
+
         [Import]
         private Logger _logger;
 
         [ImportMany]
         private IEnumerable<ConsoleCommand> _commands;
+
 #pragma warning restore 0649
 
         private int Run(string[] args)
         {
             Compose();
-
-            InitializeLogger();
-
+			
             _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
 
             return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
         }
 
-        private void InitializeLogger()
+        public void OnImportsSatisfied()
         {
             _logger.SetWriter(Console.Out);
             _logger.AddCategory("info");

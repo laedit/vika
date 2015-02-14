@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace NVika.Parsers
 {
-    public sealed class InspectCodeParser : IReportParser
+    internal sealed class InspectCodeParser : IReportParser
     {
         private Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
 
@@ -44,18 +44,17 @@ namespace NVika.Parsers
                         Offset = GetOffset(issue.Attribute("Offset")),
                         Source = Name,
                     });
-
                 }
             }
             return issues;
         }
 
-        public Uri GetUri(XAttribute uriAttribute)
+        private Uri GetUri(XAttribute uriAttribute)
         {
             return uriAttribute == null ? null : new Uri(uriAttribute.Value);
         }
 
-        public Offset GetOffset(XAttribute offsetAttribute)
+        private Offset GetOffset(XAttribute offsetAttribute)
         {
             if (offsetAttribute == null)
             {
@@ -71,10 +70,7 @@ namespace NVika.Parsers
                 start = offsetAttribute.Value.Substring(0, dashIndex);
                 end = offsetAttribute.Value.Substring(dashIndex + 1);
             }
-            else
-            {
-                start = offsetAttribute.Value;
-            }
+
             // TODO convert to Offset from beginning of the line, not the file?
             return new Offset
             {
@@ -83,7 +79,7 @@ namespace NVika.Parsers
             };
         }
 
-        public IssueSeverity GetSeverity(XAttribute severityAttribute)
+        private IssueSeverity GetSeverity(XAttribute severityAttribute)
         {
             switch (severityAttribute.Value)
             {
@@ -99,7 +95,7 @@ namespace NVika.Parsers
             }
         }
 
-        public uint? GetLine(XAttribute lineAttribute)
+        private uint? GetLine(XAttribute lineAttribute)
         {
             if (lineAttribute == null)
             {
@@ -116,6 +112,5 @@ namespace NVika.Parsers
             }
             return _issueTypes[issueTypeId];
         }
-
     }
 }

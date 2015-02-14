@@ -4,22 +4,33 @@ namespace NVika.Parsers
 {
     public class Issue
     {
-        public string Name { get; set; }
-        public string Message { get; set; }
-        public uint? Line { get; set; }
-        public Offset Offset { get; set; }
-        public IssueSeverity Severity { get; set; }
-        public string FilePath { get; set; }
-        public string Category { get; set; }
-        public string Description { get; set; }
-        public Uri HelpUri { get; set; }
-        public string Project { get; set; }
-        public string Source { get; set; }
+        public string Name { get; internal set; }
+
+        public string Message { get; internal set; }
+
+        public uint? Line { get; internal set; }
+
+        public Offset Offset { get; internal set; }
+
+        public IssueSeverity Severity { get; internal set; }
+
+        public string FilePath { get; internal set; }
+
+        public string Category { get; internal set; }
+
+        public string Description { get; internal set; }
+
+        public Uri HelpUri { get; internal set; }
+
+        public string Project { get; internal set; }
+
+        public string Source { get; internal set; }
     }
 
     public class Offset
     {
-        public uint? Start { get; set; }
-        public uint? End { get; set; }
+        public uint? Start { get; internal set; }
+
+        public uint? End { get; internal set; }
     }
 }

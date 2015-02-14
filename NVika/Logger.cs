@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 
@@ -26,16 +27,6 @@ namespace NVika
             categories.Add(category);
         }
 
-        public void Write(string message, string category, params object[] args)
-        {
-            if (writer == null) return;
-
-            if (categories.Contains(category))
-            { 
-                writer.WriteLine(message, args);
-            }
-        }
-
         public void Debug(string message, params object[] args)
         {
             Write(message, "debug", args);
@@ -50,5 +41,18 @@ namespace NVika
         {
             Write(message, "error", args);
         }
-    }
+
+		private void Write(string message, string category, params object[] args)
+		{
+			if (writer == null)
+			{
+				throw new Exception("The writer must be set with the 'SetWriter' method first.");
+			}
+
+			if (categories.Contains(category))
+			{
+				writer.WriteLine(message, args);
+			}
+		}
+	}
 }

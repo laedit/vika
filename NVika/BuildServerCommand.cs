@@ -16,12 +16,16 @@ namespace NVika
         private bool _includeSourceInMessage;
 
 #pragma warning disable 0649
+
         [ImportMany]
         private IEnumerable<IBuildServer> _buildServers;
+
         [Import]
         private LocalBuildServer _localBuildServer;
+
         [ImportMany]
         private IEnumerable<IReportParser> _parsers;
+
 #pragma warning restore 0649
 
         [ImportingConstructor]
