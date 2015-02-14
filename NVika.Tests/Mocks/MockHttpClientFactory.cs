@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace NVika.Tests.Mocks
 {
-    internal class HttpClientFactoryMock : IHttpClientFactory
+    internal class MockHttpClientFactory : IHttpClientFactory
     {
         public HttpMessageHandlerMock HttpMessageHandler { get; private set; }
 
-        public HttpClientFactoryMock(HttpStatusCode responseStatusCode)
+        public MockHttpClientFactory(HttpStatusCode responseStatusCode)
         {
             HttpMessageHandler = new HttpMessageHandlerMock(new HttpResponseMessage(responseStatusCode));
         }

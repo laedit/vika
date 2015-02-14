@@ -70,7 +70,7 @@
     <Compile Include="BuildServerCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
     <Compile Include="LoggerTest.cs" />
-    <Compile Include="Mocks\HttpClientFactoryMock.cs" />
+    <Compile Include="Mocks\MockHttpClientFactory.cs" />
     <Compile Include="Mocks\MockBuildServer.cs" />
     <Compile Include="Parsers\InspectCodeParserTest.cs" />
     <Compile Include="BuildServers\LocalBuildServerTest.cs" />

@@ -60,7 +60,7 @@ namespace NVika.Tests.BuildServers
         public void WriteIntegration()
         {
             // act
-            HttpClientFactoryMock httpClientFactory = GetHttpClientFactory();
+            MockHttpClientFactory httpClientFactory = GetHttpClientFactory();
             var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
 
             var issues = GetIssues();
@@ -99,7 +99,7 @@ namespace NVika.Tests.BuildServers
         public void WriteIntegration_IncludeSourceInMessage()
         {
             // act
-            HttpClientFactoryMock httpClientFactory = GetHttpClientFactory();
+            MockHttpClientFactory httpClientFactory = GetHttpClientFactory();
             var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
             buildServer.ApplyParameters(true);
 
@@ -143,7 +143,7 @@ namespace NVika.Tests.BuildServers
         public void WriteIntegration_AppVeyorAPIError()
         {
             // act
-            HttpClientFactoryMock httpClientFactory = GetHttpClientFactory(HttpStatusCode.Forbidden);
+            MockHttpClientFactory httpClientFactory = GetHttpClientFactory(HttpStatusCode.Forbidden);
             var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
 
             var issues = GetIssues();
@@ -180,9 +180,9 @@ namespace NVika.Tests.BuildServers
             Assert.Contains("An error is occurred during the call to AppVeyor API: StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
         }
 
-        private HttpClientFactoryMock GetHttpClientFactory(HttpStatusCode responseStatusCode = HttpStatusCode.OK)
+        private MockHttpClientFactory GetHttpClientFactory(HttpStatusCode responseStatusCode = HttpStatusCode.OK)
         {
-            var httpClientFactory = new HttpClientFactoryMock(responseStatusCode);
+            var httpClientFactory = new MockHttpClientFactory(responseStatusCode);
             httpClientFactory.SetResponse(new HttpResponseMessage(responseStatusCode));
 
             return httpClientFactory;
