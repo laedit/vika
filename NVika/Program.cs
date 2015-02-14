@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Reflection;
@@ -10,10 +11,15 @@ using System.Reflection;
 namespace NVika
 {
     internal class Program : IPartImportsSatisfiedNotification
-	{
-        private static int Main(string[] args)
+    {
+        private static void Main(string[] args)
         {
-            return new Program().Run(args);
+            var exitCode = new Program().Run(args);
+            if (Debugger.IsAttached)
+            {
+                Console.ReadKey();
+            }
+            Environment.Exit(exitCode);
         }
 
 #pragma warning disable 0649
@@ -28,11 +34,20 @@ namespace NVika
 
         private int Run(string[] args)
         {
-            Compose();
-			
-            _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
+            try
+            {
+                Compose();
 
-            return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
+                _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
+
+                return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
+            }
+            catch (Exception exception)
+            {
+                var error = string.Format("An unexpected error occurred:\r\n{0}", exception);
+                _logger.Error(error);
+                return 1;
+            }
         }
 
         public void OnImportsSatisfied()

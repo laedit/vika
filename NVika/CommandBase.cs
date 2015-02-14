@@ -4,7 +4,7 @@ using System.ComponentModel.Composition;
 namespace NVika
 {
     [InheritedExport(typeof(ConsoleCommand))]
-    public abstract class CommandBase : ConsoleCommand
+    internal abstract class CommandBase : ConsoleCommand
     {
         private bool _isInDebugMode;
         protected Logger _logger;

@@ -1,4 +1,5 @@
-﻿using NVika.Abstractions;
+﻿using NSubstitute;
+using NVika.Abstractions;
 using NVika.BuildServers;
 using NVika.Parsers;
 using NVika.Tests.Mocks;
@@ -79,28 +80,28 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
             Assert.Equal("{\"Message\":\"Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
 
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
 
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
 
-			Assert.Equal(string.Empty, _loggerOutput.ToString());
-		}
+            Assert.Equal(string.Empty, _loggerOutput.ToString());
+        }
 
         [Fact]
         public void WriteIntegration_IncludeSourceInMessage()
         {
-			// act
-			HttpClientFactoryMock httpClientFactory = GetHttpClientFactory();
-			var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
-			buildServer.ApplyParameters(true);
+            // act
+            HttpClientFactoryMock httpClientFactory = GetHttpClientFactory();
+            var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
+            buildServer.ApplyParameters(true);
 
             var output = new StringBuilder();
             var writer = new StringWriter(output);
@@ -114,76 +115,76 @@ namespace NVika.Tests.BuildServers
                 buildServer.WriteMessage(issue);
             }
 
-			// assert
-			Assert.Equal(3, httpClientFactory.HttpMessageHandler.Requests.Count);
+            // assert
+            Assert.Equal(3, httpClientFactory.HttpMessageHandler.Requests.Count);
 
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"[Source1] Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"[Source1] Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
 
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"[Source2] Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"[Source2] Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
 
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"[Source3] Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"[Source3] Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
 
-			Assert.Equal(string.Empty, _loggerOutput.ToString());
-		}
+            Assert.Equal(string.Empty, _loggerOutput.ToString());
+        }
 
-		[Fact]
-		public void WriteIntegration_AppVeyorAPIError()
-		{
-			// act
-			HttpClientFactoryMock httpClientFactory = GetHttpClientFactory();
-			httpClientFactory.SetResponse(new HttpResponseMessage(HttpStatusCode.Forbidden));
-			var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
-
-			var issues = GetIssues();
-
-			// arrange
-			foreach (var issue in issues)
-			{
-				buildServer.WriteMessage(issue);
-			}
-
-			// assert
-			Assert.Equal(3, httpClientFactory.HttpMessageHandler.Requests.Count);
-
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
-
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
-
-			Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
-			Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
-			Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
-			Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-			Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
-
-			var logs = _loggerOutput.ToString();
-            Assert.NotNull(logs);
-			Assert.Contains("An error is occurred during the call to AppVeyor API: StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
-		}
-
-		private HttpClientFactoryMock GetHttpClientFactory()
+        [Fact]
+        public void WriteIntegration_AppVeyorAPIError()
         {
-            var httpClientFactory = new HttpClientFactoryMock();
-            httpClientFactory.SetResponse(new HttpResponseMessage(HttpStatusCode.OK));
+            // act
+            HttpClientFactoryMock httpClientFactory = GetHttpClientFactory(HttpStatusCode.Forbidden);
+            var buildServer = new AppVeyor(GetLogger(), GetEnvironment(), httpClientFactory);
+
+            var issues = GetIssues();
+
+            // arrange
+            foreach (var issue in issues)
+            {
+                buildServer.WriteMessage(issue);
+            }
+
+            // assert
+            Assert.Equal(3, httpClientFactory.HttpMessageHandler.Requests.Count);
+
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
+
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+
+            var logs = _loggerOutput.ToString();
+            Assert.NotNull(logs);
+            Assert.Contains("An error is occurred during the call to AppVeyor API: StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
+        }
+
+        private HttpClientFactoryMock GetHttpClientFactory(HttpStatusCode responseStatusCode = HttpStatusCode.OK)
+        {
+            var httpClientFactory = new HttpClientFactoryMock(responseStatusCode);
+            httpClientFactory.SetResponse(new HttpResponseMessage(responseStatusCode));
+
             return httpClientFactory;
         }
 
@@ -193,18 +194,18 @@ namespace NVika.Tests.BuildServers
             var writer = new StringWriter(_loggerOutput);
             var logger = new Logger();
             logger.SetWriter(writer);
-			logger.AddCategory("error");
-			return logger;
+            logger.AddCategory("error");
+            return logger;
         }
 
         private IEnvironment GetEnvironment(bool isOnAppVeyor = true)
         {
-            var environment = new EnvironmentMock();
-            environment.EnvironmentVariables.Add("APPVEYOR_API_URL", "http://localhost:8080");
+            var environment = Substitute.For<IEnvironment>();
+            environment.GetEnvironmentVariable("APPVEYOR_API_URL").Returns("http://localhost:8080");
 
             if (isOnAppVeyor)
             {
-                environment.EnvironmentVariables.Add("APPVEYOR", "TRUE");
+                environment.GetEnvironmentVariable("APPVEYOR").Returns("TRUE");
             }
 
             return environment;

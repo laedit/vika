@@ -37,7 +37,25 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ManyConsole, Version=0.4.2.17, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ManyConsole.0.4.2.17\lib\ManyConsole.dll</HintPath>
+    </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.IO.Abstractions, Version=2.0.0.103, Culture=neutral, PublicKeyToken=d480b5b72fb413da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.IO.Abstractions.2.0.0.103\lib\net40\System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers">
+      <HintPath>..\packages\System.IO.Abstractions.TestingHelpers.2.0.0.103\lib\net40\System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
@@ -49,10 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildServerCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
     <Compile Include="LoggerTest.cs" />
-    <Compile Include="Mocks\EnvironmentMock.cs" />
     <Compile Include="Mocks\HttpClientFactoryMock.cs" />
+    <Compile Include="Mocks\MockBuildServer.cs" />
     <Compile Include="Parsers\InspectCodeParserTest.cs" />
     <Compile Include="BuildServers\LocalBuildServerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

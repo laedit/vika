@@ -9,31 +9,27 @@ using System.Xml.Linq;
 
 namespace NVika
 {
-    public class BuildServerCommand : CommandBase
+    internal class BuildServerCommand : CommandBase
     {
         private string reportPath;
         private IFileSystem _fileSystem;
         private bool _includeSourceInMessage;
-
-#pragma warning disable 0649
-
-        [ImportMany]
         private IEnumerable<IBuildServer> _buildServers;
-
-        [Import]
         private LocalBuildServer _localBuildServer;
-
-        [ImportMany]
         private IEnumerable<IReportParser> _parsers;
 
-#pragma warning restore 0649
-
         [ImportingConstructor]
-        public BuildServerCommand(IFileSystem fileSystem, Logger logger)
+        public BuildServerCommand(Logger logger,
+                                  IFileSystem fileSystem,
+                                  [ImportMany]IEnumerable<IBuildServer> buildServers,
+                                  LocalBuildServer localBuildServer,
+                                  [ImportMany]IEnumerable<IReportParser> parsers)
             : base(logger)
         {
             _fileSystem = fileSystem;
-            _logger = logger;
+            _buildServers = buildServers;
+            _localBuildServer = localBuildServer;
+            _parsers = parsers;
 
             this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
             this.HasAdditionalArguments(1, "Report to analyze");
@@ -41,7 +37,6 @@ namespace NVika
 
             // TODO
             // force display warnings to console additionally to the build server
-            // force to end the build (exitcode > 0) when errors
             // warning as error
         }
 
@@ -69,17 +64,11 @@ namespace NVika
             XDocument report = null;
             try
             {
-                report = XDocument.Load(reportPath);
+                report = XDocument.Load(_fileSystem.File.OpenRead(reportPath));
             }
             catch (Exception ex)
             {
-                _logger.Error("An exception happened when loading the report: {0}", ex);
-                return 2;
-            }
-
-            if (report == null || string.IsNullOrWhiteSpace(report.ToString()))
-            {
-                _logger.Error("The report file is empty");
+                _logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
                 return 2;
             }
 
@@ -93,7 +82,7 @@ namespace NVika
             _logger.Info("Report type is '{0}'", parser.Name);
 
             var issues = parser.Parse(report);
-            _logger.Debug("{0} issues types was found", issues.Count());
+            _logger.Debug("{0} issues was found", issues.Count());
 
             foreach (var issue in issues)
             {
