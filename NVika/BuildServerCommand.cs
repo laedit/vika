@@ -11,7 +11,6 @@ namespace NVika
 {
     internal class BuildServerCommand : CommandBase
     {
-        private string reportPath;
         private IFileSystem _fileSystem;
         private bool _includeSourceInMessage;
         private IEnumerable<IBuildServer> _buildServers;
@@ -32,7 +31,6 @@ namespace NVika
             _parsers = parsers;
 
             this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
-            this.HasAdditionalArguments(1, "Report to analyze");
             this.HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
 
             // TODO
@@ -40,59 +38,70 @@ namespace NVika
             // warning as error
         }
 
-        protected override int Execute(string[] remainingArguments)
+        protected override int Execute(string[] reportPaths)
         {
-            if (remainingArguments.Length == 1)
-            {
-                reportPath = remainingArguments[0];
-            }
-            _logger.Debug("Report path is '{0}'", reportPath);
+            int returnCode = 0;
 
-            if (!_fileSystem.File.Exists(reportPath))
+            if (reportPaths.Length == 0)
             {
-                _logger.Error("The report '{0}' was not found.", reportPath);
+                _logger.Error("No report was specified. You must indicate at least one report file.");
                 return 1;
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
-            _logger.Info("The following build servers will be used:");
+            _logger.Info("The following build servers has been detected:");
             foreach (var buildServer in applicableBuildServers)
             {
                 _logger.Info("\t- {0}", buildServer.Name);
             }
 
-            XDocument report = null;
-            try
+            foreach (var reportPath in reportPaths)
             {
-                report = XDocument.Load(_fileSystem.File.OpenRead(reportPath));
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
-                return 2;
-            }
+                _logger.Debug("Report path is '{0}'", reportPath);
 
-            // Report type Detection
-            var parser = GetParser(report);
-            if (parser == null)
-            {
-                _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
-                return 3;
-            }
-            _logger.Info("Report type is '{0}'", parser.Name);
-
-            var issues = parser.Parse(report);
-            _logger.Debug("{0} issues was found", issues.Count());
-
-            foreach (var issue in issues)
-            {
-                foreach (var buildServer in applicableBuildServers)
+                if (!_fileSystem.File.Exists(reportPath))
                 {
-                    buildServer.WriteMessage(issue);
+                    _logger.Error("The report '{0}' was not found.", reportPath);
+                    return 1;
+                }
+
+                XDocument report = null;
+                try
+                {
+                    report = XDocument.Load(_fileSystem.File.OpenRead(reportPath));
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
+                    return 2;
+                }
+
+                // Report type Detection
+                var parser = GetParser(report);
+                if (parser == null)
+                {
+                    _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
+                    return 3;
+                }
+                _logger.Debug("Report type is '{0}'", parser.Name);
+
+                var issues = parser.Parse(report);
+                _logger.Debug("{0} issues was found", issues.Count());
+
+                foreach (var issue in issues)
+                {
+                    foreach (var buildServer in applicableBuildServers)
+                    {
+                        buildServer.WriteMessage(issue);
+                    }
+                }
+
+                if (returnCode == 0)
+                {
+                    returnCode = issues.Any(i => i.Severity == IssueSeverity.Error) ? 4 : 0;
                 }
             }
-
-            return issues.Any(i => i.Severity == IssueSeverity.Error) ? 4 : 0;
+            return returnCode;
         }
 
         private IEnumerable<IBuildServer> GetApplicableBuildServer()

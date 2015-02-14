@@ -15,10 +15,11 @@ namespace NVika.Tests
     public class BuildServerCommandTest
     {
         private StringBuilder _loggerOutput;
-        private bool _mockBUildServer_IncludeSource;
+        private bool _mockBuildServer_IncludeSource;
+        private bool _mockParser_Alternate;
 
         [Fact]
-        public void Execute_NoArguments_ShouldLogError_ReportNotFound()
+        public void Execute_NoArguments_ShouldLogError_NoReportSpecified()
         {
             // arrange
             var logger = GetLogger();
@@ -30,11 +31,11 @@ namespace NVika.Tests
 
             // assert
             Assert.Equal(1, exitCode);
-            Assert.Equal("The report '' was not found.\r\n", _loggerOutput.ToString());
+            Assert.Equal("No report was specified. You must indicate at least one report file.\r\n", _loggerOutput.ToString());
         }
 
         [Fact]
-        public void Execute_OnlyDebug_ShouldLogError_ReportNotFound()
+        public void Execute_OnlyDebug_ShouldLogError_NoResportSpecified()
         {
             // arrange
             var logger = GetLogger();
@@ -47,8 +48,7 @@ namespace NVika.Tests
             // assert
             Assert.Equal(1, exitCode);
             var logs = _loggerOutput.ToString();
-            Assert.Contains("The report '' was not found.", logs);
-            Assert.Contains("Report path is ''", logs);
+            Assert.Contains("No report was specified. You must indicate at least one report file.", logs);
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace NVika.Tests
         }
 
         [Fact]
-        public void Execute_ParserCanParse__WithDebug_ShouldWriteMessageFromIssuesAndWriteIssuesCount()
+        public void Execute_ParserCanParse_WithDebug_ShouldWriteMessageFromIssuesAndWriteIssuesCount()
         {
             // arrange
             var logger = GetLogger();
@@ -199,6 +199,7 @@ namespace NVika.Tests
             // assert
             Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
+            Assert.Contains("Report path is 'report.xml'", logs);
             Assert.Contains("3 issues was found", logs);
             Assert.Contains("Message1", logs);
             Assert.Contains("Message2", logs);
@@ -253,12 +254,64 @@ namespace NVika.Tests
             Assert.Contains("Message3 - Source3", logs);
         }
 
-        private IReportParser GetMockReportParser(bool canParse = false, bool issuesContainError = true)
+        [Fact]
+        public void Execute_MultipleReports_ShouldWriteMessageFromIssues()
+        {
+            // arrange
+            var logger = GetLogger();
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "report.xml", new MockFileData("<root></root>") },
+                { "report2.xml", new MockFileData("<root></root>") }
+            });
+            var localBuildServer = new LocalBuildServer(logger);
+            var mockBuildServer = GetMockBuildServer(true);
+            var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
+            var parsers = new List<IReportParser> { GetMockReportParser(true, true, true) };
+            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml", "--debug" });
+
+            // act
+            var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
+
+            // assert
+            Assert.Equal(4, exitCode);
+            var logs = _loggerOutput.ToString();
+            Assert.Contains("3 issues was found", logs);
+            Assert.Contains("Message1", logs);
+            Assert.Contains("Message2", logs);
+            Assert.Contains("Message3", logs);
+            Assert.Contains("Message4", logs);
+            Assert.Contains("Message5", logs);
+            Assert.Contains("Message6", logs);
+        }
+
+        private IReportParser GetMockReportParser(bool canParse = false, bool issuesContainError = true, bool alternate = false)
         {
             var mockReportParser = Substitute.For<IReportParser>();
             mockReportParser.Name.Returns("MockReportParser");
             mockReportParser.CanParse(Arg.Any<XDocument>()).Returns(canParse);
-            mockReportParser.Parse(Arg.Any<XDocument>()).Returns(GetIssues(issuesContainError));
+
+            mockReportParser.Parse(Arg.Any<XDocument>()).Returns((ci) =>
+            {
+                if (alternate)
+                {
+                    _mockParser_Alternate = !_mockParser_Alternate;
+                    if (_mockParser_Alternate)
+                    {
+                        return GetIssues(issuesContainError);
+                    }
+                    else
+                    {
+                        return GetIssues2(issuesContainError);
+                    }
+                }
+                else
+                {
+                    return GetIssues(issuesContainError);
+                }
+            });
+
             return mockReportParser;
         }
 
@@ -267,8 +320,8 @@ namespace NVika.Tests
             var mockBuildServer = Substitute.For<IBuildServer>();
             mockBuildServer.Name.Returns("MockBuildServer");
             mockBuildServer.CanApplyToCurrentContext().Returns(canApplyToCurrentContext);
-            mockBuildServer.When(bs => bs.ApplyParameters(Arg.Any<bool>())).Do(ci => _mockBUildServer_IncludeSource = ci.Arg<bool>());
-            mockBuildServer.When(bs => bs.WriteMessage(Arg.Any<Issue>())).Do(ci => _loggerOutput.AppendLine(ci.Arg<Issue>().Message + (_mockBUildServer_IncludeSource ? " - " + ci.Arg<Issue>().Source : string.Empty)));
+            mockBuildServer.When(bs => bs.ApplyParameters(Arg.Any<bool>())).Do(ci => _mockBuildServer_IncludeSource = ci.Arg<bool>());
+            mockBuildServer.When(bs => bs.WriteMessage(Arg.Any<Issue>())).Do(ci => _loggerOutput.AppendLine(ci.Arg<Issue>().Message + (_mockBuildServer_IncludeSource ? " - " + ci.Arg<Issue>().Source : string.Empty)));
             return mockBuildServer;
         }
 
@@ -290,6 +343,16 @@ namespace NVika.Tests
                 new Issue{ Category="Category1", Description = "Description1", FilePath = "FilePath1", HelpUri = null, Line = 42u, Message = "Message1", Name = "Name1", Offset = new Offset{ Start = 2u, End = 5u}, Project = "Project1", Severity = IssueSeverity.Suggestion, Source = "Source1" },
                 new Issue{ Category="Category2", Description = "Description2", FilePath = "FilePath2", HelpUri = new Uri("https://www.wikipedia.com"), Line = 465u, Message = "Message2", Name = "Name2", Offset = new Offset{ Start = 36u, End = 546u}, Project = "Project1", Severity = IssueSeverity.Warning, Source = "Source2" },
                 new Issue{ Category="Category1", Description = "Description3", FilePath = "FilePath3", HelpUri = new Uri("http://helperror.com"), Line = 82u, Message = "Message3", Name = "Name3", Project = "Project2", Severity = containError ? IssueSeverity.Error : IssueSeverity.Warning, Source = "Source3" },
+            };
+        }
+
+        private List<Issue> GetIssues2(bool containError = true)
+        {
+            return new List<Issue>
+            {
+                new Issue{ Category="Category1", Description = "Description4", FilePath = "FilePath4", HelpUri = null, Line = 42u, Message = "Message4", Name = "Name4", Offset = new Offset{ Start = 2u, End = 5u}, Project = "Project1", Severity = IssueSeverity.Suggestion, Source = "Source1" },
+                new Issue{ Category="Category2", Description = "Description5", FilePath = "FilePath5", HelpUri = new Uri("https://www.wikipedia.com"), Line = 465u, Message = "Message5", Name = "Name5", Offset = new Offset{ Start = 36u, End = 546u}, Project = "Project1", Severity = IssueSeverity.Warning, Source = "Source2" },
+                new Issue{ Category="Category1", Description = "Description6", FilePath = "FilePath6", HelpUri = new Uri("http://helperror.com"), Line = 82u, Message = "Message6", Name = "Name6", Project = "Project2", Severity = containError ? IssueSeverity.Error : IssueSeverity.Warning, Source = "Source3" },
             };
         }
     }
