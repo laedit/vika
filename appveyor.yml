@@ -1,7 +1,7 @@
 configuration: Release
 
 install:
-- choco install GitVersion.Portable
+- choco install GitVersion
 - choco install opencover -source https://nuget.org/api/v2/
 - choco install coveralls.io -source https://nuget.org/api/v2/
 - choco install resharper-clt
