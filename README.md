@@ -9,6 +9,8 @@ Right now it's just a tiny tool which parse analysis reports and send messages t
 
 You can use it like this: `NVika buildserver "inspectcodereport.xml"`
 
+It is possible to process several reports at the same time: `NVika buildserver report1.xml report2.xml`
+
 ### additional params:
  - --debug: active the debug category on logger, useful for debugging
  - --includesource: include the build server name in messages
@@ -21,7 +23,7 @@ You can use it like this: `NVika buildserver "inspectcodereport.xml"`
  - [FxCop](https://github.com/laedit/vika/issues/6)
  - [CodeCracker](https://github.com/laedit/vika/issues/8)
  - [StyleCop](https://github.com/laedit/vika/issues/7)
- - NDepend
+ - NDepend?
  - DupFinder (if someone wants it reaaaally bad)
  
 ## Build servers
