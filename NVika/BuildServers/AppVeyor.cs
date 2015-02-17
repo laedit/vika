@@ -77,8 +77,8 @@ namespace NVika.BuildServers
 
                 if (issue.Offset != null)
                 {
-                    _logger.Debug("Column: {0}", issue.Offset.Start);
-                    compilationMessage.Column = issue.Offset.Start;
+                    //_logger.Debug("Column: {0}", issue.Offset.Start);
+                    //compilationMessage.Column = issue.Offset.Start;
                 }
 
                 var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", compilationMessage).Result;
