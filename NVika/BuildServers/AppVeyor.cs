@@ -44,10 +44,12 @@ namespace NVika.BuildServers
             string category = "information";
             switch (issue.Severity)
             {
-                case IssueSeverity.Error: category = "error";
+                case IssueSeverity.Error:
+                    category = "error";
                     break;
 
-                case IssueSeverity.Warning: category = "warning";
+                case IssueSeverity.Warning:
+                    category = "warning";
                     break;
             }
 
@@ -58,28 +60,49 @@ namespace NVika.BuildServers
             _logger.Debug("Category: {0}", category);
             _logger.Debug("FileName: {0}", filePath);
             _logger.Debug("Line: {0}", issue.Line);
-            _logger.Debug("Column: {0}", issue.Offset.Start);
             _logger.Debug("ProjectName: {0}", issue.Project);
 
             using (var httpClient = _httpClientFactory.Create())
             {
                 httpClient.BaseAddress = new Uri(_appVeyorAPIUrl);
 
-                var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", new
+                var compilationMessage = new CompilationMessage
                 {
                     Message = message,
                     Category = category,
                     FileName = filePath,
                     Line = issue.Line,
-                    Column = issue.Offset.Start,
                     ProjectName = issue.Project
-                }).Result;
+                };
+
+                if (issue.Offset != null)
+                {
+                    _logger.Debug("Column: {0}", issue.Offset.Start);
+                    compilationMessage.Column = issue.Offset.Start;
+                }
+
+                var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", compilationMessage).Result;
 
                 if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
                 {
                     _logger.Error("An error is occurred during the call to AppVeyor API: {0}", response);
                 }
             }
+        }
+
+        private class CompilationMessage
+        {
+            public string Message { get; set; }
+
+            public string Category { get; set; }
+
+            public string FileName { get; set; }
+
+            public uint? Line { get; set; }
+
+            public string ProjectName { get; set; }
+
+            public uint? Column { get; set; }
         }
     }
 }
