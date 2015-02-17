@@ -7,7 +7,7 @@ install:
 - choco install resharper-clt
 - GitVersion /output buildserver /UpdateAssemblyInfo true
 
-#cache:
+cache:
 #- packages -> **\packages.config
 #- C:\ProgramData\chocolatey\bin\OpenCover.Console.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\bin\coveralls.net.exe -> appveyor.yml
@@ -27,7 +27,7 @@ build:
   verbosity: minimal
 
 after_build:
-- inspectcode /o="inspectcodereport.xml" "Vika.sln"
+- inspectcode /o="inspectcodereport.xml" /project="NVika" "Vika.sln"
 - NVika\bin\Release\NVika buildserver "inspectcodereport.xml" --debug --includesource
 
 test_script:
