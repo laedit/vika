@@ -8,7 +8,7 @@ install:
 - GitVersion /output buildserver /UpdateAssemblyInfo true
 
 cache:
-#- packages -> **\packages.config
+- packages -> **\packages.config
 #- C:\ProgramData\chocolatey\bin\OpenCover.Console.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\bin\coveralls.net.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\bin\GitVersion.exe -> appveyor.yml
