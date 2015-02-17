@@ -58,6 +58,7 @@ namespace NVika.BuildServers
             _logger.Debug("Category: {0}", category);
             _logger.Debug("FileName: {0}", filePath);
             _logger.Debug("Line: {0}", issue.Line);
+            _logger.Debug("Column: {0}", issue.Offset.Start);
             _logger.Debug("ProjectName: {0}", issue.Project);
 
             using (var httpClient = _httpClientFactory.Create())
@@ -70,6 +71,7 @@ namespace NVika.BuildServers
                     Category = category,
                     FileName = filePath,
                     Line = issue.Line,
+                    Column = issue.Offset.Start,
                     ProjectName = issue.Project
                 }).Result;
 
