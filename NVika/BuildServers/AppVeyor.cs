@@ -73,7 +73,7 @@ namespace NVika.BuildServers
                     ProjectName = issue.Project
                 }).Result;
 
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
                 {
                     _logger.Error("An error is occurred during the call to AppVeyor API: {0}", response);
                 }
