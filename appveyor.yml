@@ -31,7 +31,7 @@ after_build:
 - NVika\bin\Release\NVika buildserver "inspectcodereport.xml" --debug --includesource
 
 test_script:
-- OpenCover.Console.exe -register:user -filter:"+[NVika]*" -excludebyattribute:*.ExcludeFromCodeCoverage -target:"xunit.console.clr4.exe" -targetargs:"""NVika.Tests\bin\Release\NVika.Tests.dll"" /noshadow /appveyor" -output:coverage.xml -returntargetcode
+- OpenCover.Console.exe -register:user -filter:"+[NVika]*" -excludebyattribute:*.ExcludeFromCodeCoverage* -target:"xunit.console.clr4.exe" -targetargs:"""NVika.Tests\bin\Release\NVika.Tests.dll"" /noshadow /appveyor" -output:coverage.xml -returntargetcode
 - coveralls.net --opencover coverage.xml
 
 artifacts:
