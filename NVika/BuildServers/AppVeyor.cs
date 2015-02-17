@@ -102,7 +102,7 @@ namespace NVika.BuildServers
 
             public string ProjectName { get; set; }
 
-            public uint? Column { get; set; }
+            //public uint? Column { get; set; }
         }
     }
 }
