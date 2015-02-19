@@ -1,17 +1,15 @@
 configuration: Release
 
 install:
-- choco install GitVersion
+- GitVersion /output buildserver /UpdateAssemblyInfo true
 - choco install opencover -source https://nuget.org/api/v2/
 - choco install coveralls.io -source https://nuget.org/api/v2/
 - choco install resharper-clt
-- GitVersion /output buildserver /UpdateAssemblyInfo true
 
 #cache:
 #- packages -> **\packages.config
 #- C:\ProgramData\chocolatey\bin\OpenCover.Console.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\bin\coveralls.net.exe -> appveyor.yml
-#- C:\ProgramData\chocolatey\bin\GitVersion.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\bin\inspectcode.exe -> appveyor.yml
 #- C:\ProgramData\chocolatey\lib -> appveyor.yml
 
