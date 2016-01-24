@@ -50,7 +50,7 @@ namespace NVika.Tests
 			logger.Error("error message");
 
 			// assert
-			Assert.Equal("debug message\r\n", logs.ToString());
+			Assert.Equal("debug message", logs.ToString().Trim());
 		}
 
 		[Fact]
@@ -68,7 +68,7 @@ namespace NVika.Tests
 			logger.Error("error message");
 
 			// assert
-			Assert.Equal("info message\r\n", logs.ToString());
+			Assert.Equal("info message", logs.ToString().Trim());
 		}
 
 		[Fact]
@@ -86,7 +86,7 @@ namespace NVika.Tests
 			logger.Error("error message");
 
 			// assert
-			Assert.Equal("error message\r\n", logs.ToString());
+			Assert.Equal("error message", logs.ToString().Trim());
 		}
 	}
 }

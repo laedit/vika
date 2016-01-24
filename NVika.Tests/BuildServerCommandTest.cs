@@ -31,7 +31,7 @@ namespace NVika.Tests
 
             // assert
             Assert.Equal(1, exitCode);
-            Assert.Equal("No report was specified. You must indicate at least one report file.\r\n", _loggerOutput.ToString());
+            Assert.Equal("No report was specified. You must indicate at least one report file.", _loggerOutput.ToString().Trim());
         }
 
         [Fact]
