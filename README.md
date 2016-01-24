@@ -1,3 +1,4 @@
+![Project icon](icon.png)
 # vika
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
@@ -48,3 +49,5 @@ And the client may push reports through the website public API.
 
 ## Contributing
 PRs gladly accepted but beware of code coverage and style.
+
+Icon: [Report](https://thenounproject.com/term/report/84881/) designed by [Nataliia Lytvyn](https://thenounproject.com/natashenkalitvin/ from The Noun Project.
