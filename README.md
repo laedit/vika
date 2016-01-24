@@ -3,7 +3,7 @@
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/m2qxrige03yn5hbh?svg=true)](https://ci.appveyor.com/project/laedit/vika) [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/m2qxrige03yn5hbh?svg=true)](https://ci.appveyor.com/project/laedit/vika) [![Travis CI build Status](https://travis-ci.org/laedit/vika.svg?branch=master)](https://travis-ci.org/laedit/vika) [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika)
 
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
