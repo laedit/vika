@@ -1,5 +1,7 @@
 ![Project icon](icon.png)
 # vika
+
+[![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
