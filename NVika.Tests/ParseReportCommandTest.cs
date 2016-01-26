@@ -12,7 +12,7 @@ using Xunit;
 
 namespace NVika.Tests
 {
-    public class BuildServerCommandTest
+    public class ParseReportCommandTest
     {
         private StringBuilder _loggerOutput;
         private bool _mockBuildServer_IncludeSource;
@@ -23,7 +23,7 @@ namespace NVika.Tests
         {
             // arrange
             var logger = GetLogger();
-            var buildServerCommand = new BuildServerCommand(logger, new MockFileSystem(), Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, new MockFileSystem(), Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
             buildServerCommand.GetActualOptions().Parse(new string[] { });
 
             // act
@@ -39,7 +39,7 @@ namespace NVika.Tests
         {
             // arrange
             var logger = GetLogger();
-            var buildServerCommand = new BuildServerCommand(logger, new MockFileSystem(), Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, new MockFileSystem(), Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
             buildServerCommand.GetActualOptions().Parse(new[] { "--debug" });
 
             // act
@@ -57,7 +57,7 @@ namespace NVika.Tests
             // arrange
             var logger = GetLogger();
             var fileSystem = new MockFileSystem();
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, Enumerable.Empty<IBuildServer>(), new LocalBuildServer(logger), Enumerable.Empty<IReportParser>());
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -78,7 +78,7 @@ namespace NVika.Tests
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer();
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -100,7 +100,7 @@ namespace NVika.Tests
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -122,7 +122,7 @@ namespace NVika.Tests
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, Enumerable.Empty<IReportParser>());
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -144,7 +144,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser() };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -166,7 +166,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true) };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -190,7 +190,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true) };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--debug" });
 
             // act
@@ -216,7 +216,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, false) };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
@@ -240,7 +240,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, false) };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--includesource" });
 
             // act
@@ -268,7 +268,7 @@ namespace NVika.Tests
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, true, true) };
-            var buildServerCommand = new BuildServerCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
             var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml", "--debug" });
 
             // act

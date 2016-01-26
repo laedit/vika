@@ -69,7 +69,7 @@
     <Compile Include="Abstractions\IEnvironment.cs" />
     <Compile Include="Abstractions\IHttpClientFactory.cs" />
     <Compile Include="CommandBase.cs" />
-    <Compile Include="BuildServerCommand.cs" />
+    <Compile Include="ParseReportCommand.cs" />
     <Compile Include="BuildServers\AppVeyor.cs" />
     <Compile Include="BuildServers\BuildServerBase.cs" />
     <Compile Include="BuildServers\IBuildServer.cs" />

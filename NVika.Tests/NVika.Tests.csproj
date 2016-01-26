@@ -68,7 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildServerCommandTest.cs" />
+    <Compile Include="ParseReportCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
     <Compile Include="LoggerTest.cs" />
     <Compile Include="Mocks\MockHttpClientFactory.cs" />

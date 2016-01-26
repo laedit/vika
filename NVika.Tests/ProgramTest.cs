@@ -22,7 +22,7 @@ namespace NVika.Tests
             var consoleOutput = output.ToString();
             Assert.Equal(1, exitCode);
             Assert.Contains(string.Format("NVika V{0}", Assembly.GetAssembly(typeof(Program)).GetName().Version), consoleOutput);
-            Assert.Contains("Executing buildserver (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
+            Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
             Assert.Contains("No report was specified. You must indicate at least one report file.", consoleOutput);
         }
 
@@ -40,7 +40,7 @@ namespace NVika.Tests
             var consoleOutput = output.ToString();
             Assert.Equal(1, exitCode);
             Assert.Contains(string.Format("NVika V{0}", Assembly.GetAssembly(typeof(Program)).GetName().Version), consoleOutput);
-            Assert.Contains("Executing buildserver (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
+            Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
             Assert.Contains("The report 'unkowncommand' was not found.", consoleOutput);
         }
 
@@ -52,7 +52,7 @@ namespace NVika.Tests
             Console.SetOut(new StringWriter(output));
 
             // act
-            var exitCode = new Program().Run(new[] { "buildserver", "nonexistingreport.abc" });
+            var exitCode = new Program().Run(new[] { "parsereport", "nonexistingreport.abc" });
 
             // assert
             var consoleOutput = output.ToString();

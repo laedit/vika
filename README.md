@@ -3,14 +3,17 @@
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/m2qxrige03yn5hbh?svg=true)](https://ci.appveyor.com/project/laedit/vika) [![Travis CI build Status](https://travis-ci.org/laedit/vika.svg?branch=master)](https://travis-ci.org/laedit/vika) [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika) [![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/m2qxrige03yn5hbh?svg=true)](https://ci.appveyor.com/project/laedit/vika) 
+[![Travis CI build Status](https://travis-ci.org/laedit/vika.svg?branch=master)](https://travis-ci.org/laedit/vika) 
+[![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika) 
+[![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
 
-You can use it like this: `NVika buildserver "inspectcodereport.xml"`
+You can use it like this: `NVika parsereport "inspectcodereport.xml"`
 
-It is possible to process several reports at the same time: `NVika buildserver report1.xml report2.xml`
+It is possible to process several reports at the same time: `NVika parsereport report1.xml report2.xml`
 
 ### additional params:
  - `--debug`: active the debug category on logger, useful for debugging

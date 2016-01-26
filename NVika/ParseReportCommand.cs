@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace NVika
 {
-    internal class BuildServerCommand : CommandBase
+    internal class ParseReportCommand : CommandBase
     {
         private IFileSystem _fileSystem;
         private bool _includeSourceInMessage;
@@ -18,7 +18,7 @@ namespace NVika
         private IEnumerable<IReportParser> _parsers;
 
         [ImportingConstructor]
-        public BuildServerCommand(Logger logger,
+        public ParseReportCommand(Logger logger,
                                   IFileSystem fileSystem,
                                   [ImportMany]IEnumerable<IBuildServer> buildServers,
                                   LocalBuildServer localBuildServer,
@@ -30,7 +30,7 @@ namespace NVika
             _localBuildServer = localBuildServer;
             _parsers = parsers;
 
-            this.IsCommand("buildserver", "Parse the report and show warnings in console or inject them to the build server");
+            this.IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
             this.HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
 
             // TODO
