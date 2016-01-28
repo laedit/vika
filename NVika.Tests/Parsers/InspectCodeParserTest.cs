@@ -60,7 +60,7 @@ namespace NVika.Tests.Parsers
         }
 
         [Theory]
-        [PropertyData("ParseXmlData")]
+        [MemberData("ParseXmlData")]
         public void Parse(XDocument report)
         {
             // arrange
