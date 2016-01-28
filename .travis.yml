@@ -2,6 +2,11 @@ language: csharp
 
 solution: Vika.sln
 
+cache:
+  directories:
+  - packages
+  - testrunner
+
 install:
   - nuget restore Vika.sln
   - nuget install xunit.runner.console -OutputDirectory testrunner
