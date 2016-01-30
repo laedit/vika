@@ -4,8 +4,8 @@ Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
 [![Licence Apache 2](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://github.com/laedit/vika/blob/master/LICENSE) 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/m2qxrige03yn5hbh?svg=true)](https://ci.appveyor.com/project/laedit/vika) 
-[![Travis CI build Status](https://travis-ci.org/laedit/vika.svg?branch=master)](https://travis-ci.org/laedit/vika) 
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/laedit/vika.svg?label=build+windows)](https://ci.appveyor.com/project/laedit/vika) 
+[![Travis CI build Status](https://img.shields.io/travis/laedit/vika.svg?label=build+linux)](https://travis-ci.org/laedit/vika) 
 [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika) 
 [![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
