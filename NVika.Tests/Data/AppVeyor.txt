@@ -4,7 +4,6 @@ using System;
 using System.ComponentModel.Composition;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 
 namespace NVika.BuildServers
 {
@@ -78,15 +77,11 @@ namespace NVika.BuildServers
 
                 if (issue.Offset != null)
                 {
-                    _logger.Debug("Column: {0}", issue.Offset.Start);
-                    compilationMessage.Column = issue.Offset.Start + 1;
+                    //_logger.Debug("Column: {0}", issue.Offset.Start);
+                    //compilationMessage.Column = issue.Offset.Start;
                 }
 
-                JsonMediaTypeFormatter jsonFormat = new JsonMediaTypeFormatter();
-                jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
-                jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-
-                var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
+                var response = httpClient.PostAsJsonAsync("api/build/compilationmessages", compilationMessage).Result;
 
                 if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
                 {
@@ -107,7 +102,7 @@ namespace NVika.BuildServers
 
             public string ProjectName { get; set; }
 
-            public uint? Column { get; set; }
+            //public uint? Column { get; set; }
         }
     }
 }

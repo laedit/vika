@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.IO.Abstractions;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -11,17 +8,10 @@ namespace NVika.Parsers
     internal sealed class InspectCodeParser : IReportParser
     {
         private Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
-        private readonly IFileSystem _fileSystem;
 
         public string Name
         {
             get { return "InspectCode"; }
-        }
-
-        [ImportingConstructor]
-        public InspectCodeParser(IFileSystem fileSystem)
-        {
-            _fileSystem = fileSystem;
         }
 
         public bool CanParse(XDocument report)
@@ -31,6 +21,7 @@ namespace NVika.Parsers
 
         public IEnumerable<Issue> Parse(XDocument report)
         {
+            var issues = new List<Issue>();
             var issuesType = report.Descendants("IssueType");
 
             foreach (var project in report.Descendants("Project"))
@@ -38,26 +29,24 @@ namespace NVika.Parsers
                 foreach (var issue in project.Descendants("Issue"))
                 {
                     var issueType = GetIssueType(issuesType, issue.Attribute("TypeId").Value);
-                    var sourceFilePath = issue.Attribute("File").Value;
-                    var offsetAttribute = issue.Attribute("Offset");
-                    var lineNumber = GetLine(issue.Attribute("Line"), offsetAttribute != null);
 
-                    yield return new Issue
+                    issues.Add(new Issue
                     {
                         Project = project.Attribute("Name").Value,
                         Category = issueType.Attribute("Category").Value,
                         Description = issueType.Attribute("Description").Value,
-                        FilePath = sourceFilePath,
+                        FilePath = issue.Attribute("File").Value,
                         HelpUri = GetUri(issueType.Attribute("WikiUrl")),
-                        Line = lineNumber,
+                        Line = GetLine(issue.Attribute("Line")),
                         Message = issue.Attribute("Message").Value,
                         Name = issue.Attribute("TypeId").Value,
                         Severity = GetSeverity(issueType.Attribute("Severity")),
-                        Offset = GetOffset(offsetAttribute, sourceFilePath, lineNumber),
+                        Offset = GetOffset(issue.Attribute("Offset")),
                         Source = Name,
-                    };
+                    });
                 }
             }
+            return issues;
         }
 
         private Uri GetUri(XAttribute uriAttribute)
@@ -65,9 +54,9 @@ namespace NVika.Parsers
             return uriAttribute == null ? null : new Uri(uriAttribute.Value);
         }
 
-        private Offset GetOffset(XAttribute offsetAttribute, string sourceFilePath, uint? lineNumber)
+        private Offset GetOffset(XAttribute offsetAttribute)
         {
-            if (offsetAttribute == null || !_fileSystem.File.Exists(sourceFilePath))
+            if (offsetAttribute == null)
             {
                 return null;
             }
@@ -82,14 +71,11 @@ namespace NVika.Parsers
                 end = offsetAttribute.Value.Substring(dashIndex + 1);
             }
 
-            var lines = _fileSystem.File.ReadLines(sourceFilePath);
-            var issueLineOffset = lines.Take((int)lineNumber.Value - 1).Sum(line => line.Length);
-            var issueLineText = lines.Skip((int)lineNumber.Value - 1).Take(1).First();
-
+            // TODO convert to Offset from beginning of the line, not the file?
             return new Offset
             {
-                Start = string.IsNullOrWhiteSpace(start) ? null : (uint?)(int.Parse(start) - (issueLineOffset + lineNumber.Value - 1)),
-                End = string.IsNullOrWhiteSpace(start) ? null : (uint?)(int.Parse(end) - (issueLineOffset + lineNumber.Value - 1))
+                Start = string.IsNullOrWhiteSpace(start) ? null : (uint?)uint.Parse(start),
+                End = string.IsNullOrWhiteSpace(start) ? null : (uint?)uint.Parse(end)
             };
         }
 
@@ -109,11 +95,11 @@ namespace NVika.Parsers
             }
         }
 
-        private uint? GetLine(XAttribute lineAttribute, bool isOffsetAvailable)
+        private uint? GetLine(XAttribute lineAttribute)
         {
             if (lineAttribute == null)
             {
-                return isOffsetAvailable ? 1 : (uint?)null;
+                return null;
             }
             return uint.Parse(lineAttribute.Value);
         }

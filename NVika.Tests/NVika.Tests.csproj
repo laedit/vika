@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\AppVeyor.txt" />
     <Compile Include="ParseReportCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
     <Compile Include="LoggerTest.cs" />
@@ -90,13 +91,22 @@
     <Compile Include="BuildServers\LocalBuildServerTest.cs" />
     <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Data\BuildServerBase.txt" />
+    <EmbeddedResource Include="Data\CommandBase.txt" />
+    <EmbeddedResource Include="Data\InspectCodeParser.txt" />
+    <EmbeddedResource Include="Data\LocalBuildServer.txt" />
+    <EmbeddedResource Include="Data\Logger.txt" />
+    <EmbeddedResource Include="Data\ParseReportCommand.txt" />
+    <EmbeddedResource Include="Data\Program.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="inspectcodereport.xml" />
+    <EmbeddedResource Include="Data\inspectcodereport.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
