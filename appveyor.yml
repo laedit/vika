@@ -27,6 +27,15 @@ build:
 after_build:
 - inspectcode /o="inspectcodereport.xml" /project="NVika" "Vika.sln"
 - NVika\bin\Release\NVika parsereport "inspectcodereport.xml" --debug --includesource
+- ilrepack /internalize /parallel /wildcards /lib:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.0" /out:NVika.exe NVika/bin/Release/NVika.exe NVika/bin/Release/*.dll
+- tools/SemanticReleaseNotesParser.exe -g Categories -t File --pluralizecategoriestitle --includestyle --debug
+- tools/SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown --pluralizecategoriestitle --debug
+# build chocolatey package
+- ps: (gc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1).replace('{{version}}', $env:GitVersion_NuGetVersion).replace('{{tag}}',$env:appveyor_repo_tag_name)|sc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1
+- choco pack PackagingAssets\chocolatey\NVika.nuspec -Version %GitVersion_NuGetVersion% -OutputDirectory %appveyor_build_folder%\PackagingAssets\chocolatey\
+# zip for github package
+- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika.exe
+- 7z a NVika.%GitVersion_NuGetVersion%.zip ReleaseNotes.html
 
 test_script:
 - OpenCover.Console.exe -register:user -filter:"+[NVika]*" -excludebyattribute:*.ExcludeFromCodeCoverage* -target:"%xunit20%\xunit.console.exe" -targetargs:"""NVika.Tests\bin\Release\NVika.Tests.dll"" -noshadow -appveyor" -output:coverage.xml -returntargetcode
@@ -39,3 +48,29 @@ artifacts:
   name: NVika.exe.CodeAnalysisLog.xml
 
 - path: inspectcodereport.xml
+
+- path: ReleaseNotes.html
+
+- path: NVika.*.zip
+  name: NVika.zip
+
+- path: PackagingAssets\chocolatey\nvika.*.nupkg
+  name: NVika.nupkg
+
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: WaNF2IUzat+PQQqquLoaN43QIpnUsrYgSOGN3P5Tpy+A+ANOWQqvWE0eFA+XwmmX
+    artifact: NVika.zip
+    description: $(SemanticReleaseNotes)
+    on:
+      appveyor_repo_tag: true
+
+  - provider: NuGet
+    server: https://chocolatey.org/
+    api_key:
+      secure: 2GBJF71EQfU+kIL5NHVM4wYoCRcFf/gM/voNIgud8vDWUE+uA1ye/hRWjJPQWA5w
+    skip_symbols: true
+    artifact: NVika.nupkg
+    on:
+      appveyor_repo_tag: true
