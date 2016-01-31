@@ -7,20 +7,21 @@ namespace NVika
     internal abstract class CommandBase : ConsoleCommand
     {
         private bool _isInDebugMode;
-        protected Logger _logger;
 
-        public CommandBase(Logger logger)
+        protected Logger Logger { get; private set; }
+
+        protected CommandBase(Logger logger)
         {
-            _logger = logger;
-            this.HasOption("debug", "Enable debugging", s => _isInDebugMode = true);
-            this.AllowsAnyAdditionalArguments("Reports to analyze");
+            Logger = logger;
+            HasOption("debug", "Enable debugging", s => _isInDebugMode = true);
+            AllowsAnyAdditionalArguments("Reports to analyze");
         }
 
         public override int Run(string[] reportPaths)
         {
             if (_isInDebugMode)
             {
-                _logger.AddCategory("debug");
+                Logger.AddCategory("debug");
             }
 
             return Execute(reportPaths);

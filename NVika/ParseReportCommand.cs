@@ -11,11 +11,11 @@ namespace NVika
 {
     internal class ParseReportCommand : CommandBase
     {
-        private IFileSystem _fileSystem;
+        private readonly IFileSystem _fileSystem;
+        private readonly IEnumerable<IBuildServer> _buildServers;
+        private readonly LocalBuildServer _localBuildServer;
+        private readonly IEnumerable<IReportParser> _parsers;
         private bool _includeSourceInMessage;
-        private IEnumerable<IBuildServer> _buildServers;
-        private LocalBuildServer _localBuildServer;
-        private IEnumerable<IReportParser> _parsers;
 
         [ImportingConstructor]
         public ParseReportCommand(Logger logger,
@@ -30,8 +30,8 @@ namespace NVika
             _localBuildServer = localBuildServer;
             _parsers = parsers;
 
-            this.IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
-            this.HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
+            IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
+            HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
 
             // TODO
             // force display warnings to console additionally to the build server
@@ -44,24 +44,24 @@ namespace NVika
 
             if (reportPaths.Length == 0)
             {
-                _logger.Error("No report was specified. You must indicate at least one report file.");
+                Logger.Error("No report was specified. You must indicate at least one report file.");
                 return 1;
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
-            _logger.Info("The following build servers has been detected:");
+            Logger.Info("The following build servers has been detected:");
             foreach (var buildServer in applicableBuildServers)
             {
-                _logger.Info("\t- {0}", buildServer.Name);
+                Logger.Info("\t- {0}", buildServer.Name);
             }
 
             foreach (var reportPath in reportPaths)
             {
-                _logger.Debug("Report path is '{0}'", reportPath);
+                Logger.Debug("Report path is '{0}'", reportPath);
 
                 if (!_fileSystem.File.Exists(reportPath))
                 {
-                    _logger.Error("The report '{0}' was not found.", reportPath);
+                    Logger.Error("The report '{0}' was not found.", reportPath);
                     return 1;
                 }
 
@@ -72,7 +72,7 @@ namespace NVika
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
+                    Logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
                     return 2;
                 }
 
@@ -80,13 +80,13 @@ namespace NVika
                 var parser = GetParser(report);
                 if (parser == null)
                 {
-                    _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
+                    Logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
                     return 3;
                 }
-                _logger.Debug("Report type is '{0}'", parser.Name);
+                Logger.Debug("Report type is '{0}'", parser.Name);
 
                 var issues = parser.Parse(report);
-                _logger.Debug("{0} issues was found", issues.Count());
+                Logger.Debug("{0} issues was found", issues.Count());
 
                 foreach (var issue in issues)
                 {

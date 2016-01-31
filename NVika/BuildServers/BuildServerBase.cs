@@ -4,7 +4,7 @@ namespace NVika.BuildServers
 {
     internal abstract class BuildServerBase : IBuildServer
     {
-        protected bool _includeSourceInMessage;
+        protected bool IncludeSourceInMessage { get; private set; }
 
         public abstract string Name { get; }
 
@@ -12,7 +12,7 @@ namespace NVika.BuildServers
 
         public void ApplyParameters(bool includeSourceInMessage)
         {
-            _includeSourceInMessage = includeSourceInMessage;
+            IncludeSourceInMessage = includeSourceInMessage;
         }
 
         public abstract void WriteMessage(Issue issue);

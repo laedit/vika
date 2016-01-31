@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Xml.Linq;
@@ -10,7 +9,7 @@ namespace NVika.Parsers
 {
     internal sealed class InspectCodeParser : IReportParser
     {
-        private Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
+        private readonly Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
         private readonly IFileSystem _fileSystem;
 
         public string Name
@@ -75,7 +74,7 @@ namespace NVika.Parsers
             string start = null;
             string end = null;
 
-            var dashIndex = offsetAttribute.Value.IndexOf("-");
+            var dashIndex = offsetAttribute.Value.IndexOf("-", StringComparison.OrdinalIgnoreCase);
             if (dashIndex > -1)
             {
                 start = offsetAttribute.Value.Substring(0, dashIndex);
@@ -84,7 +83,6 @@ namespace NVika.Parsers
 
             var lines = _fileSystem.File.ReadLines(sourceFilePath);
             var issueLineOffset = lines.Take((int)lineNumber.Value - 1).Sum(line => line.Length);
-            var issueLineText = lines.Skip((int)lineNumber.Value - 1).Take(1).First();
 
             return new Offset
             {
@@ -103,7 +101,6 @@ namespace NVika.Parsers
 
                 case "ERROR": return IssueSeverity.Error;
 
-                case "WARNING":
                 default:
                     return IssueSeverity.Warning;
             }

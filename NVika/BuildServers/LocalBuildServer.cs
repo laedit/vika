@@ -6,9 +6,8 @@ namespace NVika.BuildServers
     [Export]
     internal sealed class LocalBuildServer : BuildServerBase
     {
-        private static string s_lineFormat = "{0} {1} '{2}' - Line {3}: {4}";
-        private bool _applyToCurrentContext = false;
-        private Logger _logger;
+        private const string LineFormat = "{0} {1} '{2}' - Line {3}: {4}";
+        private readonly Logger _logger;
 
         public override string Name
         {
@@ -23,13 +22,13 @@ namespace NVika.BuildServers
 
         public override bool CanApplyToCurrentContext()
         {
-            return _applyToCurrentContext;
+            return false;
         }
 
         public override void WriteMessage(Issue issue)
         {
-            string format = s_lineFormat;
-            if (_includeSourceInMessage)
+            string format = LineFormat;
+            if (IncludeSourceInMessage)
             {
                 format = string.Concat("[{5}] ", format);
             }

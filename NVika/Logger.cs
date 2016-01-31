@@ -9,22 +9,22 @@ namespace NVika
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class Logger
     {
-        private readonly List<string> categories;
-        private TextWriter writer;
+        private readonly List<string> _categories;
+        private TextWriter _writer;
 
         public Logger()
         {
-            categories = new List<string>();
+            _categories = new List<string>();
         }
 
         public void SetWriter(TextWriter textWriter)
         {
-            writer = textWriter;
+            _writer = textWriter;
         }
 
         public void AddCategory(string category)
         {
-            categories.Add(category);
+            _categories.Add(category);
         }
 
         public void Debug(string message, params object[] args)
@@ -42,17 +42,17 @@ namespace NVika
             Write(message, "error", args);
         }
 
-		private void Write(string message, string category, params object[] args)
-		{
-			if (writer == null)
-			{
-				throw new Exception("The writer must be set with the 'SetWriter' method first.");
-			}
+        private void Write(string message, string category, params object[] args)
+        {
+            if (_writer == null)
+            {
+                throw new Exception("The writer must be set with the 'SetWriter' method first.");
+            }
 
-			if (categories.Contains(category))
-			{
-				writer.WriteLine(message, args);
-			}
-		}
-	}
+            if (_categories.Contains(category))
+            {
+                _writer.WriteLine(message, args);
+            }
+        }
+    }
 }

@@ -13,7 +13,7 @@ namespace NVika.BuildServers
         private readonly Logger _logger;
         private readonly IEnvironment _environment;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly string _appVeyorAPIUrl;
+        private readonly string _appVeyorApiUrl;
 
         public override string Name
         {
@@ -26,7 +26,7 @@ namespace NVika.BuildServers
             _logger = logger;
             _environment = environment;
             _httpClientFactory = httpClientFactory;
-            _appVeyorAPIUrl = _environment.GetEnvironmentVariable("APPVEYOR_API_URL");
+            _appVeyorApiUrl = _environment.GetEnvironmentVariable("APPVEYOR_API_URL");
         }
 
         public override bool CanApplyToCurrentContext()
@@ -37,7 +37,7 @@ namespace NVika.BuildServers
         public override void WriteMessage(Issue issue)
         {
             var message = issue.Message;
-            if (_includeSourceInMessage)
+            if (IncludeSourceInMessage)
             {
                 message = string.Format("[{0}] {1}", issue.Source, message);
             }
@@ -65,7 +65,7 @@ namespace NVika.BuildServers
 
             using (var httpClient = _httpClientFactory.Create())
             {
-                httpClient.BaseAddress = new Uri(_appVeyorAPIUrl);
+                httpClient.BaseAddress = new Uri(_appVeyorApiUrl);
 
                 var compilationMessage = new CompilationMessage
                 {
@@ -86,7 +86,7 @@ namespace NVika.BuildServers
                 jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
                 jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 
-                var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
+            var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
 
                 if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
                 {
@@ -95,7 +95,7 @@ namespace NVika.BuildServers
             }
         }
 
-        private class CompilationMessage
+        private sealed class CompilationMessage
         {
             public string Message { get; set; }
 
