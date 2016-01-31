@@ -81,7 +81,7 @@ namespace NVika.Tests.Parsers
             var result = parser.Parse(report);
 
             // assert
-            Assert.Equal(39, result.Count());
+            Assert.Equal(41, result.Count());
 
             var issue = result.First();
             Assert.Equal("Constraints Violations", issue.Category);
@@ -137,6 +137,33 @@ namespace NVika.Tests.Parsers
             Assert.Equal(19u, issue.Offset.End);
             Assert.Equal("NVika", issue.Project);
             Assert.Equal(IssueSeverity.Suggestion, issue.Severity);
+            Assert.Equal("InspectCode", issue.Source);
+
+            issue = result.Skip(38).First();
+            Assert.Equal("Potential Code Quality Issues", issue.Category);
+            Assert.Equal("Auto-implemented property accessor is never used: Private accessibility", issue.Description);
+            Assert.Equal(@"NVika\Parsers\InspectCodeParser.cs", issue.FilePath);
+            Assert.Null(issue.HelpUri);
+            Assert.Equal(1u, issue.Line);
+            Assert.Equal("Auto-implemented property accessor is never used", issue.Message);
+            Assert.Equal("UnusedAutoPropertyAccessor.Local", issue.Name);
+            Assert.Equal(0u, issue.Offset.Start);
+            Assert.Equal(5u, issue.Offset.End);
+            Assert.Equal("NVika", issue.Project);
+            Assert.Equal(IssueSeverity.Error, issue.Severity);
+            Assert.Equal("InspectCode", issue.Source);
+
+            issue = result.Skip(39).First();
+            Assert.Equal("Redundancies in Code", issue.Category);
+            Assert.Equal("Redundant 'case' label", issue.Description);
+            Assert.Equal(@"NVika\Parsers\InspectCodeParser.cs", issue.FilePath);
+            Assert.Null(issue.HelpUri);
+            Assert.Null(issue.Line);
+            Assert.Equal("Redundant case label", issue.Message);
+            Assert.Equal("RedundantCaseLabel", issue.Name);
+            Assert.Null(issue.Offset);
+            Assert.Equal("NVika", issue.Project);
+            Assert.Equal(IssueSeverity.Hint, issue.Severity);
             Assert.Equal("InspectCode", issue.Source);
 
             issue = result.Last();

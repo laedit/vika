@@ -60,5 +60,25 @@ namespace NVika.Tests
             Assert.Contains(string.Format("NVika V{0}", Assembly.GetAssembly(typeof(Program)).GetName().Version), consoleOutput);
             Assert.Contains("The report 'nonexistingreport.abc' was not found.", consoleOutput);
         }
+
+        [Fact]
+        public void Run_NoParameters_ExceptionAreLogged()
+        {
+            // arrange
+            var output = new StringBuilder();
+            Console.SetOut(new StringWriter(output));
+
+            // act
+            var exitCode = new Program().Run(null);
+
+            // assert
+            var consoleOutput = output.ToString();
+            Assert.Equal(1, exitCode);
+            Assert.Contains(string.Format("NVika V{0}", Assembly.GetAssembly(typeof(Program)).GetName().Version), consoleOutput);
+            Assert.Contains("An unexpected error occurred:", consoleOutput);
+            Assert.Contains("System.ArgumentNullException: Value cannot be null.", consoleOutput);
+        }
+
     }
 }
+

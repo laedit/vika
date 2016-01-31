@@ -17,10 +17,10 @@
     <IssueType Id="PossibleMultipleEnumeration" Category="Potential Code Quality Issues" Description="Possible multiple enumeration of IEnumerable" Severity="WARNING" WikiUrl="http://confluence.jetbrains.net/display/ReSharper/Possible+multiple+enumeration+of+IEnumerable" />
     <IssueType Id="PublicConstructorInAbstractClass" Category="Common Practices and Code Improvements" Description="Make constructor in abstract class protected" Severity="SUGGESTION" WikiUrl="http://confluence.jetbrains.net/display/ReSharper/Make+constructor+in+abstract+class+protected" />
     <IssueType Id="RedundantAssignment" Category="Redundancies in Code" Description="Assignment is not used" Severity="WARNING" />
-    <IssueType Id="RedundantCaseLabel" Category="Redundancies in Code" Description="Redundant 'case' label" Severity="WARNING" />
+    <IssueType Id="RedundantCaseLabel" Category="Redundancies in Code" Description="Redundant 'case' label" Severity="HINT" />
     <IssueType Id="RedundantThisQualifier" Category="Redundancies in Code" Description="Redundant 'this.' qualifier" Severity="WARNING" />
     <IssueType Id="StringIndexOfIsCultureSpecific.1" Category="Common Practices and Code Improvements" SubCategory="String.IndexOf is culture-specific" Description="String.IndexOf is culture-specific: String.IndexOf(string) is culture-specific" Severity="WARNING" />
-    <IssueType Id="UnusedAutoPropertyAccessor.Local" Category="Potential Code Quality Issues" SubCategory="Auto-implemented property accessor is never used" Description="Auto-implemented property accessor is never used: Private accessibility" Severity="WARNING" />
+    <IssueType Id="UnusedAutoPropertyAccessor.Local" Category="Potential Code Quality Issues" SubCategory="Auto-implemented property accessor is never used" Description="Auto-implemented property accessor is never used: Private accessibility" Severity="ERROR" />
   </IssueTypes>
   <Issues>
     <Project Name="NVika">
@@ -62,6 +62,8 @@
       <Issue TypeId="PossibleMultipleEnumeration" File="NVika\Parsers\InspectCodeParser.cs" Offset="939-949" Line="31" Message="Possible multiple enumeration of IEnumerable" />
       <Issue TypeId="StringIndexOfIsCultureSpecific.1" File="NVika\Parsers\InspectCodeParser.cs" Offset="2306-2340" Line="67" Message="String.IndexOf(string) is culture-specific" />
       <Issue TypeId="RedundantCaseLabel" File="NVika\Parsers\InspectCodeParser.cs" Offset="3215-3230" Line="92" Message="Redundant case label" />
+      <Issue TypeId="UnusedAutoPropertyAccessor.Local" File="NVika\Parsers\InspectCodeParser.cs" Offset="0-5" Message="Auto-implemented property accessor is never used" />
+      <Issue TypeId="RedundantCaseLabel" File="NVika\Parsers\InspectCodeParser.cs" Message="Redundant case label" />
       <Issue TypeId="ParameterTypeCanBeEnumerable.Global" File="NVika\Program.cs" Offset="818-826" Line="35" Message="Parameter can be of type 'IEnumerable&lt;string&gt;'" />
     </Project>
   </Issues>
