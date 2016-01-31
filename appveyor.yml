@@ -31,7 +31,7 @@ after_build:
 - tools\SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown
 # build chocolatey package
 - ps: (gc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1).replace('{{version}}', $env:GitVersion_NuGetVersion).replace('{{tag}}',$env:appveyor_repo_tag_name)|sc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1
-- choco pack PackagingAssets\chocolatey\NVika.nuspec -Version %GitVersion_NuGetVersion% -OutputDirectory %appveyor_build_folder%\PackagingAssets\chocolatey\
+- choco pack PackagingAssets\chocolatey\NVika.nuspec --version %GitVersion_NuGetVersion%
 # zip for github package
 - 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika\bin\Release\*.dll
 - 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika\bin\Release\NVika.exe
@@ -54,7 +54,7 @@ artifacts:
 - path: NVika.*.zip
   name: NVika.zip
 
-- path: PackagingAssets\chocolatey\nvika.*.nupkg
+- path: nvika.*.nupkg
   name: NVika.nupkg
 
 deploy:
