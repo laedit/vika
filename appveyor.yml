@@ -27,8 +27,8 @@ build:
 after_build:
 - inspectcode /o="inspectcodereport.xml" /project="NVika" "Vika.sln"
 - NVika\bin\Release\NVika parsereport "inspectcodereport.xml" --debug --includesource
-- tools\SemanticReleaseNotesParser.exe -g Categories -t File --pluralizecategoriestitle --includestyle --debug
-- tools\SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown --pluralizecategoriestitle --debug
+- tools\SemanticReleaseNotesParser.exe -g Categories -t File
+- tools\SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown
 # build chocolatey package
 - ps: (gc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1).replace('{{version}}', $env:GitVersion_NuGetVersion).replace('{{tag}}',$env:appveyor_repo_tag_name)|sc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1
 - choco pack PackagingAssets\chocolatey\NVika.nuspec -Version %GitVersion_NuGetVersion% -OutputDirectory %appveyor_build_folder%\PackagingAssets\chocolatey\
