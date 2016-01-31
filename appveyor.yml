@@ -5,6 +5,7 @@ install:
 - choco install opencover -source https://nuget.org/api/v2/
 - choco install coveralls.io -source https://nuget.org/api/v2/
 - choco install resharper-clt
+- choco install ilrepack -source https://api.nuget.org/v2/
 
 #cache:
 #- packages -> **\packages.config
