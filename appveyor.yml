@@ -5,7 +5,6 @@ install:
 - choco install opencover -source https://nuget.org/api/v2/
 - choco install coveralls.io -source https://nuget.org/api/v2/
 - choco install resharper-clt
-- choco install ilrepack -source https://nuget.org/api/v2/
 
 #cache:
 #- packages -> **\packages.config
@@ -28,14 +27,14 @@ build:
 after_build:
 - inspectcode /o="inspectcodereport.xml" /project="NVika" "Vika.sln"
 - NVika\bin\Release\NVika parsereport "inspectcodereport.xml" --debug --includesource
-- ilrepack /internalize /parallel /wildcards /lib:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.0" /out:NVika.exe NVika/bin/Release/NVika.exe NVika/bin/Release/*.dll
 - tools/SemanticReleaseNotesParser.exe -g Categories -t File --pluralizecategoriestitle --includestyle --debug
 - tools/SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown --pluralizecategoriestitle --debug
 # build chocolatey package
 - ps: (gc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1).replace('{{version}}', $env:GitVersion_NuGetVersion).replace('{{tag}}',$env:appveyor_repo_tag_name)|sc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1
 - choco pack PackagingAssets\chocolatey\NVika.nuspec -Version %GitVersion_NuGetVersion% -OutputDirectory %appveyor_build_folder%\PackagingAssets\chocolatey\
 # zip for github package
-- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika.exe
+- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika\bin\Release\*.dll
+- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\NVika\bin\Release\NVika.exe
 - 7z a NVika.%GitVersion_NuGetVersion%.zip ReleaseNotes.html
 
 test_script:
