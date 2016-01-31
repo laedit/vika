@@ -89,7 +89,7 @@ namespace NVika.Parsers
             return new Offset
             {
                 Start = string.IsNullOrWhiteSpace(start) ? null : (uint?)(int.Parse(start) - (issueLineOffset + lineNumber.Value - 1)),
-                End = string.IsNullOrWhiteSpace(start) ? null : (uint?)(int.Parse(end) - (issueLineOffset + lineNumber.Value - 1))
+                End = string.IsNullOrWhiteSpace(end) ? null : (uint?)(int.Parse(end) - (issueLineOffset + lineNumber.Value - 1))
             };
         }
 
