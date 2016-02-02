@@ -16,10 +16,10 @@ environment:
     secure: GdZUBHY15XkHS4bAvE7K42B4ssrtz19qK20fSnDUvjlFDbIUXNUDop6qmx8N+GQn
 
 before_build:
-  - nuget restore
+  - nuget restore src\Vika.sln
 
 build:
-  project: Vika.sln
+  project: src\Vika.sln
   verbosity: minimal
 
 after_build:

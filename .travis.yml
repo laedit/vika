@@ -1,6 +1,6 @@
 language: csharp
 
-solution: Vika.sln
+solution: src/Vika.sln
 
 cache:
   directories:
@@ -8,9 +8,9 @@ cache:
   - testrunner
 
 install:
-  - nuget restore Vika.sln
+  - nuget restore src/Vika.sln
   - nuget install xunit.runner.console -OutputDirectory testrunner
 
 script:
-  - xbuild /p:Configuration=Release Vika.sln
+  - xbuild /p:Configuration=Release src/Vika.sln
   - mono ./testrunner/xunit.runner.console.*/tools/xunit.console.exe ./NVika.Tests/bin/Release/NVika.Tests.dll
