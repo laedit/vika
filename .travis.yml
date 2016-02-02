@@ -13,4 +13,4 @@ install:
 
 script:
   - xbuild /p:Configuration=Release src/Vika.sln
-  - mono ./testrunner/xunit.runner.console.*/tools/xunit.console.exe ./NVika.Tests/bin/Release/NVika.Tests.dll
+  - mono ./testrunner/xunit.runner.console.*/tools/xunit.console.exe ./src/NVika.Tests/bin/Release/NVika.Tests.dll
