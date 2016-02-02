@@ -6,10 +6,10 @@ install:
 - choco install coveralls.io -source https://nuget.org/api/v2/
 - choco install resharper-clt
 
-#cache:
-#- packages -> **\packages.config
-#- C:\ProgramData\chocolatey\bin -> appveyor.yml
-#- C:\ProgramData\chocolatey\lib -> appveyor.yml
+cache:
+- packages -> **\packages.config
+- C:\ProgramData\chocolatey\bin -> appveyor.yml
+- C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 environment:
   COVERALLS_REPO_TOKEN:
