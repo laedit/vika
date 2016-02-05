@@ -1,4 +1,8 @@
-# 0.1.0 (31 janvier 2016)
+# 0.1.1 (2016-02-05)
+
+ - [#15](https://github.com/laedit/vika/issues/15) - Could not load file or assembly 'Newtonsoft.Json' when running NVika in AppVeyor
+
+# 0.1.0 (2016-01-31)
 
  - [#12](https://github.com/laedit/vika/issues/12) - Support Mono +enhancement
  - [#9](https://github.com/laedit/vika/issues/9) - Handle multiple report files +enhancement
