@@ -33,6 +33,7 @@ after_build:
 # zip for github package
 - 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\*.dll
 - 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\NVika.exe
+- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\NVika.exe.config
 - 7z a NVika.%GitVersion_NuGetVersion%.zip ReleaseNotes.html
 
 test_script:
