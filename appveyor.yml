@@ -4,7 +4,7 @@ install:
 - GitVersion /output buildserver /UpdateAssemblyInfo true
 - choco install opencover -source https://nuget.org/api/v2/
 - choco install coveralls.io -source https://nuget.org/api/v2/
-- choco install resharper-clt
+- choco install resharper-clt.portable
 
 cache:
 - packages -> **\packages.config
