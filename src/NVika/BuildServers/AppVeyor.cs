@@ -55,6 +55,7 @@ namespace NVika.BuildServers
             }
 
             string filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+            string details = string.Format("{0} in {1} on line {2}", message, filePath, issue.Line);
 
             _logger.Debug("Send compilation message to AppVeyor:");
             _logger.Debug("Message: {0}", message);
@@ -62,6 +63,7 @@ namespace NVika.BuildServers
             _logger.Debug("FileName: {0}", filePath);
             _logger.Debug("Line: {0}", issue.Line);
             _logger.Debug("ProjectName: {0}", issue.Project);
+            _logger.Debug("Details: {0}", details);
 
             using (var httpClient = _httpClientFactory.Create())
             {
@@ -73,7 +75,8 @@ namespace NVika.BuildServers
                     Category = category,
                     FileName = filePath,
                     Line = issue.Line,
-                    ProjectName = issue.Project
+                    ProjectName = issue.Project,
+                    Details = details
                 };
 
                 if (issue.Offset != null)
@@ -85,7 +88,7 @@ namespace NVika.BuildServers
                 JsonMediaTypeFormatter jsonFormat = new JsonMediaTypeFormatter();
                 jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
                 jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-
+                
             var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
 
                 if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
@@ -108,6 +111,8 @@ namespace NVika.BuildServers
             public string ProjectName { get; set; }
 
             public uint? Column { get; set; }
+
+            public string Details { get; set; }
         }
     }
 }
