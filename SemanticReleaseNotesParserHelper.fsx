@@ -71,7 +71,7 @@ module SemanticReleaseNotesParser =
     /// The default option set given to SemanticReleaseNotesParser.
     let SemanticReleaseNotesParserDefaults = {
         Debug = false
-        ToolPath = ""
+        ToolPath = findToolInSubPath "SemanticReleaseNotesParser.exe" ("tools" @@ "semanticreleasenotes-parser")
         TimeOut = TimeSpan.FromMinutes 5.
         ReleaseNotesPath = ""
         OutputPath = ""

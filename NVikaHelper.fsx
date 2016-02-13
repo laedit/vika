@@ -24,7 +24,7 @@ module NVika =
     let NVikaParseReportDefaults = {
         Debug = false
         IncludeSource = false
-        ToolPath = findToolInSubPath "NVika.exe" "tools" @@ "nvika"
+        ToolPath = findToolInSubPath "NVika.exe" ("tools" @@ "nvika")
         TimeOut = TimeSpan.FromMinutes 5.
     }
     
