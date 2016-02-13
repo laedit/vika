@@ -6,11 +6,7 @@ cache:
   directories:
   - packages
   - testrunner
-
-install:
-  - nuget restore src/Vika.sln
-  - nuget install xunit.runner.console -OutputDirectory testrunner
+  - tools
 
 script:
-  - xbuild /p:Configuration=Release src/Vika.sln
-  - mono ./testrunner/xunit.runner.console.*/tools/xunit.console.exe ./src/NVika.Tests/bin/Release/NVika.Tests.dll
+  - build.sh

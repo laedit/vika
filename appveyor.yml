@@ -1,66 +1,45 @@
-configuration: Release
-
-install:
-- GitVersion /output buildserver /UpdateAssemblyInfo true
-- choco install opencover -source https://nuget.org/api/v2/
-- choco install coveralls.io -source https://nuget.org/api/v2/
-- choco install resharper-clt.portable
-
 cache:
 - packages -> **\packages.config
 - C:\ProgramData\chocolatey\bin -> appveyor.yml
 - C:\ProgramData\chocolatey\lib -> appveyor.yml
+- tools -> build.fsx
+
+install:
+- GitVersion /output buildserver /UpdateAssemblyInfo true
 
 environment:
   COVERALLS_REPO_TOKEN:
     secure: GdZUBHY15XkHS4bAvE7K42B4ssrtz19qK20fSnDUvjlFDbIUXNUDop6qmx8N+GQn
 
-before_build:
-  - nuget restore src\Vika.sln
+build_script:
+  build.bat
 
-build:
-  project: src\Vika.sln
-  verbosity: minimal
-
-after_build:
-- inspectcode /o="inspectcodereport.xml" /project="NVika" "src\Vika.sln"
-- src\NVika\bin\Release\NVika parsereport "inspectcodereport.xml" --debug --includesource
-- tools\SemanticReleaseNotesParser.exe -g Categories -t File -r ReleaseNotes.md --debug
-- tools\SemanticReleaseNotesParser.exe -g Categories -t Environment -f Markdown -r ReleaseNotes.md --debug
-# build chocolatey package
-- ps: (gc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1).replace('{{version}}', $env:GitVersion_NuGetVersion).replace('{{tag}}',$env:appveyor_repo_tag_name)|sc PackagingAssets\chocolatey\tools\chocolateyInstall.ps1
-- choco pack PackagingAssets\chocolatey\NVika.nuspec --version %GitVersion_NuGetVersion%
-# zip for github package
-- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\*.dll
-- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\NVika.exe
-- 7z a NVika.%GitVersion_NuGetVersion%.zip %appveyor_build_folder%\src\NVika\bin\Release\NVika.exe.config
-- 7z a NVika.%GitVersion_NuGetVersion%.zip ReleaseNotes.html
-
-test_script:
-- OpenCover.Console.exe -register:user -filter:"+[NVika]*" -excludebyattribute:*.ExcludeFromCodeCoverage* -target:"%xunit20%\xunit.console.exe" -targetargs:"""src\NVika.Tests\bin\Release\NVika.Tests.dll"" -noshadow -appveyor" -output:coverage.xml -returntargetcode
-- coveralls.net --opencover coverage.xml
+test: off
 
 artifacts:
-- path: coverage.xml
+- path: artifacts\coverage.xml
 
-- path: src\NVika\bin\Release\NVika.exe.CodeAnalysisLog.xml
+- path: build\NVika.exe.CodeAnalysisLog.xml
   name: NVika.exe.CodeAnalysisLog.xml
 
-- path: inspectcodereport.xml
+- path: artifacts\inspectcodereport.xml
 
-- path: ReleaseNotes.html
+- path: artifacts\ReleaseNotes.html
 
-- path: NVika.*.zip
+- path: artifacts\NVika.*.zip
   name: NVika.zip
 
-- path: nvika.*.nupkg
+- path: artifacts\nvika.*.nupkg
   name: NVika.nupkg
+  
+- path: artifacts\NVikaHelper.fsx
+  name: NVikaHelper.fsx
 
 deploy:
   - provider: GitHub
     auth_token:
       secure: WaNF2IUzat+PQQqquLoaN43QIpnUsrYgSOGN3P5Tpy+A+ANOWQqvWE0eFA+XwmmX
-    artifact: NVika.zip
+    artifact: NVika.zip, NVikaHelper.fsx
     description: $(SemanticReleaseNotes)
     on:
       appveyor_repo_tag: true
