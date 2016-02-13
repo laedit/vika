@@ -1,7 +1,5 @@
 language: csharp
 
-solution: src/Vika.sln
-
 cache:
   directories:
   - packages
@@ -9,4 +7,4 @@ cache:
   - tools
 
 script:
-  - build.sh
+  - ./build.sh
