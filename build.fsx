@@ -77,45 +77,53 @@ Target "Test" (fun _ ->
         ExcludeVersion = true
     })
     
-    "OpenCover" |> NugetInstall (fun p -> 
-    { p with 
-        OutputDirectory = "tools";
-        ExcludeVersion = true
-    })
-    
-    testDir + "NVika.Tests.dll -noshadow" |> OpenCover (fun p -> 
-    { p with
-        ExePath = "./tools/OpenCover/tools/OpenCover.Console.exe"
-        TestRunnerExePath = "./tools/xunit.runner.console/tools/xunit.console.exe";
-        Output = artifactsDir @@ "coverage.xml";
-        Register = RegisterUser;
-        Filter = "+[NVika]*";
-        OptionalArguments = "-excludebyattribute:*.ExcludeFromCodeCoverage* -returntargetcode";
-    })
-    
-    if isLocalBuild then
-        "ReportGenerator" |> NugetInstall (fun p -> 
-        { p with 
-            OutputDirectory = "tools";
-            ExcludeVersion = true
-        })
-        [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p -> 
-        { p with 
-            TargetDir = artifactsDir @@ "reports" 
-            ExePath = "tools/ReportGenerator/tools/ReportGenerator"
-            LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
-        })
+    if isUnix then
+        !! (testDir @@ "NVika.Tests.dll")
+        |> xUnit2 (fun p -> { p with 
+                                HtmlOutputPath = Some (artifactsDir @@ "xunit.html") 
+                                ShadowCopy = false
+                            })
     else
-        "coveralls.io" |> NugetInstall (fun p -> 
+
+        "OpenCover" |> NugetInstall (fun p -> 
         { p with 
             OutputDirectory = "tools";
             ExcludeVersion = true
         })
-        if not (directExec(fun info ->
-            info.FileName <- "coveralls.net"
-            info.Arguments <- "--opencover " + artifactsDir + "coverage.xml" ))
-        then
-            failwith "Execution of coveralls.net have failed, NVika can't be executed."
+    
+        testDir + "NVika.Tests.dll -noshadow" |> OpenCover (fun p -> 
+        { p with
+            ExePath = "./tools/OpenCover/tools/OpenCover.Console.exe"
+            TestRunnerExePath = "./tools/xunit.runner.console/tools/xunit.console.exe";
+            Output = artifactsDir @@ "coverage.xml";
+            Register = RegisterUser;
+            Filter = "+[NVika]*";
+            OptionalArguments = "-excludebyattribute:*.ExcludeFromCodeCoverage* -returntargetcode";
+        })
+    
+        if isLocalBuild then
+            "ReportGenerator" |> NugetInstall (fun p -> 
+            { p with 
+                OutputDirectory = "tools";
+                ExcludeVersion = true
+            })
+            [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p -> 
+            { p with 
+                TargetDir = artifactsDir @@ "reports" 
+                ExePath = "tools/ReportGenerator/tools/ReportGenerator"
+                LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
+            })
+        else
+            "coveralls.io" |> NugetInstall (fun p -> 
+            { p with 
+                OutputDirectory = "tools";
+                ExcludeVersion = true
+            })
+            if not (directExec(fun info ->
+                info.FileName <- "coveralls.net"
+                info.Arguments <- "--opencover " + artifactsDir + "coverage.xml" ))
+            then
+                failwith "Execution of coveralls.net have failed, NVika can't be executed."
 )
 
 Target "Zip" (fun _ ->

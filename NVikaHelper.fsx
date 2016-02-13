@@ -34,17 +34,20 @@ module NVika =
     /// 1. In the `<ProgramData>\chocolatey\bin` directory
     /// 2. In the `PATH` environment variable.
     let private findExe toolPath =
-        let found = [
+        let paths = [
                         Seq.singleton toolPath
                         Seq.singleton ("tools" @@ "NVika")
                         Seq.singleton (environVar "ProgramData" @@ "chocolatey" @@ "lib" @@ "nvika")
                         pathDirectories
                     ]
+        let found = paths
                     |> Seq.concat
                     |> Seq.map (fun directory -> directory @@ "NVika.exe")
                     |> Seq.tryFind fileExists
         
-        if found <> None then found.Value else failwith "Cannot find the NVika executable."
+        if found <> None then found.Value 
+        else 
+            failwith (sprintf "Cannot find the NVika executable in following paths: %A" paths)
 
     /// [omit]
     let private buildArgs command reports parameters =
