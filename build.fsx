@@ -25,8 +25,8 @@ Target "Clean" (fun _ ->
 )
 
 Target "RestorePackages" (fun _ ->
-    !! "./src/**/packages.config"
-    |> Seq.iter (RestorePackage id)
+    "./src/Vika.sln"
+    |> RestoreMSSolutionPackages id
 )
 
 Target "BuildApp" (fun _ ->
