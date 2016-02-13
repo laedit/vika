@@ -26,7 +26,7 @@ Target "Clean" (fun _ ->
 
 Target "RestorePackages" (fun _ ->
     "./src/Vika.sln"
-    |> RestoreMSSolutionPackages id
+    |> RestoreMSSolutionPackages (fun p -> { p with OutputPath = "src/packages" })
 )
 
 Target "BuildApp" (fun _ ->

@@ -6,7 +6,8 @@ cache:
   - testrunner
   - tools
 
-sudo: false  # use the new container-based Travis infrastructure
+before_script:
+ - chmod +x build.sh
 
 script:
   - ./build.sh
