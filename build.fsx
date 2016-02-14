@@ -141,8 +141,7 @@ Target "PackFakeHelper" (fun _ ->
 
 Target "ChocoPack" (fun _ ->
     FileUtils.cp_r "PackagingAssets\chocolatey" (buildDir @@ "chocolatey")
-    buildDir + @"chocolatey\tools\chocolateyInstall.ps1" |> FileHelper.RegexReplaceInFileWithEncoding "{{version}}" version System.Text.Encoding.UTF8
-    buildDir + @"chocolatey\tools\chocolateyInstall.ps1" |> FileHelper.RegexReplaceInFileWithEncoding "{{tag}}" tag System.Text.Encoding.UTF8
+    [buildDir + @"chocolatey\tools\chocolateyInstall.ps1"] |> FileHelper.ReplaceInFiles [("{{version}}", version); ("{{tag}}", tag)]
     buildDir + "chocolatey\NVika.nuspec" |> Choco.Pack (fun p -> { p with Version = version })
     "nvika." + version + ".nupkg" |> FileHelper.MoveFile artifactsDir
 )
