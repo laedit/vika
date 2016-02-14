@@ -110,7 +110,7 @@ Target "Test" (fun _ ->
             [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p -> 
             { p with 
                 TargetDir = artifactsDir @@ "reports" 
-                ExePath = @"tools\ReportGenerator\tools\ReportGenerator"
+                ExePath = @"tools\ReportGenerator\tools\ReportGenerator.exe"
                 LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
             })
         else
@@ -120,7 +120,7 @@ Target "Test" (fun _ ->
                 ExcludeVersion = true
             })
             if not (directExec(fun info ->
-                info.FileName <- @"tools\coveralls.io\tools\coveralls.net"
+                info.FileName <- @"tools\coveralls.io\tools\coveralls.net.exe"
                 info.Arguments <- "--opencover " + artifactsDir + "coverage.xml" ))
             then
                 failwith "Execution of coveralls.net have failed."
