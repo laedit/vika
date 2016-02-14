@@ -34,25 +34,28 @@ module NVika =
     /// 1. In the `<ProgramData>\chocolatey\bin` directory
     /// 2. In the `PATH` environment variable.
     let private findExe toolPath =
-        let paths = [
-                        Seq.singleton toolPath
-                        Seq.singleton ("tools" @@ "NVika")
-                        Seq.singleton (environVar "ProgramData" @@ "chocolatey" @@ "lib" @@ "nvika")
-                        pathDirectories
-                    ]
-        let found = paths
-                    |> Seq.concat
-                    |> Seq.map (fun directory -> directory @@ "NVika.exe")
-                    |> Seq.tryFind fileExists
+        if toolPath |> isNullOrEmpty then
+            let paths = [
+                            Seq.singleton ("tools" @@ "NVika")
+                            Seq.singleton (environVar "ProgramData" @@ "chocolatey" @@ "lib" @@ "nvika")
+                            pathDirectories
+                        ] |> Seq.concat
+            let found = paths
+                        |> Seq.map (fun directory -> directory @@ "NVika.exe")
+                        |> Seq.tryFind fileExists
         
-        if found <> None then found.Value 
-        else 
-            failwith (sprintf "Cannot find the NVika executable in following paths: %A" paths)
+            if found <> None 
+            then 
+                trace (sprintf "founded: %s" found.Value)
+                found.Value 
+            else 
+                failwith (sprintf "Cannot find the NVika executable in following paths: %A" paths)
+        else toolPath
 
     /// [omit]
     let private buildArgs command reports parameters =
         new StringBuilder()
-                |> append command
+                |> appendWithoutQuotes command
                 |> append (separated " " reports)
                 |> appendIfTrueWithoutQuotes parameters.Debug "--debug"
                 |> appendIfTrueWithoutQuotes parameters.IncludeSource "--includesource"
