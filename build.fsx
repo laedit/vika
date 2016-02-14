@@ -120,10 +120,10 @@ Target "Test" (fun _ ->
                 ExcludeVersion = true
             })
             if not (directExec(fun info ->
-                info.FileName <- "coveralls.net"
+                info.FileName <- "tools/coveralls.io/tools/coveralls.net"
                 info.Arguments <- "--opencover " + artifactsDir + "coverage.xml" ))
             then
-                failwith "Execution of coveralls.net have failed, NVika can't be executed."
+                failwith "Execution of coveralls.net have failed."
 )
 
 Target "Zip" (fun _ ->
