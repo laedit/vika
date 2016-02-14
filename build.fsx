@@ -16,7 +16,7 @@ let testDir  = "./test/"
 let artifactsDir = "./artifacts/"
 
 // version info
-let version = if isLocalBuild then "0.0.1" else buildVersion
+let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then environVar "GitVersion_NuGetVersionV2" else buildVersion
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
 // Targets
