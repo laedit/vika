@@ -1,7 +1,7 @@
 cache:
-- packages -> **\packages.config
-- C:\ProgramData\chocolatey\bin -> appveyor.yml
-- C:\ProgramData\chocolatey\lib -> appveyor.yml
+- src/packages -> **\packages.config
+- C:\ProgramData\chocolatey\bin -> build.fsx
+- C:\ProgramData\chocolatey\lib -> build.fsx
 - tools -> build.fsx
 
 install:
