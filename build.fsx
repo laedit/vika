@@ -52,6 +52,8 @@ Target "BuildReleaseNotes" (fun _ ->
                                                         GroupBy = SemanticReleaseNotesParser.GroupByType.Categories
                                                         Debug = true
                                                         OutputPath = buildDir @@ "ReleaseNotes.html"
+                                                        PluralizeCategoriesTitle = true
+                                                        IncludeStyle = SemanticReleaseNotesParser.IncludeStyleType.Yes
         } )
 
      buildDir @@ "ReleaseNotes.html" |> FileHelper.CopyFile artifactsDir
@@ -61,6 +63,7 @@ Target "BuildReleaseNotes" (fun _ ->
                                                         OutputType = SemanticReleaseNotesParser.OutputType.Environment
                                                         OutputFormat = SemanticReleaseNotesParser.OutputFormat.Markdown
                                                         Debug = true
+                                                        PluralizeCategoriesTitle = true
         } )
 )
 
