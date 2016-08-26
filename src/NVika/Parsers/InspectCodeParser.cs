@@ -25,7 +25,10 @@ namespace NVika.Parsers
 
         public bool CanParse(XDocument report)
         {
-            return report.FirstNode is XComment && ((XComment)report.FirstNode).Value.Contains("InspectCode");
+            return report.Root.Name == "Report"
+                    && report.Descendants("IssueType").Any()
+                    && report.Descendants("Project").Any()
+                    && report.Descendants("Issue").Any();
         }
 
         public IEnumerable<Issue> Parse(XDocument report)
