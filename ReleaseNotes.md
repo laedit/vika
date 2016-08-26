@@ -1,3 +1,7 @@
+# 0.1.2 (2016-08-26)
+
+- [#23](https://github.com/laedit/vika/issues/23) - Support Inspect Code v2016.2
+
 # 0.1.1 (2016-02-05)
 
  - [#15](https://github.com/laedit/vika/issues/15) - Could not load file or assembly 'Newtonsoft.Json' when running NVika in AppVeyor
