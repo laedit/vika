@@ -2,8 +2,7 @@ language: csharp
 
 cache:
   directories:
-  - packages
-  - testrunner
+  - src/packages
   - tools
 
 before_script:

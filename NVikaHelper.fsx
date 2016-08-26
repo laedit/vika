@@ -24,7 +24,7 @@ module NVika =
     let NVikaParseReportDefaults = {
         Debug = false
         IncludeSource = false
-        ToolPath = findToolInSubPath "NVika.exe" ("tools" @@ "nvika")
+        ToolPath = null
         TimeOut = TimeSpan.FromMinutes 5.
     }
     
@@ -36,12 +36,13 @@ module NVika =
     let private findExe toolPath =
         if toolPath |> isNullOrEmpty then
             let paths = [
+                            Seq.singleton (findToolInSubPath "NVika.exe" ("tools" @@ "nvika"))
                             Seq.singleton ("tools" @@ "NVika")
                             Seq.singleton (environVar "ProgramData" @@ "chocolatey" @@ "lib" @@ "nvika")
                             pathDirectories
                         ] |> Seq.concat
             let found = paths
-                        |> Seq.map (fun directory -> directory @@ "NVika.exe")
+                        |> Seq.map (fun directory -> if hasExt ".exe" directory then directory else directory @@ "NVika.exe")
                         |> Seq.tryFind fileExists
         
             if found <> None 
@@ -56,7 +57,7 @@ module NVika =
     let private buildArgs command reports parameters =
         new StringBuilder()
                 |> appendWithoutQuotes command
-                |> append (separated " " reports)
+                |> appendWithoutQuotes (separated " " reports)
                 |> appendIfTrueWithoutQuotes parameters.Debug "--debug"
                 |> appendIfTrueWithoutQuotes parameters.IncludeSource "--includesource"
                 |> toText

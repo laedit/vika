@@ -1,5 +1,4 @@
 #r "./tools/FAKE/tools/FakeLib.dll"
-#load "Choco.fsx"
 #load "NVikaHelper.fsx"
 #load "SemanticReleaseNotesParserHelper.fsx"
 
@@ -142,16 +141,33 @@ Target "PackFakeHelper" (fun _ ->
     artifactsDir @@ "NVikaHelper.fsx" |> FileHelper.RegexReplaceInFileWithEncoding "./tools/FAKE/tools/FakeLib.dll" "FakeLib.dll" System.Text.Encoding.UTF8
 )
 
-Target "ChocoPack" (fun _ ->
-    FileUtils.cp_r "PackagingAssets\chocolatey" (buildDir @@ "chocolatey")
-    [buildDir + @"chocolatey\tools\chocolateyInstall.ps1"] |> FileHelper.ReplaceInFiles [("{{version}}", version); ("{{tag}}", tag)]
-    buildDir + "chocolatey\NVika.nuspec" |> Choco.Pack (fun p -> { p with Version = version })
-    "nvika." + version + ".nupkg" |> FileHelper.MoveFile artifactsDir
+Target "ChocoPack" (fun _ -> 
+    Choco.Pack (fun p -> 
+        { p with 
+            PackageId = "nvika"
+            Version = version
+            Title = "NVika"
+            Authors = ["laedit"]
+            Owners = ["laedit"]
+            ProjectUrl = "https://github.com/laedit/vika"
+            IconUrl = "https://cdn.rawgit.com/laedit/vika/master/icon.png"
+            LicenseUrl = "https://github.com/laedit/vika/blob/master/LICENSE"
+            BugTrackerUrl = "https://github.com/laedit/vika/issues"
+            Description = "Parse analysis reports (InspectCode, ...) and send messages to build server or console."
+            Tags = ["report"; "parsing"; "build"; "server"; "inspectcode"]
+            ReleaseNotes = "https://github.com/laedit/vika/releases"
+            PackageDownloadUrl = "https://github.com/laedit/vika/releases/download/" + tag + "/NVika." + version + ".zip"
+            OutputDir = artifactsDir
+            Checksum = Checksum.CalculateFileHash (artifactsDir + "NVika." + version + ".zip")
+            ChecksumType = Choco.ChocolateyChecksumType.Sha256
+        })
 )
 
 Target "All" DoNothing
 
 // Dependencies
+"Clean" ==> "ChocoPack"
+
 "Clean"
   ==> "RestorePackages"
   ==> "BuildApp"
