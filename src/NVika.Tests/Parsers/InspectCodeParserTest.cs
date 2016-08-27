@@ -200,7 +200,7 @@ namespace NVika.Tests.Parsers
             // arrange
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
-                { @"src\NVika\BuildServers\AppVeyor.cs", new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) }
+                { Path.Combine("src", @"NVika\BuildServers\AppVeyor.cs"), new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) }
             });
             var parser = new InspectCodeParser(fileSystem);
             report.Root.Element("Information").Element("Solution").Value = Path.Combine("src", "Vika.sln");
