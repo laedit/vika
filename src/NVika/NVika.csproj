@@ -71,7 +71,7 @@
     <Compile Include="Abstractions\IEnvironment.cs" />
     <Compile Include="Abstractions\IHttpClientFactory.cs" />
     <Compile Include="CommandBase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="ParseReportCommand.cs" />
     <Compile Include="BuildServers\AppVeyor.cs" />
     <Compile Include="BuildServers\BuildServerBase.cs" />
