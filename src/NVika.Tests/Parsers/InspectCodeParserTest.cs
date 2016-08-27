@@ -192,5 +192,39 @@ namespace NVika.Tests.Parsers
             Assert.Equal(IssueSeverity.Suggestion, issue.Severity);
             Assert.Equal("InspectCode", issue.Source);
         }
+
+        [Theory]
+        [MemberData("ParseXmlDataFromInspectCodeReport")]
+        public void Parse_SlnInSubFolder(XDocument report)
+        {
+            // arrange
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { @"src\NVika\BuildServers\AppVeyor.cs", new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) }
+            });
+            var parser = new InspectCodeParser(fileSystem);
+            report.Root.Element("Information").Element("Solution").Value = @"src\Vika.sln";
+
+            // act
+            var result = parser.Parse(report);
+
+            // assert
+            Assert.Equal(41, result.Count());
+
+            var issue = result.First();
+            Assert.Equal("Constraints Violations", issue.Category);
+            Assert.Equal("Inconsistent Naming", issue.Description);
+            Assert.Equal(@"src\NVika\BuildServers\AppVeyor.cs", issue.FilePath);
+            Assert.Null(issue.HelpUri);
+            Assert.Equal(15u, issue.Line);
+            Assert.Equal("Name '_appVeyorAPIUrl' does not match rule 'Instance fields (private)'. Suggested name is '_appVeyorApiUrl'.", issue.Message);
+            Assert.Equal("InconsistentNaming", issue.Name);
+            Assert.Equal(32u, issue.Offset.Start);
+            Assert.Equal(47u, issue.Offset.End);
+            Assert.Equal("NVika", issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("InspectCode", issue.Source);
+
+        }
     }
 }

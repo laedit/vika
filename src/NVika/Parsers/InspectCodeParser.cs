@@ -28,11 +28,13 @@ namespace NVika.Parsers
             return report.Root.Name == "Report"
                     && report.Descendants("IssueType").Any()
                     && report.Descendants("Project").Any()
-                    && report.Descendants("Issue").Any();
+                    && report.Descendants("Issue").Any()
+                    && report.Descendants("Information").Any();
         }
 
         public IEnumerable<Issue> Parse(XDocument report)
         {
+            var rootFolder = _fileSystem.Path.GetDirectoryName(report.Root.Element("Information").Element("Solution").Value);
             var issuesType = report.Descendants("IssueType");
 
             foreach (var project in report.Descendants("Project"))
@@ -40,7 +42,7 @@ namespace NVika.Parsers
                 foreach (var issue in project.Descendants("Issue"))
                 {
                     var issueType = GetIssueType(issuesType, issue.Attribute("TypeId").Value);
-                    var sourceFilePath = issue.Attribute("File").Value;
+                    var sourceFilePath =  string.IsNullOrEmpty(rootFolder) ? issue.Attribute("File").Value : _fileSystem.Path.Combine(rootFolder, issue.Attribute("File").Value);
                     var offsetAttribute = issue.Attribute("Offset");
                     var lineNumber = GetLine(issue.Attribute("Line"), offsetAttribute != null);
 
