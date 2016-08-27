@@ -203,7 +203,7 @@ namespace NVika.Tests.Parsers
                 { @"src\NVika\BuildServers\AppVeyor.cs", new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) }
             });
             var parser = new InspectCodeParser(fileSystem);
-            report.Root.Element("Information").Element("Solution").Value = @"src\Vika.sln";
+            report.Root.Element("Information").Element("Solution").Value = Path.Combine("src", "Vika.sln");
 
             // act
             var result = parser.Parse(report);
