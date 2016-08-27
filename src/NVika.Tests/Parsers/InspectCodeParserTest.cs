@@ -214,7 +214,7 @@ namespace NVika.Tests.Parsers
             var issue = result.First();
             Assert.Equal("Constraints Violations", issue.Category);
             Assert.Equal("Inconsistent Naming", issue.Description);
-            Assert.Equal(@"src\NVika\BuildServers\AppVeyor.cs", issue.FilePath);
+            Assert.Equal(Path.Combine("src", @"NVika\BuildServers\AppVeyor.cs"), issue.FilePath);
             Assert.Null(issue.HelpUri);
             Assert.Equal(15u, issue.Line);
             Assert.Equal("Name '_appVeyorAPIUrl' does not match rule 'Instance fields (private)'. Suggested name is '_appVeyorApiUrl'.", issue.Message);
