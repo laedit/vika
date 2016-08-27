@@ -27,7 +27,7 @@ namespace NVika.BuildServers
 
         public override void WriteMessage(Issue issue)
         {
-            string format = LineFormat;
+            var format = LineFormat;
             if (IncludeSourceInMessage)
             {
                 format = string.Concat("[{5}] ", format);

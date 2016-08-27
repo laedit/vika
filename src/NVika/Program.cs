@@ -44,8 +44,7 @@ namespace NVika
             }
             catch (Exception exception)
             {
-                var error = string.Format("An unexpected error occurred:\r\n{0}", exception);
-                _logger.Error(error);
+                _logger.Error($"An unexpected error occurred:\r\n{exception}");
                 return 1;
             }
         }
@@ -62,12 +61,13 @@ namespace NVika
             try
             {
                 var first = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-                var container = new CompositionContainer(first);
-
-                var batch = new CompositionBatch();
-                batch.AddExportedValue<IFileSystem>(new FileSystem());
-                batch.AddPart(this);
-                container.Compose(batch);
+                using (var container = new CompositionContainer(first))
+                {
+                    var batch = new CompositionBatch();
+                    batch.AddExportedValue<IFileSystem>(new FileSystem());
+                    batch.AddPart(this);
+                    container.Compose(batch);
+                }
             }
             catch (ReflectionTypeLoadException ex)
             {

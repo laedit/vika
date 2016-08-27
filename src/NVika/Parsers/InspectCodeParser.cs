@@ -62,7 +62,7 @@ namespace NVika.Parsers
             }
         }
 
-        private Uri GetUri(XAttribute uriAttribute)
+        private static Uri GetUri(XAttribute uriAttribute)
         {
             return uriAttribute == null ? null : new Uri(uriAttribute.Value);
         }
@@ -94,7 +94,7 @@ namespace NVika.Parsers
             };
         }
 
-        private IssueSeverity GetSeverity(XAttribute severityAttribute)
+        private static IssueSeverity GetSeverity(XAttribute severityAttribute)
         {
             switch (severityAttribute.Value)
             {
@@ -109,7 +109,7 @@ namespace NVika.Parsers
             }
         }
 
-        private uint? GetLine(XAttribute lineAttribute, bool isOffsetAvailable)
+        private static uint? GetLine(XAttribute lineAttribute, bool isOffsetAvailable)
         {
             if (lineAttribute == null)
             {

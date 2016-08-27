@@ -40,7 +40,7 @@ namespace NVika
 
         protected override int Execute(string[] reportPaths)
         {
-            int returnCode = 0;
+            var returnCode = 0;
 
             if (reportPaths.Length == 0)
             {

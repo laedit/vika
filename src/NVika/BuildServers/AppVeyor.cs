@@ -17,7 +17,7 @@ namespace NVika.BuildServers
 
         public override string Name
         {
-            get { return "AppVeyor"; }
+            get { return nameof(AppVeyor); }
         }
 
         [ImportingConstructor]
@@ -39,10 +39,10 @@ namespace NVika.BuildServers
             var message = issue.Message;
             if (IncludeSourceInMessage)
             {
-                message = string.Format("[{0}] {1}", issue.Source, message);
+                message = $"[{issue.Source}] {message}";
             }
 
-            string category = "information";
+            var category = "information";
             switch (issue.Severity)
             {
                 case IssueSeverity.Error:
@@ -54,7 +54,7 @@ namespace NVika.BuildServers
                     break;
             }
 
-            string filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+            var filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
 
             _logger.Debug("Send compilation message to AppVeyor:");
             _logger.Debug("Message: {0}", message);
@@ -82,7 +82,7 @@ namespace NVika.BuildServers
                     compilationMessage.Column = issue.Offset.Start + 1;
                 }
 
-                JsonMediaTypeFormatter jsonFormat = new JsonMediaTypeFormatter();
+                var jsonFormat = new JsonMediaTypeFormatter();
                 jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
                 jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 
