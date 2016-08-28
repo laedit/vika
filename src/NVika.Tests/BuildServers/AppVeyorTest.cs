@@ -3,6 +3,7 @@ using NVika.Abstractions;
 using NVika.BuildServers;
 using NVika.Parsers;
 using NVika.Tests.Mocks;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -177,7 +178,7 @@ namespace NVika.Tests.BuildServers
 
             var logs = _loggerOutput.ToString();
             Assert.NotNull(logs);
-            Assert.Contains("An error is occurred during the call to AppVeyor API: StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
+            Assert.Contains("An error is occurred during the call to AppVeyor API: \"StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
         }
 
         private MockHttpClientFactory GetHttpClientFactory(HttpStatusCode responseStatusCode = HttpStatusCode.OK)
@@ -188,13 +189,14 @@ namespace NVika.Tests.BuildServers
             return httpClientFactory;
         }
 
-        private Logger GetLogger()
+        private ILogger GetLogger()
         {
             _loggerOutput = new StringBuilder();
             var writer = new StringWriter(_loggerOutput);
-            var logger = new Logger();
-            logger.SetWriter(writer);
-            logger.AddCategory("error");
+            var logger = new LoggerConfiguration()
+                        .MinimumLevel.Error()
+                        .WriteTo.TextWriter(writer)
+                        .CreateLogger();
             return logger;
         }
 

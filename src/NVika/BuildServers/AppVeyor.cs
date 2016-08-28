@@ -1,5 +1,6 @@
 ﻿using NVika.Abstractions;
 using NVika.Parsers;
+using Serilog;
 using System;
 using System.ComponentModel.Composition;
 using System.Net;
@@ -10,7 +11,7 @@ namespace NVika.BuildServers
 {
     internal sealed class AppVeyor : BuildServerBase
     {
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
         private readonly IEnvironment _environment;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _appVeyorApiUrl;
@@ -21,7 +22,7 @@ namespace NVika.BuildServers
         }
 
         [ImportingConstructor]
-        public AppVeyor(Logger logger, IEnvironment environment, IHttpClientFactory httpClientFactory)
+        public AppVeyor(ILogger logger, IEnvironment environment, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _environment = environment;
@@ -57,11 +58,11 @@ namespace NVika.BuildServers
             var filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
 
             _logger.Debug("Send compilation message to AppVeyor:");
-            _logger.Debug("Message: {0}", message);
-            _logger.Debug("Category: {0}", category);
-            _logger.Debug("FileName: {0}", filePath);
-            _logger.Debug("Line: {0}", issue.Line);
-            _logger.Debug("ProjectName: {0}", issue.Project);
+            _logger.Debug("Message: {message}", message);
+            _logger.Debug("Category: {category}", category);
+            _logger.Debug("FileName: {filePath}", filePath);
+            _logger.Debug("Line: {line}", issue.Line);
+            _logger.Debug("ProjectName: {project}", issue.Project);
 
             using (var httpClient = _httpClientFactory.Create())
             {
@@ -78,7 +79,7 @@ namespace NVika.BuildServers
 
                 if (issue.Offset != null)
                 {
-                    _logger.Debug("Column: {0}", issue.Offset.Start);
+                    _logger.Debug("Column: {Offset.Start}", issue.Offset.Start);
                     compilationMessage.Column = issue.Offset.Start + 1;
                 }
 
@@ -86,11 +87,11 @@ namespace NVika.BuildServers
                 jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
                 jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 
-            var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
+                var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
 
                 if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
                 {
-                    _logger.Error("An error is occurred during the call to AppVeyor API: {0}", response);
+                    _logger.Error("An error is occurred during the call to AppVeyor API: {response}", response);
                 }
             }
         }

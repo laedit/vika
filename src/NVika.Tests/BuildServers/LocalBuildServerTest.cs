@@ -1,5 +1,6 @@
 ﻿using NVika.BuildServers;
 using NVika.Parsers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,9 +55,9 @@ namespace NVika.Tests.BuildServers
 
             // assert
             var outputLines = _loggerOutput.ToString();
-            Assert.Contains("Suggestion Name1 'FilePath1' - Line 42: Message1", outputLines);
-            Assert.Contains("Warning Name2 'FilePath2' - Line 465: Message2", outputLines);
-            Assert.Contains("Error Name3 'FilePath3' - Line 82: Message3", outputLines);
+            Assert.Contains("Suggestion \"Name1\" \"FilePath1\" - Line 42: \"Message1\"", outputLines);
+            Assert.Contains("Warning \"Name2\" \"FilePath2\" - Line 465: \"Message2\"", outputLines);
+            Assert.Contains("Error \"Name3\" \"FilePath3\" - Line 82: \"Message3\"", outputLines);
         }
 
         [Fact]
@@ -76,9 +77,9 @@ namespace NVika.Tests.BuildServers
 
             // assert
             var outputLines = _loggerOutput.ToString();
-            Assert.Contains("[Source1] Suggestion Name1 'FilePath1' - Line 42: Message1", outputLines);
-            Assert.Contains("[Source2] Warning Name2 'FilePath2' - Line 465: Message2", outputLines);
-            Assert.Contains("[Source3] Error Name3 'FilePath3' - Line 82: Message3", outputLines);
+            Assert.Contains("[\"Source1\"] Suggestion \"Name1\" \"FilePath1\" - Line 42: \"Message1\"", outputLines);
+            Assert.Contains("[\"Source2\"] Warning \"Name2\" \"FilePath2\" - Line 465: \"Message2\"", outputLines);
+            Assert.Contains("[\"Source3\"] Error \"Name3\" \"FilePath3\" - Line 82: \"Message3\"", outputLines);
         }
 
         private List<Issue> GetIssues()
@@ -91,14 +92,14 @@ namespace NVika.Tests.BuildServers
             };
         }
 
-        private Logger GetLogger()
+        private ILogger GetLogger()
         {
             _loggerOutput = new StringBuilder();
             var writer = new StringWriter(_loggerOutput);
-            var logger = new Logger();
-            logger.SetWriter(writer);
-			logger.AddCategory("info");
-			return logger;
+            var logger = new LoggerConfiguration()
+                        .WriteTo.TextWriter(writer, Serilog.Events.LogEventLevel.Information)
+                        .CreateLogger();
+            return logger;
         }
     }
 }

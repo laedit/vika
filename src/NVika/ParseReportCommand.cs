@@ -1,5 +1,7 @@
-﻿using NVika.BuildServers;
+﻿using ManyConsole;
+using NVika.BuildServers;
 using NVika.Parsers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -9,8 +11,10 @@ using System.Xml.Linq;
 
 namespace NVika
 {
-    internal class ParseReportCommand : CommandBase
+    [Export(typeof(ConsoleCommand))]
+    internal class ParseReportCommand : ConsoleCommand
     {
+        private readonly ILogger _logger;
         private readonly IFileSystem _fileSystem;
         private readonly IEnumerable<IBuildServer> _buildServers;
         private readonly LocalBuildServer _localBuildServer;
@@ -18,13 +22,13 @@ namespace NVika
         private bool _includeSourceInMessage;
 
         [ImportingConstructor]
-        public ParseReportCommand(Logger logger,
+        public ParseReportCommand(ILogger logger,
                                   IFileSystem fileSystem,
                                   [ImportMany]IEnumerable<IBuildServer> buildServers,
                                   LocalBuildServer localBuildServer,
                                   [ImportMany]IEnumerable<IReportParser> parsers)
-            : base(logger)
         {
+            _logger = logger;
             _fileSystem = fileSystem;
             _buildServers = buildServers;
             _localBuildServer = localBuildServer;
@@ -32,36 +36,37 @@ namespace NVika
 
             IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
             HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
+            AllowsAnyAdditionalArguments("Reports to analyze");
 
             // TODO
             // force display warnings to console additionally to the build server
             // warning as error
         }
 
-        protected override int Execute(string[] reportPaths)
+        public override int Run(string[] reportPaths)
         {
             var returnCode = 0;
 
             if (reportPaths.Length == 0)
             {
-                Logger.Error("No report was specified. You must indicate at least one report file.");
+                _logger.Error("No report was specified. You must indicate at least one report file.");
                 return 1;
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
-            Logger.Info("The following build servers has been detected:");
+            _logger.Information("The following build servers have been detected:");
             foreach (var buildServer in applicableBuildServers)
             {
-                Logger.Info("\t- {0}", buildServer.Name);
+                _logger.Information("\t- {buildServerName}", buildServer.Name);
             }
 
             foreach (var reportPath in reportPaths)
             {
-                Logger.Debug("Report path is '{0}'", reportPath);
+                _logger.Debug("Report path is {reportPath}", reportPath);
 
                 if (!_fileSystem.File.Exists(reportPath))
                 {
-                    Logger.Error("The report '{0}' was not found.", reportPath);
+                    _logger.Error("The report {reportPath} was not found.", reportPath);
                     return 1;
                 }
 
@@ -72,7 +77,7 @@ namespace NVika
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("An exception happened when loading the report '{1}': {0}", reportPath, ex);
+                    _logger.Error(ex, "An exception happened when loading the report {reportPath}", reportPath);
                     return 2;
                 }
 
@@ -80,13 +85,13 @@ namespace NVika
                 var parser = GetParser(report);
                 if (parser == null)
                 {
-                    Logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
+                    _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
                     return 3;
                 }
-                Logger.Debug("Report type is '{0}'", parser.Name);
+                _logger.Debug("Report type is {Name}", parser.Name);
 
                 var issues = parser.Parse(report);
-                Logger.Debug("{0} issues was found", issues.Count());
+                _logger.Information("{Count} issues was found", issues.Count());
 
                 foreach (var issue in issues)
                 {

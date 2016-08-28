@@ -1,4 +1,8 @@
 ﻿using ManyConsole;
+using NDesk.Options;
+using Serilog;
+using Serilog.Configuration;
+using Serilog.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -10,7 +14,7 @@ using System.Reflection;
 
 namespace NVika
 {
-    internal class Program : IPartImportsSatisfiedNotification
+    internal class Program
     {
         private static void Main(string[] args)
         {
@@ -19,13 +23,14 @@ namespace NVika
             {
                 Console.ReadKey();
             }
+
             Environment.Exit(exitCode);
         }
 
 #pragma warning disable 0649
 
-        [Import]
-        private Logger _logger;
+        [Export]
+        private ILogger _logger;
 
         [ImportMany]
         private IEnumerable<ConsoleCommand> _commands;
@@ -36,24 +41,47 @@ namespace NVika
         {
             try
             {
+                var extraArgs = Initialize(args);
+
                 Compose();
 
-                _logger.Info("NVika V{0}", Assembly.GetExecutingAssembly().GetName().Version);
+                _logger.Information("NVika V{Version}", Assembly.GetExecutingAssembly().GetName().Version);
 
-                return ConsoleCommandDispatcher.DispatchCommand(_commands, args.ToArray(), Console.Out);
+                return ConsoleCommandDispatcher.DispatchCommand(_commands, extraArgs.ToArray(), Console.Out);
             }
             catch (Exception exception)
             {
-                _logger.Error($"An unexpected error occurred:\r\n{exception}");
+                _logger.Error("An unexpected error occurred:\r\n{exception}", exception);
                 return 1;
             }
         }
 
-        public void OnImportsSatisfied()
+        private List<string> Initialize(string[] args)
         {
-            _logger.SetWriter(Console.Out);
-            _logger.AddCategory("info");
-            _logger.AddCategory("error");
+            var isInDebugMode = false;
+            List<string> extraArgs = null;
+
+            if (args != null)
+            {
+                var globalArguments = new OptionSet
+                {
+                    { "debug", "Enable debugging", s => isInDebugMode = true }
+                };
+
+                extraArgs = globalArguments.Parse(args);
+            }
+
+            var loggerConf = new LoggerConfiguration()
+                        .Enrich.WithExceptionDetails()
+                        .WriteTo.LiterateConsole(outputTemplate: "[{Level}] {Message}{NewLine}{Exception}");
+            if (isInDebugMode)
+            {
+                loggerConf.MinimumLevel.Debug();
+            }
+
+            _logger = loggerConf.CreateLogger();
+
+            return extraArgs;
         }
 
         private void Compose()

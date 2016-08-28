@@ -49,6 +49,14 @@
       <HintPath>..\packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.2.0\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.TextWriter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.TextWriter.2.0.0\lib\net45\Serilog.Sinks.TextWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.IO.Abstractions, Version=2.0.0.123, Culture=neutral, PublicKeyToken=d480b5b72fb413da, processorArchitecture=MSIL">
@@ -83,7 +91,6 @@
     <EmbeddedResource Include="Data\AppVeyor.txt" />
     <Compile Include="ParseReportCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
-    <Compile Include="LoggerTest.cs" />
     <Compile Include="Mocks\MockHttpClientFactory.cs" />
     <Compile Include="Mocks\MockBuildServer.cs" />
     <Compile Include="Parsers\InspectCodeParserTest.cs" />

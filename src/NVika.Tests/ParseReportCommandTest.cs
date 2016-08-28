@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using NVika.BuildServers;
 using NVika.Parsers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +32,7 @@ namespace NVika.Tests
 
             // assert
             Assert.Equal(1, exitCode);
-            Assert.Equal("No report was specified. You must indicate at least one report file.", _loggerOutput.ToString().Trim());
+            Assert.Contains("No report was specified. You must indicate at least one report file.", _loggerOutput.ToString().Trim());
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace NVika.Tests
             // assert
             Assert.Equal(1, exitCode);
             var logs = _loggerOutput.ToString();
-            Assert.Contains("The report 'report.xml' was not found.", logs);
+            Assert.Contains("The report \"report.xml\" was not found.", logs);
         }
 
         [Fact]
@@ -87,8 +88,9 @@ namespace NVika.Tests
             // assert
             Assert.Equal(2, exitCode);
             var logs = _loggerOutput.ToString();
-            Assert.Contains("\t- Local console", logs);
-            Assert.Contains("An exception happened when loading the report 'System.Xml.XmlException: Root element is missing.", logs);
+            Assert.Contains("\t- \"Local console\"", logs);
+            Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
+            Assert.Contains("System.Xml.XmlException: Root element is missing.", logs);
         }
 
         [Fact]
@@ -109,8 +111,9 @@ namespace NVika.Tests
             // assert
             Assert.Equal(2, exitCode);
             var logs = _loggerOutput.ToString();
-            Assert.Contains("\t- MockBuildServer", logs);
-            Assert.Contains("An exception happened when loading the report 'System.Xml.XmlException: Root element is missing.", logs);
+            Assert.Contains("\t- \"MockBuildServer\"", logs);
+            Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
+            Assert.Contains("System.Xml.XmlException: Root element is missing.", logs);
         }
 
         [Fact]
@@ -184,14 +187,14 @@ namespace NVika.Tests
         public void Execute_ParserCanParse_WithDebug_ShouldWriteMessageFromIssuesAndWriteIssuesCount()
         {
             // arrange
-            var logger = GetLogger();
+            var logger = GetLogger(Serilog.Events.LogEventLevel.Debug);
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", new MockFileData("<root></root>") } });
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true) };
             var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
-            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--debug" });
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml"});
 
             // act
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
@@ -199,7 +202,7 @@ namespace NVika.Tests
             // assert
             Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
-            Assert.Contains("Report path is 'report.xml'", logs);
+            Assert.Contains("Report path is \"report.xml\"", logs);
             Assert.Contains("3 issues was found", logs);
             Assert.Contains("Message1", logs);
             Assert.Contains("Message2", logs);
@@ -258,7 +261,7 @@ namespace NVika.Tests
         public void Execute_MultipleReports_ShouldWriteMessageFromIssues()
         {
             // arrange
-            var logger = GetLogger();
+            var logger = GetLogger(Serilog.Events.LogEventLevel.Debug);
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
                 { "report.xml", new MockFileData("<root></root>") },
@@ -269,7 +272,7 @@ namespace NVika.Tests
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, true, true) };
             var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
-            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml", "--debug" });
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml"});
 
             // act
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
@@ -325,14 +328,14 @@ namespace NVika.Tests
             return mockBuildServer;
         }
 
-        private Logger GetLogger()
+        private ILogger GetLogger(Serilog.Events.LogEventLevel logEventLevel = Serilog.Events.LogEventLevel.Information)
         {
             _loggerOutput = new StringBuilder();
             var writer = new StringWriter(_loggerOutput);
-            var logger = new Logger();
-            logger.SetWriter(writer);
-            logger.AddCategory("info");
-            logger.AddCategory("error");
+            var loggerConfiguration = new LoggerConfiguration()
+                        .WriteTo.TextWriter(writer);
+            loggerConfiguration.MinimumLevel.Is(logEventLevel);
+            var logger = loggerConfiguration.CreateLogger();
             return logger;
         }
 
