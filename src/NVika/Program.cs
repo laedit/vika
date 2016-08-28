@@ -58,7 +58,7 @@ namespace NVika
                 }
                 else
                 {
-                    _logger.Error("An unexpected error occurred:\r\n{exception}", exception);
+                    _logger.Error(exception, "An unexpected error occurred:");
                 }
                 return 1;
             }
@@ -107,7 +107,7 @@ namespace NVika
             }
             catch (ReflectionTypeLoadException ex)
             {
-                _logger.Error(@"Unable to load: \r\n{0}", string.Join("\r\n", ex.LoaderExceptions.Select(e => e.Message)));
+                _logger.Error(ex, @"Unable to load: \r\n{0}", string.Join("\r\n", ex.LoaderExceptions.Select(e => e.Message)));
                 throw;
             }
         }
