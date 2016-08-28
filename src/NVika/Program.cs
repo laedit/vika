@@ -51,7 +51,15 @@ namespace NVika
             }
             catch (Exception exception)
             {
-                _logger.Error("An unexpected error occurred:\r\n{exception}", exception);
+                if (_logger == null)
+                {
+                    Console.WriteLine("Error: logger is not configured.");
+                    Console.WriteLine("An unexpected error occurred:\r\n{0}", exception);
+                }
+                else
+                {
+                    _logger.Error("An unexpected error occurred:\r\n{exception}", exception);
+                }
                 return 1;
             }
         }
