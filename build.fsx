@@ -11,7 +11,7 @@ open SemanticReleaseNotesParserHelper
 
 // Properties
 let buildDir = "./build/"
-let testDir  = "./test/"
+let testDir = "./test/"
 let artifactsDir = "./artifacts/"
 
 // version info
