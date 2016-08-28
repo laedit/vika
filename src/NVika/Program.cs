@@ -1,8 +1,6 @@
 ﻿using ManyConsole;
 using NDesk.Options;
 using Serilog;
-using Serilog.Configuration;
-using Serilog.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -54,7 +52,7 @@ namespace NVika
                 if (_logger == null)
                 {
                     Console.WriteLine("Error: logger is not configured.");
-                    Console.WriteLine("An unexpected error occurred:\r\n{0}", exception);
+                    Console.WriteLine($"An unexpected error occurred:\r\n{exception}");
                 }
                 else
                 {
@@ -80,7 +78,6 @@ namespace NVika
             }
 
             var loggerConf = new LoggerConfiguration()
-                        .Enrich.WithExceptionDetails()
                         .WriteTo.LiterateConsole(outputTemplate: "[{Level}] {Message}{NewLine}{Exception}");
             if (isInDebugMode)
             {
