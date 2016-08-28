@@ -76,7 +76,7 @@ namespace NVika.Tests
             Assert.Equal(1, exitCode);
             Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("An unexpected error occurred:", consoleOutput);
-            Assert.Contains("System.NullReferenceException: Object reference not set to an instance of an object.", consoleOutput);
+            Assert.Contains("System.NullReferenceException: Object reference not set to an instance of an object", consoleOutput);
         }
 
     }
