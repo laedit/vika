@@ -299,6 +299,10 @@ namespace NVika.Tests
             {
                 if (alternate)
                 {
+                    if (issuesContainError && _mockParser_Alternate)
+                    {
+                        issuesContainError = false;
+                    }
                     _mockParser_Alternate = !_mockParser_Alternate;
                     if (_mockParser_Alternate)
                     {
