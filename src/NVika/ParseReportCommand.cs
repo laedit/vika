@@ -45,7 +45,7 @@ namespace NVika
 
         public override int Run(string[] reportPaths)
         {
-            var returnCode = 0;
+            var returnCode = ExitCodes.OK;
 
             if (reportPaths.Length == 0)
             {
@@ -78,7 +78,7 @@ namespace NVika
                 catch (Exception ex)
                 {
                     _logger.Error(ex, "An exception happened when loading the report {reportPath}", reportPath);
-                    return 2;
+                    return ExitCodes.ReportNotFound;
                 }
 
                 // Report type Detection
@@ -86,7 +86,7 @@ namespace NVika
                 if (parser == null)
                 {
                     _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
-                    return 3;
+                    return ExitCodes.NoParserFoundForThisReport;
                 }
                 _logger.Debug("Report type is {Name}", parser.Name);
 
@@ -101,9 +101,10 @@ namespace NVika
                     }
                 }
 
-                if (returnCode == 0)
+                if (returnCode == ExitCodes.OK && issues.Any(i => i.Severity == IssueSeverity.Error))
                 {
-                    returnCode = issues.Any(i => i.Severity == IssueSeverity.Error) ? 4 : 0;
+                    returnCode = ExitCodes.IssuesWithErrorWasFound;
+                    _logger.Fatal("Issues with severity error was found: the build will fail");
                 }
             }
             return returnCode;

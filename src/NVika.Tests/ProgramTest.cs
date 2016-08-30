@@ -38,7 +38,7 @@ namespace NVika.Tests
 
             // assert
             var consoleOutput = output.ToString();
-            Assert.Equal(1, exitCode);
+            Assert.Equal(2, exitCode);
             Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
             Assert.Contains("The report unkowncommand was not found.", consoleOutput);
@@ -56,7 +56,7 @@ namespace NVika.Tests
 
             // assert
             var consoleOutput = output.ToString();
-            Assert.Equal(1, exitCode);
+            Assert.Equal(2, exitCode);
             Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("The report nonexistingreport.abc was not found.", consoleOutput);
         }

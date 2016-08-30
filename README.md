@@ -21,6 +21,14 @@ It is possible to process several reports at the same time: `NVika parsereport r
  - `--debug`: active the debug category on logger, useful for debugging
  - `--includesource`: include the report source name in messages
 
+### exit codes:
+ - 0: OK
+ - 1: unknown error
+ - 2: report not found
+ - 3: exception during report loading
+ - 4: no parser found for the current report
+ - 5: issue(s) with error severity was found
+
 ## Analysis tools
 ### Supported
  - [InspectCode](https://chocolatey.org/packages/resharper-clt): example of usage `inspectcode /o="inspectcodereport.xml" "Vika.sln"`

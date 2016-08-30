@@ -79,6 +79,7 @@
     <Compile Include="Abstractions\HttpClientFactory.cs" />
     <Compile Include="Abstractions\IEnvironment.cs" />
     <Compile Include="Abstractions\IHttpClientFactory.cs" />
+    <Compile Include="ExitCodes.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="ParseReportCommand.cs" />
     <Compile Include="BuildServers\AppVeyor.cs" />

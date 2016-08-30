@@ -65,7 +65,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(1, exitCode);
+            Assert.Equal(2, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("The report \"report.xml\" was not found.", logs);
         }
@@ -86,7 +86,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(2, exitCode);
+            Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("\t- \"Local console\"", logs);
             Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
@@ -109,7 +109,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(2, exitCode);
+            Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("\t- \"MockBuildServer\"", logs);
             Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
@@ -132,7 +132,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(3, exitCode);
+            Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("The adequate parser for this report was not found. You are welcome to address us an issue.", logs);
         }
@@ -154,7 +154,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(3, exitCode);
+            Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("The adequate parser for this report was not found. You are welcome to address us an issue.", logs);
         }
@@ -176,7 +176,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(4, exitCode);
+            Assert.Equal(5, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("Message1", logs);
             Assert.Contains("Message2", logs);
@@ -200,7 +200,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(4, exitCode);
+            Assert.Equal(5, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("Report path is \"report.xml\"", logs);
             Assert.Contains("3 issues was found", logs);
@@ -278,7 +278,7 @@ namespace NVika.Tests
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
 
             // assert
-            Assert.Equal(4, exitCode);
+            Assert.Equal(5, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("3 issues was found", logs);
             Assert.Contains("Message1", logs);
