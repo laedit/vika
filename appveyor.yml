@@ -22,6 +22,9 @@ artifacts:
 - path: build\NVika.exe.CodeAnalysisLog.xml
   name: NVika.exe.CodeAnalysisLog.xml
 
+- path: build\static-analysis.sarif.json
+  name: static-analysis.sarif.json
+
 - path: artifacts\inspectcodereport.xml
 
 - path: src\NVika\static-analysis.sarif.json

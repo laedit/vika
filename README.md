@@ -32,13 +32,16 @@ It is possible to process several reports at the same time: `NVika parsereport r
 ## Analysis tools
 ### Supported
  - [InspectCode](https://chocolatey.org/packages/resharper-clt): example of usage `inspectcode /o="inspectcodereport.xml" "Vika.sln"`
+ - Analyzers producing [SARIF](http://sarifweb.azurewebsites.net) format, like Roslyn analyzers: for those you need to add an `ErrorLog` node in your `csproj` containing the path of the report; See [NVika.csproj](https://github.com/laedit/vika/blob/master/src/NVika/NVika.csproj)
 
 ### To come
  - [FxCop](https://github.com/laedit/vika/issues/6)
- - [CodeCracker](https://github.com/laedit/vika/issues/8)
  - [StyleCop](https://github.com/laedit/vika/issues/7)
  - NDepend?
  - DupFinder (if someone wants it reaaaally bad)
+ - [Mono.Gendarme](https://github.com/laedit/vika/issues/16)
+ - [CPD](https://github.com/laedit/vika/issues/27)
+ - [CPPCheck](https://github.com/laedit/vika/issues/26)
  
 ## Build servers
 ### Supported
@@ -51,7 +54,7 @@ It is possible to process several reports at the same time: `NVika parsereport r
  - [MyGet](https://github.com/laedit/vika/issues/5)?
 
 I really wondering if there is any value to supporting these three, because there doesn't support to add build message like AppVeyor but only log message.
-And they support custom HTML report, so an xsl transformation is enough.
+And they support custom HTML report, so an xslt transformation is enough.
 
 ## What it will be
 A website will be added for displaying a nice and shiny aggregated report from all source to a dedicated page for each GitHub project.

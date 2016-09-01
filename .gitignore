@@ -194,4 +194,4 @@ tools/OpenCover/
 tools/xunit.runner.console/
 tools/coveralls.io/
 tools/ReportGenerator
-src/NVika/static-analysis.sarif.json
+src/.vs/config/applicationhost.config

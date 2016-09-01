@@ -1,5 +1,6 @@
 ﻿using ManyConsole;
 using NDesk.Options;
+using NVika.Exceptions;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,11 @@ namespace NVika
                 _logger.Information("NVika V{Version}", Assembly.GetExecutingAssembly().GetName().Version);
 
                 return ConsoleCommandDispatcher.DispatchCommand(_commands, extraArgs.ToArray(), Console.Out);
+            }
+            catch(NVikaException exception)
+            {
+                _logger.Fatal(exception, "An unexpected error occurred:");
+                return exception.ExitCode;
             }
             catch (Exception exception)
             {

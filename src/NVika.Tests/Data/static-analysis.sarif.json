@@ -1,0 +1,549 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.3.1.0",
+        "fileVersion": "1.3.1.60616",
+        "semanticVersion": "1.3.1",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "CS0649",
+          "level": "warning",
+          "message": "Field 'Program._commands' is never assigned to, and will always have its default value null",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 45,
+                  "endLine": 48,
+                  "endColumn": 54
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
+          "ruleId": "CS0649",
+          "level": "warning",
+          "message": "Field 'Program._logger' is never assigned to, and will always have its default value null",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 24,
+                  "endLine": 45,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
+          "ruleId": "CC0021",
+          "level": "warning",
+          "message": "Use 'nameof(AppVeyor)' instead of specifying the program element name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/AppVeyor.cs",
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 26,
+                  "endLine": 20,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0001",
+          "level": "warning",
+          "message": "Use 'var' instead of specifying the type name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/LocalBuildServer.cs",
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 13,
+                  "endLine": 30,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0021",
+          "level": "warning",
+          "message": "Use 'nameof(Issue)' instead of specifying the program element name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 43,
+                  "endLine": 31,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0105",
+          "level": "warning",
+          "message": "Use 'var' instead of specifying the type name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/ParseReportCommand.cs",
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 13,
+                  "endLine": 43,
+                  "endColumn": 16
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0030",
+          "level": "note",
+          "message": "This variables can be made const.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 13,
+                  "endLine": 38,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
+          "ruleId": "CC0048",
+          "level": "note",
+          "message": "Use string interpolation",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/AppVeyor.cs",
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 27,
+                  "endLine": 42,
+                  "endColumn": 76
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
+          "ruleId": "CC0001",
+          "level": "warning",
+          "message": "Use 'var' instead of specifying the type name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/AppVeyor.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 13,
+                  "endLine": 45,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0001",
+          "level": "warning",
+          "message": "Use 'var' instead of specifying the type name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/AppVeyor.cs",
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 13,
+                  "endLine": 57,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0001",
+          "level": "warning",
+          "message": "Use 'var' instead of specifying the type name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/BuildServers/AppVeyor.cs",
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 17,
+                  "endLine": 85,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0021",
+          "level": "warning",
+          "message": "Use 'nameof(Issue)' instead of specifying the program element name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 59,
+                  "endLine": 40,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0021",
+          "level": "warning",
+          "message": "Use 'nameof(Offset)' instead of specifying the program element name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 59,
+                  "endLine": 44,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0021",
+          "level": "warning",
+          "message": "Use 'nameof(Name)' instead of specifying the program element name.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 53,
+                  "endLine": 49,
+                  "endColumn": 59
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0048",
+          "level": "note",
+          "message": "Use string interpolation",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 29,
+                  "endLine": 64,
+                  "endColumn": 93
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
+          "ruleId": "S1940",
+          "level": "warning",
+          "message": "Use the opposite operator (\"!=\") instead.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 17,
+                  "endLine": 39,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0022",
+          "level": "warning",
+          "message": "CompositionContainer should be disposed.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Program.cs",
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 33,
+                  "endLine": 82,
+                  "endColumn": 64
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "typeName": "CompositionContainer"
+            }
+          }
+        },
+        {
+          "ruleId": "CC0091",
+          "level": "warning",
+          "message": "Make 'GetUri' method static.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 21,
+                  "endLine": 65,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0091",
+          "level": "warning",
+          "message": "Make 'GetSeverity' method static.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 31,
+                  "endLine": 97,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CC0091",
+          "level": "warning",
+          "message": "Make 'GetLine' method static.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Prog/Github/vika/src/NVika/Parsers/InspectCodeParser.cs",
+                "region": {
+                  "startLine": 112,
+                  "startColumn": 23,
+                  "endLine": 112,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "CC0001": {
+          "id": "CC0001",
+          "shortDescription": "You should use 'var' whenever possible.",
+          "fullDescription": "Usage of an implicit type improve readability of the code.\u000d\u000aCode depending on types for their readability should be refactored with better variable names or by introducing well-named methods.",
+          "defaultLevel": "warning",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0001.html",
+          "properties": {
+            "category": "Style",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0021": {
+          "id": "CC0021",
+          "shortDescription": "Use nameof",
+          "fullDescription": "In C#6 the nameof() operator should be used to specify the name of a program element instead of a string literal as it produce code that is easier to refactor.",
+          "defaultLevel": "warning",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0021.html",
+          "properties": {
+            "category": "Design",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0022": {
+          "id": "CC0022",
+          "shortDescription": "Should dispose object",
+          "fullDescription": "When a disposable object is created it should be disposed as soon as possible.\u000aThis warning will appear if you create a disposable object and don't store, return or dispose it.",
+          "defaultLevel": "warning",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0022.html",
+          "properties": {
+            "category": "Usage",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0030": {
+          "id": "CC0030",
+          "shortDescription": "Make Local Variable Constant.",
+          "fullDescription": "This variable is assigned a constant value and never changed it can be made 'const'",
+          "defaultLevel": "note",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0030.html",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0048": {
+          "id": "CC0048",
+          "shortDescription": "Use string interpolation instead of String.Format",
+          "fullDescription": "String interpolation allows for better reading of the resulting string when compared to String.Format. You should use String.Format only when another method is supplying the format string.",
+          "defaultLevel": "note",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0048.html",
+          "properties": {
+            "category": "Style",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0091": {
+          "id": "CC0091",
+          "shortDescription": "Use static method",
+          "fullDescription": "If the method is not referencing any instance variable and if you are not creating a virtual, abstract, new or partial method, and if it is not a method override, your instance method may be changed to a static method.",
+          "defaultLevel": "warning",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0091.html",
+          "properties": {
+            "category": "Design",
+            "isEnabledByDefault": true
+          }
+        },
+        "CC0105": {
+          "id": "CC0105",
+          "shortDescription": "You should use 'var' whenever possible.",
+          "fullDescription": "Usage of an implicit type improve readability of the code.\u000d\u000aCode depending on types for their readability should be refactored with better variable names or by introducing well-named methods.",
+          "defaultLevel": "warning",
+          "helpUri": "https://code-cracker.github.io/diagnostics/CC0105.html",
+          "properties": {
+            "category": "Style",
+            "isEnabledByDefault": true
+          }
+        },
+        "CS0649": {
+          "id": "CS0649",
+          "shortDescription": "Field is never assigned to, and will always have its default value",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1940": {
+          "id": "S1940",
+          "shortDescription": "Boolean checks should not be inverted",
+          "fullDescription": "It is needlessly complex to invert the result of a boolean comparison. The opposite comparison should be made instead.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.16.0&ruleId=S1940",
+          "properties": {
+            "category": "Maintainability",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

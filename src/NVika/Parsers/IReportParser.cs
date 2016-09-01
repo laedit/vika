@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Xml.Linq;
 
 namespace NVika.Parsers
 {
@@ -9,8 +8,8 @@ namespace NVika.Parsers
     {
         string Name { get; }
 
-        bool CanParse(XDocument document);
+        bool CanParse(string filePath);
 
-        IEnumerable<Issue> Parse(XDocument document);
+        IEnumerable<Issue> Parse(string filePath);
     }
 }

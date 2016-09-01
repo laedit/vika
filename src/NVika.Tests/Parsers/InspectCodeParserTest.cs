@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
 using Xunit;
 
@@ -11,43 +10,12 @@ namespace NVika.Tests.Parsers
 {
     public class InspectCodeParserTest
     {
-        public static IEnumerable<object[]> ParseXmlDataFromInspectCodeReport
-        {
-            get
-            {
-                XDocument doc = XDocument.Parse(GetEmbeddedResourceContent("inspectcodereport.xml"));
-                return new[] { new object[] { doc } };
-            }
-        }
-
-        public static IEnumerable<object[]> CanParse_InspectCodeReports
-        {
-            get
-            {
-                return new[]
-                {
-                    new object[] { GetEmbeddedResourceContent("inspectcodereport.xml"), true },
-                    new object[] {  GetEmbeddedResourceContent("inspectcodereport_2016.2.xml"), true }
-                };
-            }
-        }
-
-        private static string GetEmbeddedResourceContent(string resourceName)
-        {
-            using (Stream resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Concat("NVika.Tests.Data.", resourceName)))
-            {
-                using (StreamReader resourceStreamReader = new StreamReader(resourceStream))
-                {
-                    return resourceStreamReader.ReadToEnd();
-                }
-            }
-        }
-
         [Fact]
         public void Name()
         {
             // arrange
-            var parser = new InspectCodeParser(new MockFileSystem());
+            var parser = new InspectCodeParser();
+            parser.FileSystem = new MockFileSystem();
 
             // act
             var name = parser.Name;
@@ -57,39 +25,47 @@ namespace NVika.Tests.Parsers
         }
 
         [Theory]
-        [MemberData("CanParse_InspectCodeReports")]
-        [InlineData("<Report ToolsVersion=\"8.2\"></Report>", false)]
-        [InlineData("<IssueTypes></IssueTypes>", false)]
+        [InlineData("inspectcodereport.xml", true)]
+        [InlineData("inspectcodereport_2016.2.xml", true)]
+        [InlineData("emptyreport.xml", false)]
+        [InlineData("onlyissues.xml", false)]
         public void CanParse(string xmlContent, bool expectedResult)
         {
             // arrange
-            var doc = XDocument.Parse(xmlContent);
-            var parser = new InspectCodeParser(new MockFileSystem());
+            var parser = new InspectCodeParser();
+            parser.FileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "inspectcodereport.xml", new MockFileData(TestUtilities.GetEmbeddedResourceContent("inspectcodereport.xml")) },
+                { "inspectcodereport_2016.2.xml", new MockFileData(TestUtilities.GetEmbeddedResourceContent("inspectcodereport_2016.2.xml")) },
+                { "emptyreport.xml", new MockFileData("<Report ToolsVersion=\"8.2\"></Report>") },
+                { "onlyissues.xml", new MockFileData("<IssueTypes></IssueTypes>") },
+            });
 
             // act
-            var result = parser.CanParse(doc);
+            var result = parser.CanParse(xmlContent);
 
             // assert
             Assert.Equal(expectedResult, result);
         }
 
-        [Theory]
-        [MemberData("ParseXmlDataFromInspectCodeReport")]
-        public void Parse(XDocument report)
+        [Fact]
+        public void Parse()
         {
             // arrange
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
-                { @"NVika\BuildServers\AppVeyor.cs", new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) },
-                { @"NVika\BuildServers\LocalBuildServer.cs", new MockFileData(GetEmbeddedResourceContent("LocalBuildServer.txt")) },
-                { @"NVika\ParseReportCommand.cs", new MockFileData(GetEmbeddedResourceContent("ParseReportCommand.txt")) },
-                { @"NVika\Parsers\InspectCodeParser.cs", new MockFileData(GetEmbeddedResourceContent("InspectCodeParser.txt")) },
-                { @"NVika\Program.cs", new MockFileData(GetEmbeddedResourceContent("Program.txt")) },
+                { "inspectcodereport.xml", new MockFileData(TestUtilities.GetEmbeddedResourceContent("inspectcodereport.xml")) },
+                { @"NVika\BuildServers\AppVeyor.cs", new MockFileData(TestUtilities.GetEmbeddedResourceContent("AppVeyor.txt")) },
+                { @"NVika\BuildServers\LocalBuildServer.cs", new MockFileData(TestUtilities.GetEmbeddedResourceContent("LocalBuildServer.txt")) },
+                { @"NVika\ParseReportCommand.cs", new MockFileData(TestUtilities.GetEmbeddedResourceContent("ParseReportCommand.txt")) },
+                { @"NVika\Parsers\InspectCodeParser.cs", new MockFileData(TestUtilities.GetEmbeddedResourceContent("InspectCodeParser.txt")) },
+                { @"NVika\Program.cs", new MockFileData(TestUtilities.GetEmbeddedResourceContent("Program.txt")) },
             });
-            var parser = new InspectCodeParser(fileSystem);
+            var parser = new InspectCodeParser();
+            parser.FileSystem = fileSystem;
 
             // act
-            var result = parser.Parse(report);
+            var result = parser.Parse("inspectcodereport.xml");
 
             // assert
             Assert.Equal(41, result.Count());
@@ -193,20 +169,23 @@ namespace NVika.Tests.Parsers
             Assert.Equal("InspectCode", issue.Source);
         }
 
-        [Theory]
-        [MemberData("ParseXmlDataFromInspectCodeReport")]
-        public void Parse_SlnInSubFolder(XDocument report)
+        [Fact]
+        public void Parse_SlnInSubFolder()
         {
             // arrange
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-            {
-                { Path.Combine("src", @"NVika\BuildServers\AppVeyor.cs"), new MockFileData(GetEmbeddedResourceContent("AppVeyor.txt")) }
-            });
-            var parser = new InspectCodeParser(fileSystem);
+            var report = XDocument.Parse(TestUtilities.GetEmbeddedResourceContent("inspectcodereport.xml"));
             report.Root.Element("Information").Element("Solution").Value = Path.Combine("src", "Vika.sln");
 
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "inspectcodereport.xml", new MockFileData(report.ToString()) },
+                { Path.Combine("src", @"NVika\BuildServers\AppVeyor.cs"), new MockFileData(TestUtilities.GetEmbeddedResourceContent("AppVeyor.txt")) }
+            });
+            var parser = new InspectCodeParser();
+            parser.FileSystem = fileSystem;
+
             // act
-            var result = parser.Parse(report);
+            var result = parser.Parse("inspectcodereport.xml");
 
             // assert
             Assert.Equal(41, result.Count());
@@ -224,7 +203,6 @@ namespace NVika.Tests.Parsers
             Assert.Equal("NVika", issue.Project);
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("InspectCode", issue.Source);
-
         }
     }
 }

@@ -1,30 +1,31 @@
-﻿using System;
+﻿using NVika.Exceptions;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.IO.Abstractions;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace NVika.Parsers
 {
-    internal sealed class InspectCodeParser : IReportParser
+    internal sealed class InspectCodeParser : ReportParserBase
     {
         private readonly Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
-        private readonly IFileSystem _fileSystem;
 
-        public string Name
+        public override string Name
         {
             get { return "InspectCode"; }
         }
 
-        [ImportingConstructor]
-        public InspectCodeParser(IFileSystem fileSystem)
+        public InspectCodeParser()
+            : base(new[] { ".xml" }, '<')
         {
-            _fileSystem = fileSystem;
+
         }
 
-        public bool CanParse(XDocument report)
+        protected override bool CanParse(StreamReader reader)
         {
+            var report = XDocument.Load(reader);
+
             return report.Root.Name == "Report"
                     && report.Descendants("IssueType").Any()
                     && report.Descendants("Project").Any()
@@ -32,9 +33,11 @@ namespace NVika.Parsers
                     && report.Descendants("Information").Any();
         }
 
-        public IEnumerable<Issue> Parse(XDocument report)
+        public override IEnumerable<Issue> Parse(string reportPath)
         {
-            var rootFolder = _fileSystem.Path.GetDirectoryName(report.Root.Element("Information").Element("Solution").Value);
+            var report = XDocument.Load(FileSystem.File.OpenRead(reportPath));
+
+            var rootFolder = FileSystem.Path.GetDirectoryName(report.Root.Element("Information").Element("Solution").Value);
             var issuesType = report.Descendants("IssueType");
 
             foreach (var project in report.Descendants("Project"))
@@ -42,7 +45,7 @@ namespace NVika.Parsers
                 foreach (var issue in project.Descendants("Issue"))
                 {
                     var issueType = GetIssueType(issuesType, issue.Attribute("TypeId").Value);
-                    var sourceFilePath =  string.IsNullOrEmpty(rootFolder) ? issue.Attribute("File").Value : _fileSystem.Path.Combine(rootFolder, issue.Attribute("File").Value);
+                    var sourceFilePath = string.IsNullOrEmpty(rootFolder) ? issue.Attribute("File").Value : FileSystem.Path.Combine(rootFolder, issue.Attribute("File").Value);
                     var offsetAttribute = issue.Attribute("Offset");
                     var lineNumber = GetLine(issue.Attribute("Line"), offsetAttribute != null);
 
@@ -71,7 +74,7 @@ namespace NVika.Parsers
 
         private Offset GetOffset(XAttribute offsetAttribute, string sourceFilePath, uint? lineNumber)
         {
-            if (offsetAttribute == null || !_fileSystem.File.Exists(sourceFilePath))
+            if (offsetAttribute == null || !FileSystem.File.Exists(sourceFilePath))
             {
                 return null;
             }
@@ -86,7 +89,7 @@ namespace NVika.Parsers
                 end = offsetAttribute.Value.Substring(dashIndex + 1);
             }
 
-            var lines = _fileSystem.File.ReadLines(sourceFilePath);
+            var lines = FileSystem.File.ReadLines(sourceFilePath);
             var issueLineOffset = lines.Take((int)lineNumber.Value - 1).Sum(line => line.Length);
 
             return new Offset

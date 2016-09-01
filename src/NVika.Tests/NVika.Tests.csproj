@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestUtilities.cs" />
     <EmbeddedResource Include="Data\AppVeyor.txt" />
     <Compile Include="ParseReportCommandTest.cs" />
     <Compile Include="BuildServers\AppVeyorTest.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Mocks\MockBuildServer.cs" />
     <Compile Include="Parsers\InspectCodeParserTest.cs" />
     <Compile Include="BuildServers\LocalBuildServerTest.cs" />
+    <Compile Include="Parsers\SarifParserTest.cs" />
     <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Data\BuildServerBase.txt" />
@@ -107,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Data\static-analysis.sarif.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

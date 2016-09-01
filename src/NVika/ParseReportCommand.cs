@@ -37,10 +37,6 @@ namespace NVika
             IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
             HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
             AllowsAnyAdditionalArguments("Reports to analyze");
-
-            // TODO
-            // force display warnings to console additionally to the build server
-            // warning as error
         }
 
         public override int Run(string[] reportPaths)
@@ -67,22 +63,11 @@ namespace NVika
                 if (!_fileSystem.File.Exists(reportPath))
                 {
                     _logger.Error("The report {reportPath} was not found.", reportPath);
-                    return 1;
-                }
-
-                XDocument report = null;
-                try
-                {
-                    report = XDocument.Load(_fileSystem.File.OpenRead(reportPath));
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex, "An exception happened when loading the report {reportPath}", reportPath);
                     return ExitCodes.ReportNotFound;
                 }
 
                 // Report type Detection
-                var parser = GetParser(report);
+                var parser = GetParser(reportPath);
                 if (parser == null)
                 {
                     _logger.Error("The adequate parser for this report was not found. You are welcome to address us an issue.");
@@ -90,7 +75,7 @@ namespace NVika
                 }
                 _logger.Debug("Report type is {Name}", parser.Name);
 
-                var issues = parser.Parse(report);
+                var issues = parser.Parse(reportPath);
                 _logger.Information("{Count} issues was found", issues.Count());
 
                 foreach (var issue in issues)
@@ -106,6 +91,7 @@ namespace NVika
                     returnCode = ExitCodes.IssuesWithErrorWasFound;
                     _logger.Fatal("Issues with severity error was found: the build will fail");
                 }
+
             }
             return returnCode;
         }
@@ -127,9 +113,9 @@ namespace NVika
             return applicableBuildServers;
         }
 
-        private IReportParser GetParser(XDocument document)
+        private IReportParser GetParser(string reportPath)
         {
-            return _parsers.FirstOrDefault(p => p.CanParse(document));
+            return _parsers.FirstOrDefault(p => p.CanParse(reportPath));
         }
     }
 }

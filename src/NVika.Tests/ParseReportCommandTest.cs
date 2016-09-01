@@ -89,8 +89,7 @@ namespace NVika.Tests
             Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("\t- \"Local console\"", logs);
-            Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
-            Assert.Contains("System.Xml.XmlException: Root element is missing.", logs);
+            Assert.Contains("The adequate parser for this report was not found. You are welcome to address us an issue.", logs);
         }
 
         [Fact]
@@ -112,8 +111,7 @@ namespace NVika.Tests
             Assert.Equal(4, exitCode);
             var logs = _loggerOutput.ToString();
             Assert.Contains("\t- \"MockBuildServer\"", logs);
-            Assert.Contains("An exception happened when loading the report \"report.xml\"", logs);
-            Assert.Contains("System.Xml.XmlException: Root element is missing.", logs);
+            Assert.Contains("The adequate parser for this report was not found. You are welcome to address us an issue.", logs);
         }
 
         [Fact]
@@ -293,9 +291,9 @@ namespace NVika.Tests
         {
             var mockReportParser = Substitute.For<IReportParser>();
             mockReportParser.Name.Returns("MockReportParser");
-            mockReportParser.CanParse(Arg.Any<XDocument>()).Returns(canParse);
+            mockReportParser.CanParse(Arg.Any<string>()).Returns(canParse);
 
-            mockReportParser.Parse(Arg.Any<XDocument>()).Returns((ci) =>
+            mockReportParser.Parse(Arg.Any<string>()).Returns((ci) =>
             {
                 if (alternate)
                 {
