@@ -27,7 +27,8 @@ namespace NVika.Tests.Parsers
         [InlineData("emptyreport.xml", false)]
         [InlineData("onlyissues.xml", false)]
         [InlineData("emptyreport.json", true)]
-        public void CanParse(string xmlContent, bool expectedResult)
+        [InlineData("emptyreport.sarif", true)]
+        public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
             var parser = new SarifParser();
@@ -36,22 +37,12 @@ namespace NVika.Tests.Parsers
                 { "static-analysis.sarif.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("static-analysis.sarif.json")) },
                 { "emptyreport.xml", new MockFileData("<Report ToolsVersion=\"8.2\"></Report>") },
                 { "onlyissues.xml", new MockFileData("<IssueTypes></IssueTypes>") },
-                { "emptyreport.json", new MockFileData(@"{
-  ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
-  ""version"": ""1.0.0"",
-  ""runs"": [
-    {
-      ""tool"": {
-        ""name"": ""Microsoft (R) Visual C# Compiler"",
-        ""version"": ""1.3.1.0"",
-        ""fileVersion"": ""1.3.1.60616"",
-        ""semanticVersion"": ""1.3.1"",
-        ""language"": ""en-US""
-      }}]}") },
+                { "emptyreport.json", new MockFileData(EmptyReportSample) },
+                { "emptyreport.sarif", new MockFileData(EmptyReportSample) },
             });
 
             // act
-            var result = parser.CanParse(xmlContent);
+            var result = parser.CanParse(reportPath);
 
             // assert
             Assert.Equal(expectedResult, result);
@@ -116,5 +107,18 @@ namespace NVika.Tests.Parsers
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
         }
+
+        private const string EmptyReportSample = @"{
+  ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
+  ""version"": ""1.0.0"",
+  ""runs"": [
+    {
+      ""tool"": {
+        ""name"": ""Microsoft (R) Visual C# Compiler"",
+        ""version"": ""1.3.1.0"",
+        ""fileVersion"": ""1.3.1.60616"",
+        ""semanticVersion"": ""1.3.1"",
+        ""language"": ""en-US""
+      }}]}";
     }
 }

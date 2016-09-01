@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.IO.Abstractions;
+using System.Linq;
 using System.Reflection;
 
 namespace NVika.Parsers
@@ -32,16 +33,19 @@ namespace NVika.Parsers
         {
             try
             {
-                using (var reader = new StreamReader(FileSystem.File.OpenRead(filePath)))
+                if (_allowedExtensions.Contains(FileSystem.Path.GetExtension(filePath)))
                 {
-                    if (!_firstChar.HasValue || (char)reader.Peek() == _firstChar.Value)
+                    using (var reader = new StreamReader(FileSystem.File.OpenRead(filePath)))
                     {
-                        reader.BaseStream.Position = 0;
-                        reader.DiscardBufferedData();
-                        return CanParse(reader);
+                        if (!_firstChar.HasValue || (char)reader.Peek() == _firstChar.Value)
+                        {
+                            reader.BaseStream.Position = 0;
+                            reader.DiscardBufferedData();
+                            return CanParse(reader);
+                        }
                     }
-                    return false;
                 }
+                return false;
             }
             catch (Exception ex)
             {

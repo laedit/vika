@@ -29,7 +29,8 @@ namespace NVika.Tests.Parsers
         [InlineData("inspectcodereport_2016.2.xml", true)]
         [InlineData("emptyreport.xml", false)]
         [InlineData("onlyissues.xml", false)]
-        public void CanParse(string xmlContent, bool expectedResult)
+        [InlineData("onlyissues.json", false)]
+        public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
             var parser = new InspectCodeParser();
@@ -42,7 +43,7 @@ namespace NVika.Tests.Parsers
             });
 
             // act
-            var result = parser.CanParse(xmlContent);
+            var result = parser.CanParse(reportPath);
 
             // assert
             Assert.Equal(expectedResult, result);

@@ -41,7 +41,11 @@ Target "InspectCodeAnalysis" (fun _ ->
         info.FileName <- "inspectcode"
         info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" )
     then
-        artifactsDir + "inspectcodereport.xml" |> NVika.ParseReport (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
+        [
+            artifactsDir + "inspectcodereport.xml";
+            buildDir + "static-analysis.sarif.json"
+        ] 
+        |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
             
     else traceError "Execution of inspectcode have failed, NVika can't be executed."
 )
