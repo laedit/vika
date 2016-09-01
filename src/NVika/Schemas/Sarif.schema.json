@@ -79,17 +79,36 @@
         },
 
         "kind": {
-          "description": "Describes the location.",
-          "enum": [ "alias", "assignment", "branch", "call", "callReturn", "continuation", "declaration", "functionEnter", "functionExit", "sanitizer", "sink", "source", "usage" ]
+          "description": "Categorizes the location.",
+          "enum": [ "alias", "assignment", "branch", "call", "callReturn", "continuation", "declaration", "functionEnter", "functionExit", "functionReturn", "usage" ]
         },
 
-        "callee": {
-          "description": "For an annotation of kind 'call', the fully qualified logical name of the function called from this location.",
+        "taintKind": {
+          "description": "Classifies state transitions in code locations relevant to a taint analysis.",
+          "enum": [ "source", "sink", "sanitizer" ]
+        },
+
+        "target": {
+          "description": "The fully qualified name of the target on which this location operates. For an annotation of kind 'call', for example, the target refers to the fully qualified logical name of the function called from this location.",
           "type": "string"
         },
 
-        "calleeKey": {
-          "description": "A key used to retrieve the callee's logicalLocation from the logicalLocations dictionary.",
+        "parameters": {
+          "description": "An ordered set of strings that parameterize the operation for this location. For an annotation of kind 'call', for example, this property may hold the ordered list of arguments passed to the callee.",
+          "type": "array",
+          "default": [ ],
+          "items": {
+            "type": "string"
+          }
+        },
+
+        "variables": {
+          "description": "A dictionary, each of whose keys specifies a variable name, the associated value of which represents the variable value. For an annotation of kind 'continuation', for example, this dictionary might hold the current assumed values of a set of global variables.",
+          "type": "object"
+        },
+
+        "targetKey": {
+          "description": "A key used to retrieve the target's logicalLocation from the logicalLocations dictionary.",
           "type": "string"
         },
 
@@ -261,6 +280,11 @@
           "description": "The MIME type (RFC 2045) of the file.",
           "type": "string",
           "pattern": "[^/]+/.+"
+        },
+
+        "contents": {
+          "description": "The contents of the file, expressed as a MIME Base64-encoded byte sequence.",
+          "type": "string"
         },
 
         "hashes": {
@@ -511,6 +535,7 @@
     "notification": {
       "type": "object",
       "description": "Describes a condition relevant to the tool itself, as opposed to being relevant to a target being analyzed by the tool.",
+      "additionalProperties": false,
       "properties": {
 
         "id": {
@@ -670,7 +695,7 @@
         },
 
         "insertedBytes": {
-          "description": "The byte sequence to be inserted at the byte offset specified by the 'offset' property, measured from the beginning of the file.",
+          "description": "The MIME Base64-encoded byte sequence to be inserted at the byte offset specified by the 'offset' property, measured from the beginning of the file.",
           "type": "string"
         }
       },
