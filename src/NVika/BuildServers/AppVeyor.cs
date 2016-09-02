@@ -79,7 +79,7 @@ namespace NVika.BuildServers
 
                 if (issue.Offset != null)
                 {
-                    _logger.Debug("Column: {Offset.Start}", issue.Offset.Start);
+                    _logger.Debug("Column: {offsetStart}", issue.Offset.Start);
                     compilationMessage.Column = issue.Offset.Start + 1;
                 }
 
