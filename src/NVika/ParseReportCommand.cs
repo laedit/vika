@@ -2,12 +2,10 @@
 using NVika.BuildServers;
 using NVika.Parsers;
 using Serilog;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO.Abstractions;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace NVika
 {
@@ -41,7 +39,7 @@ namespace NVika
 
         public override int Run(string[] reportPaths)
         {
-            var returnCode = ExitCodes.OK;
+            var returnCode = ExitCodes.Ok;
 
             if (reportPaths.Length == 0)
             {
@@ -86,13 +84,18 @@ namespace NVika
                     }
                 }
 
-                if (returnCode == ExitCodes.OK && issues.Any(i => i.Severity == IssueSeverity.Error))
+                if (returnCode == ExitCodes.Ok && issues.Any(i => i.Severity == IssueSeverity.Error))
                 {
                     returnCode = ExitCodes.IssuesWithErrorWasFound;
-                    _logger.Fatal("Issues with severity error was found: the build will fail");
                 }
 
             }
+
+            if (returnCode == ExitCodes.IssuesWithErrorWasFound)
+            {
+                _logger.Fatal("Issues with severity error was found: the build will fail");
+            }
+
             return returnCode;
         }
 

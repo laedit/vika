@@ -3,7 +3,7 @@ namespace NVika
 {
     internal static class ExitCodes
     {
-        internal const int OK = 0;
+        internal const int Ok = 0;
 
         internal const int UnknownError = 1;
 

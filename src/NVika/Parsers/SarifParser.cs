@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.Sarif.Readers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,14 +29,7 @@ namespace NVika.Parsers
         {
             string schemaText;
             var schemaFilePath = FileSystem.Path.Combine("Schemas", "sarif.schema.json");
-            if (FileSystem.File.Exists(schemaFilePath))
-            {
-                schemaText = FileSystem.File.ReadAllText(schemaFilePath);
-            }
-            else
-            {
-                schemaText = GetEmbeddedResourceContent("Schemas.Sarif.schema.json");
-            }
+            schemaText = FileSystem.File.Exists(schemaFilePath) ? FileSystem.File.ReadAllText(schemaFilePath) : GetEmbeddedResourceContent("Schemas.Sarif.schema.json");
 
             var schema = JSchema.Parse(schemaText);
             using (var jsonTextReader = new JsonTextReader(reader))
@@ -91,11 +83,7 @@ namespace NVika.Parsers
 
             if (result.Locations.Count > 0)
             {
-                location = result.Locations[0].ResultFile;
-                if(location == null)
-                {
-                    location = result.Locations[0].AnalysisTarget;
-                }
+                location = result.Locations[0].ResultFile ?? result.Locations[0].AnalysisTarget;
             }
 
             return location;
