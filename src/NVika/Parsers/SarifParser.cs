@@ -27,11 +27,7 @@ namespace NVika.Parsers
 
         protected override bool CanParse(StreamReader reader)
         {
-            string schemaText;
-            var schemaFilePath = FileSystem.Path.Combine("Schemas", "sarif.schema.json");
-            schemaText = FileSystem.File.Exists(schemaFilePath) ? FileSystem.File.ReadAllText(schemaFilePath) : GetEmbeddedResourceContent("Schemas.Sarif.schema.json");
-
-            var schema = JSchema.Parse(schemaText);
+            var schema = JSchema.Parse(GetEmbeddedResourceContent("Schemas.Sarif.schema.json"));
             using (var jsonTextReader = new JsonTextReader(reader))
             {
                 var report = JObject.Load(jsonTextReader);
