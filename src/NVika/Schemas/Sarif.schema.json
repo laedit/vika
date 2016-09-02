@@ -96,7 +96,7 @@
         "parameters": {
           "description": "An ordered set of strings that parameterize the operation for this location. For an annotation of kind 'call', for example, this property may hold the ordered list of arguments passed to the callee.",
           "type": "array",
-          "default": [ ],
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -137,7 +137,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -174,7 +174,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -307,7 +307,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -438,7 +438,7 @@
           "description": "The environment variables associated with the analysis tool process, expressed as key/value pairs.",
           "type": "object",
           "additionalProperties": true,
-          "default": { }
+          "default": {}
         },
 
         "properties": {
@@ -451,7 +451,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -501,7 +501,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -595,7 +595,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -793,7 +793,8 @@
           "items": {
             "description": "A flag value indicating one or more suppression conditions.",
             "enum": [
-              "suppressedInSource", "suppressedExternally"
+              "suppressedInSource",
+              "suppressedExternally"
             ]
           }
         },
@@ -827,7 +828,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -889,7 +890,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -974,7 +975,7 @@
           "description": "A stable identifier for a run, for example, 'nightly Clang analyzer run'. Multiple runs of the same type can have the same stableId.",
           "type": "string"
         },
-        
+
         "automationId": {
           "description": "A global identifier that allows the run to be correlated with other artifacts produced by a larger automation process.",
           "type": "string"
@@ -984,7 +985,7 @@
           "description": "The 'id' property of a separate (potentially external) SARIF 'run' instance that comprises the baseline that was used to compute result 'baselineState' properties for the run.",
           "type": "string"
         },
-        
+
         "architecture": {
           "description": "The hardware architecture for which the run was targeted.",
           "type": "string"
@@ -1022,7 +1023,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -1099,7 +1100,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "default": [ ]
+            "default": []
           }
         },
 
@@ -1113,7 +1114,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
@@ -1181,7 +1182,7 @@
               "description": "A set of distinct strings that provide additional information.",
               "type": "array",
               "uniqueItems": true,
-              "default": [ ],
+              "default": [],
               "items": {
                 "type": "string"
               }
