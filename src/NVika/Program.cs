@@ -44,7 +44,7 @@ namespace NVika
 
                 Compose();
 
-                _logger.Information("NVika V{Version}", Assembly.GetExecutingAssembly().GetName().Version);
+                _logger.Information("NVika {Version}", typeof(Program).GetTypeInfo().Assembly.GetName().Version);
 
                 return ConsoleCommandDispatcher.DispatchCommand(_commands, extraArgs.ToArray(), Console.Out);
             }

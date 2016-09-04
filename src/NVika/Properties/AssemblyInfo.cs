@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Laedit")]
 [assembly: AssemblyProduct("NVika")]
-[assembly: AssemblyCopyright("Copyright © Laedit 2015")]
+[assembly: AssemblyCopyright("Copyright © Laedit 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.0.0.0")]
