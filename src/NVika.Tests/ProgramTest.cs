@@ -21,7 +21,7 @@ namespace NVika.Tests
             // assert
             var consoleOutput = output.ToString();
             Assert.Equal(1, exitCode);
-            Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
+            Assert.Contains($"NVika {Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
             Assert.Contains("No report was specified. You must indicate at least one report file.", consoleOutput);
         }
@@ -39,7 +39,7 @@ namespace NVika.Tests
             // assert
             var consoleOutput = output.ToString();
             Assert.Equal(2, exitCode);
-            Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
+            Assert.Contains($"NVika {Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
             Assert.Contains("The report unkowncommand was not found.", consoleOutput);
         }
@@ -57,7 +57,7 @@ namespace NVika.Tests
             // assert
             var consoleOutput = output.ToString();
             Assert.Equal(2, exitCode);
-            Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
+            Assert.Contains($"NVika {Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("The report nonexistingreport.abc was not found.", consoleOutput);
         }
 
@@ -74,7 +74,7 @@ namespace NVika.Tests
             // assert
             var consoleOutput = output.ToString();
             Assert.Equal(1, exitCode);
-            Assert.Contains($"NVika V{Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
+            Assert.Contains($"NVika {Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
             Assert.Contains("An unexpected error occurred:", consoleOutput);
             Assert.Contains("System.NullReferenceException: Object reference not set to an instance of an object", consoleOutput);
         }
