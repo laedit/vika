@@ -287,6 +287,31 @@ namespace NVika.Tests
             Assert.Contains("Message6", logs);
         }
 
+        [Fact]
+        public void Execute_WarningAsError_ShouldExitWithCode5()
+        {
+            // arrange
+            var logger = GetLogger();
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", new MockFileData("<root></root>") } });
+            var localBuildServer = new LocalBuildServer(logger);
+            var mockBuildServer = GetMockBuildServer(true);
+            var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
+            var parsers = new List<IReportParser> { GetMockReportParser(true, false) };
+            var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--warningaserror" });
+
+            // act
+            var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
+
+            // assert
+            Assert.Equal(5, exitCode);
+            var logs = _loggerOutput.ToString();
+            Assert.Contains("[Suggestion] Message1", logs);
+            Assert.Contains("[Error] Message2", logs);
+            Assert.Contains("[Error] Message3", logs);
+            Assert.Contains("[Fatal] Issues with severity error was found: the build will fail", logs);
+        }
+
         private IReportParser GetMockReportParser(bool canParse = false, bool issuesContainError = true, bool alternate = false)
         {
             var mockReportParser = Substitute.For<IReportParser>();
@@ -326,7 +351,7 @@ namespace NVika.Tests
             mockBuildServer.Name.Returns("MockBuildServer");
             mockBuildServer.CanApplyToCurrentContext().Returns(canApplyToCurrentContext);
             mockBuildServer.When(bs => bs.ApplyParameters(Arg.Any<bool>())).Do(ci => _mockBuildServer_IncludeSource = ci.Arg<bool>());
-            mockBuildServer.When(bs => bs.WriteMessage(Arg.Any<Issue>())).Do(ci => _loggerOutput.AppendLine(ci.Arg<Issue>().Message + (_mockBuildServer_IncludeSource ? " - " + ci.Arg<Issue>().Source : string.Empty)));
+            mockBuildServer.When(bs => bs.WriteMessage(Arg.Any<Issue>())).Do(ci => _loggerOutput.AppendLine("[" + ci.Arg<Issue>().Severity + "] " + ci.Arg<Issue>().Message + (_mockBuildServer_IncludeSource ? " - " + ci.Arg<Issue>().Source : string.Empty)));
             return mockBuildServer;
         }
 
