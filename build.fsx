@@ -50,7 +50,11 @@ Target "LaunchNVika" (fun _ ->
             buildDir + "NVika.exe.CodeAnalysisLog.xml";
         ]
     let existingReportsPath = reportsPath |> Seq.filter fileExists
-    existingReportsPath |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
+
+    if Seq.isEmpty existingReportsPath then
+        traceImportant "No analytics reports to parse :'("
+    else
+        existingReportsPath |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
 )
 
 Target "BuildReleaseNotes" (fun _ ->
