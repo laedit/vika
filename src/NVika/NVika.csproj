@@ -96,6 +96,7 @@
     <Compile Include="Exceptions\LoadingReportException.cs" />
     <Compile Include="Exceptions\NVikaException.cs" />
     <Compile Include="ExitCodes.cs" />
+    <Compile Include="Parsers\FxCopParser.cs" />
     <Compile Include="Parsers\ReportParserBase.cs" />
     <Compile Include="Parsers\SarifParser.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />

@@ -6,4 +6,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CC0021:Use nameof", Justification = "Not from the type 'Issue'", Scope = "member", Target = "~M:NVika.Parsers.InspectCodeParser.CanParse(System.IO.StreamReader)~System.Boolean")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CC0021:Use nameof", Justification = "Not from the type 'Issue'", Scope = "member", Target = "~M:NVika.Parsers.InspectCodeParser.Parse(System.String)~System.Collections.Generic.IEnumerable{NVika.Parsers.Issue}")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CC0021:Use nameof", Justification = "Not from the property 'Name'", Scope = "member", Target = "~M:NVika.Parsers.FxCopParser.Parse(System.String)~System.Collections.Generic.IEnumerable{NVika.Parsers.Issue}")]
 

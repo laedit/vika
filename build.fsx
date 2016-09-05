@@ -37,22 +37,20 @@ Target "BuildApp" (fun _ ->
 Target "InspectCodeAnalysis" (fun _ ->
     "resharper-clt.portable" |> Choco.Install id
     
-    if directExec(fun info ->
+    directExec(fun info ->
         info.FileName <- "inspectcode"
-        info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" )
-    then
-        artifactsDir + "inspectcodereport.xml"
-        |> NVika.ParseReport (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
-            
-    else traceError "Execution of inspectcode have failed, NVika can't be executed."
+        info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
 )
 
-Target "RoslynAnalysis" (fun _ ->
-    let roslynReportPath = buildDir + "static-analysis.sarif.json"
-    if fileExists roslynReportPath then
-        roslynReportPath |> NVika.ParseReport (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
-    else
-        traceError "file 'static-analysis.sarif.json' not found"
+Target "LaunchNVika" (fun _ ->
+    let reportsPath = 
+        [
+            artifactsDir + "inspectcodereport.xml";
+            buildDir + "static-analysis.sarif.json";
+            buildDir + "NVika.exe.CodeAnalysisLog.xml";
+        ]
+    let existingReportsPath = reportsPath |> Seq.filter fileExists
+    existingReportsPath |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
 )
 
 Target "BuildReleaseNotes" (fun _ ->
@@ -181,7 +179,7 @@ Target "All" DoNothing
   ==> "RestorePackages"
   ==> "BuildApp"
   =?> ("InspectCodeAnalysis", Choco.IsAvailable)
-  ==> "RoslynAnalysis"
+  ==> "LaunchNVika"
   ==> "BuildReleaseNotes"
   ==> "BuildTest"
   ==> "Test"
