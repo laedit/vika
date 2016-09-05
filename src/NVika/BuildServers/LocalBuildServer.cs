@@ -7,7 +7,8 @@ namespace NVika.BuildServers
     [Export]
     internal sealed class LocalBuildServer : BuildServerBase
     {
-        private const string LineFormat = "{0} {1} {2} - Line {3}: {4}";
+        private const string LineFormat = "{0} {1} {3} - Line {4}: {2}";
+        private const string NoFileLineFormat = "{0} {1}: {2}";
         private readonly ILogger _logger;
 
         public override string Name
@@ -29,11 +30,17 @@ namespace NVika.BuildServers
         public override void WriteMessage(Issue issue)
         {
             var format = LineFormat;
+            if(issue.FilePath == null)
+            {
+                format = NoFileLineFormat;
+            }
+
             if (IncludeSourceInMessage)
             {
                 format = string.Concat("[{5}] ", format);
             }
-            _logger.Information(format, issue.Severity, issue.Name, issue.FilePath, issue.Line, issue.Message, issue.Source);
+
+            _logger.Information(format, issue.Severity, issue.Name, issue.Message, issue.FilePath, issue.Line,issue.Source);
         }
     }
 }
