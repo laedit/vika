@@ -65,7 +65,7 @@ namespace NVika.Tests.Parsers
             var result = parser.Parse("CodeAnalysisLog.xml").ToList();
 
             // assert
-            Assert.Equal(24, result.Count);
+            Assert.Equal(26, result.Count);
 
             AssertIssue(result[0],
                         "Microsoft.Naming",
@@ -84,22 +84,26 @@ namespace NVika.Tests.Parsers
                         IssueSeverity.Error);
 
             AssertIssue(result[10],
-                        "Microsoft.Globalization",
-                        "Specify IFormatProvider",
-                        "http://msdn.microsoft.com/library/ms182190.aspx",
-                        "Because the behavior of 'string.Format(string, object)' could vary based on the current user's locale settings, replace this call in 'Program.Run(string[])' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.",
-                        "CA1305",
-                        IssueSeverity.Error);
+                        "Microsoft.Design",
+                        "Do not catch general exception types",
+                        "http://msdn.microsoft.com/library/ms182137.aspx",
+                        "Modify 'Program.Run(string[])' to catch a more specific exception than 'Exception' or rethrow the exception.",
+                        "CA1031",
+                        IssueSeverity.Error,
+                        @"D:\Prog\Github\vika\src\NVika\Program.cs",
+                        56);
 
             AssertIssue(result[16],
                         "Microsoft.Performance",
                         "Avoid uncalled private code",
                         "http://msdn.microsoft.com/library/ms182264.aspx",
-                        "'AppVeyor.CompilationMessage.Line.get()' appears to have no upstream public or protected callers.",
+                        "'AppVeyor.CompilationMessage.FileName.get()' appears to have no upstream public or protected callers.",
                         "CA1811",
-                        IssueSeverity.Warning);
+                        IssueSeverity.Warning,
+                        @"D:\Prog\Github\vika\src\NVika\BuildServers\AppVeyor.cs",
+                        105);
 
-            AssertIssue(result[19],
+            AssertIssue(result[20],
                         "Microsoft.Design",
                         "Implement standard exception constructors",
                         "http://msdn.microsoft.com/library/ms182151.aspx",
@@ -107,22 +111,24 @@ namespace NVika.Tests.Parsers
                         "CA1032",
                         IssueSeverity.Error);
 
-            AssertIssue(result[23],
+            AssertIssue(result[25],
                         "Microsoft.Globalization",
                         "Specify IFormatProvider",
                         "http://msdn.microsoft.com/library/ms182190.aspx",
                         "Because the behavior of 'int.Parse(string)' could vary based on the current user's locale settings, replace this call in 'InspectCodeParser.GetOffset(XAttribute, string, uint?)' with a call to 'int.Parse(string, IFormatProvider)'. If the result of 'int.Parse(string, IFormatProvider)' will be based on input from the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will based on input stored and accessed by software, such as when it is loaded from disk or from a database, specify 'CultureInfo.InvariantCulture'.",
                         "CA1305",
-                        IssueSeverity.Error);
+                        IssueSeverity.Error,
+                        @"D:\Prog\Github\vika\src\NVika\Parsers\InspectCodeParser.cs",
+                        94);
         }
 
-        private void AssertIssue(Issue result, string expectedCategory, string expectedDescription, string expectedUri, string expectedMessage, string expectedName, IssueSeverity expectedSeverity)
+        private void AssertIssue(Issue result, string expectedCategory, string expectedDescription, string expectedUri, string expectedMessage, string expectedName, IssueSeverity expectedSeverity, string expectedFilePath = null, uint? expectedLine = null)
         {
             Assert.Equal(expectedCategory, result.Category);
             Assert.Equal(expectedDescription, result.Description);
-            Assert.Null(result.FilePath);
+            Assert.Equal(expectedFilePath, result.FilePath);
             Assert.Equal(expectedUri, result.HelpUri.AbsoluteUri);
-            Assert.Null(result.Line);
+            Assert.Equal(expectedLine, result.Line);
             Assert.Equal(expectedMessage, result.Message);
             Assert.Equal(expectedName, result.Name);
             Assert.Null(result.Offset);

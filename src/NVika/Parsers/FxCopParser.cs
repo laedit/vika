@@ -45,19 +45,44 @@ namespace NVika.Parsers
             foreach (var message in report.Descendants("Message"))
             {
                 var rule = GetRule(rules, message.Attribute("CheckId").Value);
-                var issue = message.Element("Issue");
 
-                yield return new Issue
+                foreach (var issue in message.Elements("Issue"))
                 {
-                    Category = rule.Attribute("Category").Value,
-                    Description = rule.Element("Name").Value,
-                    HelpUri = new Uri(rule.Element("Url").Value),
-                    Message = issue.Value,
-                    Name = message.Attribute("CheckId").Value,
-                    Severity = GetSeverity(issue.Attribute("Level")),
-                    Source = Name,
-                };
+                    yield return new Issue
+                    {
+                        Category = rule.Attribute("Category").Value,
+                        Description = rule.Element("Name").Value,
+                        HelpUri = new Uri(rule.Element("Url").Value),
+                        Message = issue.Value,
+                        Name = message.Attribute("CheckId").Value,
+                        Severity = GetSeverity(issue.Attribute("Level")),
+                        Source = Name,
+                        Line = GetLine(issue.Attribute("Line")),
+                        FilePath = GetPath(issue)
+                    };
+
+                }
             }
+        }
+
+        private string GetPath(XElement issue)
+        {
+            var path = issue.Attribute("Path")?.Value;
+            var file = issue.Attribute("File")?.Value;
+            if(path != null && file != null)
+            {
+                return FileSystem.Path.Combine(path, file);
+            }
+            return null;
+        }
+
+        private static uint? GetLine(XAttribute issueLine)
+        {
+            if(issueLine == null)
+            {
+                return null;
+            }
+            return uint.Parse(issueLine.Value);
         }
 
         private static IssueSeverity GetSeverity(XAttribute level)
