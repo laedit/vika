@@ -1,6 +1,7 @@
 ﻿using NVika.Parsers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using System.Text;
@@ -90,7 +91,7 @@ namespace NVika.Tests.Parsers
                         "Modify 'Program.Run(string[])' to catch a more specific exception than 'Exception' or rethrow the exception.",
                         "CA1031",
                         IssueSeverity.Error,
-                        @"D:\Prog\Github\vika\src\NVika\Program.cs",
+                        Path.Combine(@"D:\Prog\Github\vika\src\NVika", "Program.cs"),
                         56);
 
             AssertIssue(result[16],
@@ -100,7 +101,7 @@ namespace NVika.Tests.Parsers
                         "'AppVeyor.CompilationMessage.FileName.get()' appears to have no upstream public or protected callers.",
                         "CA1811",
                         IssueSeverity.Warning,
-                        @"D:\Prog\Github\vika\src\NVika\BuildServers\AppVeyor.cs",
+                        Path.Combine(@"D:\Prog\Github\vika\src\NVika\BuildServers", "AppVeyor.cs"),
                         105);
 
             AssertIssue(result[20],
@@ -118,7 +119,7 @@ namespace NVika.Tests.Parsers
                         "Because the behavior of 'int.Parse(string)' could vary based on the current user's locale settings, replace this call in 'InspectCodeParser.GetOffset(XAttribute, string, uint?)' with a call to 'int.Parse(string, IFormatProvider)'. If the result of 'int.Parse(string, IFormatProvider)' will be based on input from the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will based on input stored and accessed by software, such as when it is loaded from disk or from a database, specify 'CultureInfo.InvariantCulture'.",
                         "CA1305",
                         IssueSeverity.Error,
-                        @"D:\Prog\Github\vika\src\NVika\Parsers\InspectCodeParser.cs",
+                        Path.Combine(@"D:\Prog\Github\vika\src\NVika\Parsers", "InspectCodeParser.cs"),
                         94);
         }
 
