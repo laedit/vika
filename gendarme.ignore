@@ -1,0 +1,23 @@
+# gendarme ignored defects
+
+R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
+M: NVika.Parsers.XmlReportParser::Parse(System.String)
+M: NVika.BuildServers.AppVeyor::WriteMessage(NVika.Parsers.Issue)
+M: NVika.Program::Compose()
+
+R: Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule
+A: NVika
+
+R: Gendarme.Rules.Exceptions.MissingExceptionConstructorsRule
+C: NVika.Exceptions.NVikaException
+C: NVika.Exceptions.LoadingReportException
+
+R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
+C: NVika.Exceptions.NVikaException
+C: NVika.Exceptions.LoadingReportException
+
+R: Gendarme.Rules.BadPractice.PreferTryParseRule
+M: NVika.Parsers.GendarmeParser::ParseSource(System.String)
+M: NVika.Parsers.FxCopParser::GetLine(System.Xml.Linq.XAttribute)
+M: NVika.Parsers.InspectCodeParser::GetOffset(System.Xml.Linq.XAttribute,System.String,System.Nullable<System.UInt32>)
+M: NVika.Parsers.InspectCodeParser::GetLine(System.Xml.Linq.XAttribute,System.Boolean)
