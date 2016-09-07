@@ -50,7 +50,7 @@ Target "GendarmeAnalysis" (fun _ ->
     })
     
     directExec(fun info ->
-        info.FileName <- "./tools/Mono.Gendarme/tools/gendarme"
+        info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
         info.Arguments <- "--xml " + buildDir + "GendarmeReport.xml " + buildDir + "NVika.exe" ) |> ignore
 )
 
