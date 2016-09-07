@@ -334,7 +334,7 @@
         },
         {
           "ruleId": "S1940",
-          "level": "warning",
+          "level": "error",
           "message": "Use the opposite operator (\"!=\") instead.",
           "locations": [
             {

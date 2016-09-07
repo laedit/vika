@@ -79,6 +79,26 @@ namespace NVika.Tests
             Assert.Contains("System.NullReferenceException: Object reference not set to an instance of an object", consoleOutput);
         }
 
+        [Fact]
+        public void Run_ApplicationException_AreLoggedAndHaveExitCode()
+        {
+            // arrange
+            var output = new StringBuilder();
+            Console.SetOut(new StringWriter(output));
+            var reportPath = Path.Combine("Data", "WrongReport.xml");
+
+            // act
+            var exitCode = new Program().Run(new[] { "parsereport", reportPath, "--debug" });
+
+            // assert
+            var consoleOutput = output.ToString();
+            Assert.Equal(3, exitCode);
+            Assert.Contains($"NVika {Assembly.GetAssembly(typeof(Program)).GetName().Version}", consoleOutput);
+            Assert.Contains("Report path is " + reportPath, consoleOutput);
+            Assert.Contains("An unexpected error occurred:", consoleOutput);
+            Assert.Contains("NVika.Exceptions.LoadingReportException: An exception happened when loading the report '" + reportPath + "'", consoleOutput);
+        }
+
     }
 }
 

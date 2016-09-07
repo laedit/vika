@@ -243,14 +243,14 @@
       <problem>The method contains one or more unused parameters.</problem>
       <solution>You should remove or use the unused parameters.</solution>
       <target Name="System.Void GendarmeTest.Program::Main(System.String[])" Assembly="GendarmeTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <defect Severity="Medium" Confidence="Normal" Location="args" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs(≈11)">Parameter 'args' of type 'System.String[]' is never used in the method.</defect>
+        <defect Severity="Low" Confidence="Normal" Location="args" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs(≈11)">Parameter 'args' of type 'System.String[]' is never used in the method.</defect>
       </target>
     </rule>
     <rule Name="ConsiderUsingStaticTypeRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)">
       <problem>This type contains only static fields and methods and should be static.</problem>
       <solution>Change this type into a static (or sealed for 1.x) type gain clarity and better error reporting.</solution>
       <target Name="GendarmeTest.Program" Assembly="GendarmeTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <defect Severity="Medium" Confidence="High" Location="GendarmeTest.Program" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs(≈11)"></defect>
+        <defect Severity="Audit" Confidence="High" Location="GendarmeTest.Program" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs(≈11)"></defect>
       </target>
     </rule>
     <rule Name="MarkAssemblyWithCLSCompliantRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule(2.10)">

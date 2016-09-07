@@ -30,6 +30,7 @@ namespace NVika.Tests.Parsers
         [InlineData("emptyreport.xml", false)]
         [InlineData("onlyissues.xml", false)]
         [InlineData("onlyissues.json", false)]
+        [InlineData("falsereport.xml", false)]
         public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
@@ -40,6 +41,7 @@ namespace NVika.Tests.Parsers
                 { "inspectcodereport_2016.2.xml", new MockFileData(TestUtilities.GetEmbeddedResourceContent("inspectcodereport_2016.2.xml")) },
                 { "emptyreport.xml", new MockFileData("<Report ToolsVersion=\"8.2\"></Report>") },
                 { "onlyissues.xml", new MockFileData("<IssueTypes></IssueTypes>") },
+                { "falsereport.xml", new MockFileData("{<IssueTypes></IssueTypes>") },
             });
 
             // act
@@ -47,6 +49,25 @@ namespace NVika.Tests.Parsers
 
             // assert
             Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void CanParse_LoadingException()
+        {
+            // arrange
+            var parser = new InspectCodeParser();
+            parser.FileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "wrongreport.xml", new MockFileData("<Report ToolsVersion=\"8.2\"></Rport>") },
+            });
+
+            // act
+            var exception = Assert.Throws<Exceptions.LoadingReportException>(() => parser.CanParse("wrongreport.xml"));
+
+            // assert
+            Assert.Equal(3, exception.ExitCode);
+            Assert.Equal("An exception happened when loading the report 'wrongreport.xml'", exception.Message);
+            Assert.NotNull(exception.InnerException);
         }
 
         [Fact]

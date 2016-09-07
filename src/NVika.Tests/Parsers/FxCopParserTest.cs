@@ -29,6 +29,7 @@ namespace NVika.Tests.Parsers
         [InlineData("onlymessages.xml", true)]
         [InlineData("onlyrules.xml", true)]
         [InlineData("onlyissues.json", false)]
+        [InlineData("falsereport.xml", false)]
         public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
@@ -39,6 +40,7 @@ namespace NVika.Tests.Parsers
                 { "emptyreport.xml", new MockFileData("<FxCopReport Version=\"10.0\"></FxCopReport>") },
                 { "onlymessages.xml", new MockFileData("<FxCopReport Version=\"10.0\"><Messages><Message /></Messages></FxCopReport>") },
                 { "onlyrules.xml", new MockFileData("<FxCopReport Version=\"10.0\"><Rules><Rule /></Rules></FxCopReport>") },
+                { "falsereport.xml", new MockFileData("{<FxCopReport Version=\"10.0\"><Rules><Rule /></Rules></FxCopReport>") },
             });
 
             // act

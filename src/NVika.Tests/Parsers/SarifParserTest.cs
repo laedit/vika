@@ -28,6 +28,7 @@ namespace NVika.Tests.Parsers
         [InlineData("onlyissues.xml", false)]
         [InlineData("emptyreport.json", true)]
         [InlineData("emptyreport.sarif", true)]
+        [InlineData("falsereport.sarif", false)]
         public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
@@ -39,6 +40,7 @@ namespace NVika.Tests.Parsers
                 { "onlyissues.xml", new MockFileData("<IssueTypes></IssueTypes>") },
                 { "emptyreport.json", new MockFileData(EmptyReportSample) },
                 { "emptyreport.sarif", new MockFileData(EmptyReportSample) },
+                { "falsereport.sarif", new MockFileData("<" + EmptyReportSample) },
             });
 
             // act
@@ -104,7 +106,7 @@ namespace NVika.Tests.Parsers
             Assert.Equal(17u, issue.Offset.Start);
             Assert.Equal(26u, issue.Offset.End);
             Assert.Null(issue.Project);
-            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal(IssueSeverity.Error, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
         }
 

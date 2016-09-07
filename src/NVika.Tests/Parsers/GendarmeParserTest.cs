@@ -30,6 +30,7 @@ namespace NVika.Tests.Parsers
         [InlineData("onlymessages.xml", true)]
         [InlineData("onlyrules.xml", true)]
         [InlineData("onlyissues.json", false)]
+        [InlineData("falsereport.xml", false)]
         public void CanParse(string reportPath, bool expectedResult)
         {
             // arrange
@@ -40,6 +41,7 @@ namespace NVika.Tests.Parsers
                 { "emptyreport.xml", new MockFileData("<gendarme-output date=\"09/05/2016 17:56:58\"></gendarme-output>") },
                 { "onlymessages.xml", new MockFileData("<gendarme-output date=\"09/05/2016 17:56:58\"><rules><rule /></rules></gendarme-output>") },
                 { "onlyrules.xml", new MockFileData("<gendarme-output date=\"09/05/2016 17:56:58\"><results><rule /></results></gendarme-output>") },
+                { "falsereport.xml", new MockFileData("{<gendarme-output date=\"09/05/2016 17:56:58\"><results><rule /></results></gendarme-output>") },
             });
 
             // act
@@ -82,7 +84,7 @@ namespace NVika.Tests.Parsers
                         "https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnusedParametersRule(2.10)",
                         "You should remove or use the unused parameters.",
                         "AvoidUnusedParametersRule",
-                        IssueSeverity.Warning,
+                        IssueSeverity.Suggestion,
                         @"d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs",
                         11);
 
@@ -92,7 +94,7 @@ namespace NVika.Tests.Parsers
                         "https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)",
                         "Change this type into a static (or sealed for 1.x) type gain clarity and better error reporting.",
                         "ConsiderUsingStaticTypeRule",
-                        IssueSeverity.Warning,
+                        IssueSeverity.Hint,
                         @"d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs",
                         11);
 

@@ -82,6 +82,27 @@ namespace NVika.Tests.BuildServers
             Assert.Contains("[\"Source3\"] Error \"Name3\" \"FilePath3\" - Line 82: \"Message3\"", outputLines);
         }
 
+        [Fact]
+        public void WriteIntegration_IssueWithoutFilePath()
+        {
+            // act
+            var buildServer = new LocalBuildServer(GetLogger());
+
+            var issues = GetIssuesWithoutFileInfos();
+
+            // arrange
+            foreach (var issue in issues)
+            {
+                buildServer.WriteMessage(issue);
+            }
+
+            // assert
+            var outputLines = _loggerOutput.ToString();
+            Assert.Contains("Suggestion \"Name1\": \"Message1\"", outputLines);
+            Assert.Contains("Warning \"Name2\": \"Message2\"", outputLines);
+            Assert.Contains("Error \"Name3\": \"Message3\"", outputLines);
+        }
+
         private List<Issue> GetIssues()
         {
             return new List<Issue>
@@ -89,6 +110,16 @@ namespace NVika.Tests.BuildServers
                 new Issue{ Category="Category1", Description = "Description1", FilePath = "FilePath1", HelpUri = null, Line = 42u, Message = "Message1", Name = "Name1", Offset = new Offset{ Start = 2u, End = 5u}, Project = "Project1", Severity = IssueSeverity.Suggestion, Source = "Source1" },
                 new Issue{ Category="Category2", Description = "Description2", FilePath = "FilePath2", HelpUri = new Uri("https://www.wikipedia.com"), Line = 465u, Message = "Message2", Name = "Name2", Offset = new Offset{ Start = 36u, End = 546u}, Project = "Project1", Severity = IssueSeverity.Warning, Source = "Source2" },
                 new Issue{ Category="Category1", Description = "Description3", FilePath = "FilePath3", HelpUri = new Uri("http://helperror.com"), Line = 82u, Message = "Message3", Name = "Name3", Project = "Project2", Severity = IssueSeverity.Error, Source = "Source3" },
+            };
+        }
+
+        private List<Issue> GetIssuesWithoutFileInfos()
+        {
+            return new List<Issue>
+            {
+                new Issue{ Category="Category1", Description = "Description1", HelpUri = null, Message = "Message1", Name = "Name1", Project = "Project1", Severity = IssueSeverity.Suggestion, Source = "Source1" },
+                new Issue{ Category="Category2", Description = "Description2", HelpUri = new Uri("https://www.wikipedia.com"), Message = "Message2", Name = "Name2", Project = "Project1", Severity = IssueSeverity.Warning, Source = "Source2" },
+                new Issue{ Category="Category1", Description = "Description3", HelpUri = new Uri("http://helperror.com"), Message = "Message3", Name = "Name3", Project = "Project2", Severity = IssueSeverity.Error, Source = "Source3" },
             };
         }
 
