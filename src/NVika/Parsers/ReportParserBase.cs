@@ -29,13 +29,13 @@ namespace NVika.Parsers
             _firstChar = firstChar;
         }
 
-        public bool CanParse(string filePath)
+        public bool CanParse(string reportPath)
         {
             try
             {
-                if (_allowedExtensions.Contains(FileSystem.Path.GetExtension(filePath)))
+                if (_allowedExtensions.Contains(FileSystem.Path.GetExtension(reportPath)))
                 {
-                    using (var reader = new StreamReader(FileSystem.File.OpenRead(filePath)))
+                    using (var reader = new StreamReader(FileSystem.File.OpenRead(reportPath)))
                     {
                         if (!_firstChar.HasValue || (char)reader.Peek() == _firstChar.Value)
                         {
@@ -49,13 +49,13 @@ namespace NVika.Parsers
             }
             catch (Exception ex)
             {
-                throw new LoadingReportException(filePath, ex);
+                throw new LoadingReportException(reportPath, ex);
             }
         }
 
         protected abstract bool CanParse(StreamReader streamReader);
 
-        public abstract IEnumerable<Issue> Parse(string filePath);
+        public abstract IEnumerable<Issue> Parse(string reportPath);
 
         internal static string GetEmbeddedResourceContent(string resourceName)
         {

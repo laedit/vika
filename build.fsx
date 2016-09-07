@@ -42,12 +42,25 @@ Target "InspectCodeAnalysis" (fun _ ->
         info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
 )
 
+Target "GendarmeAnalysis" (fun _ ->
+    "mono.gendarme" |> NugetInstall (fun p -> 
+    { p with 
+        OutputDirectory = "tools";
+        ExcludeVersion = true
+    })
+    
+    directExec(fun info ->
+        info.FileName <- "./tools/Mono.Gendarme/tools/gendarme"
+        info.Arguments <- "--xml " + buildDir + "GendarmeReport.xml " + buildDir + "NVika.exe" ) |> ignore
+)
+
 Target "LaunchNVika" (fun _ ->
     let reportsPath = 
         [
             artifactsDir + "inspectcodereport.xml";
             buildDir + "static-analysis.sarif.json";
             buildDir + "NVika.exe.CodeAnalysisLog.xml";
+            buildDir + "GendarmeReport.xml";
         ]
     let existingReportsPath = reportsPath |> Seq.filter fileExists
 
@@ -165,7 +178,7 @@ Target "ChocoPack" (fun _ ->
             LicenseUrl = "https://github.com/laedit/vika/blob/master/LICENSE"
             BugTrackerUrl = "https://github.com/laedit/vika/issues"
             Description = "Parse analysis reports (InspectCode, ...) and send messages to build server or console."
-            Tags = ["report"; "parsing"; "build"; "server"; "inspectcode"]
+            Tags = ["report"; "parsing"; "build"; "server"; "inspectcode"; "FxCop"; "SARIF"; "Roslyn"; "Gendarme"]
             ReleaseNotes = "https://github.com/laedit/vika/releases"
             PackageDownloadUrl = "https://github.com/laedit/vika/releases/download/" + tag + "/NVika." + version + ".zip"
             OutputDir = artifactsDir
@@ -183,6 +196,7 @@ Target "All" DoNothing
   ==> "RestorePackages"
   ==> "BuildApp"
   =?> ("InspectCodeAnalysis", Choco.IsAvailable)
+  ==> "GendarmeAnalysis"
   ==> "LaunchNVika"
   ==> "BuildReleaseNotes"
   ==> "BuildTest"

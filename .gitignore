@@ -194,4 +194,5 @@ tools/OpenCover/
 tools/xunit.runner.console/
 tools/coveralls.io/
 tools/ReportGenerator
+tools/Mono.Gendarme/
 src/.vs/config/applicationhost.config

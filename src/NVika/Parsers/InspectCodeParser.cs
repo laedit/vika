@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace NVika.Parsers
 {
-    internal sealed class InspectCodeParser : ReportParserBase
+    internal sealed class InspectCodeParser : XmlReportParser
     {
         private readonly Dictionary<string, XElement> _issueTypes = new Dictionary<string, XElement>();
 
@@ -16,26 +15,13 @@ namespace NVika.Parsers
         }
 
         public InspectCodeParser()
-            : base(new[] { ".xml" }, '<')
+            : base("Report", "Information")
         {
 
         }
 
-        protected override bool CanParse(StreamReader reader)
+        protected override IEnumerable<Issue> Parse(XDocument report)
         {
-            var report = XDocument.Load(reader);
-
-            return report.Root.Name == "Report"
-                    && report.Descendants("IssueType").Any()
-                    && report.Descendants("Project").Any()
-                    && report.Descendants("Issue").Any()
-                    && report.Descendants("Information").Any();
-        }
-
-        public override IEnumerable<Issue> Parse(string reportPath)
-        {
-            var report = XDocument.Load(FileSystem.File.OpenRead(reportPath));
-
             var rootFolder = FileSystem.Path.GetDirectoryName(report.Root.Element("Information").Element("Solution").Value);
             var issuesType = report.Descendants("IssueType");
 

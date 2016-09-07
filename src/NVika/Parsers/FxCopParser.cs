@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace NVika.Parsers
 {
-    internal sealed class FxCopParser : ReportParserBase
+    internal sealed class FxCopParser : XmlReportParser
     {
         private readonly Dictionary<string, XElement> _rules = new Dictionary<string, XElement>();
 
@@ -20,26 +18,13 @@ namespace NVika.Parsers
         }
 
         public FxCopParser()
-            : base(new[] { ".xml" }, '<')
+            : base("FxCopReport")
         {
 
         }
 
-        protected override bool CanParse(StreamReader streamReader)
+        protected override IEnumerable<Issue> Parse(XDocument report)
         {
-            // Avoid Xml exception caused by the BOM
-            using (var xmlReader = new XmlTextReader(streamReader.BaseStream))
-            {
-                var report = XDocument.Load(xmlReader);
-
-                return report.Root.Name == "FxCopReport";
-            }
-        }
-
-        public override IEnumerable<Issue> Parse(string reportPath)
-        {
-            var report = XDocument.Load(FileSystem.File.OpenRead(reportPath));
-
             var rules = report.Descendants("Rule");
 
             foreach (var message in report.Descendants("Message"))

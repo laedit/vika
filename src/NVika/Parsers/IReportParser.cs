@@ -8,8 +8,8 @@ namespace NVika.Parsers
     {
         string Name { get; }
 
-        bool CanParse(string filePath);
+        bool CanParse(string reportPath);
 
-        IEnumerable<Issue> Parse(string filePath);
+        IEnumerable<Issue> Parse(string reportPath);
     }
 }

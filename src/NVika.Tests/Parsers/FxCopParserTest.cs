@@ -1,11 +1,8 @@
 ﻿using NVika.Parsers;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace NVika.Tests.Parsers
