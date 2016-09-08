@@ -55,7 +55,14 @@ namespace NVika.BuildServers
                     break;
             }
 
-            var filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+            var filePath = issue.FilePath;
+            var details = issue.Message;
+
+            if (issue.FilePath != null)
+            {
+                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+                details = $"{issue.Message} in {filePath} on line {issue.Line}";
+            }
 
             _logger.Debug("Send compilation message to AppVeyor:");
             _logger.Debug("Message: {message}", message);
@@ -63,6 +70,7 @@ namespace NVika.BuildServers
             _logger.Debug("FileName: {filePath}", filePath);
             _logger.Debug("Line: {line}", issue.Line);
             _logger.Debug("ProjectName: {project}", issue.Project);
+            _logger.Debug("Details: {details}", details);
 
             using (var httpClient = _httpClientFactory.Create())
             {
@@ -74,7 +82,8 @@ namespace NVika.BuildServers
                     Category = category,
                     FileName = filePath,
                     Line = issue.Line,
-                    ProjectName = issue.Project
+                    ProjectName = issue.Project,
+                    Details = details
                 };
 
                 if (issue.Offset != null)
@@ -109,6 +118,8 @@ namespace NVika.BuildServers
             public string ProjectName { get; set; }
 
             public uint? Column { get; set; }
+
+            public string Details { get; set; }
         }
     }
 }
