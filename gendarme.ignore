@@ -2,8 +2,8 @@
 
 R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
 M: System.Collections.Generic.IEnumerable`1<NVika.Parsers.Issue> NVika.Parsers.XmlReportParser::Parse(System.String)
-M: NVika.BuildServers.AppVeyor::WriteMessage(NVika.Parsers.Issue)
-M: NVika.Program::Compose()
+M: System.Void NVika.BuildServers.AppVeyor::WriteMessage(NVika.Parsers.Issue)
+M: System.Void NVika.Program::Compose()
 
 R: Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule
 A: NVika
@@ -17,7 +17,7 @@ T: NVika.Exceptions.NVikaException
 T: NVika.Exceptions.LoadingReportException
 
 R: Gendarme.Rules.BadPractice.PreferTryParseRule
-M: System.Tuple`1<System.String,System.Nullable`1<System.UInt32>> NVika.Parsers.GendarmeParser::ParseSource(System.String)
+M: System.Tuple`2<System.String,System.Nullable`1<System.UInt32>> NVika.Parsers.GendarmeParser::ParseSource(System.String)
 M: System.Nullable`1<System.UInt32> NVika.Parsers.FxCopParser::GetLine(System.Xml.Linq.XAttribute)
-M: NVika.Parsers.Offest NVika.Parsers.InspectCodeParser::GetOffset(System.Xml.Linq.XAttribute,System.String,System.Nullable`1<System.UInt32>)
+M: NVika.Parsers.Offset NVika.Parsers.InspectCodeParser::GetOffset(System.Xml.Linq.XAttribute,System.String,System.Nullable`1<System.UInt32>)
 M: System.Nullable`1<System.UInt32> NVika.Parsers.InspectCodeParser::GetLine(System.Xml.Linq.XAttribute,System.Boolean)
