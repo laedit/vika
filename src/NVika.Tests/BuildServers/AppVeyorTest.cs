@@ -79,25 +79,25 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\",\"Column\":3,\"Details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
+            Assert.Equal("{\"message\":\"Message1\",\"category\":\"information\",\"fileName\":\"FilePath1\",\"line\":42,\"projectName\":\"Project1\",\"column\":3,\"details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\",\"Column\":37,\"Details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+            Assert.Equal("{\"message\":\"Message2\",\"category\":\"warning\",\"fileName\":\"FilePath2\",\"line\":465,\"projectName\":\"Project1\",\"column\":37,\"details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\",\"Details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+            Assert.Equal("{\"message\":\"Message3\",\"category\":\"error\",\"fileName\":\"FilePath3\",\"line\":82,\"projectName\":\"Project2\",\"details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[3].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[3].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message4\",\"Category\":\"information\",\"ProjectName\":\"Project2\",\"Details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
+            Assert.Equal("{\"message\":\"Message4\",\"category\":\"information\",\"projectName\":\"Project2\",\"details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
 
             Assert.Equal(string.Empty, _loggerOutput.ToString());
         }
@@ -129,25 +129,25 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"[Source1] Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\",\"Column\":3,\"Details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
+            Assert.Equal("{\"message\":\"[Source1] Message1\",\"category\":\"information\",\"fileName\":\"FilePath1\",\"line\":42,\"projectName\":\"Project1\",\"column\":3,\"details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"[Source2] Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\",\"Column\":37,\"Details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+            Assert.Equal("{\"message\":\"[Source2] Message2\",\"category\":\"warning\",\"fileName\":\"FilePath2\",\"line\":465,\"projectName\":\"Project1\",\"column\":37,\"details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"[Source3] Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\",\"Details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+            Assert.Equal("{\"message\":\"[Source3] Message3\",\"category\":\"error\",\"fileName\":\"FilePath3\",\"line\":82,\"projectName\":\"Project2\",\"details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[3].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[3].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"[Source4] Message4\",\"Category\":\"information\",\"ProjectName\":\"Project2\",\"Details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
+            Assert.Equal("{\"message\":\"[Source4] Message4\",\"category\":\"information\",\"projectName\":\"Project2\",\"details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
 
             Assert.Equal(string.Empty, _loggerOutput.ToString());
         }
@@ -174,25 +174,25 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[0].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message1\",\"Category\":\"information\",\"FileName\":\"FilePath1\",\"Line\":42,\"ProjectName\":\"Project1\",\"Column\":3,\"Details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
+            Assert.Equal("{\"message\":\"Message1\",\"category\":\"information\",\"fileName\":\"FilePath1\",\"line\":42,\"projectName\":\"Project1\",\"column\":3,\"details\":\"Message1 in FilePath1 on line 42\"}", httpClientFactory.HttpMessageHandler.Requests[0].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[1].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[1].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[1].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message2\",\"Category\":\"warning\",\"FileName\":\"FilePath2\",\"Line\":465,\"ProjectName\":\"Project1\",\"Column\":37,\"Details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
+            Assert.Equal("{\"message\":\"Message2\",\"category\":\"warning\",\"fileName\":\"FilePath2\",\"line\":465,\"projectName\":\"Project1\",\"column\":37,\"details\":\"Message2 in FilePath2 on line 465\"}", httpClientFactory.HttpMessageHandler.Requests[1].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[2].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[2].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[2].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message3\",\"Category\":\"error\",\"FileName\":\"FilePath3\",\"Line\":82,\"ProjectName\":\"Project2\",\"Details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
+            Assert.Equal("{\"message\":\"Message3\",\"category\":\"error\",\"fileName\":\"FilePath3\",\"line\":82,\"projectName\":\"Project2\",\"details\":\"Message3 in FilePath3 on line 82\"}", httpClientFactory.HttpMessageHandler.Requests[2].Item2);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[3].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[3].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal("{\"Message\":\"Message4\",\"Category\":\"information\",\"ProjectName\":\"Project2\",\"Details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
+            Assert.Equal("{\"message\":\"Message4\",\"category\":\"information\",\"projectName\":\"Project2\",\"details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
 
             var logs = _loggerOutput.ToString();
             Assert.NotNull(logs);

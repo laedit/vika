@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using Newtonsoft.Json.Serialization;
 
 namespace NVika.BuildServers
 {
@@ -95,6 +96,7 @@ namespace NVika.BuildServers
                 var jsonFormat = new JsonMediaTypeFormatter();
                 jsonFormat.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
                 jsonFormat.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                jsonFormat.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
                 var response = httpClient.PostAsync("api/build/compilationmessages", compilationMessage, jsonFormat).Result;
 
