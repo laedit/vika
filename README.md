@@ -1,4 +1,4 @@
-# ![Project icon](icon.png) vika
+# ![Project icon](resources/icon.png) vika
 
 Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
@@ -46,7 +46,7 @@ It is possible to process several reports at the same time: `NVika parsereport r
 ## Build servers
 ### Supported
   - [AppVeyor](http://appveyor.com)
-![AppVeyor example](AppVeyor.png)
+![AppVeyor example](resources/AppVeyor.png)
   
 ### To come
  - [TeamCity](https://github.com/laedit/vika/issues/4)?

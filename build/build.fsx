@@ -1,4 +1,4 @@
-#r "./tools/FAKE/tools/FakeLib.dll"
+#r "../tools/FAKE/tools/FakeLib.dll"
 #load "NVikaHelper.fsx"
 #load "SemanticReleaseNotesParserHelper.fsx"
 
@@ -11,6 +11,7 @@ open SemanticReleaseNotesParserHelper
 
 // Properties
 let buildDir = "./build/"
+let buildResultDir = "./build_result/"
 let testDir = "./test/"
 let artifactsDir = "./artifacts/"
 
@@ -20,7 +21,7 @@ let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagNam
 
 // Targets
 Target "Clean" (fun _ ->
-    CleanDirs [buildDir; testDir; artifactsDir]
+    CleanDirs [buildResultDir; testDir; artifactsDir]
 )
 
 Target "RestorePackages" (fun _ ->
@@ -30,7 +31,7 @@ Target "RestorePackages" (fun _ ->
 
 Target "BuildApp" (fun _ ->
     !! "src/NVika/NVika.csproj"
-      |> MSBuildRelease buildDir "Build"
+      |> MSBuildRelease buildResultDir "Build"
       |> Log "AppBuild-Output: "
 )
 
@@ -51,35 +52,35 @@ Target "GendarmeAnalysis" (fun _ ->
     
     directExec(fun info ->
         info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
-        info.Arguments <- "--xml " + buildDir + "GendarmeReport.xml " + "--ignore gendarme.ignore " + buildDir + "NVika.exe" ) |> ignore
+        info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" ) |> ignore
 )
 
 Target "LaunchNVika" (fun _ ->
     let reportsPath = 
         [
             artifactsDir + "inspectcodereport.xml";
-            buildDir + "static-analysis.sarif.json";
-            buildDir + "NVika.exe.CodeAnalysisLog.xml";
-            buildDir + "GendarmeReport.xml";
+            buildResultDir + "static-analysis.sarif.json";
+            buildResultDir + "NVika.exe.CodeAnalysisLog.xml";
+            buildResultDir + "GendarmeReport.xml";
         ]
     let existingReportsPath = reportsPath |> Seq.filter fileExists
 
     if Seq.isEmpty existingReportsPath then
         traceImportant "No analytics reports to parse :'("
     else
-        existingReportsPath |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildDir @@ "NVika.exe" })
+        existingReportsPath |> NVika.ParseReports (fun p -> { p with Debug = true; IncludeSource = true; ToolPath = buildResultDir @@ "NVika.exe" })
 )
 
 Target "BuildReleaseNotes" (fun _ ->
      SemanticReleaseNotesParser.Convert (fun p -> { p with 
                                                         GroupBy = SemanticReleaseNotesParser.GroupByType.Categories
                                                         Debug = true
-                                                        OutputPath = buildDir @@ "ReleaseNotes.html"
+                                                        OutputPath = buildResultDir @@ "ReleaseNotes.html"
                                                         PluralizeCategoriesTitle = true
                                                         IncludeStyle = SemanticReleaseNotesParser.IncludeStyleType.Yes
         } )
 
-     buildDir @@ "ReleaseNotes.html" |> FileHelper.CopyFile artifactsDir
+     buildResultDir @@ "ReleaseNotes.html" |> FileHelper.CopyFile artifactsDir
 
      SemanticReleaseNotesParser.Convert (fun p -> { p with 
                                                         GroupBy = SemanticReleaseNotesParser.GroupByType.Categories
@@ -153,16 +154,16 @@ Target "Test" (fun _ ->
 )
 
 Target "Zip" (fun _ ->
-    !! (buildDir + "/*.dll")
-    ++ (buildDir + "NVika.exe")
-    ++ (buildDir + "NVika.exe.config")
-    ++ (buildDir + "ReleaseNotes.html")
-    |> Zip buildDir (artifactsDir + "NVika." + version + ".zip")
+    !! (buildResultDir + "/*.dll")
+    ++ (buildResultDir + "NVika.exe")
+    ++ (buildResultDir + "NVika.exe.config")
+    ++ (buildResultDir + "ReleaseNotes.html")
+    |> Zip buildResultDir (artifactsDir + "NVika." + version + ".zip")
 )
 
 Target "PackFakeHelper" (fun _ ->
-    "NVikaHelper.fsx" |> FileHelper.CopyFile artifactsDir
-    artifactsDir @@ "NVikaHelper.fsx" |> FileHelper.RegexReplaceInFileWithEncoding "./tools/FAKE/tools/FakeLib.dll" "FakeLib.dll" System.Text.Encoding.UTF8
+    buildDir @@ "NVikaHelper.fsx" |> FileHelper.CopyFile artifactsDir
+    artifactsDir @@ "NVikaHelper.fsx" |> FileHelper.RegexReplaceInFileWithEncoding "../tools/FAKE/tools/FakeLib.dll" "FakeLib.dll" System.Text.Encoding.UTF8
 )
 
 Target "ChocoPack" (fun _ -> 
