@@ -32,7 +32,7 @@ It is possible to process several reports at the same time: `NVika parsereport r
 ## Analysis tools
 ### Supported
  - [InspectCode](https://chocolatey.org/packages/resharper-clt): example of usage `inspectcode /o="inspectcodereport.xml" "Vika.sln"`
- - Analyzers producing [SARIF](http://sarifweb.azurewebsites.net) format, like Roslyn analyzers: for those you need to add an `ErrorLog` node in your `csproj` containing the path of the report; See [NVika.csproj](https://github.com/laedit/vika/blob/master/src/NVika/NVika.csproj)
+ - Analyzers producing [SARIF](http://sarifweb.azurewebsites.net) format, like Roslyn analyzers: for those you need to add an `ErrorLog` node in your `csproj` containing the path of the report, or an `/errorlog:<reportPath>` switch for `csc`; See [NVika.csproj](https://github.com/laedit/vika/blob/master/src/NVika/NVika.csproj)
  - [FxCop](https://msdn.microsoft.com/en-us/library/bb429476(v=vs.80).aspx): example of usage `fxcopcmd /file:NVika.dll /out:FxCopResults.xml`. Or activate Code Analysis in the corresponding tab of your project properties in Visual Studio.
  - [Mono.Gendarme](http://www.mono-project.com/docs/tools+libraries/tools/gendarme/): example of usafe `gendarme --xml GendarmeReport.xml "\GendarmeTest.exe"`
 
