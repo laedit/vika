@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>NVika.MSBuild</id>
+    <title>NVika for MSBuild</title>
+    <version>@build.number@</version>
+    <authors>@authors@</authors>
+    <owners>@authors@</owners>
+    <description>@description@</description>
+    <licenseUrl>https://github.com/laedit/vika/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/laedit/vika</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/laedit/vika/master/icon.png</iconUrl>
+    <releaseNotes>https://github.com/laedit/vika/releases</releaseNotes>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>true</developmentDependency>
+    <tags>@tags@</tags>
+  </metadata>
+</package>

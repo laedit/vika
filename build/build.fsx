@@ -166,20 +166,56 @@ Target "PackFakeHelper" (fun _ ->
     artifactsDir @@ "NVikaHelper.fsx" |> FileHelper.RegexReplaceInFileWithEncoding "../tools/FAKE/tools/FakeLib.dll" "FakeLib.dll" System.Text.Encoding.UTF8
 )
 
+
+let authors = ["laedit"]
+let projectDescription = "Parse analysis reports (InspectCode, ...) and send messages to build server or console."
+let tags = ["report"; "parsing"; "build"; "server"; "inspectcode"; "FxCop"; "SARIF"; "Roslyn"; "Gendarme"]
+
+Target "PackMSBuild" (fun _ ->
+    let msBuildDir = buildResultDir @@ "NVika.MSBuild"
+    CreateDir msBuildDir
+
+    CopyFile msBuildDir "./src/NVika.MSBuild/NVika.MSBuild.nuspec"
+    CopyFile msBuildDir "./src/NVika.MSBuild/readme.txt"
+
+    let msBuildBuildDir =  msBuildDir @@ "build"
+    CreateDir msBuildBuildDir
+    CopyFile msBuildBuildDir "./src/NVika.MSBuild/NVika.MSBuild.targets"
+
+    let msBuildToolsFolder = msBuildDir @@ "tools"
+    CreateDir msBuildToolsFolder
+
+    !! (buildResultDir + "/*.dll")
+    ++ (buildResultDir + "NVika.exe")
+    ++ (buildResultDir + "NVika.exe.config")
+    |> CopyFiles msBuildToolsFolder
+
+    NuGetPack (fun p -> 
+        { p with
+            Authors = authors
+            Description = projectDescription
+            OutputPath = artifactsDir
+            WorkingDir = msBuildDir
+            Version = version
+            Tags = tags |> List.fold (fun r s -> r + " " + s) ""
+        }) 
+        (msBuildDir @@ "NVika.MSBuild.nuspec")
+)
+
 Target "ChocoPack" (fun _ -> 
     Choco.Pack (fun p -> 
         { p with 
             PackageId = "nvika"
             Version = version
             Title = "NVika"
-            Authors = ["laedit"]
-            Owners = ["laedit"]
+            Authors = authors
+            Owners = authors
             ProjectUrl = "https://github.com/laedit/vika"
             IconUrl = "https://cdn.rawgit.com/laedit/vika/master/icon.png"
             LicenseUrl = "https://github.com/laedit/vika/blob/master/LICENSE"
             BugTrackerUrl = "https://github.com/laedit/vika/issues"
-            Description = "Parse analysis reports (InspectCode, ...) and send messages to build server or console."
-            Tags = ["report"; "parsing"; "build"; "server"; "inspectcode"; "FxCop"; "SARIF"; "Roslyn"; "Gendarme"]
+            Description = projectDescription
+            Tags = tags
             ReleaseNotes = "https://github.com/laedit/vika/releases"
             PackageDownloadUrl = "https://github.com/laedit/vika/releases/download/" + tag + "/NVika." + version + ".zip"
             OutputDir = artifactsDir
@@ -204,6 +240,7 @@ Target "All" DoNothing
   ==> "Test"
   ==> "Zip"
   ==> "PackFakeHelper"
+  ==> "PackMSBuild"
   =?> ("ChocoPack", Choco.IsAvailable)
   ==> "All"
 
