@@ -58,7 +58,7 @@ namespace NVika
 
             foreach (var reportPath in reportPaths)
             {
-                _logger.Debug("Report path is {reportPath}", reportPath);
+                _logger.Information("Report path is {reportPath}", reportPath);
 
                 if (!_fileSystem.File.Exists(reportPath))
                 {
