@@ -18,7 +18,7 @@ type NVikaParseReportParams = {
     TimeOut : TimeSpan
     /// Treat all warnings as errors. Default `false`.
     /// Equivalent to the `--treatwarningsaserrors` option.
-    TreatWarningsAsError : bool
+    TreatWarningsAsErrors : bool
 }
 
 /// Containes tasks which allow to call nvika
@@ -29,7 +29,7 @@ module NVika =
         IncludeSource = false
         ToolPath = null
         TimeOut = TimeSpan.FromMinutes 5.
-        TreatWarningsAsError = false
+        TreatWarningsAsErrors = false
     }
     
     /// [omit]
@@ -64,7 +64,7 @@ module NVika =
                 |> appendWithoutQuotes (separated " " reports)
                 |> appendIfTrueWithoutQuotes parameters.Debug "--debug"
                 |> appendIfTrueWithoutQuotes parameters.IncludeSource "--includesource"
-                |> appendIfTrueWithoutQuotes parameters.IncludeSource "--treatwarningsaserrors"
+                |> appendIfTrueWithoutQuotes parameters.TreatWarningsAsErrors "--treatwarningsaserrors"
                 |> toText
 
     /// Runs NVika parse report on the given reports.
