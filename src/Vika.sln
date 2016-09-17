@@ -16,8 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\build\build.fsx = ..\build\build.fsx
 		..\build.sh = ..\build.sh
 		CodeCoverage.runsettings = CodeCoverage.runsettings
-		..\gendarme.ignore = ..\gendarme.ignore
-		..\NVikaHelper.fsx = ..\NVikaHelper.fsx
+		..\build\gendarme.ignore = ..\build\gendarme.ignore
+		..\build\NVikaHelper.fsx = ..\build\NVikaHelper.fsx
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
