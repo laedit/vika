@@ -226,6 +226,8 @@ Target "ChocoPack" (fun _ ->
 
 Target "All" DoNothing
 
+let isLocalOrAppVeyorBuild = (isLocalBuild || buildServer = AppVeyor)
+
 // Dependencies
 "Clean" ==> "ChocoPack"
 
@@ -238,10 +240,10 @@ Target "All" DoNothing
   ==> "BuildReleaseNotes"
   ==> "BuildTest"
   ==> "Test"
-  ==> "Zip"
-  ==> "PackFakeHelper"
-  ==> "PackMSBuild"
-  =?> ("ChocoPack", Choco.IsAvailable)
+  =?> ("Zip", isLocalOrAppVeyorBuild)
+  =?> ("PackFakeHelper", isLocalOrAppVeyorBuild)
+  =?> ("PackMSBuild", isLocalOrAppVeyorBuild)
+  =?> ("ChocoPack", isLocalOrAppVeyorBuild && Choco.IsAvailable)
   ==> "All"
 
 // start build
