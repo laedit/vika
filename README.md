@@ -20,6 +20,7 @@ It is possible to process several reports at the same time: `NVika parsereport r
 ### additional params:
  - `--debug`: active the debug category on logger, useful for debugging
  - `--includesource`: include the report source name in messages
+ - `--treatwarningsaserrors`: treat all warnings as errors
 
 ### exit codes:
  - 0: OK

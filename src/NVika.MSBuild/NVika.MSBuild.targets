@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition ="$(TreatWarningsAsErrors) == 'true'">
-    <NVikaWarningsAsErrorsSwith>--warningaserror</NVikaWarningsAsErrorsSwith>
+    <NVikaWarningsAsErrorsSwith>--treatwarningsaserrors</NVikaWarningsAsErrorsSwith>
   </PropertyGroup>
 
   <Target Name="NVikaParseReport">

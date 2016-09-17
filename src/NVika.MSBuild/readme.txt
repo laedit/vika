@@ -7,7 +7,7 @@ It call the nvika command line with some parameters:
                        Automatically populated for FxCop and Roslyn Analyzers if they are activated and NVikaReports is empty;
                        if there are no reports, the command line is not called
  - includesource: added if NVikaIncludeSource is 'true'
- - warningaserror: added if TreatWarningsAsErrors is 'true'
+ - treatwarningsaserrors: added if TreatWarningsAsErrors is 'true'
 
 
  Example of configuration in an MSBuild project file:

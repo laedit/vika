@@ -288,7 +288,7 @@ namespace NVika.Tests
         }
 
         [Fact]
-        public void Execute_WarningAsError_ShouldExitWithCode5()
+        public void Execute_TreatWarningsAsErrors_ShouldExitWithCode5()
         {
             // arrange
             var logger = GetLogger();
@@ -298,7 +298,7 @@ namespace NVika.Tests
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, false) };
             var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
-            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--warningaserror" });
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "--treatwarningsaserrors" });
 
             // act
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());

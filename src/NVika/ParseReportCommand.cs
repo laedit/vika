@@ -18,7 +18,7 @@ namespace NVika
         private readonly LocalBuildServer _localBuildServer;
         private readonly IEnumerable<IReportParser> _parsers;
         private bool _includeSourceInMessage;
-        private bool _warningAsError;
+        private bool _treatWarningsAsErrors;
 
         [ImportingConstructor]
         public ParseReportCommand(ILogger logger,
@@ -35,7 +35,7 @@ namespace NVika
 
             IsCommand("parsereport", "Parse the report and show warnings in console or inject them to the build server");
             HasOption("includesource", "Include the source in messages", s => _includeSourceInMessage = true);
-            HasOption("warningaserror", "Consider all warnings as errors", s => _warningAsError = true);
+            HasOption("treatwarningsaserrors", "Treat all warnings as errors", s => _treatWarningsAsErrors = true);
             AllowsAnyAdditionalArguments("Reports to analyze");
         }
 
@@ -76,7 +76,7 @@ namespace NVika
                 _logger.Debug("Report type is {Name}", parser.Name);
 
                 var issues = parser.Parse(reportPath);
-                issues = AlignIssuesSeverity(_warningAsError, issues);
+                issues = AlignIssuesSeverity(_treatWarningsAsErrors, issues);
 
                 _logger.Information("{Count} issues was found", issues.Count());
 
@@ -103,11 +103,11 @@ namespace NVika
             return returnCode;
         }
 
-        private static IEnumerable<Issue> AlignIssuesSeverity(bool warningAsError, IEnumerable<Issue> issues)
+        private static IEnumerable<Issue> AlignIssuesSeverity(bool treatWarningsAsErrors, IEnumerable<Issue> issues)
         {
             issues = issues.Select(issue =>
             {
-                if (warningAsError && issue.Severity == IssueSeverity.Warning)
+                if (treatWarningsAsErrors && issue.Severity == IssueSeverity.Warning)
                 {
                     issue.Severity = IssueSeverity.Error;
                 }
