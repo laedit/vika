@@ -8,6 +8,7 @@ open Fake.NuGet.Install
 open OpenCoverHelper
 open NVikaHelper
 open SemanticReleaseNotesParserHelper
+open SonarQubeHelper
 
 // Properties
 let buildDir = "./build/"
@@ -27,6 +28,26 @@ Target "Clean" (fun _ ->
 Target "RestorePackages" (fun _ ->
     "./src/Vika.sln"
     |> RestoreMSSolutionPackages (fun p -> { p with OutputPath = "src/packages" })
+)
+
+Target "BeginSonarQube" (fun _ ->
+    "msbuild-sonarqube-runner" |> Choco.Install id
+
+    SonarQube Begin (fun p ->
+        {p with
+             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             Key = "laedit:Vika"
+             Name = "Vika"
+             Version = version
+             Settings = [ "sonar.host.url=https://sonarqube.com"; "sonar.login=" + environVar "SonarQube_Token"] })
+)
+
+Target "EndSonarQube" (fun _ ->
+    SonarQube End (fun p ->
+        {p with
+             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             Settings = [ "sonar.login=" + environVar "SonarQube_Token" ]
+        })
 )
 
 Target "BuildApp" (fun _ ->
@@ -226,14 +247,17 @@ Target "ChocoPack" (fun _ ->
 
 Target "All" DoNothing
 
-let isLocalOrAppVeyorBuild = (isLocalBuild || buildServer = AppVeyor)
+let isAppVeyorBuild = buildServer = AppVeyor
+let isLocalOrAppVeyorBuild = (isLocalBuild || isAppVeyorBuild)
 
 // Dependencies
 "Clean" ==> "ChocoPack"
 
 "Clean"
   ==> "RestorePackages"
+  =?> ("BeginSonarQube", isAppVeyorBuild)
   ==> "BuildApp"
+  =?> ("EndSonarQube", isAppVeyorBuild)
   =?> ("InspectCodeAnalysis", Choco.IsAvailable)
   ==> "GendarmeAnalysis"
   ==> "LaunchNVika"

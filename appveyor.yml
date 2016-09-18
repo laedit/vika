@@ -10,6 +10,8 @@ install:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: GdZUBHY15XkHS4bAvE7K42B4ssrtz19qK20fSnDUvjlFDbIUXNUDop6qmx8N+GQn
+  SonarQube_Token:
+    secure: V/DXd2F/UgLZEx+v4GGR2HUKyrejAGT6BYN7aIAE0eheLzwVx8nP++xnSRpjCnyz
 
 build_script:
   build.bat
