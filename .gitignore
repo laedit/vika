@@ -195,4 +195,6 @@ tools/xunit.runner.console/
 tools/coveralls.io/
 tools/ReportGenerator
 tools/Mono.Gendarme/
-src/.vs/config/applicationhost.config
+
+# Visual Studio cache
+src/.vs/
