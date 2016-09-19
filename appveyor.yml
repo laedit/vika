@@ -21,6 +21,8 @@ test: off
 artifacts:
 - path: artifacts\coverage.xml
 
+- path: artifacts\reports
+
 - path: build\NVika.exe.CodeAnalysisLog.xml
   name: NVika.exe.CodeAnalysisLog.xml
 
