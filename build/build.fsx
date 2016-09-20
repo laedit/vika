@@ -8,6 +8,7 @@ open Fake.NuGet.Install
 open OpenCoverHelper
 open NVikaHelper
 open SemanticReleaseNotesParserHelper
+open SonarQubeHelper
 
 // Properties
 let buildDir = "./build/"
@@ -19,6 +20,8 @@ let artifactsDir = "./artifacts/"
 let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then environVar "GitVersion_NuGetVersionV2" else buildVersion
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
+let isPR = environVar "APPVEYOR_PULL_REQUEST_NUMBER" <> ""
+
 // Targets
 Target "Clean" (fun _ ->
     CleanDirs [buildResultDir; testDir; artifactsDir]
@@ -27,6 +30,26 @@ Target "Clean" (fun _ ->
 Target "RestorePackages" (fun _ ->
     "./src/Vika.sln"
     |> RestoreMSSolutionPackages (fun p -> { p with OutputPath = "src/packages" })
+)
+
+Target "BeginSonarQube" (fun _ ->
+    "msbuild-sonarqube-runner" |> Choco.Install id
+
+    SonarQube Begin (fun p ->
+        {p with
+             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             Key = "laedit:Vika"
+             Name = "Vika"
+             Version = version
+             Settings = [ "sonar.host.url=https://sonarqube.com"; "sonar.login=" + environVar "SonarQube_Token"] })
+)
+
+Target "EndSonarQube" (fun _ ->
+    SonarQube End (fun p ->
+        {p with
+             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             Settings = [ "sonar.login=" + environVar "SonarQube_Token" ]
+        })
 )
 
 Target "BuildApp" (fun _ ->
@@ -128,7 +151,7 @@ Target "Test" (fun _ ->
             OptionalArguments = "-excludebyattribute:*.ExcludeFromCodeCoverage* -returntargetcode";
         })
     
-        if isLocalBuild then
+        if isLocalBuild || isPR then
             "ReportGenerator" |> NugetInstall (fun p -> 
             { p with 
                 OutputDirectory = "tools";
@@ -226,14 +249,17 @@ Target "ChocoPack" (fun _ ->
 
 Target "All" DoNothing
 
-let isLocalOrAppVeyorBuild = (isLocalBuild || buildServer = AppVeyor)
+let isAppVeyorBuild = buildServer = AppVeyor
+let isLocalOrAppVeyorBuild = (isLocalBuild || isAppVeyorBuild)
 
 // Dependencies
 "Clean" ==> "ChocoPack"
 
 "Clean"
   ==> "RestorePackages"
+  =?> ("BeginSonarQube", isAppVeyorBuild && not isPR)
   ==> "BuildApp"
+  =?> ("EndSonarQube", isAppVeyorBuild && not isPR)
   =?> ("InspectCodeAnalysis", Choco.IsAvailable)
   ==> "GendarmeAnalysis"
   ==> "LaunchNVika"
