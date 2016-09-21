@@ -20,7 +20,7 @@ let artifactsDir = "./artifacts/"
 let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then environVar "GitVersion_NuGetVersionV2" else buildVersion
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
-let isPR = environVar "APPVEYOR_PULL_REQUEST_NUMBER" <> ""
+let isOriginalRepo = environVar "APPVEYOR_REPO_NAME" = "laedit/vika"
 
 // Targets
 Target "Clean" (fun _ ->
@@ -151,7 +151,7 @@ Target "Test" (fun _ ->
             OptionalArguments = "-excludebyattribute:*.ExcludeFromCodeCoverage* -returntargetcode";
         })
     
-        if isLocalBuild || isPR then
+        if isLocalBuild || isOriginalRepo then
             "ReportGenerator" |> NugetInstall (fun p -> 
             { p with 
                 OutputDirectory = "tools";
@@ -257,9 +257,9 @@ let isLocalOrAppVeyorBuild = (isLocalBuild || isAppVeyorBuild)
 
 "Clean"
   ==> "RestorePackages"
-  =?> ("BeginSonarQube", isAppVeyorBuild && not isPR)
+  =?> ("BeginSonarQube", isAppVeyorBuild && isOriginalRepo)
   ==> "BuildApp"
-  =?> ("EndSonarQube", isAppVeyorBuild && not isPR)
+  =?> ("EndSonarQube", isAppVeyorBuild && isOriginalRepo)
   =?> ("InspectCodeAnalysis", Choco.IsAvailable)
   ==> "GendarmeAnalysis"
   ==> "LaunchNVika"
