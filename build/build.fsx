@@ -1,6 +1,8 @@
 #r "../tools/FAKE/tools/FakeLib.dll"
 #load "NVikaHelper.fsx"
 #load "SemanticReleaseNotesParserHelper.fsx"
+#r "System.Xml.Linq.dll"
+#r "../tools/Octokit.dll"
 
 open Fake
 open Fake.Testing.XUnit2
@@ -9,6 +11,8 @@ open OpenCoverHelper
 open NVikaHelper
 open SemanticReleaseNotesParserHelper
 open SonarQubeHelper
+open System.Linq
+open Octokit
 
 // Properties
 let buildDir = "./build/"
@@ -73,9 +77,22 @@ Target "GendarmeAnalysis" (fun _ ->
         ExcludeVersion = true
     })
     
-    directExec(fun info ->
+    if directExec(fun info ->
         info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
-        info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" ) |> ignore
+        info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" )
+    then
+        let report = System.Xml.Linq.XDocument.Load("GendarmeReport.xml")
+        let xn s = System.Xml.Linq.XName.Get(s)
+        if report.Descendants(xn "defect").Any(fun d -> d.Attribute(xn "Severity").Value = "High" || d.Attribute(xn "Severity").Value = "Critical")
+        then
+            let client = new GitHubClient(new ProductHeaderValue("GithubGistApiTest"));
+            client.Credentials <- new Credentials("e5f275638c69b231d85f7dcd56f45a2ad856a9d7");
+            let newGist = new NewGist()
+            newGist.Description <- "Gendarme report " + version
+            newGist.Files.Add("GendarmeReport." + version + ".xml", report.ToString())
+            newGist.Public <- false
+            let createdGist = client.Gist.Create(newGist).Result;
+            traceImportant createdGist.HtmlUrl
 )
 
 Target "LaunchNVika" (fun _ ->
