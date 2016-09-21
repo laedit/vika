@@ -23,10 +23,10 @@ M: NVika.Parsers.Offset NVika.Parsers.InspectCodeParser::GetOffset(System.Xml.Li
 M: System.Nullable`1<System.UInt32> NVika.Parsers.InspectCodeParser::GetLine(System.Xml.Linq.XAttribute,System.Boolean)
 
 R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
-M: NVika.Parsers.GendarmeParser.GendarmeParser()
-M: NVika.Parsers.FxCopParser.FxCopParser()
-M: NVika.Parsers.SarifParser.SarifParser()
-M: NVika.Parsers.InspectCodeParser.InspectCodeParser()
-M: NVika.ParseReportCommand.ParseReportCommand()
-M: NVika.BuildServers.AppVeyor.AppVeyor()
-M: NVika.BuildServers.LocalBuildServer.LocalBuildServer()
+M: System.Void NVika.Parsers.GendarmeParser::.ctor()
+M: System.Void NVika.Parsers.FxCopParser::.ctor()
+M: System.Void NVika.Parsers.SarifParser::.ctor()
+M: System.Void NVika.Parsers.InspectCodeParser::.ctor()
+M: System.Void NVika.ParseReportCommand::.ctor(Serilog.ILogger, System.IO.Abstractions.IFileSystem, System.Collections.Generic.IEnumerable`1<NVika.BuildServers.IBuildServer>, NVika.BuildServers.LocalBuildServer)
+M: System.Void NVika.BuildServers.AppVeyor::.ctor(Serilog.ILogger, NVika.Abstractions.IEnvironment, NVika.Abstractions.IHttpClientFactory)
+M: System.Void NVika.BuildServers.LocalBuildServer::.ctor(Serilog.ILogger )
