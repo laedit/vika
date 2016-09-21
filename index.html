@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Vika by laedit</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Vika</h1>
+        <h2>Visual Interpreter of Kooky Analysis</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/laedit/vika/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/laedit/vika/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/laedit/vika" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="-vika" class="anchor" href="#-vika" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img src="resources/icon.png" alt="Project icon"> vika</h1>
+
+<p>Visual Interpreter of Kooky Analysis.
+Also means 'bug' in Finnish.</p>
+
+<p><a href="https://github.com/laedit/vika/blob/master/LICENSE"><img src="https://img.shields.io/badge/licence-Apache%202-blue.svg" alt="Licence Apache 2"></a> 
+<a href="https://ci.appveyor.com/project/laedit/vika"><img src="https://img.shields.io/appveyor/ci/laedit/vika.svg?label=build+windows" alt="AppVeyor build status"></a> 
+<a href="https://travis-ci.org/laedit/vika"><img src="https://img.shields.io/travis/laedit/vika.svg?label=build+linux" alt="Travis CI build Status"></a> 
+<a href="https://coveralls.io/r/laedit/vika"><img src="https://coveralls.io/repos/laedit/vika/badge.svg" alt="Coverage Status"></a> 
+<a href="https://chocolatey.org/packages/nvika"><img src="https://img.shields.io/chocolatey/v/nvika.svg" alt="Chocolatey"></a> 
+<a href="https://gitter.im/laedit/vika?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/laedit/vika.svg" alt="Join the chat at https://gitter.im/laedit/vika"></a></p>
+
+<h2>
+<a id="what-it-is" class="anchor" href="#what-it-is" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What it is</h2>
+
+<p>Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.</p>
+
+<p>You can use it like this: <code>NVika parsereport "inspectcodereport.xml"</code></p>
+
+<p>It is possible to process several reports at the same time: <code>NVika parsereport report1.xml report2.xml</code></p>
+
+<h3>
+<a id="additional-params" class="anchor" href="#additional-params" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>additional params:</h3>
+
+<ul>
+<li>
+<code>--debug</code>: active the debug category on logger, useful for debugging</li>
+<li>
+<code>--includesource</code>: include the report source name in messages</li>
+<li>
+<code>--treatwarningsaserrors</code>: treat all warnings as errors</li>
+</ul>
+
+<h3>
+<a id="exit-codes" class="anchor" href="#exit-codes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>exit codes:</h3>
+
+<ul>
+<li>0: OK</li>
+<li>1: unknown error</li>
+<li>2: report not found</li>
+<li>3: exception during report loading</li>
+<li>4: no parser found for the current report</li>
+<li>5: issue(s) with error severity was found</li>
+</ul>
+
+<h2>
+<a id="analysis-tools" class="anchor" href="#analysis-tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Analysis tools</h2>
+
+<h3>
+<a id="supported" class="anchor" href="#supported" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supported</h3>
+
+<ul>
+<li>
+<a href="https://chocolatey.org/packages/resharper-clt">InspectCode</a>: example of usage <code>inspectcode /o="inspectcodereport.xml" "Vika.sln"</code>
+</li>
+<li>Analyzers producing <a href="http://sarifweb.azurewebsites.net">SARIF</a> format, like Roslyn analyzers: for those you need to add an <code>ErrorLog</code> node in your <code>csproj</code> containing the path of the report, or an <code>/errorlog:&lt;reportPath&gt;</code> switch for <code>csc</code>; See <a href="https://github.com/laedit/vika/blob/master/src/NVika/NVika.csproj">NVika.csproj</a>
+</li>
+<li>
+<a href="https://msdn.microsoft.com/en-us/library/bb429476(v=vs.80).aspx">FxCop</a>: example of usage <code>fxcopcmd /file:NVika.dll /out:FxCopResults.xml</code>. Or activate Code Analysis in the corresponding tab of your project properties in Visual Studio.</li>
+<li>
+<a href="http://www.mono-project.com/docs/tools+libraries/tools/gendarme/">Mono.Gendarme</a>: example of usafe <code>gendarme --xml GendarmeReport.xml "\GendarmeTest.exe"</code>
+</li>
+</ul>
+
+<h3>
+<a id="to-come" class="anchor" href="#to-come" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To come</h3>
+
+<ul>
+<li><a href="https://github.com/laedit/vika/issues/7">StyleCop</a></li>
+<li>NDepend?</li>
+<li>DupFinder (if someone wants it reaaaally bad)</li>
+<li><a href="https://github.com/laedit/vika/issues/27">CPD</a></li>
+<li><a href="https://github.com/laedit/vika/issues/26">CPPCheck</a></li>
+</ul>
+
+<h2>
+<a id="build-servers" class="anchor" href="#build-servers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build servers</h2>
+
+<h3>
+<a id="supported-1" class="anchor" href="#supported-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supported</h3>
+
+<ul>
+<li>
+<a href="http://appveyor.com">AppVeyor</a>
+<img src="resources/AppVeyor.png" alt="AppVeyor example">
+</li>
+</ul>
+
+<h3>
+<a id="to-come-1" class="anchor" href="#to-come-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To come</h3>
+
+<ul>
+<li>
+<a href="https://github.com/laedit/vika/issues/4">TeamCity</a>?</li>
+<li>
+<a href="https://github.com/laedit/vika/issues/3">ContinuaCI</a>?</li>
+<li>
+<a href="https://github.com/laedit/vika/issues/5">MyGet</a>?</li>
+</ul>
+
+<p>I really wondering if there is any value to supporting these three, because there doesn't support to add build message like AppVeyor but only log message.
+And they support custom HTML report, so an xslt transformation is enough.</p>
+
+<h2>
+<a id="what-it-will-be" class="anchor" href="#what-it-will-be" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What it will be</h2>
+
+<p>A website will be added for displaying a nice and shiny aggregated report from all source to a dedicated page for each GitHub project.</p>
+
+<p>There also will be a solution to upload a temporary report stored for a week.</p>
+
+<p>And the client may push reports through the website public API.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>All contributions are welcome, please read our <a href="CONTRIBUTING.md">contributing guide</a>.</p>
+
+<h2>
+<a id="attribution" class="anchor" href="#attribution" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Attribution</h2>
+
+<p>Icon: <a href="https://thenounproject.com/term/report/84881/">Report</a> designed by <a href="https://thenounproject.com/natashenkalitvin/">Nataliia Lytvyn</a> from <a href="https://thenounproject.com/">The Noun Project</a>.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
