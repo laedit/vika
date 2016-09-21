@@ -21,3 +21,12 @@ M: System.Tuple`2<System.String,System.Nullable`1<System.UInt32>> NVika.Parsers.
 M: System.Nullable`1<System.UInt32> NVika.Parsers.FxCopParser::GetLine(System.Xml.Linq.XAttribute)
 M: NVika.Parsers.Offset NVika.Parsers.InspectCodeParser::GetOffset(System.Xml.Linq.XAttribute,System.String,System.Nullable`1<System.UInt32>)
 M: System.Nullable`1<System.UInt32> NVika.Parsers.InspectCodeParser::GetLine(System.Xml.Linq.XAttribute,System.Boolean)
+
+R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
+M: NVika.Parsers.GendarmeParser.GendarmeParser()
+M: NVika.Parsers.FxCopParser.FxCopParser()
+M: NVika.Parsers.SarifParser.SarifParser()
+M: NVika.Parsers.InspectCodeParser.InspectCodeParser()
+M: NVika.ParseReportCommand.ParseReportCommand()
+M: NVika.BuildServers.AppVeyor.AppVeyor()
+M: NVika.BuildServers.LocalBuildServer.LocalBuildServer()
