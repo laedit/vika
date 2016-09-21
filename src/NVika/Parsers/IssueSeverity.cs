@@ -1,6 +1,6 @@
 ﻿namespace NVika.Parsers
 {
-    public enum IssueSeverity
+    internal enum IssueSeverity
     {
         Error,
         Warning,

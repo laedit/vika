@@ -1,6 +1,6 @@
 ﻿namespace NVika.Abstractions
 {
-    public interface IEnvironment
+    internal interface IEnvironment
     {
         string GetEnvironmentVariable(string variable);
     }

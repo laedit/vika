@@ -19,7 +19,7 @@ namespace NVika.Parsers
             }
         }
 
-        public SarifParser()
+        internal SarifParser()
             : base(new[] { ".json", ".sarif" }, '{')
         {
 

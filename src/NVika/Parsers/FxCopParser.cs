@@ -17,7 +17,7 @@ namespace NVika.Parsers
             }
         }
 
-        public FxCopParser()
+        internal FxCopParser()
             : base("FxCopReport")
         {
 

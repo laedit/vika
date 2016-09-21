@@ -17,7 +17,7 @@ namespace NVika.BuildServers
         }
 
         [ImportingConstructor]
-        public LocalBuildServer(ILogger logger)
+        internal LocalBuildServer(ILogger logger)
         {
             _logger = logger;
         }

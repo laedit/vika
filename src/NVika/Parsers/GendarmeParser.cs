@@ -17,7 +17,7 @@ namespace NVika.Parsers
             }
         }
 
-        public GendarmeParser()
+        internal GendarmeParser()
             : base("gendarme-output")
         {
 

@@ -4,8 +4,8 @@ using System.Net.Http;
 
 namespace NVika.Abstractions
 {
-	[ExcludeFromCodeCoverage]
-	[Export(typeof(IHttpClientFactory))]
+    [ExcludeFromCodeCoverage]
+    [Export(typeof(IHttpClientFactory))]
     internal class HttpClientFactory : IHttpClientFactory
     {
         public HttpClient Create()

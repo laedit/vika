@@ -23,7 +23,7 @@ namespace NVika.BuildServers
         }
 
         [ImportingConstructor]
-        public AppVeyor(ILogger logger, IEnvironment environment, IHttpClientFactory httpClientFactory)
+        internal AppVeyor(ILogger logger, IEnvironment environment, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _environment = environment;

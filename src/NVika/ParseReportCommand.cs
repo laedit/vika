@@ -21,7 +21,7 @@ namespace NVika
         private bool _treatWarningsAsErrors;
 
         [ImportingConstructor]
-        public ParseReportCommand(ILogger logger,
+        internal ParseReportCommand(ILogger logger,
                                   IFileSystem fileSystem,
                                   [ImportMany]IEnumerable<IBuildServer> buildServers,
                                   LocalBuildServer localBuildServer,

@@ -14,7 +14,7 @@ namespace NVika.Parsers
             get { return "InspectCode"; }
         }
 
-        public InspectCodeParser()
+        internal InspectCodeParser()
             : base("Report", "Information")
         {
 
