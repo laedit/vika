@@ -12,6 +12,8 @@ environment:
     secure: GdZUBHY15XkHS4bAvE7K42B4ssrtz19qK20fSnDUvjlFDbIUXNUDop6qmx8N+GQn
   SonarQube_Token:
     secure: V/DXd2F/UgLZEx+v4GGR2HUKyrejAGT6BYN7aIAE0eheLzwVx8nP++xnSRpjCnyz
+  Create_Gist_Token:
+    secure: NgR1HJh8SIi6nRwPRsrZmbJYJLST5HibSPhUpmQeRA6v5djyQDRhxmgBXjaBbGNy
 
 build_script:
   build.bat

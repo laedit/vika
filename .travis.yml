@@ -1,12 +1,15 @@
 language: csharp
 
+env:
+  secure: AceR0eoQM1Zb0EvKpDVzVxykJKeJpzRn9FA9Ke5qMhUEvTKHGyLOb+XUnxiPrUJGddiXcJVckeSAVU1tsAY/DZdWBfyjh2TiUgLt6VNqZbNlKPnkZ96DlM2HMZVYKRLWCxjDKRO5CdsiqVyR5PVdggIStGSzO+puqyJlGALSnog=
+
 cache:
   directories:
   - src/packages
   - tools
 
 before_script:
- - chmod +x build.sh
+- chmod +x build.sh
 
 script:
-  - ./build.sh
+- "./build.sh"

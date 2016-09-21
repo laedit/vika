@@ -24,7 +24,7 @@ let artifactsDir = "./artifacts/"
 let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then environVar "GitVersion_NuGetVersionV2" else buildVersion
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
-let isOriginalRepo = environVar "APPVEYOR_REPO_NAME" = "laedit/vika"
+let isOriginalRepo = (environVar "APPVEYOR_REPO_NAME" = "laedit/vika") || (environVar "TRAVIS_REPO_SLUG" = "laedit/vika")
 
 // Targets
 Target "Clean" (fun _ ->
@@ -80,13 +80,14 @@ Target "GendarmeAnalysis" (fun _ ->
     if directExec(fun info ->
         info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
         info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" )
+        && isOriginalRepo
     then
         let report = System.Xml.Linq.XDocument.Load("GendarmeReport.xml")
         let xn s = System.Xml.Linq.XName.Get(s)
         if report.Descendants(xn "defect").Any(fun d -> d.Attribute(xn "Severity").Value = "High" || d.Attribute(xn "Severity").Value = "Critical")
         then
             let client = new GitHubClient(new ProductHeaderValue("GithubGistApiTest"));
-            client.Credentials <- new Credentials("e5f275638c69b231d85f7dcd56f45a2ad856a9d7");
+            client.Credentials <- new Credentials(environVar "Create_Gist_Token");
             let newGist = new NewGist()
             newGist.Description <- "Gendarme report " + version
             newGist.Files.Add("GendarmeReport." + version + ".xml", report.ToString())
