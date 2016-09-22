@@ -25,7 +25,6 @@ let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then e
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
 let isOriginalRepo = (environVar "APPVEYOR_REPO_NAME" = "laedit/vika") || (environVar "TRAVIS_REPO_SLUG" = "laedit/vika")
-traceImportant ("isOriginalRepo: " + isOriginalRepo.ToString())
 
 // Targets
 Target "Clean" (fun _ ->
@@ -78,10 +77,10 @@ Target "GendarmeAnalysis" (fun _ ->
         ExcludeVersion = true
     })
     
-    if directExec(fun info ->
+    if not (directExec(fun info ->
         info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
-        info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" )
-        && isOriginalRepo
+        info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" ))
+        && isOriginalRepo && fileExists (buildResultDir @@ "GendarmeReport.xml")
     then
         let report = System.Xml.Linq.XDocument.Load(buildResultDir @@ "GendarmeReport.xml")
         let xn s = System.Xml.Linq.XName.Get(s)
