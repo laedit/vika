@@ -25,6 +25,7 @@ let version = if isLocalBuild then "0.0.1" else if buildServer = AppVeyor then e
 let tag = if buildServer = AppVeyor then AppVeyor.AppVeyorEnvironment.RepoTagName else "v0.0.1"
 
 let isOriginalRepo = (environVar "APPVEYOR_REPO_NAME" = "laedit/vika") || (environVar "TRAVIS_REPO_SLUG" = "laedit/vika")
+let isPR = environVar "APPVEYOR_PULL_REQUEST_NUMBER" |> isNull |> not
 
 // Targets
 Target "Clean" (fun _ ->
@@ -39,13 +40,24 @@ Target "RestorePackages" (fun _ ->
 Target "BeginSonarQube" (fun _ ->
     "msbuild-sonarqube-runner" |> Choco.Install id
 
+    let sonarSettings = match isPR with
+                        | false -> [ "sonar.host.url=https://sonarqube.com"; "sonar.login=" + environVar "SonarQube_Token" ]
+                        | true -> [
+                                    "sonar.host.url=https://sonarqube.com";
+                                    "sonar.login=" + environVar "SonarQube_Token";
+                                    "sonar.analysis.mode=preview";
+                                    "sonar.github.pullRequest=" + environVar "APPVEYOR_PULL_REQUEST_NUMBER";
+                                    "sonar.github.repository=laedit/vika";
+                                    "sonar.github.oauth=" + environVar "Sonar_PR_Token"
+                                  ]
+
     SonarQube Begin (fun p ->
         {p with
              ToolsPath = "MSBuild.SonarQube.Runner.exe"
              Key = "laedit:Vika"
              Name = "Vika"
              Version = version
-             Settings = [ "sonar.host.url=https://sonarqube.com"; "sonar.login=" + environVar "SonarQube_Token"] })
+             Settings = sonarSettings })
 )
 
 Target "EndSonarQube" (fun _ ->
