@@ -3,6 +3,7 @@ cache:
 - C:\ProgramData\chocolatey\bin -> build.fsx
 - C:\ProgramData\chocolatey\lib -> build.fsx
 - tools -> build.fsx
+- .sonarqube -> build.fsx
 
 install:
 - GitVersion /output buildserver /UpdateAssemblyInfo true
