@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\build\gendarme.ignore = ..\build\gendarme.ignore
 		..\build\NVikaHelper.fsx = ..\build\NVikaHelper.fsx
 		..\README.md = ..\README.md
+		..\ReleaseNotes.md = ..\ReleaseNotes.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NVika.MSBuild", "NVika.MSBuild", "{38B7E5B2-4930-4ED2-A950-61EFDF77A364}"
