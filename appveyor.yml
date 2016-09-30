@@ -26,10 +26,10 @@ artifacts:
 
 - path: artifacts\reports
 
-- path: build\NVika.exe.CodeAnalysisLog.xml
+- path: build_result\NVika.exe.CodeAnalysisLog.xml
   name: NVika.exe.CodeAnalysisLog.xml
 
-- path: build\static-analysis.sarif.json
+- path: build_result\static-analysis.sarif.json
   name: static-analysis.sarif.json
 
 - path: artifacts\inspectcodereport.xml
@@ -41,14 +41,14 @@ artifacts:
 - path: artifacts\NVika.*.zip
   name: NVika.zip
 
+- path: artifacts\NVika.MSBuild.*.nupkg
+  name: NVika.MSBuild.nupkg
+
 - path: artifacts\nvika.*.nupkg
   name: NVika.nupkg
   
 - path: artifacts\NVikaHelper.fsx
   name: NVikaHelper.fsx
-
-- path: artifacts\NVika.MSBuild.*.nupkg
-  name: NVika.MSBuild.nupkg
 
 deploy:
   - provider: GitHub
