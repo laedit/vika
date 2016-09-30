@@ -45,7 +45,14 @@ Target "BeginSonarQube" (fun _ ->
              Key = "laedit:Vika"
              Name = "Vika"
              Version = version
-             Settings = [ "sonar.host.url=https://sonarqube.com"; "sonar.login=" + environVar "SonarQube_Token"] })
+             Settings = [ 
+                            "sonar.host.url=https://sonarqube.com";
+                            "sonar.login=" + environVar "SonarQube_Token";
+                            "sonar.projectDescription='Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.'";
+                            "sonar.links.homepage=https://github.com/laedit/vika";
+                            "sonar.links.ci=https://ci.appveyor.com/project/laedit/vika";
+                            "sonar.links.issue=https://github.com/laedit/vika/issues"
+                        ] })
 )
 
 Target "EndSonarQube" (fun _ ->
