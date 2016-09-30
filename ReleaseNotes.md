@@ -1,3 +1,16 @@
+# 1.0.0 (2016-09-30)
+
+ - [#25](https://github.com/laedit/vika/issues/25) - Add parameter to consider warning as error +enhancement
+ - [#22](https://github.com/laedit/vika/issues/22) - More explicit build failed because of error severity +enhancement
+ - [#17](https://github.com/laedit/vika/issues/17) - Add full message to AppVeyor details +enhancement
+ - [#16](https://github.com/laedit/vika/issues/16) - Support Mono.Gendarme +enhancement
+ - [#11](https://github.com/laedit/vika/issues/11) - Propose an MSBuild Task +enhancement
+ - [#8](https://github.com/laedit/vika/issues/8) - Support Roslyn analysers (included CodeCracker) +enhancement
+ - [#6](https://github.com/laedit/vika/issues/6) - Support FxCop +enhancement
+
+Commits: 59b3e01a2d...667b48207a
+
+
 # 0.1.3 (2016-08-29)
 
  - [#19](https://github.com/laedit/vika/issues/19) - [InspectCode] When the sln is in a subfolder the source files are not find +fix
