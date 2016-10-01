@@ -8,6 +8,7 @@ Also means 'bug' in Finnish.
 [![Travis CI build Status](https://img.shields.io/travis/laedit/vika.svg?label=build+linux)](https://travis-ci.org/laedit/vika) 
 [![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika) 
 [![Chocolatey](https://img.shields.io/chocolatey/v/nvika.svg)](https://chocolatey.org/packages/nvika) 
+[![Nuget](https://img.shields.io/nuget/v/nvika.msbuild.svg)](https://www.nuget.org/packages/nvika.msbuild) 
 [![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## What it is
