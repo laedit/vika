@@ -111,7 +111,7 @@ module SemanticReleaseNotesParser =
     ///         SemanticReleaseNotesParser.ParseReport (fun p -> { p with OutputFormat = Markdown })
     ///     )
     let Convert setParams =
-        traceStartTask "SemanticReleaseNotesParser" String.Empty
+        use __ = traceStartTaskUsing "SemanticReleaseNotesParser" String.Empty
 
         let parameters = setParams SemanticReleaseNotesParserDefaults
 
@@ -135,4 +135,3 @@ module SemanticReleaseNotesParser =
                 info.FileName <- findExe parameters.ToolPath
                 info.Arguments <- args) parameters.TimeOut
         if result <> 0 then failwithf "SemanticReleaseNotesParser failed with exit code %i." result
-        traceEndTask "SemanticReleaseNotesParser" String.Empty
