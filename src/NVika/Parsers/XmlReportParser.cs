@@ -11,7 +11,7 @@ namespace NVika.Parsers
         private readonly string _rootName;
         private readonly string[] _requiredElements;
 
-        internal XmlReportParser(string rootName, params string[] requiredElements)
+        protected XmlReportParser(string rootName, params string[] requiredElements)
             : base(new[] { ".xml"}, '<')
         {
             _rootName = rootName;

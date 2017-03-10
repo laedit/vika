@@ -50,11 +50,6 @@ namespace NVika
             }
 
             var applicableBuildServers = GetApplicableBuildServer();
-            _logger.Information("The following build servers have been detected:");
-            foreach (var buildServer in applicableBuildServers)
-            {
-                _logger.Information("\t- {buildServerName}", buildServer.Name);
-            }
 
             foreach (var reportPath in reportPaths)
             {
@@ -79,14 +74,7 @@ namespace NVika
                 issues = AlignIssuesSeverity(_treatWarningsAsErrors, issues);
 
                 _logger.Information("{Count} issues was found", issues.Count());
-
-                foreach (var issue in issues)
-                {
-                    foreach (var buildServer in applicableBuildServers)
-                    {
-                        buildServer.WriteMessage(issue);
-                    }
-                }
+                ReportIssuesOnBuildServers(applicableBuildServers, issues);
 
                 if (returnCode == ExitCodes.Ok && issues.Any(i => i.Severity == IssueSeverity.Error))
                 {
@@ -101,6 +89,17 @@ namespace NVika
             }
 
             return returnCode;
+        }
+
+        private static void ReportIssuesOnBuildServers(IEnumerable<IBuildServer> applicableBuildServers, IEnumerable<Issue> issues)
+        {
+            foreach (var issue in issues)
+            {
+                foreach (var buildServer in applicableBuildServers)
+                {
+                    buildServer.WriteMessage(issue);
+                }
+            }
         }
 
         private static IEnumerable<Issue> AlignIssuesSeverity(bool treatWarningsAsErrors, IEnumerable<Issue> issues)
@@ -125,8 +124,11 @@ namespace NVika
                 applicableBuildServers = new List<IBuildServer> { _localBuildServer };
             }
 
+            _logger.Information("The following build servers have been detected:");
+
             foreach (var buildServer in applicableBuildServers)
             {
+                _logger.Information("\t- {buildServerName}", buildServer.Name);
                 buildServer.ApplyParameters(_includeSourceInMessage);
             }
 
