@@ -1,4 +1,4 @@
-#r "../tools/FAKE/tools/FakeLib.dll"
+﻿#r "../tools/FAKE/tools/FakeLib.dll"
 #load "NVikaHelper.fsx"
 #load "SemanticReleaseNotesParserHelper.fsx"
 #r "System.Xml.Linq.dll"
@@ -77,6 +77,17 @@ Target "InspectCodeAnalysis" (fun _ ->
         info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
 )
 
+let saveGendarmeReportAsGist report = 
+    let client = new GitHubClient(new ProductHeaderValue("GithubGistApiTest"));
+    client.Credentials <- new Credentials(environVar "Create_Gist_Token");
+    let newGist = new NewGist()
+    newGist.Description <- "Gendarme report " + version
+    newGist.Files.Add("GendarmeReport." + version + ".xml", report.ToString())
+    newGist.Public <- false
+    let createdGist = client.Gist.Create(newGist).Result;
+    traceImportant createdGist.HtmlUrl
+
+
 Target "GendarmeAnalysis" (fun _ ->
     "mono.gendarme" |> NugetInstall (fun p ->
     { p with
@@ -94,14 +105,7 @@ Target "GendarmeAnalysis" (fun _ ->
         let xn s = System.Xml.Linq.XName.Get(s)
         if report.Descendants(xn "defect").Any(fun d -> d.Attribute(xn "Severity").Value = "High" || d.Attribute(xn "Severity").Value = "Critical")
         then
-            let client = new GitHubClient(new ProductHeaderValue("GithubGistApiTest"));
-            client.Credentials <- new Credentials(environVar "Create_Gist_Token");
-            let newGist = new NewGist()
-            newGist.Description <- "Gendarme report " + version
-            newGist.Files.Add("GendarmeReport." + version + ".xml", report.ToString())
-            newGist.Public <- false
-            let createdGist = client.Gist.Create(newGist).Result;
-            traceImportant createdGist.HtmlUrl
+            saveGendarmeReportAsGist report
 )
 
 Target "LaunchNVika" (fun _ ->
@@ -271,6 +275,13 @@ Target "ChocoPack" (fun _ ->
             Checksum = Checksum.CalculateFileHash (artifactsDir + "NVika." + version + ".zip")
             ChecksumType = Choco.ChocolateyChecksumType.Sha256
         })
+)
+
+BuildFailureTarget "SaveGendarmeReportOnBuildFail" (fun _ ->
+    if fileExists (buildResultDir @@ "GendarmeReport.xml")
+    then
+        let report = System.Xml.Linq.XDocument.Load(buildResultDir @@ "GendarmeReport.xml")
+        saveGendarmeReportAsGist report
 )
 
 Target "All" DoNothing
