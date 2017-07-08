@@ -45,8 +45,8 @@ Target "BeginSonarQube" (fun _ ->
              Key = "laedit:Vika"
              Name = "Vika"
              Version = version
-             Settings = [ 
-                            "sonar.host.url=https://sonarqube.com";
+             Settings = [
+                            "sonar.host.url=https://sonarcloud.io";
                             "sonar.login=" + environVar "SonarQube_Token";
                             "sonar.projectDescription=\"Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.\"";
                             "sonar.links.homepage=https://github.com/laedit/vika";
@@ -71,24 +71,25 @@ Target "BuildApp" (fun _ ->
 
 Target "InspectCodeAnalysis" (fun _ ->
     "resharper-clt.portable" |> Choco.Install id
-    
+
     directExec(fun info ->
         info.FileName <- "inspectcode"
         info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
 )
 
 Target "GendarmeAnalysis" (fun _ ->
-    "mono.gendarme" |> NugetInstall (fun p -> 
-    { p with 
+    "mono.gendarme" |> NugetInstall (fun p ->
+    { p with
         OutputDirectory = "tools";
         ExcludeVersion = true
     })
-    
+
     if not (directExec(fun info ->
         info.FileName <- System.IO.Path.GetFullPath "./tools/Mono.Gendarme/tools/gendarme.exe"
         info.Arguments <- "--xml " + buildResultDir + "GendarmeReport.xml " + "--ignore " + buildDir + "gendarme.ignore " + buildResultDir + "NVika.exe" ))
         && isOriginalRepo && fileExists (buildResultDir @@ "GendarmeReport.xml")
     then
+        // if defects are found, the report is saved in a GitHub Gist since Travis doesn't have a storage space
         let report = System.Xml.Linq.XDocument.Load(buildResultDir @@ "GendarmeReport.xml")
         let xn s = System.Xml.Linq.XName.Get(s)
         if report.Descendants(xn "defect").Any(fun d -> d.Attribute(xn "Severity").Value = "High" || d.Attribute(xn "Severity").Value = "Critical")
@@ -104,7 +105,7 @@ Target "GendarmeAnalysis" (fun _ ->
 )
 
 Target "LaunchNVika" (fun _ ->
-    let reportsPath = 
+    let reportsPath =
         [
             artifactsDir + "inspectcodereport.xml";
             buildResultDir + "static-analysis.sarif.json";
@@ -120,7 +121,7 @@ Target "LaunchNVika" (fun _ ->
 )
 
 Target "BuildReleaseNotes" (fun _ ->
-     SemanticReleaseNotesParser.Convert (fun p -> { p with 
+     SemanticReleaseNotesParser.Convert (fun p -> { p with
                                                         GroupBy = SemanticReleaseNotesParser.GroupByType.Categories
                                                         Debug = true
                                                         OutputPath = buildResultDir @@ "ReleaseNotes.html"
@@ -130,7 +131,7 @@ Target "BuildReleaseNotes" (fun _ ->
 
      buildResultDir @@ "ReleaseNotes.html" |> FileHelper.CopyFile artifactsDir
 
-     SemanticReleaseNotesParser.Convert (fun p -> { p with 
+     SemanticReleaseNotesParser.Convert (fun p -> { p with
                                                         GroupBy = SemanticReleaseNotesParser.GroupByType.Categories
                                                         OutputType = SemanticReleaseNotesParser.OutputType.Environment
                                                         OutputFormat = SemanticReleaseNotesParser.OutputFormat.Markdown
@@ -146,27 +147,27 @@ Target "BuildTest" (fun _ ->
 )
 
 Target "Test" (fun _ ->
-    "xunit.runner.console" |> NugetInstall (fun p -> 
-    { p with 
+    "xunit.runner.console" |> NugetInstall (fun p ->
+    { p with
         OutputDirectory = "tools";
         ExcludeVersion = true
     })
-    
+
     if isUnix then
         !! (testDir @@ "NVika.Tests.dll")
-        |> xUnit2 (fun p -> { p with 
-                                HtmlOutputPath = Some (artifactsDir @@ "xunit.html") 
+        |> xUnit2 (fun p -> { p with
+                                HtmlOutputPath = Some (artifactsDir @@ "xunit.html")
                                 ShadowCopy = false
                             })
     else
 
-        "OpenCover" |> NugetInstall (fun p -> 
-        { p with 
+        "OpenCover" |> NugetInstall (fun p ->
+        { p with
             OutputDirectory = "tools";
             ExcludeVersion = true
         })
-    
-        testDir + "NVika.Tests.dll -noshadow" |> OpenCover (fun p -> 
+
+        testDir + "NVika.Tests.dll -noshadow" |> OpenCover (fun p ->
         { p with
             ExePath = "./tools/OpenCover/tools/OpenCover.Console.exe"
             TestRunnerExePath = "./tools/xunit.runner.console/tools/xunit.console.exe";
@@ -175,22 +176,22 @@ Target "Test" (fun _ ->
             Filter = "+[NVika]*";
             OptionalArguments = "-excludebyattribute:*.ExcludeFromCodeCoverage* -returntargetcode";
         })
-    
+
         if isLocalBuild || isOriginalRepo then
-            "ReportGenerator" |> NugetInstall (fun p -> 
-            { p with 
+            "ReportGenerator" |> NugetInstall (fun p ->
+            { p with
                 OutputDirectory = "tools";
                 ExcludeVersion = true
             })
-            [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p -> 
-            { p with 
-                TargetDir = artifactsDir @@ "reports" 
+            [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p ->
+            { p with
+                TargetDir = artifactsDir @@ "reports"
                 ExePath = @"tools\ReportGenerator\tools\ReportGenerator.exe"
                 LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
             })
         else
-            "coveralls.io" |> NugetInstall (fun p -> 
-            { p with 
+            "coveralls.io" |> NugetInstall (fun p ->
+            { p with
                 OutputDirectory = "tools";
                 ExcludeVersion = true
             })
@@ -238,7 +239,7 @@ Target "PackMSBuild" (fun _ ->
     ++ (buildResultDir + "NVika.exe.config")
     |> CopyFiles msBuildToolsFolder
 
-    NuGetPack (fun p -> 
+    NuGetPack (fun p ->
         { p with
             Authors = authors
             Description = projectDescription
@@ -246,13 +247,13 @@ Target "PackMSBuild" (fun _ ->
             WorkingDir = msBuildDir
             Version = version
             Tags = tags |> List.fold (fun r s -> r + " " + s) ""
-        }) 
+        })
         (msBuildDir @@ "NVika.MSBuild.nuspec")
 )
 
-Target "ChocoPack" (fun _ -> 
-    Choco.Pack (fun p -> 
-        { p with 
+Target "ChocoPack" (fun _ ->
+    Choco.Pack (fun p ->
+        { p with
             PackageId = "nvika"
             Version = version
             Title = "NVika"
