@@ -88,9 +88,15 @@ namespace NVika.Parsers
                 return new Tuple<string, uint?>(null, null);
             }
 
+            if (!source.Contains('('))
+            {
+                // No line info
+                return new Tuple<string, uint?>(source, null);
+            }
+
             var sourceInfos = source.Split('(');
             var lineInfo = sourceInfos[1];
-            return new Tuple<string, uint?>(sourceInfos[0], uint.Parse(lineInfo.Substring(1, lineInfo.Length - 1).Substring(0, lineInfo.Length - 2)));
+            return new Tuple<string, uint?>(sourceInfos[0], uint.Parse(lineInfo.Substring(1, lineInfo.Length - 2)));
         }
     }
 }

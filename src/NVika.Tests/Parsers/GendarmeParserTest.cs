@@ -1,7 +1,5 @@
 ﻿using NVika.Parsers;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using Xunit;
@@ -66,7 +64,7 @@ namespace NVika.Tests.Parsers
             var result = parser.Parse("GendarmeReport.xml").ToList();
 
             // assert
-            Assert.Equal(4, result.Count);
+            Assert.Equal(5, result.Count);
 
             AssertIssue(result[0],
                         "Performance",
@@ -89,6 +87,16 @@ namespace NVika.Tests.Parsers
                         11);
 
             AssertIssue(result[2],
+                        "Performance",
+                        "The method contains one or more unused parameters.",
+                        "https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnusedParametersRule(2.10)",
+                        "You should remove or use the unused parameters.",
+                        "AvoidUnusedParametersRule",
+                        IssueSeverity.Suggestion,
+                        @"d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs",
+                        null);
+
+            AssertIssue(result[3],
                         "Design",
                         "This type contains only static fields and methods and should be static.",
                         "https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)",
@@ -98,7 +106,7 @@ namespace NVika.Tests.Parsers
                         @"d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs",
                         11);
 
-            AssertIssue(result[3],
+            AssertIssue(result[4],
                         "Design",
                         "This assembly is not decorated with the [CLSCompliant] attribute.",
                         "https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule(2.10)",

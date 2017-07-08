@@ -244,6 +244,7 @@
       <solution>You should remove or use the unused parameters.</solution>
       <target Name="System.Void GendarmeTest.Program::Main(System.String[])" Assembly="GendarmeTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <defect Severity="Low" Confidence="Normal" Location="args" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs(≈11)">Parameter 'args' of type 'System.String[]' is never used in the method.</defect>
+        <defect Severity="Low" Confidence="Normal" Location="args" Source="d:\system\me\documents\visual studio 2015\Projects\GendarmeTest\GendarmeTest\Program.cs">Parameter 'args' of type 'System.String[]' is never used in the method.</defect>
       </target>
     </rule>
     <rule Name="ConsiderUsingStaticTypeRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)">
