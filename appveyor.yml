@@ -1,9 +1,9 @@
 cache:
 - src/packages -> **\packages.config
-- C:\ProgramData\chocolatey\bin -> build.fsx
-- C:\ProgramData\chocolatey\lib -> build.fsx
-- tools -> build.fsx
-- .sonarqube -> build.fsx
+- C:\ProgramData\chocolatey\bin -> build\build.fsx
+- C:\ProgramData\chocolatey\lib -> build\build.fsx
+- tools -> build\build.fsx
+- .sonarqube -> build\build.fsx
 
 install:
 - GitVersion /output buildserver /UpdateAssemblyInfo true
@@ -46,7 +46,7 @@ artifacts:
 
 - path: artifacts\nvika.*.nupkg
   name: NVika.nupkg
-  
+
 - path: artifacts\NVikaHelper.fsx
   name: NVikaHelper.fsx
 
