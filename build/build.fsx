@@ -78,7 +78,7 @@ Target "InspectCodeAnalysis" (fun _ ->
 )
 
 let saveGendarmeReportAsGist report = 
-    let client = new GitHubClient(new ProductHeaderValue("GithubGistApiTest"));
+    let client = new GitHubClient(new ProductHeaderValue("NVika-SaveGendarmeReport"));
     client.Credentials <- new Credentials(environVar "Create_Gist_Token");
     let newGist = new NewGist()
     newGist.Description <- "Gendarme report " + version
