@@ -1,4 +1,4 @@
-﻿#r "../tools/FAKE/tools/FakeLib.dll"
+#r "../tools/FAKE/tools/FakeLib.dll"
 #load "NVikaHelper.fsx"
 #load "SemanticReleaseNotesParserHelper.fsx"
 #r "System.Xml.Linq.dll"
@@ -174,7 +174,7 @@ Target "Test" (fun _ ->
         testDir + "NVika.Tests.dll -noshadow" |> OpenCover (fun p ->
         { p with
             ExePath = "./tools/OpenCover/tools/OpenCover.Console.exe"
-            TestRunnerExePath = "./tools/xunit.runner.console/tools/xunit.console.exe";
+            TestRunnerExePath = "./tools/xunit.runner.console/tools/net452/xunit.console.exe";
             Output = artifactsDir @@ "coverage.xml";
             Register = RegisterUser;
             Filter = "+[NVika]*";
