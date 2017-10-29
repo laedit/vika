@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis.Sarif;
+using Microsoft.CodeAnalysis.Sarif;
 using Microsoft.CodeAnalysis.Sarif.Readers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,10 +25,10 @@ namespace NVika.Parsers
 
         }
 
-        protected override bool CanParse(StreamReader reader)
+        protected override bool CanParse(StreamReader streamReader)
         {
             var schema = JSchema.Parse(GetEmbeddedResourceContent("Schemas.Sarif.schema.json"));
-            using (var jsonTextReader = new JsonTextReader(reader))
+            using (var jsonTextReader = new JsonTextReader(streamReader))
             {
                 var report = JObject.Load(jsonTextReader);
                 return report.IsValid(schema);
