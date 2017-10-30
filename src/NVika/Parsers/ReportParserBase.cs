@@ -1,4 +1,4 @@
-﻿using NVika.Exceptions;
+using NVika.Exceptions;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace NVika.Parsers
             }
             catch (Exception ex)
             {
-                throw new LoadingReportException(reportPath, ex);
+                throw new Exception(reportPath, ex); // only for test on this branch
             }
         }
 
