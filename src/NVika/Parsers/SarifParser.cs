@@ -56,7 +56,7 @@ namespace NVika.Parsers
 
                 var resultLocation = GetLocation(result);
 
-                Logger.Debug("ResultLocation: {resultLocation}", resultLocation);
+                Logger.Debug("ResultLocation: {resultLocation}", resultLocation.Uri);
                 return new Issue
                 {
                     Category = ruleCategory,
