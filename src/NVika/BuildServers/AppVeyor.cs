@@ -56,12 +56,12 @@ namespace NVika.BuildServers
                     break;
             }
 
-            var filePath = issue.FilePath.Replace(@"\", @"\\");
+            var filePath = issue.FilePath;
             var details = issue.Message;
 
             if (issue.FilePath != null)
             {
-                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty).Replace(@"\", "/");
                 details = $"{issue.Message} in {filePath} on line {issue.Line}";
             }
 
