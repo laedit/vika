@@ -61,7 +61,7 @@ namespace NVika.BuildServers
 
             if (issue.FilePath != null)
             {
-                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty).Replace("C:", "");
+                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty).Replace(@"C:\projects\vika\", "");
                 details = $"{issue.Message} in {filePath} on line {issue.Line}";
             }
 
