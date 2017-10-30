@@ -49,7 +49,7 @@ namespace NVika.Parsers
             }
             catch (Exception ex)
             {
-                throw new Exception(reportPath, ex); // only for test on this branch
+                throw new LoadingReportException(reportPath, ex);
             }
         }
 
