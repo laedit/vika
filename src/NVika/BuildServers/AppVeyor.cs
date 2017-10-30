@@ -38,6 +38,8 @@ namespace NVika.BuildServers
 
         public override void WriteMessage(Issue issue)
         {
+            _logger.Debug("FilePath: {filePath}", issue.FilePath);
+
             var message = issue.Message;
             if (IncludeSourceInMessage)
             {
