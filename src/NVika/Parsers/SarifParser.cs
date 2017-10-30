@@ -57,6 +57,9 @@ namespace NVika.Parsers
                 var resultLocation = GetLocation(result);
 
                 Logger.Debug("ResultLocation: {resultLocation}", resultLocation.Uri);
+                Logger.Debug("LocalPath: {localPath}", resultLocation.Uri.LocalPath);
+                Logger.Debug("AbsoluteUri: {absoluteUri}", resultLocation.Uri.AbsoluteUri);
+                Logger.Debug("AbsolutePath: {absolutePath}", resultLocation.Uri.AbsolutePath);
                 return new Issue
                 {
                     Category = ruleCategory,
