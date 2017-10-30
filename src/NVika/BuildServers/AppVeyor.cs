@@ -1,4 +1,4 @@
-﻿using NVika.Abstractions;
+using NVika.Abstractions;
 using NVika.Parsers;
 using Serilog;
 using System;
@@ -56,7 +56,7 @@ namespace NVika.BuildServers
                     break;
             }
 
-            var filePath = issue.FilePath;
+            var filePath = issue.FilePath.Replace(@"\", @"\\");
             var details = issue.Message;
 
             if (issue.FilePath != null)
