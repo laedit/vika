@@ -198,7 +198,7 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[4].Item1.RequestUri.AbsoluteUri);
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.MediaType);
-            Assert.Equal(@"{""message"":""Message5"",""category"":""information"",""fileName"":""D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs"",""projectName"":""Project-42"",""details"":""Message5 in D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs on line ""}", httpClientFactory.HttpMessageHandler.Requests[4].Item2);
+            Assert.Equal(@"{""message"":""Message5"",""category"":""information"",""fileName"":""D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs"",""details"":""Message5 in D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs on line ""}", httpClientFactory.HttpMessageHandler.Requests[4].Item2);
 
             var logs = _loggerOutput.ToString();
             Assert.NotNull(logs);
@@ -245,7 +245,7 @@ namespace NVika.Tests.BuildServers
                 new Issue{ Category="Category2", Description = "Description2", FilePath = "FilePath2", HelpUri = new Uri("https://www.wikipedia.com"), Line = 465u, Message = "Message2", Name = "Name2", Offset = new Offset{ Start = 36u, End = 546u}, Project = "Project1", Severity = IssueSeverity.Warning, Source = "Source2" },
                 new Issue{ Category="Category1", Description = "Description3", FilePath = "FilePath3", HelpUri = new Uri("http://helperror.com"), Line = 82u, Message = "Message3", Name = "Name3", Project = "Project2", Severity = IssueSeverity.Error, Source = "Source3" },
                 new Issue{ Category="Category3", Description = "Description4", HelpUri = new Uri("http://nosolution.com"), Message = "Message4", Name = "Name4", Project = "Project2", Severity = IssueSeverity.Hint, Source = "Source4" },
-                new Issue{ Category="Category4", Description = "Path fix", FilePath = @"D:\Prog\Github\vika\src\NVika\Program.cs", HelpUri = null, Message = "Message5", Name = "Name5", Project = "Project-42", Severity = IssueSeverity.Hint, Source = "Source4" },
+                new Issue{ Category="Category4", Description = "Path fix", FilePath = @"D:\Prog\Github\vika\src\NVika\Program.cs", HelpUri = null, Message = "Message5", Name = "Name5", Project = null, Severity = IssueSeverity.Hint, Source = "Source4" },
             };
         }
     }

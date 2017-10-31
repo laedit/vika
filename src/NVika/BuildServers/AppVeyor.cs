@@ -38,8 +38,6 @@ namespace NVika.BuildServers
 
         public override void WriteMessage(Issue issue)
         {
-            _logger.Debug("FilePath: {filePath}", issue.FilePath);
-
             var message = issue.Message;
             if (IncludeSourceInMessage)
             {
@@ -63,7 +61,7 @@ namespace NVika.BuildServers
 
             if (issue.FilePath != null)
             {
-                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+                filePath = issue.Project != null ? issue.FilePath.Replace(issue.Project + @"\", string.Empty) : issue.FilePath;
                 details = $"{issue.Message} in {filePath} on line {issue.Line}";
             }
 
