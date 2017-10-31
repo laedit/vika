@@ -73,7 +73,7 @@ namespace NVika.Tests.BuildServers
             }
 
             // assert
-            Assert.Equal(4, httpClientFactory.HttpMessageHandler.Requests.Count);
+            Assert.Equal(5, httpClientFactory.HttpMessageHandler.Requests.Count);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
@@ -99,6 +99,12 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.MediaType);
             Assert.Equal("{\"message\":\"Message4\",\"category\":\"information\",\"projectName\":\"Project2\",\"details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
 
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[4].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[4].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal(@"{""message"":""Message5"",""category"":""information"",""fileName"":""D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs"",""details"":""Message5 in D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs on line ""}", httpClientFactory.HttpMessageHandler.Requests[4].Item2);
+
             Assert.Equal(string.Empty, _loggerOutput.ToString());
         }
 
@@ -123,7 +129,7 @@ namespace NVika.Tests.BuildServers
             }
 
             // assert
-            Assert.Equal(4, httpClientFactory.HttpMessageHandler.Requests.Count);
+            Assert.Equal(5, httpClientFactory.HttpMessageHandler.Requests.Count);
 
             Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[0].Item1.Method);
             Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[0].Item1.RequestUri.AbsoluteUri);
@@ -148,6 +154,12 @@ namespace NVika.Tests.BuildServers
             Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.CharSet);
             Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[3].Item1.Content.Headers.ContentType.MediaType);
             Assert.Equal("{\"message\":\"[Source4] Message4\",\"category\":\"information\",\"projectName\":\"Project2\",\"details\":\"Message4\"}", httpClientFactory.HttpMessageHandler.Requests[3].Item2);
+
+            Assert.Equal(HttpMethod.Post, httpClientFactory.HttpMessageHandler.Requests[4].Item1.Method);
+            Assert.Equal("http://localhost:8080/api/build/compilationmessages", httpClientFactory.HttpMessageHandler.Requests[4].Item1.RequestUri.AbsoluteUri);
+            Assert.Equal("utf-8", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.CharSet);
+            Assert.Equal("application/json", httpClientFactory.HttpMessageHandler.Requests[4].Item1.Content.Headers.ContentType.MediaType);
+            Assert.Equal(@"{""message"":""[Source4] Message5"",""category"":""information"",""fileName"":""D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs"",""details"":""Message5 in D:\\Prog\\Github\\vika\\src\\NVika\\Program.cs on line ""}", httpClientFactory.HttpMessageHandler.Requests[4].Item2);
 
             Assert.Equal(string.Empty, _loggerOutput.ToString());
         }
