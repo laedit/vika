@@ -1,4 +1,4 @@
-﻿using NVika.Exceptions;
+using NVika.Exceptions;
 using Serilog;
 using System;
 using System.Collections.Generic;

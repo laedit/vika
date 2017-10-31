@@ -1,4 +1,4 @@
-﻿using NVika.Abstractions;
+using NVika.Abstractions;
 using NVika.Parsers;
 using Serilog;
 using System;
@@ -61,7 +61,7 @@ namespace NVika.BuildServers
 
             if (issue.FilePath != null)
             {
-                filePath = issue.FilePath.Replace(issue.Project + @"\", string.Empty);
+                filePath = issue.Project != null ? issue.FilePath.Replace(issue.Project + @"\", string.Empty) : issue.FilePath;
                 details = $"{issue.Message} in {filePath} on line {issue.Line}";
             }
 

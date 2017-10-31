@@ -34,8 +34,6 @@ artifacts:
 
 - path: artifacts\inspectcodereport.xml
 
-- path: src\NVika\static-analysis.sarif.json
-
 - path: artifacts\ReleaseNotes.html
 
 - path: artifacts\NVika.*.zip
