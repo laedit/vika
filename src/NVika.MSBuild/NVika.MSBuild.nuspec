@@ -9,7 +9,7 @@
     <description>@description@</description>
     <licenseUrl>https://github.com/laedit/vika/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/laedit/vika</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/laedit/vika/master/icon.png</iconUrl>
+    <iconUrl>https://cdn.rawgit.com/laedit/vika/25956ddd/resources/icon.png</iconUrl>
     <releaseNotes>https://github.com/laedit/vika/releases</releaseNotes>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>true</developmentDependency>

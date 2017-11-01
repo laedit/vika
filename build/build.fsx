@@ -264,7 +264,7 @@ Target "ChocoPack" (fun _ ->
             Authors = authors
             Owners = authors
             ProjectUrl = "https://github.com/laedit/vika"
-            IconUrl = "https://cdn.rawgit.com/laedit/vika/master/icon.png"
+            IconUrl = "https://cdn.rawgit.com/laedit/vika/25956ddd/resources/icon.png"
             LicenseUrl = "https://github.com/laedit/vika/blob/master/LICENSE"
             BugTrackerUrl = "https://github.com/laedit/vika/issues"
             Description = projectDescription
