@@ -1,3 +1,10 @@
+# 1.0.1 (2017-11-01)
+
+ - [#33](https://github.com/laedit/vika/issues/33) - Fix file path on SARIF report +fix
+
+Commits: c9ff6bf468...9bc5887d58
+
+
 # 1.0.0 (2016-09-30)
 
  - [#25](https://github.com/laedit/vika/issues/25) - Add parameter to consider warning as error +enhancement
