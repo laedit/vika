@@ -51,7 +51,7 @@ artifacts:
 deploy:
   - provider: GitHub
     auth_token:
-      secure: Un7yNxsbfrI9kF9/ZdtZ6b/k20PPDwzBdcCah1mlPuFNw3NVHk0SfD1Mwm+1+0Zc
+      secure: 0feqyghjd0ccYx5YTuoI96GXhpYbpBdXuRyn3oonNtDIrZbmB2Zc79fsD/Q/bHan
     artifact: NVika.zip, NVikaHelper.fsx
     description: $(SemanticReleaseNotes)
     on:
