@@ -191,7 +191,7 @@ Target "Test" (fun _ ->
             [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p ->
             { p with
                 TargetDir = artifactsDir @@ "reports"
-                ExePath = @"tools\ReportGenerator\tools\ReportGenerator.exe"
+                ExePath = @"tools\ReportGenerator\tools\net47\ReportGenerator.exe"
                 LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
             })
         else
