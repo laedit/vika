@@ -51,7 +51,8 @@ Target "BeginSonarQube" (fun _ ->
                             "sonar.projectDescription=\"Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.\"";
                             "sonar.links.homepage=https://github.com/laedit/vika";
                             "sonar.links.ci=https://ci.appveyor.com/project/laedit/vika";
-                            "sonar.links.issue=https://github.com/laedit/vika/issues"
+                            "sonar.links.issue=https://github.com/laedit/vika/issues";
+                            "sonar.organization=default"
                         ] })
 )
 
