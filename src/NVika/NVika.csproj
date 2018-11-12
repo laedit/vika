@@ -42,12 +42,12 @@
     <ErrorLog>$(OutputPath)\static-analysis.sarif.json</ErrorLog>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ManyConsole, Version=0.4.2.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ManyConsole.0.4.2.18\lib\ManyConsole.dll</HintPath>
+    <Reference Include="ManyConsole, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ManyConsole.1.0.0.4\lib\ManyConsole.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NDesk.Options">
-      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    <Reference Include="Mono.Options">
+      <HintPath>..\packages\Mono.Options.5.3.0.1\lib\net4-client\Mono.Options.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
