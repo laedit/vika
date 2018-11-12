@@ -12,7 +12,7 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: GdZUBHY15XkHS4bAvE7K42B4ssrtz19qK20fSnDUvjlFDbIUXNUDop6qmx8N+GQn
   SonarQube_Token:
-    secure: V/DXd2F/UgLZEx+v4GGR2HUKyrejAGT6BYN7aIAE0eheLzwVx8nP++xnSRpjCnyz
+    secure: k4wM2upFiLM0arThF60zVZXB7Wylb+ua7UPdlmxLbTkFjhuYjKXRSG2NdycTet1B
   Create_Gist_Token:
     secure: NgR1HJh8SIi6nRwPRsrZmbJYJLST5HibSPhUpmQeRA6v5djyQDRhxmgBXjaBbGNy
 
