@@ -42,7 +42,7 @@ Target "BeginSonarQube" (fun _ ->
     SonarQube Begin (fun p ->
         {p with
              ToolsPath = "MSBuild.SonarQube.Runner.exe"
-             Key = "laedit:Vika"
+             Key = "laedit_vika"
              Name = "Vika"
              Version = version
              Settings = [
@@ -52,7 +52,7 @@ Target "BeginSonarQube" (fun _ ->
                             "sonar.links.homepage=https://github.com/laedit/vika";
                             "sonar.links.ci=https://ci.appveyor.com/project/laedit/vika";
                             "sonar.links.issue=https://github.com/laedit/vika/issues";
-                            "sonar.organization=default"
+                            "sonar.organization=laedit-github"
                         ] })
 )
 
