@@ -110,6 +110,7 @@
     <EmbeddedResource Include="Data\Program.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <EmbeddedResource Include="Data\static-analysis.sarif.json" />
     <None Include="packages.config" />
   </ItemGroup>
