@@ -42,7 +42,7 @@ Target "BeginSonarQube" (fun _ ->
     SonarQube Begin (fun p ->
         {p with
              ToolsPath = "MSBuild.SonarQube.Runner.exe"
-             Key = "laedit:Vika"
+             Key = "laedit_vika"
              Name = "Vika"
              Version = version
              Settings = [
@@ -51,7 +51,8 @@ Target "BeginSonarQube" (fun _ ->
                             "sonar.projectDescription=\"Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.\"";
                             "sonar.links.homepage=https://github.com/laedit/vika";
                             "sonar.links.ci=https://ci.appveyor.com/project/laedit/vika";
-                            "sonar.links.issue=https://github.com/laedit/vika/issues"
+                            "sonar.links.issue=https://github.com/laedit/vika/issues";
+                            "sonar.organization=laedit-github"
                         ] })
 )
 
@@ -190,7 +191,7 @@ Target "Test" (fun _ ->
             [artifactsDir @@ "coverage.xml"] |> ReportGeneratorHelper.ReportGenerator (fun p ->
             { p with
                 TargetDir = artifactsDir @@ "reports"
-                ExePath = @"tools\ReportGenerator\tools\ReportGenerator.exe"
+                ExePath = @"tools\ReportGenerator\tools\net47\ReportGenerator.exe"
                 LogVerbosity = ReportGeneratorHelper.ReportGeneratorLogVerbosity.Error
             })
         else
