@@ -57,7 +57,7 @@
       <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.10\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sarif, Version=1.7.5.0, Culture=neutral, PublicKeyToken=a567ef0185dba9aa, processorArchitecture=MSIL">
+    <Reference Include="Sarif, Version=1.7.5.0, Culture=neutral, PublicKeyToken=21a5e83f6f5bb844, processorArchitecture=MSIL">
       <HintPath>..\packages\Sarif.Sdk.1.7.5\lib\net452\Sarif.dll</HintPath>
       <Private>True</Private>
     </Reference>
