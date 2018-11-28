@@ -198,6 +198,7 @@ tools/Mono.Gendarme/
 
 # Visual Studio cache
 src/.vs/
+/.vs
 
 # SonarQube cache
 .sonarqube
