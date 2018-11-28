@@ -41,7 +41,7 @@ namespace NVika.Tests
             Assert.Equal(2, exitCode);
             Assert.Contains($"NVika \"{Assembly.GetAssembly(typeof(Program)).GetName().Version}\"", consoleOutput);
             Assert.Contains("Executing parsereport (Parse the report and show warnings in console or inject them to the build server):", consoleOutput);
-            Assert.Contains("The report unkowncommand was not found.", consoleOutput);
+            Assert.Contains("The report \"unkowncommand\" was not found.", consoleOutput);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace NVika.Tests
             var consoleOutput = output.ToString();
             Assert.Equal(2, exitCode);
             Assert.Contains($"NVika \"{Assembly.GetAssembly(typeof(Program)).GetName().Version}\"", consoleOutput);
-            Assert.Contains("The report nonexistingreport.abc was not found.", consoleOutput);
+            Assert.Contains("The report \"nonexistingreport.abc\" was not found.", consoleOutput);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace NVika.Tests
             // arrange
             var output = new StringBuilder();
             Console.SetOut(new StringWriter(output));
-            var reportPath = Path.Combine("Data", "WrongReport.xml");
+            var reportPath = "Data/WrongReport.xml";
 
             // act
             var exitCode = new Program().Run(new[] { "parsereport", reportPath, "--debug" });
@@ -94,7 +94,7 @@ namespace NVika.Tests
             var consoleOutput = output.ToString();
             Assert.Equal(3, exitCode);
             Assert.Contains($"NVika \"{Assembly.GetAssembly(typeof(Program)).GetName().Version}\"", consoleOutput);
-            Assert.Contains("Report path is " + reportPath, consoleOutput);
+            Assert.Contains($"Report path is \"{reportPath}\"", consoleOutput);
             Assert.Contains("An unexpected error occurred:", consoleOutput);
             Assert.Contains("NVika.Exceptions.LoadingReportException: An exception happened when loading the report '" + reportPath + "'", consoleOutput);
         }
