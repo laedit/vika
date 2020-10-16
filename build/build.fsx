@@ -37,11 +37,11 @@ Target "RestorePackages" (fun _ ->
 )
 
 Target "BeginSonarQube" (fun _ ->
-    "msbuild-sonarqube-runner" |> Choco.Install id
+    "sonarscanner-msbuild-net46" |> Choco.Install id
 
     SonarQube Begin (fun p ->
         {p with
-             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             ToolsPath = "SonarScanner.MSBuild.exe"
              Key = "laedit_vika"
              Name = "Vika"
              Version = version
@@ -59,7 +59,7 @@ Target "BeginSonarQube" (fun _ ->
 Target "EndSonarQube" (fun _ ->
     SonarQube End (fun p ->
         {p with
-             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             ToolsPath = "SonarScanner.MSBuild.exe"
              Settings = [ "sonar.login=" + environVar "SonarQube_Token" ]
         })
 )
