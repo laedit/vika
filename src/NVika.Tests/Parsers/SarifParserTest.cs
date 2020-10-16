@@ -1,4 +1,4 @@
-﻿using NVika.Parsers;
+using NVika.Parsers;
 using System.Collections.Generic;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
@@ -65,62 +65,76 @@ namespace NVika.Tests.Parsers
             var results = parser.Parse("static-analysis.sarif.json").ToList();
 
             // assert
-            Assert.Equal(18, results.Count);
+            Assert.Equal(41, results.Count);
 
             var issue = results[0];
-            Assert.Equal("Design", issue.Category);
-            Assert.Equal("Use nameof", issue.Description);
-            Assert.Equal(@"D:\Prog\Github\vika\src\NVika\BuildServers\AppVeyor.cs", issue.FilePath);
-            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0021.html", issue.HelpUri.AbsoluteUri);
-            Assert.Equal(20u, issue.Line);
-            Assert.Equal("Use 'nameof(AppVeyor)' instead of specifying the program element name.", issue.Message);
-            Assert.Equal("CC0021", issue.Name);
-            Assert.Equal(26u, issue.Offset.Start);
-            Assert.Equal(36u, issue.Offset.End);
+            Assert.Equal("Major Code Smell", issue.Category);
+            Assert.Equal("Utility classes should not have public constructors", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Program.cs", issue.FilePath);
+            Assert.Equal("https://rules.sonarsource.com/csharp/RSPEC-1118", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(5u, issue.Line);
+            Assert.Equal("Add a 'protected' constructor or the 'static' keyword to the class declaration.", issue.Message);
+            Assert.Equal("S1118", issue.Name);
+            Assert.Equal(11u, issue.Offset.Start);
+            Assert.Equal(18u, issue.Offset.End);
             Assert.Null(issue.Project);
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
 
             issue = results[12];
             Assert.Equal("Style", issue.Category);
-            Assert.Equal("Use string interpolation instead of String.Format", issue.Description);
-            Assert.Equal(@"D:\Prog\Github\vika\src\NVika\Program.cs", issue.FilePath);
-            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0048.html", issue.HelpUri.AbsoluteUri);
-            Assert.Equal(64u, issue.Line);
-            Assert.Equal("Use string interpolation", issue.Message);
-            Assert.Equal("CC0048", issue.Name);
-            Assert.Equal(29u, issue.Offset.Start);
-            Assert.Equal(93u, issue.Offset.End);
+            Assert.Equal("Remove commented code.", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\SarifParser.cs", issue.FilePath);
+            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0037.html", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(12u, issue.Line);
+            Assert.Equal("Commented code should be removed.", issue.Message);
+            Assert.Equal("CC0037", issue.Name);
+            Assert.Equal(1u, issue.Offset.Start);
+            Assert.Equal(59u, issue.Offset.End);
             Assert.Null(issue.Project);
             Assert.Equal(IssueSeverity.Suggestion, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
 
-            issue = results[13];
-            Assert.Equal("Maintainability", issue.Category);
-            Assert.Equal("Boolean checks should not be inverted", issue.Description);
-            Assert.Equal(@"D:\Prog\Github\vika\src\NVika\Program.cs", issue.FilePath);
-            Assert.Equal("http://vs.sonarlint.org/rules/index.html#version=1.16.0&ruleId=S1940", issue.HelpUri.AbsoluteUri);
-            Assert.Equal(39u, issue.Line);
-            Assert.Equal("Use the opposite operator (\"!=\") instead.", issue.Message);
-            Assert.Equal("S1940", issue.Name);
-            Assert.Equal(17u, issue.Offset.Start);
+            issue = results[3];
+            Assert.Equal("Minor Code Smell", issue.Category);
+            Assert.Equal("Unused \"using\" should be removed", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\IReportParser.cs", issue.FilePath);
+            Assert.Equal("https://rules.sonarsource.com/csharp/RSPEC-1128", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(2u, issue.Line);
+            Assert.Equal("Remove this unnecessary 'using'.", issue.Message);
+            Assert.Equal("S1128", issue.Name);
+            Assert.Equal(1u, issue.Offset.Start);
             Assert.Equal(26u, issue.Offset.End);
             Assert.Null(issue.Project);
-            Assert.Equal(IssueSeverity.Error, issue.Severity);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[33];
+            Assert.Equal("Design", issue.Category);
+            Assert.Equal("Use nameof", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\FxCopParser.cs", issue.FilePath);
+            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0021.html", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(34u, issue.Line);
+            Assert.Equal("Use 'nameof(Issue)' instead of specifying the program element name.", issue.Message);
+            Assert.Equal("CC0021", issue.Name);
+            Assert.Equal(56u, issue.Offset.Start);
+            Assert.Equal(63u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
         }
 
         private const string EmptyReportSample = @"{
-  ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
-  ""version"": ""1.0.0"",
-  ""runs"": [
-    {
-      ""tool"": {
-        ""name"": ""Microsoft (R) Visual C# Compiler"",
-        ""version"": ""1.3.1.0"",
-        ""fileVersion"": ""1.3.1.60616"",
-        ""semanticVersion"": ""1.3.1"",
-        ""language"": ""en-US""
-      }}]}";
+    ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
+    ""version"": ""2.1.0"",
+    ""runs"": [{
+            ""tool"": {
+                ""driver"": {
+                    ""name"": ""Microsoft (R) Visual C# Compiler"",
+                    ""version"": ""3.8.0-4.20503.2 (75d31ee9)"",
+                    ""dottedQuadFileVersion"": ""3.8.0.0"",
+                    ""semanticVersion"": ""3.8.0"",
+                    ""language"": ""en-US""
+    }}}]}";
     }
 }

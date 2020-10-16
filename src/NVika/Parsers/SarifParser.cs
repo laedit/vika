@@ -39,33 +39,42 @@ namespace NVika.Parsers
         {
             var logContents = FileSystem.File.ReadAllText(reportPath);
 
-            var settings = new JsonSerializerSettings
-            {
-                ContractResolver = SarifContractResolver.Instance
-            };
+            var log = JsonConvert.DeserializeObject<SarifLog>(logContents);
 
-            var log = JsonConvert.DeserializeObject<SarifLog>(logContents, settings);
-
-            return log.Runs.SelectMany(run => run.Results.Where(result => result.SuppressionStates == SuppressionStates.None).Select(result =>
+            return log.Runs.SelectMany(run => run.Results.Where(result => result.Suppressions == null || result.Suppressions.All(suppression => suppression.Status == SuppressionStatus.None))
+            .Select(result =>
             {
-                Rule resultRule;
-                run.Rules.TryGetValue(result.RuleId, out resultRule);
+                run.SetRunOnResults();
+                var resultRule = result.GetRule();
 
                 string ruleCategory = null;
                 resultRule?.TryGetProperty("category", out ruleCategory);
 
-                var resultLocation = GetLocation(result);
+                string filePath = null;
+                Region region = null;
+                if (result.Locations.Count > 0)
+                {
+                    if (result.Locations[0].PhysicalLocation != null)
+                    {
+                        filePath = result.Locations[0].PhysicalLocation.ArtifactLocation.Uri.LocalPath;
+                        region = result.Locations[0].PhysicalLocation.Region;
+                    }
+                    else
+                    {
+                        filePath = result.AnalysisTarget.Uri.LocalPath;
+                    }
+                }
 
                 return new Issue
                 {
                     Category = ruleCategory,
-                    Description = resultRule?.ShortDescription,
-                    FilePath = resultLocation.Uri.LocalPath,
+                    Description = resultRule?.ShortDescription.Text,
+                    FilePath = filePath,
                     HelpUri = resultRule?.HelpUri,
-                    Message = resultRule == null ? result.Message : result.GetMessageText(resultRule),
+                    Message = resultRule == null ? result.Message.Text : result.GetMessageText(resultRule),
                     Name = result.RuleId,
-                    Line = resultLocation.Region == null ? 0u : (uint)resultLocation.Region.StartLine,
-                    Offset = resultLocation.Region == null ? new Offset() : new Offset { Start = (uint)resultLocation.Region.StartColumn, End = (uint)resultLocation.Region.EndColumn },
+                    Line = region == null ? 0u : (uint)region.StartLine,
+                    Offset = region == null ? new Offset() : new Offset { Start = (uint)region.StartColumn, End = (uint)region.EndColumn },
                     Project = null,
                     Severity = LevelToSeverity(result.Level),
                     Source = "SARIF"
@@ -73,30 +82,15 @@ namespace NVika.Parsers
             }));
         }
 
-        private static PhysicalLocation GetLocation(Result result)
-        {
-            PhysicalLocation location = null;
-
-            if (result.Locations.Count > 0)
-            {
-                location = result.Locations[0].ResultFile ?? result.Locations[0].AnalysisTarget;
-            }
-
-            return location;
-        }
-
-        private static IssueSeverity LevelToSeverity(ResultLevel level)
+        private static IssueSeverity LevelToSeverity(FailureLevel level)
         {
             switch (level)
             {
-                case ResultLevel.Default:
-                case ResultLevel.Warning: return IssueSeverity.Warning;
+                case FailureLevel.Warning: return IssueSeverity.Warning;
 
-                case ResultLevel.Error: return IssueSeverity.Error;
+                case FailureLevel.Error: return IssueSeverity.Error;
 
-                case ResultLevel.NotApplicable:
-                case ResultLevel.Pass:
-                case ResultLevel.Note:
+                case FailureLevel.Note:
                 default: return IssueSeverity.Suggestion;
             }
         }
