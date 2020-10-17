@@ -37,29 +37,17 @@ Target "RestorePackages" (fun _ ->
 )
 
 Target "BeginSonarQube" (fun _ ->
-    "msbuild-sonarqube-runner" |> Choco.Install id
+    "sonarscanner-msbuild-net46" |> Choco.Install id
 
-    SonarQube Begin (fun p ->
-        {p with
-             ToolsPath = "MSBuild.SonarQube.Runner.exe"
-             Key = "laedit_vika"
-             Name = "Vika"
-             Version = version
-             Settings = [
-                            "sonar.host.url=https://sonarcloud.io";
-                            "sonar.login=" + environVar "SonarQube_Token";
-                            "sonar.projectDescription=\"Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.\"";
-                            "sonar.links.homepage=https://github.com/laedit/vika";
-                            "sonar.links.ci=https://ci.appveyor.com/project/laedit/vika";
-                            "sonar.links.issue=https://github.com/laedit/vika/issues";
-                            "sonar.organization=laedit-github"
-                        ] })
+    directExec(fun info ->
+        info.FileName <- "SonarScanner.MSBuild.exe"
+        info.Arguments <- "begin /k:\"laedit_vika\" /n:\"Vika\" /o:laedit-github /v:\"" + version + "\" /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=" + environVar "SonarQube_Token" + " /d:sonar.projectDescription=\"Visual Interpreter of Kooky Analysis: parse analysis reports and send messages to the build server, or in console.\" /d:sonar.links.homepage=https://github.com/laedit/vika /d:sonar.links.ci=https://ci.appveyor.com/project/laedit/vika /d:sonar.links.issue=https://github.com/laedit/vika/issues" ) |> ignore
 )
 
 Target "EndSonarQube" (fun _ ->
     SonarQube End (fun p ->
         {p with
-             ToolsPath = "MSBuild.SonarQube.Runner.exe"
+             ToolsPath = "SonarScanner.MSBuild.exe"
              Settings = [ "sonar.login=" + environVar "SonarQube_Token" ]
         })
 )
@@ -75,7 +63,7 @@ Target "InspectCodeAnalysis" (fun _ ->
 
     directExec(fun info ->
         info.FileName <- "inspectcode"
-        info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
+        info.Arguments <- "-o=\"" + artifactsDir + "inspectcodereport.xml\" --project=\"NVika\" \"src\Vika.sln\" --toolset=14.0" ) |> ignore
 )
 
 let saveGendarmeReportAsGist report = 
