@@ -63,7 +63,7 @@ Target "InspectCodeAnalysis" (fun _ ->
 
     directExec(fun info ->
         info.FileName <- "inspectcode"
-        info.Arguments <- "/o=\"" + artifactsDir + "inspectcodereport.xml\" /project=\"NVika\" \"src\Vika.sln\"" ) |> ignore
+        info.Arguments <- "-o=\"" + artifactsDir + "inspectcodereport.xml\" --project=\"NVika\" \"src\Vika.sln\" --toolset-path=\"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"" ) |> ignore
 )
 
 let saveGendarmeReportAsGist report = 
