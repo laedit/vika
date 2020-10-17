@@ -26,7 +26,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisModuleSuppressionsFile>Properties\GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorLog>$(OutputPath)\static-analysis.sarif.json</ErrorLog>
+    <ErrorLog>$(OutputPath)\static-analysis.sarif.json;version=2</ErrorLog>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,7 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisModuleSuppressionsFile>Properties\GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorLog>$(OutputPath)\static-analysis.sarif.json</ErrorLog>
+    <ErrorLog>$(OutputPath)\static-analysis.sarif.json;version=2</ErrorLog>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ManyConsole, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
@@ -57,9 +57,8 @@
       <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.10\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sarif, Version=1.7.5.0, Culture=neutral, PublicKeyToken=21a5e83f6f5bb844, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sarif.Sdk.1.7.5\lib\net452\Sarif.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Sarif, Version=2.3.6.0, Culture=neutral, PublicKeyToken=21a5e83f6f5bb844, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sarif.Sdk.2.3.6\lib\net45\Sarif.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net45\Serilog.dll</HintPath>
