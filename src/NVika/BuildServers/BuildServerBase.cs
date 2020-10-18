@@ -1,4 +1,4 @@
-﻿using NVika.Parsers;
+using NVika.Parsers;
 
 namespace NVika.BuildServers
 {

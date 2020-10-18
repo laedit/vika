@@ -1,4 +1,4 @@
-﻿namespace NVika.Parsers
+namespace NVika.Parsers
 {
     internal enum IssueSeverity
     {

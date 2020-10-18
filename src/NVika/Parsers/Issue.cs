@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace NVika.Parsers
 {
@@ -25,12 +25,5 @@ namespace NVika.Parsers
         internal string Project { get; set; }
 
         internal string Source { get; set; }
-    }
-
-    internal class Offset
-    {
-        internal uint? Start { get; set; }
-
-        internal uint? End { get; set; }
     }
 }

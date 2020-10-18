@@ -1,4 +1,4 @@
-﻿using ManyConsole;
+using ManyConsole;
 using Mono.Options;
 using NVika.Exceptions;
 using Serilog;
@@ -48,7 +48,7 @@ namespace NVika
 
                 return ConsoleCommandDispatcher.DispatchCommand(_commands, extraArgs.ToArray(), Console.Out);
             }
-            catch(NVikaException exception)
+            catch (NVikaException exception)
             {
                 _logger.Fatal(exception, "An unexpected error occurred:");
                 return exception.ExitCode;
@@ -84,7 +84,7 @@ namespace NVika
             }
 
             var loggerConf = new LoggerConfiguration()
-                        .WriteTo.LiterateConsole(outputTemplate: "[{Level}] {Message}{NewLine}{Exception}");
+                        .WriteTo.Console(outputTemplate: "[{Level}] {Message}{NewLine}{Exception}");
             if (isInDebugMode)
             {
                 loggerConf.MinimumLevel.Debug();

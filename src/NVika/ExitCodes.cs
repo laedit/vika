@@ -1,4 +1,4 @@
-﻿
+
 namespace NVika
 {
     internal static class ExitCodes

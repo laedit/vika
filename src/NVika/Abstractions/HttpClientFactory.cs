@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 

@@ -1,4 +1,4 @@
-﻿using NVika.Parsers;
+using NVika.Parsers;
 using System.Collections.Generic;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -12,7 +12,7 @@ namespace NVika.Parsers
         private readonly string[] _requiredElements;
 
         protected XmlReportParser(string rootName, params string[] requiredElements)
-            : base(new[] { ".xml"}, '<')
+            : base(new[] { ".xml" }, '<')
         {
             _rootName = rootName;
             _requiredElements = requiredElements;

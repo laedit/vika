@@ -1,4 +1,4 @@
-﻿using ManyConsole;
+using ManyConsole;
 using NVika.BuildServers;
 using NVika.Parsers;
 using Serilog;
@@ -23,9 +23,9 @@ namespace NVika
         [ImportingConstructor]
         internal ParseReportCommand(ILogger logger,
                                   IFileSystem fileSystem,
-                                  [ImportMany]IEnumerable<IBuildServer> buildServers,
+                                  [ImportMany] IEnumerable<IBuildServer> buildServers,
                                   LocalBuildServer localBuildServer,
-                                  [ImportMany]IEnumerable<IReportParser> parsers)
+                                  [ImportMany] IEnumerable<IReportParser> parsers)
         {
             _logger = logger;
             _fileSystem = fileSystem;

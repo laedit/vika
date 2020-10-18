@@ -1,4 +1,4 @@
-﻿using NVika.Abstractions;
+using NVika.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Net;

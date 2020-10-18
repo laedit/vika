@@ -1,4 +1,4 @@
-﻿namespace NVika.Abstractions
+namespace NVika.Abstractions
 {
     internal interface IEnvironment
     {

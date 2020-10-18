@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -54,7 +54,7 @@ namespace NVika.Parsers
         {
             var path = issue.Attribute("Path")?.Value;
             var file = issue.Attribute("File")?.Value;
-            if(path != null && file != null)
+            if (path != null && file != null)
             {
                 return FileSystem.Path.Combine(path, file);
             }
@@ -63,7 +63,7 @@ namespace NVika.Parsers
 
         private static uint? GetLine(XAttribute issueLine)
         {
-            if(issueLine == null)
+            if (issueLine == null)
             {
                 return null;
             }

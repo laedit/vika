@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using NVika.BuildServers;
 using NVika.Parsers;
 using Serilog;
@@ -192,7 +192,7 @@ namespace NVika.Tests
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true) };
             var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
-            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml"});
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml" });
 
             // act
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());
@@ -270,7 +270,7 @@ namespace NVika.Tests
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
             var parsers = new List<IReportParser> { GetMockReportParser(true, true, true) };
             var buildServerCommand = new ParseReportCommand(logger, fileSystem, buildServers, localBuildServer, parsers);
-            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml"});
+            var remainingArgs = buildServerCommand.GetActualOptions().Parse(new[] { "report.xml", "report2.xml" });
 
             // act
             var exitCode = buildServerCommand.Run(remainingArgs.ToArray());

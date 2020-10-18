@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -83,7 +83,7 @@ namespace NVika.Parsers
 
         private static Tuple<string, uint?> ParseSource(string source)
         {
-            if(string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty(source))
             {
                 return new Tuple<string, uint?>(null, null);
             }

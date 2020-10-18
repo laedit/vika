@@ -1,4 +1,4 @@
-﻿using NVika.BuildServers;
+using NVika.BuildServers;
 using NVika.Parsers;
 using Serilog;
 using System;

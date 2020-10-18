@@ -1,4 +1,4 @@
-﻿using NVika.Parsers;
+using NVika.Parsers;
 using Serilog;
 using System.ComponentModel.Composition;
 
@@ -30,7 +30,7 @@ namespace NVika.BuildServers
         public override void WriteMessage(Issue issue)
         {
             var format = LineFormat;
-            if(issue.FilePath == null)
+            if (issue.FilePath == null)
             {
                 format = NoFileLineFormat;
             }
@@ -40,7 +40,7 @@ namespace NVika.BuildServers
                 format = string.Concat("[{5}] ", format);
             }
 
-            _logger.Information(format, issue.Severity, issue.Name, issue.Message, issue.FilePath, issue.Line,issue.Source);
+            _logger.Information(format, issue.Severity, issue.Name, issue.Message, issue.FilePath, issue.Line, issue.Source);
         }
     }
 }
