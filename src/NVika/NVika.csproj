@@ -4,6 +4,18 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ErrorLog>bin\$(Configuration)\$(TargetFramework)\static-analysis.Core.sarif.json;version=2</ErrorLog>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>nvika</ToolCommandName>
+    <Authors>laedit</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Tool - Parse analysis reports (InspectCode, ...) and send messages to build server or console.</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/laedit/vika</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/laedit/vika</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</PackageTags>
+    <PackageReleaseNotes>https://github.com/laedit/vika/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +29,17 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Schemas\Sarif.schema.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\resources\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
