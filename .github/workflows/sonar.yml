@@ -30,12 +30,19 @@ jobs:
       run: dotnet build src --configuration Release
 
     - name: Test
-      run: dotnet test src --configuration Release --no-build --nologo --verbosity normal --collect:"XPlat Code Coverage"
+      run: dotnet test src --configuration Release --no-build --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
         projectBaseDir: src
+        args: >
+          -Dsonar.organization=laedit-github
+          -Dsonar.projectKey=laedit_vika
+          -Dsonar.cs.opencover.reportsPaths=NVika.Tests/coverage.opencover.xml
+          -Dsonar.sources=NVika/
+          -Dsonar.tests=NVika.Tests/
+          -Dsonar.verbose=true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
