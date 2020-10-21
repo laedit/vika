@@ -1,48 +1,45 @@
-name: SonarCloud Analysis
-
+name: Sonar Analysis
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating a pull request. 
   push:
     branches:
       - master
   pull_request:
-
 jobs:
   sonarcloud:
-    runs-on: ubuntu-latest
-    
-    env:
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.x
+      - name: Test
+        run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-    - name: Build
-      run: dotnet build src --configuration Release
-
-    - name: Test
-      run: dotnet test src --configuration Release --no-build --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        projectBaseDir: src
-        args: >
-          -Dsonar.organization=laedit-github
-          -Dsonar.projectKey=laedit_vika
-          -Dsonar.cs.opencover.reportsPaths=NVika.Tests/coverage.opencover.xml
-          -Dsonar.sources=NVika/
-          -Dsonar.tests=NVika.Tests/
-          -Dsonar.verbose=true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" -d:sonar.cs.opencover.reportsPaths=NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="NVika.Tests/*"
+          dotnet build src --configuration Release
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
