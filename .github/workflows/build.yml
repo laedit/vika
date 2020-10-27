@@ -49,7 +49,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        dotnet tool install gitversion.tool
+        dotnet tool install --global gitversion.tool
 
     - name: Check gitversion
       run: dotnet gitversion $env:GITHUB_WORKSPACE /output buildserver
