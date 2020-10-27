@@ -9,6 +9,7 @@
     <licenseUrl>https://github.com/laedit/vika/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/laedit/vika</projectUrl>
     <iconUrl>https://cdn.rawgit.com/laedit/vika/master/resources/icon.png</iconUrl>
+    <packageSourceUrl>https://github.com/laedit/vika/master/chocolatey</packageSourceUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Parse analysis reports (InspectCode, ...) and send messages to build server or console.</description>
     <releaseNotes>https://github.com/laedit/SemanticReleaseNotesParser/releases</releaseNotes>
