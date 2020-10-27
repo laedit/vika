@@ -205,3 +205,4 @@ src/.vs/
 
 # opencover
 coverage.opencover.xml
+GendarmeReport.xml

@@ -14,7 +14,7 @@ It call the nvika command line with some parameters:
 
  <PropertyGroup>
     <RunCodeAnalysis>true</RunCodeAnalysis> <!-- FxCop is activated-->
-    <ErrorLog>analysisresult.sarif.json</ErrorLog> <!-- generates output file for Roslyn Analyzers -->
+    <ErrorLog>analysisresult.sarif.json;version=2</ErrorLog> <!-- generates output file for Roslyn Analyzers -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors> <!-- all warnings during build are considered as errors, including those reported by NVika -->
     <NVikaIncludeSource>true</NVikaIncludeSource> <!-- add source in NVika messages -->
  </PropertyGroup>

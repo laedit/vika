@@ -1,18 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>NVika.MSBuild</id>
+    <id>nvika</id>
     <version>0.1.0</version>
-    <title>NVika for MSBuild</title>
+    <title>NVika</title>
     <authors>laedit</authors>
     <owners>laedit</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <developmentDependency>true</developmentDependency>
     <licenseUrl>https://github.com/laedit/vika/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/laedit/vika</projectUrl>
     <iconUrl>https://cdn.rawgit.com/laedit/vika/master/resources/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Parse analysis reports (InspectCode, ...) and send messages to build server or console.</description>
-    <releaseNotes>https://github.com/laedit/vika/releases</releaseNotes>
+    <releaseNotes>https://github.com/laedit/SemanticReleaseNotesParser/releases</releaseNotes>
     <tags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</tags>
   </metadata>
+  <files>
+    <file src="tools/**" />
+  </files>
 </package>
