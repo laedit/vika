@@ -52,10 +52,11 @@ jobs:
         dotnet tool install --global gitversion.tool
 
     - name: Check gitversion
+      id: gitversion
       run: dotnet gitversion $env:GITHUB_WORKSPACE /output buildserver
 
     - name: Echo version
-      run: echo ${{ GitVersion_NuGetVersionV2 }}
+      run: echo ${{ steps.gitversion.env.GitVersion_NuGetVersionV2 }}
 
     - name: Test
       run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
@@ -73,7 +74,7 @@ jobs:
       shell: powershell
       run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" -d:sonar.cs.opencover.reportsPaths=src/NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="src/NVika.Tests/*"
-        dotnet build src --configuration Release --no-restore /p:Version=${{ GitVersion_NuGetVersionV2 }}
+        dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.env.GitVersion_NuGetVersionV2 }}
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
     - name: InspectCodeAnalysis
