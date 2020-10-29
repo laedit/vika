@@ -51,6 +51,7 @@ jobs:
       uses: gittools/actions/gitversion/setup@v0.9.4
       with:
         versionSpec: '5.3.x'
+
     - name: Check GitVersion
       id: gitversion # step id used as reference for output values
       uses: gittools/actions/gitversion/execute@v0.9.4
@@ -97,6 +98,7 @@ jobs:
 
     - name: Create packages
       run: |
+        mkdir ./artifacts
         Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/* -DestinationPath "artifacts/NVika.netcore.$env:GitVersion_NuGetVersionV2.zip"
         Copy-Item -Path "src/NVika/bin/Release/NVika.$env:GitVersion_NuGetVersionV2.nupkg" -Destination artifacts
 
