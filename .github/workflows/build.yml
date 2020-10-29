@@ -20,12 +20,18 @@ jobs:
     - name: Fetch all history for all tags and branches
       run: git fetch --prune --unshallow
 
-    - uses: actions/cache@v2
+    - name: Cache nuget packages
+      uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           nuget-
+
+    - name: Cache Chocolatey packages
+      uses: actions/cache@v2
+      with:
+        path: C:\ProgramData\chocolatey\lib
 
     - name: Cache SonarCloud packages
       uses: actions/cache@v1
