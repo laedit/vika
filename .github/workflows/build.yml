@@ -118,7 +118,7 @@ jobs:
         $installPath = "chocolatey/tools/chocolateyInstall.ps1"
         $originalContent = Get-Content $installPath
         $originalContent.replace('[version]', "${{ steps.gitversion.outputs.nuGetVersionV2 }}") | Set-Content $installPath
-        choco pack chocolatey/NVika-parser.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts
+        choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts
         Set-Content $installPath $originalContent
 
     - uses: actions/upload-artifact@v2
