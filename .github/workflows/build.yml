@@ -105,8 +105,9 @@ jobs:
 
     - name: Create MSBuild package
       run: |
+        Copy-Item -Path resources/icon.png -Destination src\NVika.MSBuild\
         mkdir src\NVika.MSBuild\tools\
-        Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools\ -Verbose
+        Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools\
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
     - name: Create netcore packages
