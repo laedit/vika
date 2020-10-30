@@ -15,6 +15,12 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '13' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+
     - uses: actions/checkout@v2
 
     - name: Fetch all history for all tags and branches
