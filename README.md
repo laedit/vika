@@ -4,12 +4,11 @@ Visual Interpreter of Kooky Analysis.
 Also means 'bug' in Finnish.
 
 [![Licence Apache 2](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://github.com/laedit/vika/blob/master/LICENSE) 
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/laedit/vika.svg?label=build+windows)](https://ci.appveyor.com/project/laedit/vika) 
-[![Travis CI build Status](https://img.shields.io/travis/laedit/vika.svg?label=build+linux)](https://travis-ci.org/laedit/vika) 
-[![Coverage Status](https://coveralls.io/repos/laedit/vika/badge.svg)](https://coveralls.io/r/laedit/vika) 
-[![Chocolatey](https://img.shields.io/chocolatey/v/nvika.svg)](https://chocolatey.org/packages/nvika) 
-[![Nuget](https://img.shields.io/nuget/v/nvika.msbuild.svg)](https://www.nuget.org/packages/nvika.msbuild) 
-[![Join the chat at https://gitter.im/laedit/vika](https://badges.gitter.im/laedit/vika.svg)](https://gitter.im/laedit/vika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![Build](https://github.com/laedit/vika/workflows/Build/badge.svg)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=alert_status)](https://sonarcloud.io/dashboard?id=laedit_vika) 
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=laedit_vika)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=laedit_vika)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=laedit_vika)
 
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
