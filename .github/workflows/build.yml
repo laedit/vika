@@ -28,14 +28,6 @@ jobs:
         restore-keys: |
           nuget-
 
-    - name: Cache Chocolatey packages
-      uses: actions/cache@v2
-      with:
-        path: C:\ProgramData\chocolatey\lib
-        key: choco-cache-${{ github.sha }}
-        restore-keys: |
-          choco-cache-
-
     - name: Cache SonarCloud packages
       uses: actions/cache@v1
       with:
@@ -83,14 +75,14 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=src/NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="src/NVika.Tests/*" /d:sonar.verbose=true
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=src/NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="src/NVika.Tests/*"
         dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
     - name: InspectCodeAnalysis
       run: |
-        choco install resharper-clt.portable -y
-        inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" --toolset=14.0
+        nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
+        ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" --toolset=14.0
 
     - name: GendarmeAnalysis
       run: |
