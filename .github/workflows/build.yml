@@ -103,17 +103,17 @@ jobs:
         # dotnet SemanticReleaseNotesParser -g=categories --debug -o="artifacts/ReleaseNotes.html" --pluralizecategoriestitle --includestyle
         # dotnet SemanticReleaseNotesParser -g=categories --debug -t=environment -f=markdown --pluralizecategoriestitle
 
-    - name: Create netcore packages
-      run: |
-        mkdir ./artifacts/zips
-        Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
-        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
-
     - name: Create MSBuild package
       run: |
         mkdir src\NVika.MSBuild\tools\
         Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools\
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
+
+    - name: Create netcore packages
+      run: |
+        mkdir ./artifacts/zips
+        Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
 
     - name: Create windows version
       run: |
