@@ -103,29 +103,31 @@ jobs:
         # dotnet SemanticReleaseNotesParser -g=categories --debug -o="artifacts/ReleaseNotes.html" --pluralizecategoriestitle --includestyle
         # dotnet SemanticReleaseNotesParser -g=categories --debug -t=environment -f=markdown --pluralizecategoriestitle
 
-    - name: Create packages
+    - name: Create zips
       run: |
-        mkdir ./artifacts
-        Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/* -DestinationPath "artifacts/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
-        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts
+        mkdir ./artifacts/zips
+        Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/zips
 
     - name: Create MSBuild package
       run: |
-        Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/*" -Destination src\NVika.MSBuild\tools
-        nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts
+        mkdir ./artifacts/nuget
+        Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools
+        nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
     - name: Publish windows version
       run: |
         dotnet publish src/NVika --configuration Release --output ./publish --self-contained true --runtime win-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         # Copy-Item -Path "artifacts/ReleaseNotes.html" -Destination publish
-        Compress-Archive -Path publish/* -DestinationPath "artifacts/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
+        Compress-Archive -Path publish/* -DestinationPath "artifacts/nuget/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
 
     - name: Publish chocolatey version
       run: |
+        mkdir ./artifacts/chocolatey
         $installPath = "chocolatey/tools/chocolateyInstall.ps1"
         $originalContent = Get-Content $installPath
         $originalContent.replace('[version]', "${{ steps.gitversion.outputs.nuGetVersionV2 }}") | Set-Content $installPath
-        choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts
+        choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts/chocolatey
         Set-Content $installPath $originalContent
 
     - uses: actions/upload-artifact@v2
