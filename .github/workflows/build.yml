@@ -97,11 +97,11 @@ jobs:
         # dotnet SemanticReleaseNotesParser -g=categories --debug -o="artifacts/ReleaseNotes.html" --pluralizecategoriestitle --includestyle
         # dotnet SemanticReleaseNotesParser -g=categories --debug -t=environment -f=markdown --pluralizecategoriestitle
 
-    - name: Create zips
+    - name: Create netcore packages
       run: |
         mkdir ./artifacts/zips
         Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
-        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/zips
+        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
 
     - name: Create MSBuild package
       run: |
@@ -109,13 +109,13 @@ jobs:
         Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
-    - name: Publish windows version
+    - name: Create windows version
       run: |
         dotnet publish src/NVika --configuration Release --output ./publish --self-contained true --runtime win-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         # Copy-Item -Path "artifacts/ReleaseNotes.html" -Destination publish
-        Compress-Archive -Path publish/* -DestinationPath "artifacts/nuget/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
+        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
 
-    - name: Publish chocolatey version
+    - name: Create chocolatey version
       run: |
         mkdir ./artifacts/chocolatey
         $installPath = "chocolatey/tools/chocolateyInstall.ps1"
@@ -165,7 +165,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/NVika.netcore.${{ steps.get_version.outputs.version }}.zip
+          asset_path: ./artifacts/zips/NVika.netcore.${{ steps.get_version.outputs.version }}.zip
           asset_name: NVika.netcore.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
     
@@ -175,21 +175,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
+          asset_path: ./artifacts/zips/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
           asset_name: NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
 
       - name: Chocolatey push
-        run: choco push artifacts/nvika.win-x86.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
+        run: choco push artifacts/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
         env:
           CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
 
       - name: Nuget push Tool
-        run: dotnet nuget push artifacts/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifacts/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
       - name: Nuget push MSBuild
-        run: dotnet nuget push artifacts/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifacts/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
