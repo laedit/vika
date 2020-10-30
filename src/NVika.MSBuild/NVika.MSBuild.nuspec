@@ -8,11 +8,15 @@
     <owners>laedit</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>true</developmentDependency>
-    <licenseUrl>https://github.com/laedit/vika/blob/master/LICENSE</licenseUrl>
+    <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/laedit/vika</projectUrl>
     <iconUrl>https://cdn.rawgit.com/laedit/vika/master/resources/icon.png</iconUrl>
+    <icon>icon.png</icon>
     <description>Parse analysis reports (InspectCode, ...) and send messages to build server or console.</description>
     <releaseNotes>https://github.com/laedit/vika/releases</releaseNotes>
     <tags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</tags>
   </metadata>
+  <files>
+    <file src="../../resources/icon.png" target="/" />
+  </files>
 </package>
