@@ -1,0 +1,202 @@
+name: Build
+
+on:
+  push:
+    tags: v[1-9]+.[0-9]+.[0-9]+
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '13' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+
+    - uses: actions/checkout@v2
+
+    - name: Fetch all history for all tags and branches
+      run: git fetch --prune --unshallow
+
+    - name: Cache nuget packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          nuget-
+
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
+    - name: Cache SonarCloud scanner
+      id: cache-sonar-scanner
+      uses: actions/cache@v1
+      with:
+        path: .\.sonar\scanner
+        key: ${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ runner.os }}-sonar-scanner
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.4
+      with:
+        versionSpec: '5.3.x'
+
+    - name: Check GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9.4
+
+    - name: Echo version
+      run: echo ${{ steps.gitversion.outputs.nuGetVersionV2 }}
+
+    - name: Test
+      run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+    - name: Install SonarCloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      shell: powershell
+      run: |
+        New-Item -Path .\.sonar\scanner -ItemType Directory
+        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+    - name: Build and analyze
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      shell: powershell
+      run: |
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=src/NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="src/NVika.Tests/*"
+        dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    - name: InspectCodeAnalysis
+      run: |
+        nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
+        ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" --toolset=14.0
+
+    - name: GendarmeAnalysis
+      run: |
+        nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
+        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\netcoreapp3.1\NVika.exe
+      
+    - name: LaunchNVika
+      run: .\src\NVika\bin\Release\netcoreapp3.1\NVika.exe --debug --includesource inspectcodereport.xml ./src/NVika/bin/Release/netcoreapp3.1/static-analysis.sarif.json GendarmeReport.xml
+
+    # - name: Create release notes
+      # run: |
+        # dotnet SemanticReleaseNotesParser -g=categories --debug -o="artifacts/ReleaseNotes.html" --pluralizecategoriestitle --includestyle
+        # dotnet SemanticReleaseNotesParser -g=categories --debug -t=environment -f=markdown --pluralizecategoriestitle
+
+    - name: Create MSBuild package
+      run: |
+        Copy-Item -Path resources/icon.png -Destination src\NVika.MSBuild\
+        mkdir src\NVika.MSBuild\tools\
+        Copy-Item -Path "src/NVika/bin/Release/netcoreapp3.1/publish/*" -Destination src\NVika.MSBuild\tools\
+        nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
+
+    - name: Create netcore packages
+      run: |
+        mkdir ./artifacts/zips
+        Compress-Archive -Path src/NVika/bin/Release/netcoreapp3.1/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
+
+    - name: Create windows version
+      run: |
+        dotnet publish src/NVika --configuration Release --output ./publish --self-contained true --runtime win-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        # Copy-Item -Path "artifacts/ReleaseNotes.html" -Destination publish
+        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
+
+    - name: Create chocolatey version
+      run: |
+        mkdir ./artifacts/chocolatey
+        $installPath = "chocolatey/tools/chocolateyInstall.ps1"
+        $originalContent = Get-Content $installPath
+        $originalContent.replace('[version]', "${{ steps.gitversion.outputs.nuGetVersionV2 }}") | Set-Content $installPath
+        choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts/chocolatey
+        Set-Content $installPath $originalContent
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: artifacts/*
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build]
+    runs-on: ubuntu-latest
+    
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - uses: actions/download-artifact@v2
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: ${{ env.SemanticReleaseNotes }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Zip netcore
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/zips/NVika.netcore.${{ steps.get_version.outputs.version }}.zip
+          asset_name: NVika.netcore.${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+    
+      - name: Upload Zip win-x86
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/zips/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
+          asset_name: NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+
+      - name: Chocolatey push
+        run: choco push artifacts/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
+        env:
+          CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
+
+      - name: Nuget push Tool
+        run: dotnet nuget push artifacts/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Nuget push MSBuild
+        run: dotnet nuget push artifacts/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

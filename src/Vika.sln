@@ -1,32 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVika", "NVika\NVika.csproj", "{70D378FE-426F-4854-A7E5-98EED3070EB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVika", "NVika\NVika.csproj", "{70D378FE-426F-4854-A7E5-98EED3070EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVika.Tests", "NVika.Tests\NVika.Tests.csproj", "{782180B2-8004-4B2A-AE2A-2F0A1B42080D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVika.Tests", "NVika.Tests\NVika.Tests.csproj", "{782180B2-8004-4B2A-AE2A-2F0A1B42080D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AB4358F-B332-4573-94A6-FD327CEC64A9}"
 	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
-		..\.travis.yml = ..\.travis.yml
 		..\appveyor.yml = ..\appveyor.yml
-		..\build.bat = ..\build.bat
-		..\build\build.fsx = ..\build\build.fsx
-		..\build.sh = ..\build.sh
 		CodeCoverage.runsettings = CodeCoverage.runsettings
-		..\build\gendarme.ignore = ..\build\gendarme.ignore
-		..\build\NVikaHelper.fsx = ..\build\NVikaHelper.fsx
 		..\README.md = ..\README.md
 		..\ReleaseNotes.md = ..\ReleaseNotes.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NVika.MSBuild", "NVika.MSBuild", "{38B7E5B2-4930-4ED2-A950-61EFDF77A364}"
-	ProjectSection(SolutionItems) = preProject
-		NVika.MSBuild\NVika.MSBuild.nuspec = NVika.MSBuild\NVika.MSBuild.nuspec
-		NVika.MSBuild\NVika.MSBuild.targets = NVika.MSBuild\NVika.MSBuild.targets
-		NVika.MSBuild\readme.txt = NVika.MSBuild\readme.txt
 	EndProjectSection
 EndProject
 Global
@@ -46,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {002A144F-705B-45FA-A9FF-E3F5B251E792}
 	EndGlobalSection
 EndGlobal
