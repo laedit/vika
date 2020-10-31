@@ -1,3 +1,9 @@
+# vNext
+
+- [#243](https://github.com/laedit/vika/pull/243) - Upgrade Sarif parser to 2.1.0 +breaking
+- [2bee1be99cfbec63523c41c5148c8cbf7e5bea6a](https://github.com/laedit/vika/commit/2bee1be99cfbec63523c41c5148c8cbf7e5bea6a) & [#246](https://github.com/laedit/vika/pull/246) - Switch to netcore +breaking
+- [#245](https://github.com/laedit/vika/pull/245) - Produce a dotnet tool +enhancement
+
 # 1.0.1 (2017-11-01)
 
  - [#33](https://github.com/laedit/vika/issues/33) - Fix file path on SARIF report +fix
