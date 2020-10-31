@@ -13,8 +13,12 @@
     <ProjectOutputExtension Condition="$(OutputType) == 'Library'">dll</ProjectOutputExtension>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(ErrorLog) != ''">
+    <ErrorLogFixed>$(ErrorLog.Replace(";version=2",""))</ErrorLogFixed>
+  </PropertyGroup>
+
   <ItemGroup Condition="$(NVikaReports) == ''">
-    <NVikaReports Condition="$(ErrorLog) != ''" Include="$(ErrorLog)" />
+    <NVikaReports Condition="$(ErrorLogFixed) != ''" Include="$(ErrorLogFixed)" />
     <NVikaReports Condition="'$(RunCodeAnalysis)' == 'true'" Include="$(OutputPath)$(AssemblyName).$(ProjectOutputExtension).CodeAnalysisLog.xml" />
   </ItemGroup>
 
