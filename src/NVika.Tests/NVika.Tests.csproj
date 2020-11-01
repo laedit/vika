@@ -19,6 +19,9 @@
     <EmbeddedResource Include="Data\Logger.txt" />
     <EmbeddedResource Include="Data\ParseReportCommand.txt" />
     <EmbeddedResource Include="Data\Program.txt" />
+    <EmbeddedResource Include="Data\static-analysis.old.sarif.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Data\static-analysis.sarif.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

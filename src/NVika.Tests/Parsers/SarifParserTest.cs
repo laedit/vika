@@ -1,13 +1,18 @@
 using NVika.Parsers;
+using Serilog;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace NVika.Tests.Parsers
 {
     public class SarifParserTest
     {
+        private StringBuilder _loggerOutput;
+
         [Fact]
         public void Name()
         {
@@ -48,6 +53,26 @@ namespace NVika.Tests.Parsers
 
             // assert
             Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void CanParseOldSarifFormat()
+        {
+            // arrange
+            var parser = new SarifParser();
+            parser.Logger = GetLogger();
+            parser.FileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "static-analysis.old.sarif.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("static-analysis.old.sarif.json")) }
+            });
+
+            // act
+            var result = parser.CanParse("static-analysis.old.sarif.json");
+
+            // assert
+            Assert.False(result);
+            var logs = _loggerOutput.ToString();
+            Assert.Contains("SARIF 1.0 is not supported, please update your analysis tool to produce SARIF 2.1 format.", logs);
         }
 
         [Fact]
@@ -122,6 +147,17 @@ namespace NVika.Tests.Parsers
             Assert.Null(issue.Project);
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("SARIF", issue.Source);
+        }
+
+        private ILogger GetLogger(Serilog.Events.LogEventLevel logEventLevel = Serilog.Events.LogEventLevel.Information)
+        {
+            _loggerOutput = new StringBuilder();
+            var writer = new StringWriter(_loggerOutput);
+            var loggerConfiguration = new LoggerConfiguration()
+                        .WriteTo.TextWriter(writer);
+            loggerConfiguration.MinimumLevel.Is(logEventLevel);
+            var logger = loggerConfiguration.CreateLogger();
+            return logger;
         }
 
         private const string EmptyReportSample = @"{
