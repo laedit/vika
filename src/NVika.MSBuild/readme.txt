@@ -1,5 +1,10 @@
 Thanks for using NVika.MSBuild!
 
+/!\ Warning for existing users, this version has breaking changes:
+ - netcore 3.1 is necessary
+ - SARIF version has passed to 2.1, old version isn't supported anymore, please upgrade your ErrorLog to version 2 like in sample below
+-------------------------------------------------------------------
+
 This add a Target which is invoked automatically after all other targets of the project.
 It call the nvika command line with some parameters:
 
