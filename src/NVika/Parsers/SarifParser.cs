@@ -26,11 +26,23 @@ namespace NVika.Parsers
 
         protected override bool CanParse(StreamReader streamReader)
         {
-            var schema = JSchema.Parse(GetEmbeddedResourceContent("Schemas.Sarif.schema.json"));
+            var schema = JSchema.Parse(GetEmbeddedResourceContent("Schemas.Sarif.2.1.schema.json"));
             using (var jsonTextReader = new JsonTextReader(streamReader))
             {
                 var report = JObject.Load(jsonTextReader);
-                return report.IsValid(schema);
+                if (report.IsValid(schema))
+                {
+                    return true;
+                }
+                else
+                {
+                    var schema10 = JSchema.Parse(GetEmbeddedResourceContent("Schemas.Sarif.1.0.schema.json"));
+                    if (report.IsValid(schema10))
+                    {
+                        Logger.Error("SARIF 1.0 is not supported, please update your analysis tool to produce SARIF 2.1 format.");
+                    }
+                    return false;
+                }
             }
         }
 
