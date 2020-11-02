@@ -13,6 +13,16 @@ Also means 'bug' in Finnish.
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
 
+## Installation
+
+- [Zip netcore](https://github.com/laedit/SemanticReleaseNotesParser/releases): download and extract
+- [Zip win-x86](https://github.com/laedit/SemanticReleaseNotesParser/releases): download and extract
+- [Chocolatey (win-x86)](https://chocolatey.org/packages/nvika/): `choco install nvika`
+- [Dotnet tool](https://www.nuget.org/packages/NVika/):  `dotnet tool install NVika`
+- [MSBuild](https://www.nuget.org/packages/NVika.MSBuild/):  `Install-Package NVika.MSBuild`
+
+## Usage
+
 You can use it like this: `NVika parsereport "inspectcodereport.xml"`
 
 It is possible to process several reports at the same time: `NVika parsereport report1.xml report2.xml`
