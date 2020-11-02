@@ -1,4 +1,4 @@
-# vNext
+# 2.0.0 (2020-11-02)
 
 - [#243](https://github.com/laedit/vika/pull/243) - Upgrade Sarif parser to 2.1.0 +breaking
 - [2bee1be99cfbec63523c41c5148c8cbf7e5bea6a](https://github.com/laedit/vika/commit/2bee1be99cfbec63523c41c5148c8cbf7e5bea6a) & [#246](https://github.com/laedit/vika/pull/246) - Switch to netcore +breaking
