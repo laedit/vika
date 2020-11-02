@@ -172,7 +172,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/zips/NVika.netcore.${{ steps.get_version.outputs.version }}.zip
+          asset_path: ./artifact/zips/NVika.netcore.${{ steps.get_version.outputs.version }}.zip
           asset_name: NVika.netcore.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
     
@@ -182,21 +182,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/zips/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
+          asset_path: ./artifact/zips/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
           asset_name: NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
 
       - name: Chocolatey push
-        run: choco push artifacts/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
+        run: choco push artifact/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
         env:
           CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
 
       - name: Nuget push Tool
-        run: dotnet nuget push artifacts/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifact/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
       - name: Nuget push MSBuild
-        run: dotnet nuget push artifacts/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifact/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
