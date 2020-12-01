@@ -55,13 +55,13 @@ jobs:
         dotnet-version: 3.1.x
 
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.4
+      uses: gittools/actions/gitversion/setup@v0.9.7
       with:
-        versionSpec: '5.3.x'
+        versionSpec: '5.x'
 
     - name: Check GitVersion
       id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9.4
+      uses: gittools/actions/gitversion/execute@v0.9.7
 
     - name: Echo version
       run: echo ${{ steps.gitversion.outputs.nuGetVersionV2 }}
