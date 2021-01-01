@@ -68,7 +68,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
-    <PackageReference Include="System.IO.Abstractions" Version="13.2.2" />
+    <PackageReference Include="System.IO.Abstractions" Version="13.2.8" />
   </ItemGroup>
 
 </Project>
