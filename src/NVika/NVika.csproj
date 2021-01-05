@@ -16,6 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</PackageTags>
     <PackageReleaseNotes>https://github.com/laedit/vika/releases</PackageReleaseNotes>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
@@ -55,7 +56,7 @@
     </PackageReference>
     <PackageReference Include="ManyConsole" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
