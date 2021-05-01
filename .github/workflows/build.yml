@@ -15,12 +15,6 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '13' # The JDK version to make available on the path.
-        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-        architecture: x64 # (x64 or x86) - defaults to x64
-
     - uses: actions/checkout@v2
 
     - name: Fetch all history for all tags and branches
@@ -33,21 +27,6 @@ jobs:
         key: nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           nuget-
-
-    - name: Cache SonarCloud packages
-      uses: actions/cache@v1
-      with:
-        path: ~\sonar\cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: ${{ runner.os }}-sonar
-
-    - name: Cache SonarCloud scanner
-      id: cache-sonar-scanner
-      uses: actions/cache@v1
-      with:
-        path: .\.sonar\scanner
-        key: ${{ runner.os }}-sonar-scanner
-        restore-keys: ${{ runner.os }}-sonar-scanner
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -69,21 +48,9 @@ jobs:
     - name: Test
       run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-    - name: Install SonarCloud scanner
-      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+    - name: Build
       shell: powershell
-      run: |
-        New-Item -Path .\.sonar\scanner -ItemType Directory
-        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-    - name: Build and analyze
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      shell: powershell
-      run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"laedit_vika" /o:"laedit-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=src/NVika.Tests/coverage.opencover.xml /d:sonar.coverage.exclusions="src/NVika.Tests/*"
-        dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
-        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      run: dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
     - name: InspectCodeAnalysis
       run: |
