@@ -40,10 +40,7 @@ namespace NVika.BuildServers
 
             if (issue.FilePath != null)
             {
-                var file = issue.Project != null
-                    ? issue.FilePath.Replace(issue.Project + @"\", string.Empty)
-                    : issue.FilePath;
-
+                var file = issue.FilePath.Replace('\\', '/');
                 outputString.Append($"file={file},");
             }
 
