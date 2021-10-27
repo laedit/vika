@@ -1,3 +1,4 @@
+using System;
 using NVika.Parsers;
 using System.Collections.Generic;
 using System.IO;
@@ -225,6 +226,56 @@ namespace NVika.Tests.Parsers
             Assert.Equal("NVika", issue.Project);
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("InspectCode", issue.Source);
+        }
+
+        [Fact]
+        public void Parse_IssueSeverityTakesPrecedenceOverIssueTypeSeverity()
+        {
+            // arrange
+            var report = XDocument.Parse(TestUtilities.GetEmbeddedResourceContent("InspectCodeReport_IssuesWithSeverity.xml"));
+            report.Root.Element("Information").Element("Solution").Value = Path.Combine("src", "Vika.sln");
+
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "InspectCodeReport_IssuesWithSeverity.xml", new MockFileData(report.ToString()) },
+                { Path.Combine("src", @"InspectCodeTest\TestClass.cs"), new MockFileData(TestUtilities.GetEmbeddedResourceContent("TestClass.txt")) }
+            });
+            var parser = new InspectCodeParser();
+            parser.FileSystem = fileSystem;
+
+            // act
+            var result = parser.Parse("InspectCodeReport_IssuesWithSeverity.xml").ToArray();
+
+            // assert
+            Assert.Equal(2, result.Length);
+
+            var issueWithSeverity = result[0];
+            Assert.Equal("Syntax Style", issueWithSeverity.Category);
+            Assert.Equal("Use preferred 'var' style: For built-in types", issueWithSeverity.Description);
+            Assert.Equal(Path.Combine("src", @"InspectCodeTest\TestClass.cs"), issueWithSeverity.FilePath);
+            Assert.Equal(new Uri("https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_BuiltInTypes"), issueWithSeverity.HelpUri);
+            Assert.Equal(7u, issueWithSeverity.Line);
+            Assert.Equal("Use explicit type (built-in types)", issueWithSeverity.Message);
+            Assert.Equal("SuggestVarOrType_BuiltInTypes", issueWithSeverity.Name);
+            Assert.Equal(12u, issueWithSeverity.Offset.Start);
+            Assert.Equal(15u, issueWithSeverity.Offset.End);
+            Assert.Equal("InspectCodeTest", issueWithSeverity.Project);
+            Assert.Equal(IssueSeverity.Warning, issueWithSeverity.Severity);
+            Assert.Equal("InspectCode", issueWithSeverity.Source);
+
+            var issueWithoutSeverity = result[1];
+            Assert.Equal("Common Practices and Code Improvements", issueWithoutSeverity.Category);
+            Assert.Equal("Convert local variable or field to constant: Private accessibility", issueWithoutSeverity.Description);
+            Assert.Equal(Path.Combine("src", @"InspectCodeTest\TestClass.cs"), issueWithoutSeverity.FilePath);
+            Assert.Null(issueWithoutSeverity.HelpUri);
+            Assert.Equal(7u, issueWithoutSeverity.Line);
+            Assert.Equal("Convert to constant", issueWithoutSeverity.Message);
+            Assert.Equal("ConvertToConstant.Local", issueWithoutSeverity.Name);
+            Assert.Equal(16u, issueWithoutSeverity.Offset.Start);
+            Assert.Equal(32u, issueWithoutSeverity.Offset.End);
+            Assert.Equal("InspectCodeTest", issueWithoutSeverity.Project);
+            Assert.Equal(IssueSeverity.Warning, issueWithoutSeverity.Severity);
+            Assert.Equal("InspectCode", issueWithoutSeverity.Source);
         }
     }
 }

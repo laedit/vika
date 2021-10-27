@@ -1,0 +1,11 @@
+﻿namespace InspectCodeTest
+{
+    public class TestClass
+    {
+        public static double MetresToInches(double metres)
+        {
+            var conversionFactor = 0.0254;
+            return metres * conversionFactor;
+        }
+    }
+}

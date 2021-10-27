@@ -28,6 +28,8 @@
     <Content Include="Data\WrongReport.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Data\TestClass.txt" />
+    <EmbeddedResource Include="Data\InspectCodeReport_IssuesWithSeverity.xml" />
   </ItemGroup>
 
   <ItemGroup>
