@@ -44,7 +44,7 @@ namespace NVika.Parsers
                         Line = lineNumber,
                         Message = issue.Attribute("Message").Value,
                         Name = issue.Attribute("TypeId").Value,
-                        Severity = GetSeverity(issueType.Attribute("Severity")),
+                        Severity = GetSeverity(issue.Attribute("Severity"), issueType.Attribute("Severity")),
                         Offset = GetOffset(offsetAttribute, sourceFilePath, lineNumber),
                         Source = Name,
                     };
@@ -84,9 +84,14 @@ namespace NVika.Parsers
             };
         }
 
-        private static IssueSeverity GetSeverity(XAttribute severityAttribute)
+        private static IssueSeverity GetSeverity(XAttribute issueSeverity, XAttribute issueTypeSeverity)
         {
-            switch (severityAttribute.Value)
+            // The severity type is always present on the issue type element,
+            // but it is also overridden by an individual issue's severity, if one is present.
+            // See: https://www.jetbrains.com/help/resharper/InspectCode.html#understanding-output
+            var finalSeverity = issueSeverity?.Value ?? issueTypeSeverity.Value;
+
+            switch (finalSeverity)
             {
                 case "HINT": return IssueSeverity.Hint;
 
