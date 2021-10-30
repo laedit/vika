@@ -1,3 +1,7 @@
+# Next
+
+- [#290](https://github.com/laedit/vika/pull/290) - Add GitHub build server by [smoogipoo](https://github.com/smoogipoo) +enhancement
+
 # 2.0.0 (2020-11-02)
 
 - [#243](https://github.com/laedit/vika/pull/243) - Upgrade Sarif parser to 2.1.0 +breaking
