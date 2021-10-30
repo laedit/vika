@@ -238,7 +238,7 @@ namespace NVika.Tests.Parsers
             var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
                 { "InspectCodeReport_IssuesWithSeverity.xml", new MockFileData(report.ToString()) },
-                { Path.Combine("src", @"InspectCodeTest\TestClass.cs"), new MockFileData(TestUtilities.GetEmbeddedResourceContent("TestClass.txt")) }
+                { Path.Combine("src", @"InspectCodeTest\Conversions.cs"), new MockFileData(TestUtilities.GetEmbeddedResourceContent("Conversions.txt")) }
             });
             var parser = new InspectCodeParser();
             parser.FileSystem = fileSystem;
@@ -252,7 +252,7 @@ namespace NVika.Tests.Parsers
             var issueWithSeverity = result[0];
             Assert.Equal("Syntax Style", issueWithSeverity.Category);
             Assert.Equal("Use preferred 'var' style: For built-in types", issueWithSeverity.Description);
-            Assert.Equal(Path.Combine("src", @"InspectCodeTest\TestClass.cs"), issueWithSeverity.FilePath);
+            Assert.Equal(Path.Combine("src", @"InspectCodeTest\Conversions.cs"), issueWithSeverity.FilePath);
             Assert.Equal(new Uri("https://www.jetbrains.com/resharperplatform/help?Keyword=SuggestVarOrType_BuiltInTypes"), issueWithSeverity.HelpUri);
             Assert.Equal(7u, issueWithSeverity.Line);
             Assert.Equal("Use explicit type (built-in types)", issueWithSeverity.Message);
@@ -266,7 +266,7 @@ namespace NVika.Tests.Parsers
             var issueWithoutSeverity = result[1];
             Assert.Equal("Common Practices and Code Improvements", issueWithoutSeverity.Category);
             Assert.Equal("Convert local variable or field to constant: Private accessibility", issueWithoutSeverity.Description);
-            Assert.Equal(Path.Combine("src", @"InspectCodeTest\TestClass.cs"), issueWithoutSeverity.FilePath);
+            Assert.Equal(Path.Combine("src", @"InspectCodeTest\Conversions.cs"), issueWithoutSeverity.FilePath);
             Assert.Null(issueWithoutSeverity.HelpUri);
             Assert.Equal(7u, issueWithoutSeverity.Line);
             Assert.Equal("Convert to constant", issueWithoutSeverity.Message);

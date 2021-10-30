@@ -13,8 +13,8 @@
   </IssueTypes>
   <Issues>
     <Project Name="InspectCodeTest">
-      <Issue TypeId="SuggestVarOrType_BuiltInTypes" Severity="WARNING" File="InspectCodeTest\TestClass.cs" Offset="142-145" Line="7" Message="Use explicit type (built-in types)" />
-      <Issue TypeId="ConvertToConstant.Local" File="InspectCodeTest\TestClass.cs" Offset="146-162" Line="7" Message="Convert to constant" />
+      <Issue TypeId="SuggestVarOrType_BuiltInTypes" Severity="WARNING" File="InspectCodeTest\Conversions.cs" Offset="151-154" Line="7" Message="Use explicit type (built-in types)" />
+      <Issue TypeId="ConvertToConstant.Local" File="InspectCodeTest\Conversions.cs" Offset="155-171" Line="7" Message="Convert to constant" />
     </Project>
   </Issues>
 </Report>

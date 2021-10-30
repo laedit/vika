@@ -1,6 +1,6 @@
-﻿namespace InspectCodeTest
+namespace InspectCodeTest
 {
-    public class TestClass
+    public static class Conversions
     {
         public static double MetresToInches(double metres)
         {
