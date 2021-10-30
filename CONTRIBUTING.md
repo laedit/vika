@@ -12,7 +12,6 @@ Once you're familiar with Git and GitHub, clone the repository and run the Vika.
 
 ## Discussing ideas 
 
-* [Gitter Chatroom](https://gitter.im/laedit/vika)
 * [GitHub Issues](https://github.com/laedit/vika/issues)
 
 ## Coding conventions
