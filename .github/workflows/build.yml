@@ -156,16 +156,16 @@ jobs:
           asset_content_type: application/zip
 
       - name: Chocolatey push
-        run: choco push artifact/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=${CHOCO_API_KEY}
+        run: choco push artifact/chocolatey/nvika.${{ steps.get_version.outputs.version }}.nupkg --source=https://push.chocolatey.org/ --api-key=$env:CHOCO_API_KEY
         env:
           CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
 
       - name: Nuget push Tool
-        run: dotnet nuget push artifact/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifact/nuget/NVika.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k $env:NUGET_API_KEY
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
       - name: Nuget push MSBuild
-        run: dotnet nuget push artifact/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k ${NUGET_API_KEY}
+        run: dotnet nuget push artifact/nuget/NVika.MSBuild.${{ steps.get_version.outputs.version }}.nupkg -s  https://api.nuget.org/v3/index.json -k $env:NUGET_API_KEY
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
