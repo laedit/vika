@@ -1,6 +1,7 @@
-# Next
+# 2.1.0 (2021-11-02)
 
 - [#290](https://github.com/laedit/vika/pull/290) - Add GitHub build server by [smoogipoo](https://github.com/smoogipoo) +enhancement
+- [#307](https://github.com/laedit/vika/pull/307) - Read issue severity from issue element rather than issue type element if present by [bdach](https://github.com/bdach) +fix
 
 # 2.0.0 (2020-11-02)
 
