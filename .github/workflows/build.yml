@@ -87,7 +87,7 @@ jobs:
       run: |
         dotnet publish src/NVika --configuration Release --output ./publish --self-contained true --runtime win-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         # Copy-Item -Path "artifacts/ReleaseNotes.html" -Destination publish
-        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.$env:GitVersion_NuGetVersionV2.zip"
+        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
 
     - name: Create chocolatey version
       run: |
@@ -119,8 +119,7 @@ jobs:
 
       - name: Get the version
         id: get_version
-        shell: cmd
-        run: echo "::set-output name=VERSION::${GITHUB_REF#refs/tags/v}"
+        run: echo "::set-output name=VERSION::$env:GITHUB_REF.Replace('refs/tags/v', '')"
 
       - name: Create Release
         id: create_release
