@@ -119,7 +119,9 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo "::set-output name=VERSION::$env:GITHUB_REF.Replace('refs/tags/v', '')"
+        run: |
+          $version = $env:GITHUB_REF.Replace('refs/tags/v', '')
+          echo "::set-output name=VERSION::$version"
 
       - name: Create Release
         id: create_release
