@@ -1,3 +1,7 @@
+# 2.2.0 (2021-11-04)
+
+- [#311](https://github.com/laedit/vika/pull/311) - Add path and line to GH console output by [smoogipoo](https://github.com/smoogipoo) +enhancement
+
 # 2.1.0 (2021-11-02)
 
 - [#290](https://github.com/laedit/vika/pull/290) - Add GitHub build server by [smoogipoo](https://github.com/smoogipoo) +enhancement
