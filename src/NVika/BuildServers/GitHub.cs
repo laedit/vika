@@ -35,16 +35,21 @@ namespace NVika.BuildServers
                     break;
             }
 
+            var details = issue.Message;
+
             if (issue.FilePath != null)
             {
-                var file = issue.FilePath.Replace('\\', '/');
-                outputString.Append($"file={file},");
+                var absolutePath = issue.FilePath.Replace('\\', '/');
+                var relativePath = issue.Project != null ? issue.FilePath.Replace($"{issue.Project.Replace('\\', '/')}/", string.Empty) : absolutePath;
+
+                outputString.Append($"file={absolutePath},");
+                details = $"{issue.Message} in {relativePath} on line {issue.Line}";
             }
 
             if (issue.Offset != null)
                 outputString.Append($"col={issue.Offset.Start},");
 
-            outputString.Append($"line={issue.Line}::{issue.Message}");
+            outputString.Append($"line={issue.Line}::{details}");
 
             Console.WriteLine(outputString.ToString());
         }
