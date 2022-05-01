@@ -75,7 +75,7 @@ namespace NVika.Tests
         {
             // arrange
             var logger = GetLogger();
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", MockFileData.NullObject } });
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", string.Empty } });
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer();
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
@@ -97,7 +97,7 @@ namespace NVika.Tests
         {
             // arrange
             var logger = GetLogger();
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", MockFileData.NullObject } });
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData> { { "report.xml", string.Empty } });
             var localBuildServer = new LocalBuildServer(logger);
             var mockBuildServer = GetMockBuildServer(true);
             var buildServers = new List<IBuildServer> { localBuildServer, mockBuildServer };
