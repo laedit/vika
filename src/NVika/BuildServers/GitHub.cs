@@ -31,7 +31,11 @@ namespace NVika.BuildServers
                     break;
 
                 case IssueSeverity.Warning:
-                    outputString.Append("::warning");
+                    outputString.Append("::warning ");
+                    break;
+
+                case IssueSeverity.Suggestion:
+                    outputString.Append("::notice ");
                     break;
             }
 
