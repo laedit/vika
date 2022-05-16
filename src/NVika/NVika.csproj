@@ -17,7 +17,7 @@
 		<PackageTags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</PackageTags>
 		<PackageReleaseNotes>https://github.com/laedit/vika/releases</PackageReleaseNotes>
 		<IncludeSymbols>true</IncludeSymbols>
-    		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 		<Deterministic>true</Deterministic>
 	</PropertyGroup>
