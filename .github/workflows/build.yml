@@ -28,10 +28,15 @@ jobs:
         restore-keys: |
           nuget-
 
-    - name: Setup .NET Core
+    - name: Setup .NET Core 3.1
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.x
+        
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
 
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.11
