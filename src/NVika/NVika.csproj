@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
 		<ErrorLog>bin\$(Configuration)\$(TargetFramework)\static-analysis.sarif.json;version=2</ErrorLog>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>nvika</ToolCommandName>
@@ -16,8 +16,6 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</PackageTags>
 		<PackageReleaseNotes>https://github.com/laedit/vika/releases</PackageReleaseNotes>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 		<Deterministic>true</Deterministic>
 	</PropertyGroup>
