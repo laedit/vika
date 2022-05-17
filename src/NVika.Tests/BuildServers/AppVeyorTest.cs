@@ -214,7 +214,7 @@ namespace NVika.Tests.BuildServers
 
             var logs = _loggerOutput.ToString();
             Assert.NotNull(logs);
-            Assert.Contains("An error is occurred during the call to AppVeyor API: \"StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: <null>, Headers:", logs);
+            Assert.Contains("An error is occurred during the call to AppVeyor API: \"StatusCode: 403, ReasonPhrase: 'Forbidden', Version: 1.1, Content: System.Net.Http.EmptyContent, Headers:", logs);
         }
 
         private MockHttpClientFactory GetHttpClientFactory(HttpStatusCode responseStatusCode = HttpStatusCode.OK)
