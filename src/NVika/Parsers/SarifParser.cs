@@ -63,7 +63,7 @@ namespace NVika.Parsers
 
                 string filePath = null;
                 Region region = null;
-                if (result.Locations.Count > 0)
+                if (result.Locations?.Count > 0)
                 {
                     if (result.Locations[0].PhysicalLocation != null)
                     {
