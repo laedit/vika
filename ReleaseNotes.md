@@ -1,3 +1,7 @@
+# 3.0.0 (2022-05-xx)
+
+- [#347](https://github.com/laedit/vika/pull/347) - Switch to .NET 6 +breaking
+
 # 2.3.0 (2022-05-17)
 
 - [#343](https://github.com/laedit/vika/pull/343) - Include suggestions in GitHub output by [DanRigby](https://github.com/DanRigby) +enhancement
