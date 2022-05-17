@@ -53,7 +53,10 @@ namespace NVika.BuildServers
             if (issue.Offset != null)
                 outputString.Append($"col={issue.Offset.Start},");
 
-            outputString.Append($"line={issue.Line}::{details}");
+            if (issue.Line != null)
+                outputString.Append($"line={issue.Line}");
+
+            outputString.Append($"::{details}");
 
             Console.WriteLine(outputString.ToString());
         }
