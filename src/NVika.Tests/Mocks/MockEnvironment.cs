@@ -1,5 +1,4 @@
 using NVika.Abstractions;
-using System;
 using System.Collections.Generic;
 
 namespace NVika.Tests.Mocks
@@ -15,7 +14,7 @@ namespace NVika.Tests.Mocks
 
         public string GetEnvironmentVariable(string variable)
         {
-            if(_variables.TryGetValue(variable, out var value))
+            if (_variables.TryGetValue(variable, out var value))
             {
                 return value;
             }
