@@ -1,3 +1,7 @@
+# 2.3.0 (2022-05-17)
+
+- [#343](https://github.com/laedit/vika/pull/343) - Include suggestions in GitHub output by [DanRigby](https://github.com/DanRigby) +enhancement
+
 # 2.2.0 (2021-11-04)
 
 - [#311](https://github.com/laedit/vika/pull/311) - Add path and line to GH console output by [smoogipoo](https://github.com/smoogipoo) +enhancement
