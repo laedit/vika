@@ -1,4 +1,4 @@
-# 3.0.0 (2022-05-xx)
+# 3.0.0 (2022-05-18)
 
 - [#347](https://github.com/laedit/vika/pull/347) - Switch to .NET 6 +breaking
 
