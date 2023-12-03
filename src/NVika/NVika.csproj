@@ -66,7 +66,7 @@
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />
 		<PackageReference Include="Sarif.Sdk" Version="4.3.5" />
-		<PackageReference Include="Serilog" Version="3.0.1" />
+		<PackageReference Include="Serilog" Version="3.1.1" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
 		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.14.0.81108">
 			<PrivateAssets>all</PrivateAssets>
