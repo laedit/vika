@@ -15,13 +15,13 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Fetch all history for all tags and branches
       run: git fetch --prune --unshallow
 
     - name: Cache nuget packages
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/packages.lock.json') }}
@@ -29,18 +29,18 @@ jobs:
           nuget-
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '6.0.x'
 
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.11
+      uses: gittools/actions/gitversion/setup@v1.1.1
       with:
         versionSpec: '5.x'
 
     - name: Check GitVersion
       id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9.11
+      uses: gittools/actions/gitversion/execute@v1.1.1
 
     - name: Echo version
       run: echo ${{ steps.gitversion.outputs.nuGetVersionV2 }}
@@ -52,10 +52,15 @@ jobs:
       shell: powershell
       run: dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
-    - name: InspectCodeAnalysis
+    - name: InspectCode Analysis - old xml
       run: |
         nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
-        ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" --toolset=14.0
+        ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" -f=xml
+
+    - name: InspectCode Analysis
+      run: |
+        nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
+        ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.json" --project="NVika" "src\Vika.sln"
 
     - name: GendarmeAnalysis
       run: |
@@ -63,7 +68,7 @@ jobs:
         ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\net6.0\NVika.exe
       
     - name: LaunchNVika
-      run: .\src\NVika\bin\Release\net6.0\NVika.exe --debug --includesource inspectcodereport.xml ./src/NVika/bin/Release/net6.0/static-analysis.sarif.json GendarmeReport.xml
+      run: .\src\NVika\bin\Release\net6.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net6.0/static-analysis.sarif.json GendarmeReport.xml
 
     # - name: Create release notes
       # run: |
@@ -98,7 +103,7 @@ jobs:
         choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts/chocolatey
         Set-Content $installPath $originalContent
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: artifacts/*
 
@@ -112,7 +117,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
 
       - name: Display structure of downloaded files
         run: ls -R
