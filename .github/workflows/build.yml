@@ -60,6 +60,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         path: inspectcodereport.xml
+        name: inspectcodereport.xml
 
     - name: InspectCode Analysis
       run: |
@@ -69,6 +70,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         path: inspectcodereport.json
+        name: inspectcodereport.json
 
     - name: GendarmeAnalysis
       run: |
@@ -78,6 +80,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         path: GendarmeReport.xml
+        name: GendarmeReport.xml
 
     - name: LaunchNVika
       run: .\src\NVika\bin\Release\net6.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net6.0/static-analysis.sarif.json GendarmeReport.xml
@@ -130,6 +133,7 @@ jobs:
 
     steps:
       - uses: actions/download-artifact@v4
+        name: artifact
 
       - name: Display structure of downloaded files
         run: ls -R
