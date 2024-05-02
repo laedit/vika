@@ -57,16 +57,28 @@ jobs:
         nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
         ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.xml" --project="NVika" "src\Vika.sln" -f=xml
 
+    - uses: actions/upload-artifact@v4
+      with:
+        path: inspectcodereport.xml
+
     - name: InspectCode Analysis
       run: |
         nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
         ./tools/JetBrains.ReSharper.CommandLineTools/tools/inspectcode -o="inspectcodereport.json" --project="NVika" "src\Vika.sln"
 
+    - uses: actions/upload-artifact@v4
+      with:
+        path: inspectcodereport.json
+
     - name: GendarmeAnalysis
       run: |
         nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
         ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\net6.0\NVika.exe
-      
+
+    - uses: actions/upload-artifact@v4
+      with:
+        path: GendarmeReport.xml
+
     - name: LaunchNVika
       run: .\src\NVika\bin\Release\net6.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net6.0/static-analysis.sarif.json GendarmeReport.xml
 
