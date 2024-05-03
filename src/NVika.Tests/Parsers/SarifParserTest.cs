@@ -46,6 +46,7 @@ namespace NVika.Tests.Parsers
                 { "emptyreport.json", new MockFileData(EmptyReportSample) },
                 { "emptyreport.sarif", new MockFileData(EmptyReportSample) },
                 { "falsereport.sarif", new MockFileData("<" + EmptyReportSample) },
+                { "InspectCodeReport.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("InspectCodeReport.json")) },
             });
 
             // act
@@ -88,6 +89,80 @@ namespace NVika.Tests.Parsers
 
             // act
             var results = parser.Parse("static-analysis.sarif.json").ToList();
+
+            // assert
+            Assert.Equal(41, results.Count);
+
+            var issue = results[0];
+            Assert.Equal("Major Code Smell", issue.Category);
+            Assert.Equal("Utility classes should not have public constructors", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Program.cs", issue.FilePath);
+            Assert.Equal("https://rules.sonarsource.com/csharp/RSPEC-1118", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(5u, issue.Line);
+            Assert.Equal("Add a 'protected' constructor or the 'static' keyword to the class declaration.", issue.Message);
+            Assert.Equal("S1118", issue.Name);
+            Assert.Equal(11u, issue.Offset.Start);
+            Assert.Equal(18u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[12];
+            Assert.Equal("Style", issue.Category);
+            Assert.Equal("Remove commented code.", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\SarifParser.cs", issue.FilePath);
+            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0037.html", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(12u, issue.Line);
+            Assert.Equal("Commented code should be removed.", issue.Message);
+            Assert.Equal("CC0037", issue.Name);
+            Assert.Equal(1u, issue.Offset.Start);
+            Assert.Equal(59u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Suggestion, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[3];
+            Assert.Equal("Minor Code Smell", issue.Category);
+            Assert.Equal("Unused \"using\" should be removed", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\IReportParser.cs", issue.FilePath);
+            Assert.Equal("https://rules.sonarsource.com/csharp/RSPEC-1128", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(2u, issue.Line);
+            Assert.Equal("Remove this unnecessary 'using'.", issue.Message);
+            Assert.Equal("S1128", issue.Name);
+            Assert.Equal(1u, issue.Offset.Start);
+            Assert.Equal(26u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[33];
+            Assert.Equal("Design", issue.Category);
+            Assert.Equal("Use nameof", issue.Description);
+            Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\FxCopParser.cs", issue.FilePath);
+            Assert.Equal("https://code-cracker.github.io/diagnostics/CC0021.html", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(34u, issue.Line);
+            Assert.Equal("Use 'nameof(Issue)' instead of specifying the program element name.", issue.Message);
+            Assert.Equal("CC0021", issue.Name);
+            Assert.Equal(56u, issue.Offset.Start);
+            Assert.Equal(63u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+        }
+
+        [Fact]
+        public void Parse_RelativeUris()
+        {
+            // arrange
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "InspectCodeReport.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("InspectCodeReport.json")) }
+            });
+            var parser = new SarifParser();
+            parser.FileSystem = fileSystem;
+
+            // act
+            var results = parser.Parse("InspectCodeReport.json").ToList();
 
             // assert
             Assert.Equal(41, results.Count);
