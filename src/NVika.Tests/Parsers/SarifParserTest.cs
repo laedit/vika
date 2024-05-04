@@ -46,6 +46,7 @@ namespace NVika.Tests.Parsers
                 { "emptyreport.json", new MockFileData(EmptyReportSample) },
                 { "emptyreport.sarif", new MockFileData(EmptyReportSample) },
                 { "falsereport.sarif", new MockFileData("<" + EmptyReportSample) },
+                { "InspectCodeReport.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("InspectCodeReport.json")) },
             });
 
             // act
@@ -144,6 +145,80 @@ namespace NVika.Tests.Parsers
             Assert.Equal("CC0021", issue.Name);
             Assert.Equal(56u, issue.Offset.Start);
             Assert.Equal(63u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+        }
+
+        [Fact]
+        public void Parse_RelativeUris()
+        {
+            // arrange
+            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                { "InspectCodeReport.json", new MockFileData(TestUtilities.GetEmbeddedResourceContent("InspectCodeReport.json")) }
+            });
+            var parser = new SarifParser();
+            parser.FileSystem = fileSystem;
+
+            // act
+            var results = parser.Parse("InspectCodeReport.json").ToList();
+
+            // assert
+            Assert.Equal(121, results.Count);
+
+            var issue = results[0];
+            Assert.Null(issue.Category);
+            Assert.Equal("Use preferred body style: Convert into property, indexer, or event with preferred body style", issue.Description);
+            Assert.Equal("NVika/BuildServers/AppVeyor.cs", issue.FilePath);
+            Assert.Equal("https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeAccessorOwnerBody", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(22u, issue.Line);
+            Assert.Equal("Code body does not conform to code style settings: use expression-bodied property", issue.Message);
+            Assert.Equal("ArrangeAccessorOwnerBody", issue.Name);
+            Assert.Equal(19u, issue.Offset.Start);
+            Assert.Equal(25u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Suggestion, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[12];
+            Assert.Null(issue.Category);
+            Assert.Equal("RoslynAnalyzers Exceptions should be public", issue.Description);
+            Assert.Equal("NVika/Exceptions/NVikaException.cs", issue.FilePath);
+            Assert.Null(issue.HelpUri);
+            Assert.Equal(6u, issue.Line);
+            Assert.Equal("Exceptions should be public", issue.Message);
+            Assert.Equal("CA1064", issue.Name);
+            Assert.Equal(29u, issue.Offset.Start);
+            Assert.Equal(43u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[46];
+            Assert.Null(issue.Category);
+            Assert.Equal("Possible multiple enumeration", issue.Description);
+            Assert.Equal(@"NVika/ParseReportCommand.cs", issue.FilePath);
+            Assert.Equal("https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleMultipleEnumeration", issue.HelpUri.AbsoluteUri);
+            Assert.Equal(135u, issue.Line);
+            Assert.Equal("Possible multiple enumeration", issue.Message);
+            Assert.Equal("PossibleMultipleEnumeration", issue.Name);
+            Assert.Equal(20u, issue.Offset.Start);
+            Assert.Equal(42u, issue.Offset.End);
+            Assert.Null(issue.Project);
+            Assert.Equal(IssueSeverity.Warning, issue.Severity);
+            Assert.Equal("SARIF", issue.Source);
+
+            issue = results[101];
+            Assert.Null(issue.Category);
+            Assert.Equal("RoslynAnalyzers Use PascalCase for named placeholders", issue.Description);
+            Assert.Equal("NVika/BuildServers/AppVeyor.cs", issue.FilePath);
+            Assert.Null(issue.HelpUri);
+            Assert.Equal(72u, issue.Line);
+            Assert.Equal("Use PascalCase for named placeholders.", issue.Message);
+            Assert.Equal("S6678", issue.Name);
+            Assert.Equal(27u, issue.Offset.Start);
+            Assert.Equal(41u, issue.Offset.End);
             Assert.Null(issue.Project);
             Assert.Equal(IssueSeverity.Warning, issue.Severity);
             Assert.Equal("SARIF", issue.Source);

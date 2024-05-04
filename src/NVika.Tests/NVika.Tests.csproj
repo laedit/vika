@@ -12,6 +12,7 @@
     <EmbeddedResource Include="Data\CodeAnalysisLog.xml" />
     <EmbeddedResource Include="Data\CommandBase.txt" />
     <EmbeddedResource Include="Data\GendarmeReport.xml" />
+    <EmbeddedResource Include="Data\InspectCodeReport.json" />
     <EmbeddedResource Include="Data\InspectCodeParser.txt" />
     <EmbeddedResource Include="Data\inspectcodereport.xml" />
     <EmbeddedResource Include="Data\inspectcodereport_2016.2.xml" />

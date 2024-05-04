@@ -2,6 +2,7 @@ using Microsoft.CodeAnalysis.Sarif;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,12 +68,14 @@ namespace NVika.Parsers
                 {
                     if (result.Locations[0].PhysicalLocation != null)
                     {
-                        filePath = result.Locations[0].PhysicalLocation.ArtifactLocation.Uri.LocalPath;
+                        var artifactLocationUri = result.Locations[0].PhysicalLocation.ArtifactLocation.Uri;
+                        filePath = artifactLocationUri.IsAbsoluteUri ? artifactLocationUri.LocalPath : artifactLocationUri.OriginalString;
                         region = result.Locations[0].PhysicalLocation.Region;
                     }
                     else
                     {
-                        filePath = result.AnalysisTarget.Uri.LocalPath;
+                        var analysisTargetUri = result.AnalysisTarget.Uri;
+                        filePath = analysisTargetUri.IsAbsoluteUri ? analysisTargetUri.LocalPath : analysisTargetUri.OriginalString;
                     }
                 }
 

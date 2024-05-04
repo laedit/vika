@@ -1,0 +1,4764 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.6.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 19,
+                  "endLine": 22,
+                  "endColumn": 25,
+                  "charOffset": 613,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "181DA919A494626238C4B900164B88B671B241A7B2B37D49F4E0BE24176D1D94"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/LocalBuildServer.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 19,
+                  "endLine": 16,
+                  "endColumn": 25,
+                  "charOffset": 448,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "58F54D5D1047DB94B3FA69DD386F5F9839A4DC2D5505A5071C108B629992077B"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 17,
+                  "endLine": 16,
+                  "endColumn": 23,
+                  "charOffset": 386,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "D3777C36492734248ACE8C0D271AA513081679CA1561BDFB1B76E43D602FCC81"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 17,
+                  "endLine": 16,
+                  "endColumn": 23,
+                  "charOffset": 390,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "63BE39422DF207992BFB9C5719AE01B7E5401D148356E825DD640550B04E0E8C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 19,
+                  "endLine": 14,
+                  "endColumn": 25,
+                  "charOffset": 367,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "47CCB61D50D86A5527196739F440B28CA2FD617904977867544C226CA8206A3D"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeAccessorOwnerBody",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "Code body does not conform to code style settings: use expression-bodied property"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/SarifParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 17,
+                  "endLine": 17,
+                  "endColumn": 23,
+                  "charOffset": 385,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "FA0B12735272C3865E5D2A500BBA80BFF3843429F0B3D3DEF525A4A82F947AA8"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeObjectCreationWhenTypeEvident",
+          "ruleIndex": 1,
+          "level": "note",
+          "message": {
+            "text": "Redundant type specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 68,
+                  "endLine": 10,
+                  "endColumn": 96,
+                  "charOffset": 255,
+                  "charLength": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "6594A3A5134F5103F24F85674F32D9472D01BD90177CAE8D0AF08E3431889BD6"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeObjectCreationWhenTypeEvident",
+          "ruleIndex": 1,
+          "level": "note",
+          "message": {
+            "text": "Redundant type specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 71,
+                  "endLine": 10,
+                  "endColumn": 97,
+                  "charOffset": 261,
+                  "charLength": 26
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2E36EF147F8FE322E4C2F9D90ED167BC6B92917C8401D5E480E45E54AF064721"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ArrangeObjectCreationWhenTypeEvident",
+          "ruleIndex": 1,
+          "level": "note",
+          "message": {
+            "text": "Redundant type specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 73,
+                  "endLine": 10,
+                  "endColumn": 101,
+                  "charOffset": 266,
+                  "charLength": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "7FFC99136345CCFC97E3A9B8EBDC3D872E80A2D5F19741942B5A5055DCE78E55"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "AssignNullToNotNullAttribute",
+          "ruleIndex": 2,
+          "message": {
+            "text": "Possible 'null' assignment to non-nullable entity"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/ReportParserBase.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 64,
+                  "endLine": 62,
+                  "endColumn": 160,
+                  "charOffset": 1984,
+                  "charLength": 96
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "A2002CE24E0227D5EFEF0C86829B27D317DCF550F08B4D041C16B4CEDD70AB22"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1031",
+          "ruleIndex": 3,
+          "message": {
+            "text": "Modify 'Run' to catch a more specific allowed exception type, or rethrow the exception"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 13,
+                  "endLine": 56,
+                  "endColumn": 18,
+                  "charOffset": 1474,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "24197C05E5135B492C72FE5C5984B8F4D7530258F117017FBAE235CE3F63BECB"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1032",
+          "ruleIndex": 4,
+          "message": {
+            "text": "Add the following constructor to LoadingReportException: public LoadingReportException()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Exceptions/LoadingReportException.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 8
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 27,
+                  "endLine": 6,
+                  "endColumn": 49,
+                  "charOffset": 94,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "362A3C0CB7C2270750C1272ACE364D24E59AA1BD9A12DBD16C6800FCAA6EBB02"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1064",
+          "ruleIndex": 5,
+          "message": {
+            "text": "Exceptions should be public"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Exceptions/NVikaException.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 29,
+                  "endLine": 6,
+                  "endColumn": 43,
+                  "charOffset": 96,
+                  "charLength": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "627C78DE983EAA3B1AD811D8A911A373A1D779B1D1D3CB5B07B8579185FA71C6"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1303",
+          "ruleIndex": 6,
+          "message": {
+            "text": "Method 'int Program.Run(string[] args)' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"Error: logger is not configured.\"."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 39,
+                  "endLine": 60,
+                  "endColumn": 73,
+                  "charOffset": 1613,
+                  "charLength": 34
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "F8A1CF7C1EFAA3D06265C7D78AAC007BE1B61E8221BC58B50F7706AA22E6563B"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in 'InspectCodeParser.GetOffset(XAttribute, string, uint?)' with a call to 'int.Parse(string, IFormatProvider)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 75,
+                  "endLine": 82,
+                  "endColumn": 91,
+                  "charOffset": 3398,
+                  "charLength": 16
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DECBE303FD1BCFE98DE08843006CDE95D9F709C13B1D4F00F9F0A42C5C4C5D31"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in 'InspectCodeParser.GetOffset(XAttribute, string, uint?)' with a call to 'int.Parse(string, IFormatProvider)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 83,
+                  "startColumn": 71,
+                  "endLine": 83,
+                  "endColumn": 85,
+                  "charOffset": 3531,
+                  "charLength": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "998BF6518A6ED86863A8E171309A728D0B174C04C6C6FDB8D96D053BD5727681"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'LoggerSinkConfiguration.Console([LogEventLevel], [string], [IFormatProvider], [LoggingLevelSwitch], [LogEventLevel?], [ConsoleTheme], [bool], [object])' could vary based on the current user's locale settings. Provide a value for the 'IFormatProvider' argument."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 30,
+                  "endLine": 87,
+                  "endColumn": 100,
+                  "charOffset": 2452,
+                  "charLength": 126
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "45BF65D7D63287FB0C6A247C1A5E44133D212308064A36CD6D1FEE121522A774"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'StringBuilder.Append(ref StringBuilder.AppendInterpolatedStringHandler)' could vary based on the current user's locale settings. Replace this call in 'GitHub.WriteMessage(Issue)' with a call to 'StringBuilder.Append(IFormatProvider, ref StringBuilder.AppendInterpolatedStringHandler)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 17,
+                  "endLine": 49,
+                  "endColumn": 61,
+                  "charOffset": 1543,
+                  "charLength": 44
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "EB6829CD718E6DC9B968B4A38035AF1B21F5549526F7AB2C1AA6230A4C66B143"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'StringBuilder.Append(ref StringBuilder.AppendInterpolatedStringHandler)' could vary based on the current user's locale settings. Replace this call in 'GitHub.WriteMessage(Issue)' with a call to 'StringBuilder.Append(IFormatProvider, ref StringBuilder.AppendInterpolatedStringHandler)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 17,
+                  "endLine": 54,
+                  "endColumn": 66,
+                  "charOffset": 1748,
+                  "charLength": 49
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "C463F4346C0B82E71EE8A823BB1F6ECB0DFC4A697201FE8EF4E6F37E8250C6CF"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'StringBuilder.Append(ref StringBuilder.AppendInterpolatedStringHandler)' could vary based on the current user's locale settings. Replace this call in 'GitHub.WriteMessage(Issue)' with a call to 'StringBuilder.Append(IFormatProvider, ref StringBuilder.AppendInterpolatedStringHandler)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 17,
+                  "endLine": 57,
+                  "endColumn": 58,
+                  "charOffset": 1855,
+                  "charLength": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "0E857C063D6A183E60BA97B2F0C5338DDB40D29E07F3CE21E9DF3B33BE0197A5"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'StringBuilder.Append(ref StringBuilder.AppendInterpolatedStringHandler)' could vary based on the current user's locale settings. Replace this call in 'GitHub.WriteMessage(Issue)' with a call to 'StringBuilder.Append(IFormatProvider, ref StringBuilder.AppendInterpolatedStringHandler)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 13,
+                  "endLine": 59,
+                  "endColumn": 48,
+                  "charOffset": 1913,
+                  "charLength": 35
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "426444D693C55051BFE712483E9A3D0151DEE54EE61962FC54471F04388C094D"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'uint.Parse(string)' could vary based on the current user's locale settings. Replace this call in 'FxCopParser.GetLine(XAttribute)' with a call to 'uint.Parse(string, IFormatProvider)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 20,
+                  "endLine": 70,
+                  "endColumn": 47,
+                  "charOffset": 2141,
+                  "charLength": 27
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "7C287AE5C5B4D097EA35E4A7AC9E3E4992065A91E175C10F44F1EF77A71E33DF"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'uint.Parse(string)' could vary based on the current user's locale settings. Replace this call in 'GendarmeParser.ParseSource(string)' with a call to 'uint.Parse(string, IFormatProvider)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 61,
+                  "endLine": 99,
+                  "endColumn": 115,
+                  "charOffset": 3435,
+                  "charLength": 54
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "16930FB0AE47FA36FDAE6BD7C05A62915645CBA7B34E12D42B22A4CDA243F08C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The behavior of 'uint.Parse(string)' could vary based on the current user's locale settings. Replace this call in 'InspectCodeParser.GetLine(XAttribute, bool)' with a call to 'uint.Parse(string, IFormatProvider)'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 113,
+                  "startColumn": 20,
+                  "endLine": 113,
+                  "endColumn": 51,
+                  "charOffset": 4692,
+                  "charLength": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "1D712ECC12CDBD9D6A65F5B8EF80905A3019CEAD7D10ACD89C4FF04802E82408"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1307",
+          "ruleIndex": 8,
+          "message": {
+            "text": "'string.Contains(char)' has a method overload that takes a 'StringComparison' parameter. Replace this call in 'NVika.Parsers.GendarmeParser.ParseSource(string)' with a call to 'string.Contains(char, System.StringComparison)' for clarity of intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 18,
+                  "endLine": 91,
+                  "endColumn": 38,
+                  "charOffset": 3129,
+                  "charLength": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "60443D1FC79628F5313A699A622E26F25A51D2F72DF106440B6C4C444528B29A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1307",
+          "ruleIndex": 8,
+          "message": {
+            "text": "'string.Replace(string, string?)' has a method overload that takes a 'StringComparison' parameter. Replace this call in 'NVika.BuildServers.AppVeyor.WriteMessage(NVika.Parsers.Issue)' with a call to 'string.Replace(string, string?, System.StringComparison)' for clarity of intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 52,
+                  "endLine": 64,
+                  "endColumn": 110,
+                  "charOffset": 1980,
+                  "charLength": 58
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "AB4C9DDAC26049318775C8716331257305D1E1A2C6E3682DFB8F6CD34D8066C4"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1307",
+          "ruleIndex": 8,
+          "message": {
+            "text": "'string.Replace(string, string?)' has a method overload that takes a 'StringComparison' parameter. Replace this call in 'NVika.BuildServers.GitHub.WriteMessage(NVika.Parsers.Issue)' with a call to 'string.Replace(string, string?, System.StringComparison)' for clarity of intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 47,
+                  "startColumn": 60,
+                  "endLine": 47,
+                  "endColumn": 136,
+                  "charOffset": 1431,
+                  "charLength": 76
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "20DE6181B903662C271CDE3723B1F3076DBBED43CCF5C47F2B42795B1480C399"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1307",
+          "ruleIndex": 8,
+          "message": {
+            "text": "'string.Replace(string, string?)' has a method overload that takes a 'StringComparison' parameter. Replace this call in 'NVika.Parsers.GendarmeParser.GetCategory(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>, string)' with a call to 'string.Replace(string, string?, System.StringComparison)' for clarity of intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 43,
+                  "endLine": 79,
+                  "endColumn": 147,
+                  "charOffset": 2671,
+                  "charLength": 104
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2A973865F9DD5B9EEF99948E132F3FEABEB6E6C6220D9737264D0D13F806FDAE"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA1307",
+          "ruleIndex": 8,
+          "message": {
+            "text": "'string.Replace(string, string?)' has a method overload that takes a 'StringComparison' parameter. Replace this call in 'NVika.Parsers.GendarmeParser.GetCategory(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>, string)' with a call to 'string.Replace(string, string?, System.StringComparison)' for clarity of intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 43,
+                  "endLine": 79,
+                  "endColumn": 185,
+                  "charOffset": 2671,
+                  "charLength": 142
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2A973865F9DD5B9EEF99948E132F3FEABEB6E6C6220D9737264D0D13F806FDAE"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CA2000",
+          "ruleIndex": 9,
+          "message": {
+            "text": "Call System.IDisposable.Dispose on object created by 'new AssemblyCatalog(Assembly.GetExecutingAssembly())' before all references to it are out of scope"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 102,
+                  "startColumn": 29,
+                  "endLine": 102,
+                  "endColumn": 81,
+                  "charOffset": 2894,
+                  "charLength": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "53D32E22D9A1546F5EE1AFF942A5D0F3F5D8083AD09B6866F5E7B99DB9E70A60"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CC0120",
+          "ruleIndex": 10,
+          "message": {
+            "text": "Consider put an default clause in Switch."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 13,
+                  "endLine": 57,
+                  "endColumn": 14,
+                  "charOffset": 1498,
+                  "charLength": 283
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "D6C41D04A2457CF82CC0FDB6F27C9D6FDFB228B83FE14F4B4E089E7441CCD150"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "CC0120",
+          "ruleIndex": 10,
+          "message": {
+            "text": "Consider put an default clause in Switch."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/GitHub.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 13,
+                  "endLine": 40,
+                  "endColumn": 14,
+                  "charOffset": 755,
+                  "charLength": 442
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "90A2E814CEFD99F9E06107474A2A5D3BAEB7ABB30BCFFC325709F55188D51470"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 13,
+                  "endLine": 76,
+                  "endColumn": 18,
+                  "charOffset": 2607,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DED186C0315AAD4BCAEECCE84C4A0846014DFDACA0D19287FAD464D3543B0616"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/ReportParserBase.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 21,
+                  "endLine": 38,
+                  "endColumn": 26,
+                  "charOffset": 1032,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "12C118FA1B682B7EAD33E52896D35D624E1DB42751557E119C0586977328A345"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/ReportParserBase.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 62,
+                  "startColumn": 13,
+                  "endLine": 62,
+                  "endColumn": 18,
+                  "charOffset": 1933,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "A2002CE24E0227D5EFEF0C86829B27D317DCF550F08B4D041C16B4CEDD70AB22"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/SarifParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 13,
+                  "endLine": 30,
+                  "endColumn": 18,
+                  "charOffset": 781,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "AE952744964E522808663FE0E019786A9920610510F14FB415DAA7830863214A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/XmlReportParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 11
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 13,
+                  "endLine": 24,
+                  "endColumn": 18,
+                  "charOffset": 702,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "4CD210BF15ADB3D42DF7F119C32843BB0B214A09F492730C1FAC4991329890E4"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "ConvertToUsingDeclaration",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Convert into 'using' declaration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 103,
+                  "startColumn": 17,
+                  "endLine": 103,
+                  "endColumn": 22,
+                  "charOffset": 2965,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DA2867E5B1129E3E804A51039C0E00284B4EF7A3D2AEACC825239477FEAE2D76"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleInvalidOperationException",
+          "ruleIndex": 12,
+          "message": {
+            "text": "Possible 'System.InvalidOperationException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 51,
+                  "endLine": 78,
+                  "endColumn": 67,
+                  "charOffset": 3227,
+                  "charLength": 16
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "417D4A2D00A3829BCF2E7BDD7BFE29C7C49A42244770D4635509633FA9AB726A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 65,
+                  "endLine": 76,
+                  "endColumn": 71,
+                  "charOffset": 3165,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "71FA55CB063944A2ACDDEB1A1A20AAEA1527E17782CA6F2B6727DF8CFCF6A694"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 44,
+                  "endLine": 77,
+                  "endColumn": 66,
+                  "charOffset": 3226,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "8BFC71D0DCBB16F90E366AC91FB113DC0A819E29A331FD45814EB0AD93447561"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 68,
+                  "endLine": 77,
+                  "endColumn": 74,
+                  "charOffset": 3250,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "8BFC71D0DCBB16F90E366AC91FB113DC0A819E29A331FD45814EB0AD93447561"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 51,
+                  "endLine": 79,
+                  "endColumn": 57,
+                  "charOffset": 3312,
+                  "charLength": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "B6E78123FFF956B11DC95EE9EF66EC3F119774215BFE95B184395702254E7F66"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 98,
+                  "startColumn": 45,
+                  "endLine": 98,
+                  "endColumn": 67,
+                  "charOffset": 3973,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "3E38EAD4654EBC652B0EE9467896C67DC0BAA30E5B8CC782C97BD747E87F654E"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 18,
+                  "endLine": 122,
+                  "endColumn": 40,
+                  "charOffset": 4780,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2DCF023910A17DA0D7596E52A88F56140F88235CAEE209CB83297D722633B98F"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 129,
+                  "startColumn": 41,
+                  "endLine": 129,
+                  "endColumn": 63,
+                  "charOffset": 5058,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "53F0FB7FE42FC1AE75ACD8C42FB480FC5DB6FDE088ECBBE3D1E5399B3FD36F7D"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 20,
+                  "endLine": 135,
+                  "endColumn": 42,
+                  "charOffset": 5286,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "9DE390BD6E59C5978037AB11298B88B08C70F4C97DDEE342973DA7BE5235FF59"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 36,
+                  "endLine": 32,
+                  "endColumn": 41,
+                  "charOffset": 779,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DE8DA05D12DE4CF29D85CB50DA54747A71BF9932A2FC60F93AF60BFA4769F543"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 52,
+                  "endLine": 43,
+                  "endColumn": 57,
+                  "charOffset": 1263,
+                  "charLength": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "C251250F7A5DD96B242D6FDD9D81B7EAEB14722FA7FEEC073D2DEB643075A8A0"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleMultipleEnumeration",
+          "ruleIndex": 13,
+          "message": {
+            "text": "Possible multiple enumeration"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 50,
+                  "endLine": 32,
+                  "endColumn": 60,
+                  "charOffset": 1007,
+                  "charLength": 10
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "73A62A150477CB57A0B471B7A7446256CCC39158A6FA290D26C24FAE6EA29714"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 43,
+                  "endLine": 32,
+                  "endColumn": 71,
+                  "charOffset": 786,
+                  "charLength": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DE8DA05D12DE4CF29D85CB50DA54747A71BF9932A2FC60F93AF60BFA4769F543"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 36,
+                  "endLine": 38,
+                  "endColumn": 62,
+                  "charOffset": 1013,
+                  "charLength": 26
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "D35AAC51F9B891D684738B27D3B5FCA3D2F10F52189FDB3E886A64D087091127"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 39,
+                  "endLine": 39,
+                  "endColumn": 59,
+                  "charOffset": 1086,
+                  "charLength": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "43A0A6ECAACC8391744FF962715BF6A42039E543C8E525A2F553F5D95A8E33C5"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 43,
+                  "endLine": 40,
+                  "endColumn": 62,
+                  "charOffset": 1157,
+                  "charLength": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "8AD9426181B141B532D18E10D75A1016DA72B0C044029BBAECCCB18CCB80461E"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 32,
+                  "endLine": 42,
+                  "endColumn": 60,
+                  "charOffset": 1265,
+                  "charLength": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "26E607932759D9679B51B3C6E9B4C3FAD8CFC1724A0A3CDC5BAC441633B08BE9"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 54,
+                  "endLine": 90,
+                  "endColumn": 77,
+                  "charOffset": 2773,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "138A20479C12C4C4A11199E4FB35076C84FC29AD67233BE28F14027D66B1D6A1"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 25,
+                  "endLine": 28,
+                  "endColumn": 36,
+                  "charOffset": 644,
+                  "charLength": 11
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "D360942E98386A1D471A42D8E2DD38CF134C30F77807A0B81A9805E62E46F49C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 36,
+                  "endLine": 35,
+                  "endColumn": 59,
+                  "charOffset": 920,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2E3FD3E603CDB82779AC3C933E3C7E521C3F0E0B3F77A15C6804E6BF28B718E0"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 50,
+                  "endLine": 39,
+                  "endColumn": 76,
+                  "charOffset": 1099,
+                  "charLength": 26
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "3C338A539669F0BBB3A89AAED0406B68848A9D6810D06EC8730A6D6A79D1A2C2"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 43,
+                  "endLine": 44,
+                  "endColumn": 67,
+                  "charOffset": 1324,
+                  "charLength": 24
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "F69089DBDA6E3DB0E5F2E5DF3D34FDB5DEB388A8DF987F7E38C2765D1C5CFBAF"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 47,
+                  "endLine": 45,
+                  "endColumn": 69,
+                  "charOffset": 1403,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "92E0A1837CB05EF43F8A98649AC0ECE4ACA6661503F70B8588B1051324CFCCE8"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 39,
+                  "endLine": 46,
+                  "endColumn": 64,
+                  "charOffset": 1473,
+                  "charLength": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "FF8504DC8C7B2D9B435F081DCCF51534014F9AF087142E2D76C3ED2808C0B766"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 52,
+                  "endLine": 48,
+                  "endColumn": 80,
+                  "charOffset": 1604,
+                  "charLength": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "1C5E8C4F964FC538B8080FFCFC7D6895BEA1E2B6905E796236F0442A8A99E309"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 39,
+                  "endLine": 52,
+                  "endColumn": 62,
+                  "charOffset": 1828,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "6F07336C669932EDD0B67D642204BFEF8401F4B07B8F21E44E06B1645D395D65"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 39,
+                  "endLine": 52,
+                  "endColumn": 84,
+                  "charOffset": 1828,
+                  "charLength": 45
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "6F07336C669932EDD0B67D642204BFEF8401F4B07B8F21E44E06B1645D395D65"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 61,
+                  "endLine": 79,
+                  "endColumn": 81,
+                  "charOffset": 2689,
+                  "charLength": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2A973865F9DD5B9EEF99948E132F3FEABEB6E6C6220D9737264D0D13F806FDAE"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 63,
+                  "endLine": 25,
+                  "endColumn": 74,
+                  "charOffset": 658,
+                  "charLength": 11
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "87B2EF9509FDB1E450C51D23E6752B7C13359D78AFD8535A2AA5A55910A205E8"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 63,
+                  "endLine": 25,
+                  "endColumn": 97,
+                  "charOffset": 658,
+                  "charLength": 34
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "87B2EF9509FDB1E450C51D23E6752B7C13359D78AFD8535A2AA5A55910A205E8"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 63,
+                  "endLine": 25,
+                  "endColumn": 117,
+                  "charOffset": 658,
+                  "charLength": 54
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "87B2EF9509FDB1E450C51D23E6752B7C13359D78AFD8535A2AA5A55910A205E8"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 62,
+                  "endLine": 32,
+                  "endColumn": 87,
+                  "charOffset": 1019,
+                  "charLength": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "73A62A150477CB57A0B471B7A7446256CCC39158A6FA290D26C24FAE6EA29714"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 77,
+                  "endLine": 33,
+                  "endColumn": 100,
+                  "charOffset": 1130,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "CE777A6FE7EB526749A6619DC841FFDC4C28C6BDA4BF63943669B9E2ED8DC457"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 145,
+                  "endLine": 33,
+                  "endColumn": 168,
+                  "charOffset": 1198,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "CE777A6FE7EB526749A6619DC841FFDC4C28C6BDA4BF63943669B9E2ED8DC457"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 35,
+                  "endLine": 39,
+                  "endColumn": 60,
+                  "charOffset": 1501,
+                  "charLength": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "8D5F7CA53B9AED0C6222749E54FBAB66331F37221972964AAB80314CB21B013A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 36,
+                  "endLine": 40,
+                  "endColumn": 67,
+                  "charOffset": 1570,
+                  "charLength": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "ED836908CED07028ED8F5A417F08BF8204E339065870D1BD92C2D690B6416E10"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 39,
+                  "endLine": 41,
+                  "endColumn": 73,
+                  "charOffset": 1648,
+                  "charLength": 34
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "AB4C5CE555E1B2E144732750C43750AB2F2308F5E88EBDC639C4A03822E0F8C9"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 35,
+                  "endLine": 45,
+                  "endColumn": 61,
+                  "charOffset": 1896,
+                  "charLength": 26
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "92C109F4DA39E2C623D553FC6BCE6E18E22AA6644D35A3B403B83C4D2C307616"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 32,
+                  "endLine": 46,
+                  "endColumn": 57,
+                  "charOffset": 1962,
+                  "charLength": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "CC50F3FF145B5CD247994E8604720C5A9BA1D5D6CC9C2D3F5EEF954061F6799C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 69,
+                  "endLine": 120,
+                  "endColumn": 87,
+                  "charOffset": 4982,
+                  "charLength": 18
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "EBFDFF5FD198A6E066072500DB4BDAD0488E6BCDA45FC15AFA99050E76512BDB"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/XmlReportParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 11
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 32,
+                  "endLine": 28,
+                  "endColumn": 43,
+                  "charOffset": 875,
+                  "charLength": 11
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "B5E42724C876312307725B43BAEF65978664867AEBB7FE7BE45E28A4BB4317A7"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PossibleNullReferenceException",
+          "ruleIndex": 14,
+          "message": {
+            "text": "Possible 'System.NullReferenceException'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 113,
+                  "startColumn": 111,
+                  "endLine": 113,
+                  "endColumn": 112,
+                  "charOffset": 3474,
+                  "charLength": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "25ED66DA911B4B4B33F458560E58F87956CEC297439D7FED0FAF6B4CE44249DC"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 37,
+                  "endLine": 7,
+                  "endColumn": 40,
+                  "charOffset": 114,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "37B7DA73978485A03EF6B1B71805DE41E97495CA339988F5AABB52534542181D"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 40,
+                  "endLine": 9,
+                  "endColumn": 43,
+                  "charOffset": 163,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "066038A2B8BA5776B68B55DB383C393B5C76A1BFCF08CCFE49DC8D1C1F250E63"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 36,
+                  "endLine": 11,
+                  "endColumn": 39,
+                  "charOffset": 208,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "3588B9787C33CF8C4EC8921DF7A4844B6B6861AD2C73B6496E22A60D86EE0F38"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 39,
+                  "endLine": 13,
+                  "endColumn": 42,
+                  "charOffset": 256,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "F88AF5B1B026B181BC2125BC5388E335077AF217E94C9DBCBB0A9A7CFE81C6EE"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 41,
+                  "endLine": 17,
+                  "endColumn": 44,
+                  "charOffset": 363,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "E8D5524BE99B9E2FD8C1A0B3E76FA6C06D307020518303A080CA84825646711F"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 41,
+                  "endLine": 19,
+                  "endColumn": 44,
+                  "charOffset": 413,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "0F54E7F349AB8AEA4239401611009066B898F40E46F664CCBBE030675F1E8088"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 44,
+                  "endLine": 21,
+                  "endColumn": 47,
+                  "charOffset": 466,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "8745F3817E28535C95CD049B413B31F4CB4466D352B07A8316A60E3BAF0CFA18"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 37,
+                  "endLine": 23,
+                  "endColumn": 40,
+                  "charOffset": 512,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "11590D4A8C9FE3C0024D332EC3719951DADC8FD853842C4E8530230EF04158A5"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 40,
+                  "endLine": 25,
+                  "endColumn": 43,
+                  "charOffset": 561,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "47B4E20FA7FD4CFB636FDD0778A4FEFF5F0383907001ED8914C15A924537F684"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Issue.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 39,
+                  "endLine": 27,
+                  "endColumn": 42,
+                  "charOffset": 609,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "CDD2D1EF693D93A57013159CEE97F722E4F296AA4E84B356884A48A36B08C5BF"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Offset.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 37,
+                  "endLine": 5,
+                  "endColumn": 40,
+                  "charOffset": 98,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "C8ACE32C75CDA452EE3F5B53D5DE28189DAA019F46452FBC4D3001FB4E266F3F"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "PropertyCanBeMadeInitOnly.Global",
+          "ruleIndex": 15,
+          "level": "note",
+          "message": {
+            "text": "Property can be made init-only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/Offset.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 35,
+                  "endLine": 7,
+                  "endColumn": 38,
+                  "charOffset": 142,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "41FB4A23A0830D519ED52E74B3AE22AABC68DA22BD5817327975DA87D9BD1140"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "RedundantCaseLabel",
+          "ruleIndex": 16,
+          "message": {
+            "text": "Redundant case label"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 80,
+                  "startColumn": 17,
+                  "endLine": 80,
+                  "endColumn": 32,
+                  "charOffset": 2428,
+                  "charLength": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "49A6EC49A582EE37F0AFC58EA5A360735701103A70132245FB012C2BD6CE21D2"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "RedundantCaseLabel",
+          "ruleIndex": 16,
+          "message": {
+            "text": "Redundant case label"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/FxCopParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 17,
+                  "endLine": 81,
+                  "endColumn": 40,
+                  "charOffset": 2461,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "1BD41118EA9EF1FCA074AF1D677020A466F2FDAC40989C3F261D787BD38BD30C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "RedundantCaseLabel",
+          "ruleIndex": 16,
+          "message": {
+            "text": "Redundant case label"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 17,
+                  "endLine": 66,
+                  "endColumn": 31,
+                  "charOffset": 2227,
+                  "charLength": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "FFBF8E5B99FC2BDA9D6AEAEF5F8CDB3262359DAC285D49D3C51C4D5BD572DFCC"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "RedundantCast",
+          "ruleIndex": 17,
+          "message": {
+            "text": "Type cast is redundant"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/InspectCodeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 111,
+                  "startColumn": 48,
+                  "endLine": 111,
+                  "endColumn": 55,
+                  "charOffset": 4644,
+                  "charLength": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "E20624E26C4D3458A57D897C05141187BF5821ECCD4123BBFCBE7584F41B60D4"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S4524",
+          "ruleIndex": 19,
+          "message": {
+            "text": "Move this 'default:' case to the beginning or end of this 'switch' statement."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/GendarmeParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 17,
+                  "endLine": 67,
+                  "endColumn": 25,
+                  "charOffset": 2259,
+                  "charLength": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "36C196255C7541825A2EF866DA0BE44999910CAB8B968142478DB47A2187E551"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6603",
+          "ruleIndex": 20,
+          "message": {
+            "text": "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Parsers/XmlReportParser.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 11
+                },
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 50,
+                  "endLine": 31,
+                  "endColumn": 53,
+                  "charOffset": 1035,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "D9EA2EB16B98995C79F747D9A4874BE6B82D5440C1EEF737B77CD9F7FC13CBD3"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 27,
+                  "endLine": 69,
+                  "endColumn": 47,
+                  "charOffset": 2252,
+                  "charLength": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "BB178385E8A2C28AEAA7272F176329AB51A29CDDD0B505B99BF13F5A09B0FBFE"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 27,
+                  "endLine": 70,
+                  "endColumn": 49,
+                  "charOffset": 2311,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "0FD4F7B34B4CDB7B3643EEB196C2FB2891116C0A72469FDA0C51C97110F87593"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 27,
+                  "endLine": 71,
+                  "endColumn": 49,
+                  "charOffset": 2373,
+                  "charLength": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "E89BBB9633415626A18464EDC7059B8F18DD86AC624F587E69A301E2BC772DFD"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 72,
+                  "startColumn": 27,
+                  "endLine": 72,
+                  "endColumn": 41,
+                  "charOffset": 2435,
+                  "charLength": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "F43754D9844985BCB05D85862081B6708D3BFE8DF41DE915104C56E36917761E"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 73,
+                  "startColumn": 27,
+                  "endLine": 73,
+                  "endColumn": 51,
+                  "charOffset": 2491,
+                  "charLength": 24
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DDA2F611E796A9A83995E21B7B1FCEFD6C2E3551B4AB9A649C4A7B88114A0B66"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 27,
+                  "endLine": 74,
+                  "endColumn": 47,
+                  "charOffset": 2560,
+                  "charLength": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "27723327DC847DCE0D9B3F636055E17CC8CF4C74BD3D30FB42AD6F9329875410"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 35,
+                  "endLine": 92,
+                  "endColumn": 58,
+                  "charOffset": 3201,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "FD95CB8C9FB2E25A5711E5AC66529B6635A8C8E17A868B23204B751AFD0E43C5"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 105,
+                  "startColumn": 35,
+                  "endLine": 105,
+                  "endColumn": 101,
+                  "charOffset": 4039,
+                  "charLength": 66
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "C8FE7687187D75D1CC666B8BF2EB4CAF17CBB68EE54979034765E5C8DC09C322"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 37,
+                  "endLine": 56,
+                  "endColumn": 66,
+                  "charOffset": 2236,
+                  "charLength": 29
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "4D1AEBB0EA2AA469FEC20C7E0B5341C3C68D00B20C336D0C1D7333EC9951326B"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 35,
+                  "endLine": 60,
+                  "endColumn": 75,
+                  "charOffset": 2395,
+                  "charLength": 40
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "76A375B313C30D2C87E96D6A2AC353571A52BC983BD4D94FD12721495553CB7A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S6678",
+          "ruleIndex": 21,
+          "message": {
+            "text": "Use PascalCase for named placeholders."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 131,
+                  "startColumn": 37,
+                  "endLine": 131,
+                  "endColumn": 60,
+                  "charOffset": 5134,
+                  "charLength": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "1C334ABFFD60982059E26F198D7A43A1DE3258494F07A543738CF12CC7300448"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "S927",
+          "ruleIndex": 22,
+          "message": {
+            "text": "Rename parameter 'reportPaths' to 'remainingArguments' to match the base class declaration."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 42,
+                  "endLine": 42,
+                  "endColumn": 53,
+                  "charOffset": 1784,
+                  "charLength": 11
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "35C9A9D0F20B5AAC5C5A2A0B39A7B4FCAA77A162540DF81F06EB3A1C99D10F2D"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'Category.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 114,
+                  "startColumn": 38,
+                  "endLine": 114,
+                  "endColumn": 42,
+                  "charOffset": 4314,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "7E7EDA96CF1A85E9320126C0F15A61D31E21E7B328CCBCE4F3ACB6592022533C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'Column.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 35,
+                  "endLine": 122,
+                  "endColumn": 39,
+                  "charOffset": 4517,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "864C9E8A5453CB18798B76294BA062DF29B9D8C51BAAB6E653E551B394C00735"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'Details.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 124,
+                  "startColumn": 37,
+                  "endLine": 124,
+                  "endColumn": 41,
+                  "charOffset": 4568,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "7C7E64F349FBE93D8CF0C96B2C1F3EA77ECC5D18D95383A92060449874F6C0EA"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'FileName.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 116,
+                  "startColumn": 38,
+                  "endLine": 116,
+                  "endColumn": 42,
+                  "charOffset": 4366,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "2B4FCF25AC34E1121456AC43E590732397459D4465E6AFB7F2BF6224A3C8CC85"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'Line.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 118,
+                  "startColumn": 33,
+                  "endLine": 118,
+                  "endColumn": 37,
+                  "charOffset": 4413,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "DF70C7673DFA757CBD4EF74F2A5BB4F9837D512D39ACDCC9B4B022CF3668F54A"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'Message.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 112,
+                  "startColumn": 37,
+                  "endLine": 112,
+                  "endColumn": 41,
+                  "charOffset": 4262,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "F338C15789C0B3748D011B6264FB39EA9572A0974AA5267E92033185354C373B"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedAutoPropertyAccessor.Local",
+          "ruleIndex": 23,
+          "message": {
+            "text": "Auto-property accessor 'ProjectName.get' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 41,
+                  "endLine": 120,
+                  "endColumn": 45,
+                  "charOffset": 4468,
+                  "charLength": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "44CB4D801CD0D1C7FAD360FA89494050E293ACE67DB632856ABD5AFDD17B679C"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedParameter.Local",
+          "ruleIndex": 24,
+          "message": {
+            "text": "Parameter 's' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 74,
+                  "endLine": 37,
+                  "endColumn": 75,
+                  "charOffset": 1509,
+                  "charLength": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "16CAFF19DB6D31049A9EAB6958073B2D4DC74C25E2308989836D49BCB5D9A991"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedParameter.Local",
+          "ruleIndex": 24,
+          "message": {
+            "text": "Parameter 's' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/ParseReportCommand.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 80,
+                  "endLine": 38,
+                  "endColumn": 81,
+                  "charOffset": 1627,
+                  "charLength": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "42DA82C44805BB17034FB82CAED07A5DE3829979E0E9752827544EC56DE85F11"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UnusedParameter.Local",
+          "ruleIndex": 24,
+          "message": {
+            "text": "Parameter 's' is never used"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/Program.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 80,
+                  "startColumn": 52,
+                  "endLine": 80,
+                  "endColumn": 53,
+                  "charOffset": 2297,
+                  "charLength": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "1F49B5A220D62A57BABEA9B66D5E2D52A11C356ADCD6141F3B24112ACA2B8782"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        },
+        {
+          "ruleId": "UseObjectOrCollectionInitializer",
+          "ruleIndex": 25,
+          "level": "note",
+          "message": {
+            "text": "Use object initializer"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "NVika/BuildServers/AppVeyor.cs",
+                  "uriBaseId": "solutionDir",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 34,
+                  "endLine": 96,
+                  "endColumn": 37,
+                  "charOffset": 3375,
+                  "charLength": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "contextRegionHash/v1": "AF2A6FC3F9BE3ECD6C6B0FCC89F8CC3563301FABD3537FA93BA9886AA37F5DFC"
+          },
+          "properties": {
+            "tags": ["C#",".NET 6.0"]
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "InspectCode",
+          "organization": "JetBrains, Inc",
+          "fullName": "JetBrains Inspect Code 2024.1.1",
+          "semanticVersion": "241.0.20240415.221055",
+          "informationUri": "http://www.jetbrains.com/resharper/features/command-line.html",
+          "rules": [
+            {
+              "id": "ArrangeAccessorOwnerBody",
+              "fullDescription": {
+                "text": "Use expression or block body"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeAccessorOwnerBody"
+              },
+              "shortDescription": {
+                "text": "Use preferred body style: Convert into property, indexer, or event with preferred body style"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeAccessorOwnerBody",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeStyleIssues",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ArrangeObjectCreationWhenTypeEvident",
+              "fullDescription": {
+                "text": "Add or remove explicit type specification in 'new' expression when type is evident from the usage"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeObjectCreationWhenTypeEvident"
+              },
+              "shortDescription": {
+                "text": "Use preferred style of 'new' expression when created type is evident"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=ArrangeObjectCreationWhenTypeEvident",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeStyleIssues",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "AssignNullToNotNullAttribute",
+              "fullDescription": {
+                "text": "An expression that can have 'null' value is assigned to an entity marked with 'Value cannot be null' attribute. In particular, this can happen when passing such value to a method whose parameter is marked with 'Value cannot be null' attribute."
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=AssignNullToNotNullAttribute"
+              },
+              "shortDescription": {
+                "text": "Possible 'null' assignment to non-nullable entity"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=AssignNullToNotNullAttribute",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "ConstraintViolation",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1031",
+              "fullDescription": {
+                "text": "A general exception such as System.Exception or System.SystemException or a disallowed exception type is caught in a catch statement, or a general catch clause is used. General and disallowed exceptions should not be caught."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Do not catch general exception types"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1032",
+              "fullDescription": {
+                "text": "Failure to provide the full set of constructors can make it difficult to correctly handle exceptions."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Implement standard exception constructors"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1064",
+              "fullDescription": {
+                "text": "An internal exception is visible only inside its own internal scope. After the exception falls outside the internal scope, only the base exception can be used to catch the exception. If the internal exception is inherited from T:System.Exception, T:System.SystemException, or T:System.ApplicationException, the external code will not have sufficient information to know what to do with the exception."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Exceptions should be public"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1303",
+              "fullDescription": {
+                "text": "A method passes a string literal as a parameter to a constructor or method in the .NET Framework class library and that string should be localizable. To fix a violation of this rule, replace the string literal with a string retrieved through an instance of the ResourceManager class."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Do not pass literals as localized parameters"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1305",
+              "fullDescription": {
+                "text": "A method or constructor calls one or more members that have overloads that accept a System.IFormatProvider parameter, and the method or constructor does not call the overload that takes the IFormatProvider parameter. When a System.Globalization.CultureInfo or IFormatProvider object is not supplied, the default value that is supplied by the overloaded member might not have the effect that you want in all locales. If the result will be based on the input from/output displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider'. Otherwise, if the result will be stored and accessed by software, such as when it is loaded from disk/database and when it is persisted to disk/database, specify 'CultureInfo.InvariantCulture'."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Specify IFormatProvider"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA1307",
+              "fullDescription": {
+                "text": "A string comparison operation uses a method overload that does not set a StringComparison parameter. It is recommended to use the overload with StringComparison parameter for clarity of intent. If the result will be displayed to the user, such as when sorting a list of items for display in a list box, specify 'StringComparison.CurrentCulture' or 'StringComparison.CurrentCultureIgnoreCase' as the 'StringComparison' parameter. If comparing case-insensitive identifiers, such as file paths, environment variables, or registry keys and values, specify 'StringComparison.OrdinalIgnoreCase'. Otherwise, if comparing case-sensitive identifiers, specify 'StringComparison.Ordinal'."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Specify StringComparison for clarity"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CA2000",
+              "fullDescription": {
+                "text": "If a disposable object is not explicitly disposed before all references to it are out of scope, the object will be disposed at some indeterminate time when the garbage collector runs the finalizer of the object. Because an exceptional event might occur that will prevent the finalizer of the object from running, the object should be explicitly disposed instead."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Dispose objects before losing scope"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CC0120",
+              "shortDescription": {
+                "text": "RoslynAnalyzers Your Switch maybe include default clause"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ConvertToUsingDeclaration",
+              "fullDescription": {
+                "text": "Replace 'using' statement with 'using' declaration"
+              },
+              "shortDescription": {
+                "text": "Convert into 'using' declaration"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "LanguageUsage",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "PossibleInvalidOperationException",
+              "fullDescription": {
+                "text": "Possible call to method is invalid for the object's current state"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleInvalidOperationException"
+              },
+              "shortDescription": {
+                "text": "Possible 'System.InvalidOperationException'"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleInvalidOperationException",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeSmell",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "PossibleMultipleEnumeration",
+              "fullDescription": {
+                "text": "Possible multiple enumeration of IEnumerable or IAsyncEnumerable<T>"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleMultipleEnumeration"
+              },
+              "shortDescription": {
+                "text": "Possible multiple enumeration"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleMultipleEnumeration",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeSmell",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "PossibleNullReferenceException",
+              "fullDescription": {
+                "text": "Dereferencing an expression that can have 'null' value. This warning is detected either when there is a comparison with 'null' earlier in the code or when this value is returned by a member marked with 'Value can be null' attribute."
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleNullReferenceException"
+              },
+              "shortDescription": {
+                "text": "Possible 'System.NullReferenceException'"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=PossibleNullReferenceException",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeSmell",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "PropertyCanBeMadeInitOnly.Global",
+              "fullDescription": {
+                "text": "Property setter can be replaced with 'init' accessor to enforce property immutability"
+              },
+              "shortDescription": {
+                "text": "Property can be made init-only: Non-private accessibility"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "BestPractice",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "RedundantCaseLabel",
+              "fullDescription": {
+                "text": "'case' label statement is redundant"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantCaseLabel"
+              },
+              "shortDescription": {
+                "text": "Redundant 'case' label"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantCaseLabel",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeRedundancy",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "RedundantCast",
+              "fullDescription": {
+                "text": "Type cast can be safely removed"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantCast"
+              },
+              "shortDescription": {
+                "text": "Redundant cast"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantCast",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeRedundancy",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "S3871",
+              "fullDescription": {
+                "text": "The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be public for that to work."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Exception types should be \"public\""
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "S4524",
+              "fullDescription": {
+                "text": "The switch statement is a conditional statement that executes a sequence of instructions based on patterns matching the provided value."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers \"default\" clauses should be first or last"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "S6603",
+              "fullDescription": {
+                "text": "Both the List.TrueForAll method and the IEnumerable.All method can be used to check if all list elements satisfy a given condition in a collection. However, List.TrueForAll can be faster than IEnumerable.All for List objects. The performance difference may be minor for small collections, but for large collections, it can be noticeable."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "S6678",
+              "fullDescription": {
+                "text": "Within a message template each named placeholder should be in PascalCase."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Use PascalCase for named placeholders"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "S927",
+              "fullDescription": {
+                "text": "Parameters are part of the method signature and its identity."
+              },
+              "shortDescription": {
+                "text": "RoslynAnalyzers Parameter names should match base declaration and other partial definitions"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "RoslynAnalyzers",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "UnusedAutoPropertyAccessor.Local",
+              "fullDescription": {
+                "text": "Accessor in auto-property is never used"
+              },
+              "shortDescription": {
+                "text": "Auto-property accessor is never used: Private accessibility"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "CodeSmell",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "UnusedParameter.Local",
+              "fullDescription": {
+                "text": "Parameter is never used"
+              },
+              "shortDescription": {
+                "text": "Unused parameter: Private accessibility"
+              },
+              "relationships": [
+                {
+                  "target": {
+                    "id": "DeclarationRedundancy",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "UseObjectOrCollectionInitializer",
+              "fullDescription": {
+                "text": "Suggest to replace object sequential assignments to newly created object fields by object initializer"
+              },
+              "help": {
+                "text": "https://www.jetbrains.com/resharperplatform/help?Keyword=UseObjectOrCollectionInitializer"
+              },
+              "shortDescription": {
+                "text": "Use object or collection initializer when possible"
+              },
+              "helpUri": "https://www.jetbrains.com/resharperplatform/help?Keyword=UseObjectOrCollectionInitializer",
+              "relationships": [
+                {
+                  "target": {
+                    "id": "LanguageUsage",
+                    "toolComponent": {
+                      "name": "InspectCode"
+                    }
+                  },
+                  "kinds": [
+                    "superset"
+                  ]
+                }
+              ]
+            }
+          ],
+          "taxa": [
+            {
+              "id": "BestPractice",
+              "shortDescription": {
+                "text": "Common Practices and Code Improvements"
+              }
+            },
+            {
+              "id": "CodeRedundancy",
+              "shortDescription": {
+                "text": "Redundancies in Code"
+              }
+            },
+            {
+              "id": "CodeSmell",
+              "shortDescription": {
+                "text": "Potential Code Quality Issues"
+              }
+            },
+            {
+              "id": "CodeStyleIssues",
+              "shortDescription": {
+                "text": "Syntax Style"
+              }
+            },
+            {
+              "id": "ConstraintViolation",
+              "shortDescription": {
+                "text": "Constraints Violations"
+              }
+            },
+            {
+              "id": "DeclarationRedundancy",
+              "shortDescription": {
+                "text": "Redundancies in Symbol Declarations"
+              }
+            },
+            {
+              "id": "LanguageUsage",
+              "shortDescription": {
+                "text": "Language Usage Opportunities"
+              }
+            },
+            {
+              "id": "RoslynAnalyzers",
+              "shortDescription": {
+                "text": "Roslyn Analyzers"
+              }
+            }
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://github.com/laedit/vika",
+          "revisionId": "07246da7e5540fe517c469c66d85f9e2b9bf05df",
+          "branch": "heads/pull/472/merge"
+        }
+      ],
+      "originalUriBaseIds": {
+        "solutionDir": {
+          "uri": "file:///D:/a/vika/vika/src/",
+          "description": {
+            "text": "Solution Directory"
+          }
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "NVika/BuildServers/AppVeyor.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "AC400E12BC70402EC80F32C8FD984F55",
+            "sha-1": "ADBDDDCD891C04D64121867F22F9578033B782D3",
+            "sha-256": "7608DAD61A0D859C81F84622D58A614A8CE324604659FF80841892EA8A23E3FE"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/BuildServers/LocalBuildServer.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "8E1538243F985B598E779D360C589061",
+            "sha-1": "EFC907A0FE23E0A6A793A0F3ED6303ED60EFD542",
+            "sha-256": "AC567FAAEC21F29E7AC87D40DDCA3FCE4A6F9AE9C59FA885AE84DC05049BC760"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/FxCopParser.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "63661C412EB8C92AA740E992A770DBA0",
+            "sha-1": "1106B9F993CE2AE2AD9311D1927752BD49D85CED",
+            "sha-256": "82CFB81B03C4D5BEB066CBEC3163A2B80B9CDB1ED1E1820FCF68306F8E56D35C"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/GendarmeParser.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "AA14C1DCD18E35FF30FD23FD587ECCC3",
+            "sha-1": "D99E72D9D2AAE73CEBCA6F7FD69866959BBC8A15",
+            "sha-256": "1692AADB465AD0E95CE6FA852248C20EA050A1C46CBA02C61710220C509AB4DD"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/InspectCodeParser.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "83D9D6009384B23CAAE9894C1E8EF74B",
+            "sha-1": "03688C2D2B9FAC4369A86BBDD645748CB70BC02B",
+            "sha-256": "B68D126602A12C5B9D3B29BC3E4BB6240CD67AEAA49F79C61AAB900CF246B141"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/SarifParser.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "6B09C13779976BAF599B24C325A642AD",
+            "sha-1": "F18B0654A40EABF9400E3BE56FE0C4BF3AF00DBC",
+            "sha-256": "78787F99E591136006AE19B3F98D33A3FCCD09B962112C4A3C486D32740932AA"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/ReportParserBase.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "5C51034F5E56B80BEF00E9569473715A",
+            "sha-1": "C3F86C677F98B1BB520EE125812B9C64174F65B3",
+            "sha-256": "E42C9269344BC874E8C4FEDE35808D7821009B0EBBBC370036CC1B179A3F4096"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Program.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "3D6A4F15F45A16241A299F1A0E6A8C9C",
+            "sha-1": "3BACE00F63A4FB58FDA87DB740EC446FB8966784",
+            "sha-256": "997B1EFA9FE73E429661395D9AB7DD793E5FA3BB94DE770CC1721D6E43F24362"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Exceptions/LoadingReportException.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "2AF3D472B3C951D05479D280AF6C711D",
+            "sha-1": "E4712EA8091E17BA91B1D4EFB4F486CA10B36653",
+            "sha-256": "B012284C6DB851C040070FCB3FD0B0FD379EB84D98FBB2E21D68D5C560766C7C"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Exceptions/NVikaException.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "520AAE88ED93C3116A24FE90E9C55331",
+            "sha-1": "65B36637E45A181AF157BAEC88DD0A7194A2C2C4",
+            "sha-256": "55146C0869E92F4409471BFF66E9F208BADEEE783D20DC1F1935B6AB44C6E58C"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/BuildServers/GitHub.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "7F0AE94E769C04CA92EA534B929D9D52",
+            "sha-1": "EFF1B17FEB402A3FA7600AA8909251D4369F67CC",
+            "sha-256": "0CC6779B4B594D4A761ECDA9C0FF0E846A34E2898DD861983DB2FA282870274A"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/XmlReportParser.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "7B9272B112EB6E9814853D2EA30B7992",
+            "sha-1": "F39B3EBBBAF8C640275F41FE104BFB1E4DAC2A29",
+            "sha-256": "571B11945BACC71246703E8D968ABB7D3E36CDD3FFF90052F533FE807E8B609D"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/ParseReportCommand.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "6A3E39BDA4AE5333C6DFCC56CBC9DFB5",
+            "sha-1": "E2C69C18B3970FF27F9DF77857786EB9BB0A486F",
+            "sha-256": "ED1B001436ACD9286852D41C0FDBE1906DBE55B18C4F04C4A2C701BFB0674239"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/Issue.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "26E31E92B07FDC5292C8A028FDBCDB2E",
+            "sha-1": "E59BDCA1D3CB2C1BFEF8FBAC09B8A0B0E0F29A86",
+            "sha-256": "D84721F00D905BF9B729D1FBD14CDBDB4F88E8F3492E995588368C7CD2A6B17F"
+          }
+        },
+        {
+          "location": {
+            "uri": "NVika/Parsers/Offset.cs",
+            "uriBaseId": "solutionDir"
+          },
+          "hashes": {
+            "md5": "13AACB8596FF890B032C8472754BA4CD",
+            "sha-1": "3FBFA75F9099F78105D6E0DF6EBE80F8367D20C3",
+            "sha-256": "2AAA09242B92FBFC74DB1A7D3FF50B06DE0245BF96D1CC781225D6683FCB59E0"
+          }
+        }
+      ],
+      "columnKind": "utf16CodeUnits"
+    }
+  ]
+}
