@@ -166,11 +166,11 @@ namespace NVika.Tests.Parsers
 
             // assert
             Assert.Equal(121, results.Count);
-
+            var sb = new System.Text.StringBuilder();
             var issue = results[0];
-            System.Console.WriteLine();
-            System.Console.WriteLine("Issue 0");
-            System.Console.WriteLine(issue);
+            sb.AppendLine();
+            sb.AppendLine("Issue 0");
+            sb.AppendLine(issue.ToString());
             // Assert.Equal("Major Code Smell", issue.Category);
             // Assert.Equal("Utility classes should not have public constructors", issue.Description);
             // Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Program.cs", issue.FilePath);
@@ -185,9 +185,9 @@ namespace NVika.Tests.Parsers
             // Assert.Equal("SARIF", issue.Source);
 
             issue = results[12];
-            System.Console.WriteLine();
-            System.Console.WriteLine("Issue 12");
-            System.Console.WriteLine(issue);
+            sb.AppendLine();
+            sb.AppendLine("Issue 12");
+            sb.AppendLine(issue.ToString());
             // Assert.Equal("Style", issue.Category);
             // Assert.Equal("Remove commented code.", issue.Description);
             // Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\SarifParser.cs", issue.FilePath);
@@ -202,9 +202,9 @@ namespace NVika.Tests.Parsers
             // Assert.Equal("SARIF", issue.Source);
 
             issue = results[46];
-            System.Console.WriteLine();
-            System.Console.WriteLine("Issue 46");
-            System.Console.WriteLine(issue);
+            sb.AppendLine();
+            sb.AppendLine("Issue 46");
+            sb.AppendLine(issue.ToString());
             // Assert.Equal("Minor Code Smell", issue.Category);
             // Assert.Equal("Unused \"using\" should be removed", issue.Description);
             // Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\IReportParser.cs", issue.FilePath);
@@ -219,9 +219,9 @@ namespace NVika.Tests.Parsers
             // Assert.Equal("SARIF", issue.Source);
 
             issue = results[101];
-            System.Console.WriteLine();
-            System.Console.WriteLine("Issue 101");
-            System.Console.WriteLine(issue);
+            sb.AppendLine();
+            sb.AppendLine("Issue 101");
+            sb.AppendLine(issue.ToString());
             // Assert.Equal("Design", issue.Category);
             // Assert.Equal("Use nameof", issue.Description);
             // Assert.Equal(@"C:\Users\jerem\source\repos\Vika\NVika\Parsers\FxCopParser.cs", issue.FilePath);
@@ -234,7 +234,7 @@ namespace NVika.Tests.Parsers
             // Assert.Null(issue.Project);
             // Assert.Equal(IssueSeverity.Warning, issue.Severity);
             // Assert.Equal("SARIF", issue.Source);
-            Assert.Fail();
+            Assert.Fail(sb.ToString());
         }
 
         private ILogger GetLogger(Serilog.Events.LogEventLevel logEventLevel = Serilog.Events.LogEventLevel.Information)
