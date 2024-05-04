@@ -99,8 +99,8 @@ namespace NVika
         {
             try
             {
-                var first = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-                using (var container = new CompositionContainer(first))
+                using (var currentAssemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly()))
+                using (var container = new CompositionContainer(currentAssemblyCatalog))
                 {
                     var batch = new CompositionBatch();
                     batch.AddExportedValue<IFileSystem>(new FileSystem());
