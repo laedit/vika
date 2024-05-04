@@ -1,3 +1,7 @@
+# 3.0.1 (2024-05-04)
+
+- [#472](https://github.com/laedit/vika/pull/472) - Fix relative uri in SARIF reports +fix
+
 # 3.0.0 (2022-05-18)
 
 - [#347](https://github.com/laedit/vika/pull/347) - Switch to .NET 6 +breaking
