@@ -5,10 +5,7 @@ Also means 'bug' in Finnish.
 
 [![Licence Apache 2](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://github.com/laedit/vika/blob/master/LICENSE) 
 ![Build](https://github.com/laedit/vika/workflows/Build/badge.svg)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=alert_status)](https://sonarcloud.io/dashboard?id=laedit_vika) 
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=laedit_vika)
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=laedit_vika)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=laedit_vika)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=laedit_vika&metric=alert_status)](https://sonarcloud.io/project/overview?id=laedit_vika) 
 
 ## What it is
 Right now it's just a tiny tool which parse analysis reports and send messages to the build server, or in console if it's not executed on a build server.
@@ -56,9 +53,11 @@ It is possible to process several reports at the same time: `NVika parsereport r
  
 ## Build servers
 ### Supported
-  - [AppVeyor](http://appveyor.com)
+  - Local build: output in console
+  - [AppVeyor](https://appveyor.com)
 ![AppVeyor example](resources/AppVeyor.png)
-  
+  - [GitHub actions](https://github.com)
+
 ### To come
  - [TeamCity](https://github.com/laedit/vika/issues/4)?
  - [ContinuaCI](https://github.com/laedit/vika/issues/3)?
@@ -66,13 +65,6 @@ It is possible to process several reports at the same time: `NVika parsereport r
 
 I am really wondering if there is any value to supporting these three, because there doesn't support to add build message like AppVeyor but only log message.
 And they support custom HTML report, so an xslt transformation is enough.
-
-## What it will be
-A website will be added for displaying a nice and shiny aggregated report from all source to a dedicated page for each GitHub project.
-
-There also will be a solution to upload a temporary report stored for a week.
-
-And the client may push reports through the website public API.
 
 ## Contributing
 All contributions are welcome, please read our [contributing guide](CONTRIBUTING.md).

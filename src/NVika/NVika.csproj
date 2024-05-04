@@ -16,6 +16,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</PackageTags>
 		<PackageReleaseNotes>https://github.com/laedit/vika/releases</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 		<Deterministic>true</Deterministic>
 	</PropertyGroup>
@@ -43,14 +44,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\resources\icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
+		<None Include="..\..\resources\icon.png" Pack="true" PackagePath="\" />
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
