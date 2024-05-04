@@ -213,7 +213,7 @@ namespace NVika.Tests.Parsers
             Assert.Null(issue.Category);
             Assert.Equal("RoslynAnalyzers Use PascalCase for named placeholders", issue.Description);
             Assert.Equal("NVika/BuildServers/AppVeyor.cs", issue.FilePath);
-            Assert.Null(issue.HelpUri.AbsoluteUri);
+            Assert.Null(issue.HelpUri);
             Assert.Equal(72u, issue.Line);
             Assert.Equal("Use PascalCase for named placeholders.", issue.Message);
             Assert.Equal("S6678", issue.Name);
