@@ -99,7 +99,7 @@ namespace NVika
         {
             try
             {
-                using(var currentAssemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly()))
+                using (var currentAssemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly()))
                 using (var container = new CompositionContainer(currentAssemblyCatalog))
                 {
                     var batch = new CompositionBatch();
