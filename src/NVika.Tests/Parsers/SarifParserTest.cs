@@ -234,6 +234,7 @@ namespace NVika.Tests.Parsers
             // Assert.Null(issue.Project);
             // Assert.Equal(IssueSeverity.Warning, issue.Severity);
             // Assert.Equal("SARIF", issue.Source);
+            Assert.Fail();
         }
 
         private ILogger GetLogger(Serilog.Events.LogEventLevel logEventLevel = Serilog.Events.LogEventLevel.Information)
