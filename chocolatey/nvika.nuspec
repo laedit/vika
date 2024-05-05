@@ -11,7 +11,8 @@
     <iconUrl>https://cdn.rawgit.com/laedit/vika/master/resources/icon.png</iconUrl>
     <packageSourceUrl>https://github.com/laedit/vika/tree/master/chocolatey</packageSourceUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Parse analysis reports (InspectCode, ...) and send messages to build server or console.</description>
+    <description>Parse analysis reports (InspectCode, Gendarme, Roslyn Analyzers...) and send messages to build server or console.</description>
+    <summary>Parse analysis reports and send messages to build server or console.</summary>
     <releaseNotes>https://github.com/laedit/vika/releases</releaseNotes>
     <tags>report parsing build server inspectcode FxCop SARIF Roslyn Gendarme</tags>
   </metadata>
