@@ -111,10 +111,11 @@ jobs:
 
     - name: Create chocolatey version
       run: |
+        $winVersionChecksum = (Get-FileHash "artifacts/zips/NVika.win-x86.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip" -Algorithm SHA256).Hash
         mkdir ./artifacts/chocolatey
         $installPath = "chocolatey/tools/chocolateyInstall.ps1"
         $originalContent = Get-Content $installPath
-        $originalContent.replace('[version]', "${{ steps.gitversion.outputs.nuGetVersionV2 }}") | Set-Content $installPath
+        $originalContent.replace('[version]', "${{ steps.gitversion.outputs.nuGetVersionV2 }}").replace('[checksum]', $winVersionChecksum) | Set-Content $installPath
         choco pack chocolatey/nvika.nuspec --version ${{ steps.gitversion.outputs.nuGetVersionV2 }} --outdir artifacts/chocolatey
         Set-Content $installPath $originalContent
 
