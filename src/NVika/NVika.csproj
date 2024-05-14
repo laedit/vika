@@ -9,7 +9,7 @@
 		<Authors>laedit</Authors>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Description>Tool - Parse analysis reports (InspectCode, ...) and send messages to build server or console.</Description>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/laedit/vika</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/laedit/vika</RepositoryUrl>
@@ -45,7 +45,6 @@
 
 	<ItemGroup>
 		<None Include="..\..\resources\icon.png" Pack="true" PackagePath="\" />
-		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
 		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
