@@ -1,3 +1,7 @@
+# next
+
+- [#477](https://github.com/laedit/vika/pull/477) - Fix license on nuget +enhancement
+
 # 3.0.1 (2024-05-04)
 
 - [#472](https://github.com/laedit/vika/pull/472) - Fix relative uri in SARIF reports +fix
