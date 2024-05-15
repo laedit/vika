@@ -1,5 +1,6 @@
 # next
 
+- [#478](https://github.com/laedit/vika/pull/478) - Upgrade to .NET 8 +breaking
 - [#477](https://github.com/laedit/vika/pull/477) - Fix license on nuget +enhancement
 
 # 3.0.1 (2024-05-04)
