@@ -32,7 +32,7 @@ jobs:
       uses: microsoft/infersharpaction@v1.5
       id: runinfersharp
       with:
-        binary-path: 'src/NVika/bin/Release/net6.0/'
+        binary-path: 'src/NVika/bin/Release/net8.0/'
 
     - name: Upload SARIF output to GitHub Security Center
       uses: github/codeql-action/upload-sarif@v3
