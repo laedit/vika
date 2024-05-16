@@ -17,16 +17,14 @@ jobs:
     steps:
     - name: Set color
       id: color-selector
-      shell: cmd
       run: |
-        echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+        "SELECTED_COLOR=green" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
         type "$GITHUB_OUTPUT"
     - name: Get color
       env:
         SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
-      shell: cmd
       run: |
-        echo "The selected color is $SELECTED_COLOR"
+        echo "The selected color is $env:SELECTED_COLOR"
         echo "The selected color is ${{ steps.color-selector.outputs.SELECTED_COLOR }}"
         exit 1
 
