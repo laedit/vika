@@ -95,12 +95,12 @@ jobs:
 
     - name: Create windows version
       run: |
-        dotnet publish src/NVika --configuration Release --output ./publish --runtime win-x86 -p:PublishAot=true -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
-        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        dotnet publish src/NVika --configuration Release --output ./publish --runtime win-x64 -p:PublishAot=true -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x64.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
 
     - name: Create chocolatey version
       run: |
-        $winVersionChecksum = (Get-FileHash "artifacts/zips/NVika.win-x86.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip" -Algorithm SHA256).Hash
+        $winVersionChecksum = (Get-FileHash "artifacts/zips/NVika.win-x64.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip" -Algorithm SHA256).Hash
         mkdir ./artifacts/chocolatey
         $installPath = "chocolatey/tools/chocolateyInstall.ps1"
         $originalContent = Get-Content $installPath
@@ -156,14 +156,14 @@ jobs:
           asset_name: NVika.netcore.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
     
-      - name: Upload Zip win-x86
+      - name: Upload Zip win-x64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifact/zips/NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
-          asset_name: NVika.win-x86.${{ steps.get_version.outputs.version }}.zip
+          asset_path: ./artifact/zips/NVika.win-x64.${{ steps.get_version.outputs.version }}.zip
+          asset_name: NVika.win-x64.${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
 
       - name: Chocolatey push
