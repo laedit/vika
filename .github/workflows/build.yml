@@ -45,15 +45,15 @@ jobs:
     - name: Echo version
       run: echo ${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
-    - name: Test
-      run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-
     - name: Build
       id: build
       run: |
         dotnet build src --configuration Release --no-restore
         echo "release_folder=./src/NVika/bin/Release/net8.0" >> "$GITHUB_OUTPUT"
 
+    - name: Test
+      run: dotnet test src --configuration Release --no-build --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  
     - name: InspectCode Analysis - old xml
       run: |
         nuget install JetBrains.ReSharper.CommandLineTools -ExcludeVersion -OutputDirectory tools
