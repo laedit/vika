@@ -48,7 +48,7 @@ jobs:
     - name: Build
       id: build
       run: |
-        dotnet build src --configuration Release --no-restore
+        dotnet build src --configuration Release
         echo "release_folder=./src/NVika/bin/Release/net8.0" >> $env:GITHUB_OUTPUT
 
     - name: Test
