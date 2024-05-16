@@ -49,8 +49,10 @@ jobs:
       run: dotnet test src --configuration Release --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     - name: Build
-      shell: powershell
-      run: dotnet build src --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+      id: build
+      run: |
+        dotnet build src --configuration Release --no-restore
+        echo "{release_folder}=./src/NVika/bin/Release/net8.0" >> "$GITHUB_OUTPUT"
 
     - name: InspectCode Analysis - old xml
       run: |
@@ -75,7 +77,7 @@ jobs:
     - name: GendarmeAnalysis
       run: |
         nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
-        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\net8.0\NVika.exe
+        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore ${{ steps.build.outputs.release_folder }}/NVika.exe
 
     - uses: actions/upload-artifact@v4
       with:
@@ -83,30 +85,27 @@ jobs:
         name: GendarmeReport.xml
 
     - name: LaunchNVika
-      run: .\src\NVika\bin\Release\net8.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net8.0/static-analysis.sarif.json GendarmeReport.xml
+      run: ${{ steps.build.outputs.release_folder }}/NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ${{ steps.build.outputs.release_folder }}/static-analysis.sarif.json GendarmeReport.xml
 
-    # - name: Create release notes
-      # run: |
-        # dotnet SemanticReleaseNotesParser -g=categories --debug -o="artifacts/ReleaseNotes.html" --pluralizecategoriestitle --includestyle
-        # dotnet SemanticReleaseNotesParser -g=categories --debug -t=environment -f=markdown --pluralizecategoriestitle
+    - name: Create Nuget package
+      run: dotnet pack src --configuration Release --nologo --no-build /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
     - name: Create MSBuild package
       run: |
         Copy-Item -Path resources/icon.png -Destination src\NVika.MSBuild\
         mkdir src\NVika.MSBuild\tools\
-        Copy-Item -Path "src/NVika/bin/Release/net8.0/publish/*" -Destination src\NVika.MSBuild\tools\
+        Copy-Item -Path "${{ steps.build.outputs.release_folder }}/publish/*" -Destination src\NVika.MSBuild\tools\
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
     - name: Create netcore packages
       run: |
         mkdir ./artifacts/zips
-        Compress-Archive -Path src/NVika/bin/Release/net8.0/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Compress-Archive -Path ${{ steps.build.outputs.release_folder }}/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
         Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
 
     - name: Create windows version
       run: |
-        dotnet publish src/NVika --configuration Release --output ./publish --self-contained true --runtime win-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
-        # Copy-Item -Path "artifacts/ReleaseNotes.html" -Destination publish
+        dotnet publish src/NVika --configuration Release --output ./publish --runtime win-x86 -p:PublishAot=true -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x86.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
 
     - name: Create chocolatey version
