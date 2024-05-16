@@ -75,9 +75,11 @@ jobs:
         name: inspectcodereport.json
 
     - name: GendarmeAnalysis
+      env:
+        RELEASE_FOLDER: ${{ steps.build.outputs.release_folder }}
       run: |
         nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
-        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore ${{ steps.build.outputs.release_folder }}/NVika.exe
+        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore "$RELEASE_FOLDER/NVika.exe"
 
     - uses: actions/upload-artifact@v4
       with:
@@ -85,22 +87,28 @@ jobs:
         name: GendarmeReport.xml
 
     - name: LaunchNVika
-      run: ${{ steps.build.outputs.release_folder }}/NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ${{ steps.build.outputs.release_folder }}/static-analysis.sarif.json GendarmeReport.xml
+      env:
+        RELEASE_FOLDER: ${{ steps.build.outputs.release_folder }}
+      run: $RELEASE_FOLDER/NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json $RELEASE_FOLDER/static-analysis.sarif.json GendarmeReport.xml
 
     - name: Create Nuget package
       run: dotnet pack src --configuration Release --nologo --no-build /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
     - name: Create MSBuild package
+      env:
+        RELEASE_FOLDER: ${{ steps.build.outputs.release_folder }}
       run: |
         Copy-Item -Path resources/icon.png -Destination src\NVika.MSBuild\
         mkdir src\NVika.MSBuild\tools\
-        Copy-Item -Path "${{ steps.build.outputs.release_folder }}/publish/*" -Destination src\NVika.MSBuild\tools\
+        Copy-Item -Path "$RELEASE_FOLDER/publish/*" -Destination src\NVika.MSBuild\tools\
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
     - name: Create netcore packages
+      env:
+        RELEASE_FOLDER: ${{ steps.build.outputs.release_folder }}
       run: |
         mkdir ./artifacts/zips
-        Compress-Archive -Path ${{ steps.build.outputs.release_folder }}/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Compress-Archive -Path $RELEASE_FOLDER/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
         Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
 
     - name: Create windows version
