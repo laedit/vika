@@ -18,7 +18,7 @@ jobs:
     - name: Set color
       id: color-selector
       run: |
-        "SELECTED_COLOR=green" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        "SELECTED_COLOR=green" >> $env:GITHUB_OUTPUT
     - name: Get color
       env:
         SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
@@ -62,6 +62,7 @@ jobs:
       run: |
         dotnet build src --configuration Release --no-restore
         echo "release_folder=./src/NVika/bin/Release/net8.0" >> "$GITHUB_OUTPUT"
+        "SELECTED_COLOR=green" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
     - name: Test
       run: dotnet test src --configuration Release --no-build --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
