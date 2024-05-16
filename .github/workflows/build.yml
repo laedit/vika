@@ -75,7 +75,7 @@ jobs:
     - name: GendarmeAnalysis
       run: |
         nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
-        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\net6.0\NVika.exe
+        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore .\src\NVika\bin\Release\net8.0\NVika.exe
 
     - uses: actions/upload-artifact@v4
       with:
@@ -83,7 +83,7 @@ jobs:
         name: GendarmeReport.xml
 
     - name: LaunchNVika
-      run: .\src\NVika\bin\Release\net6.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net6.0/static-analysis.sarif.json GendarmeReport.xml
+      run: .\src\NVika\bin\Release\net8.0\NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ./src/NVika/bin/Release/net8.0/static-analysis.sarif.json GendarmeReport.xml
 
     # - name: Create release notes
       # run: |
@@ -94,13 +94,13 @@ jobs:
       run: |
         Copy-Item -Path resources/icon.png -Destination src\NVika.MSBuild\
         mkdir src\NVika.MSBuild\tools\
-        Copy-Item -Path "src/NVika/bin/Release/net6.0/publish/*" -Destination src\NVika.MSBuild\tools\
+        Copy-Item -Path "src/NVika/bin/Release/net8.0/publish/*" -Destination src\NVika.MSBuild\tools\
         nuget pack src/NVika.MSBuild/NVika.MSBuild.nuspec -Version ${{ steps.gitversion.outputs.nuGetVersionV2 }} -OutputDirectory artifacts/nuget
 
     - name: Create netcore packages
       run: |
         mkdir ./artifacts/zips
-        Compress-Archive -Path src/NVika/bin/Release/net6.0/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
+        Compress-Archive -Path src/NVika/bin/Release/net8.0/publish/* -DestinationPath "artifacts/zips/NVika.netcore.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
         Copy-Item -Path "src/NVika/bin/Release/NVika.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg" -Destination artifacts/nuget
 
     - name: Create windows version
