@@ -22,6 +22,7 @@ jobs:
     - name: Get color
       env:
         SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+      shell: cmd
       run: |
         echo "The selected color is $SELECTED_COLOR"
         echo "The selected color is ${{ steps.color-selector.outputs.SELECTED_COLOR }}"
