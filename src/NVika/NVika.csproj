@@ -7,7 +7,6 @@
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>nvika</ToolCommandName>
 		<Authors>laedit</Authors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Description>Tool - Parse analysis reports (InspectCode, ...) and send messages to build server or console.</Description>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageIcon>icon.png</PackageIcon>

@@ -13,8 +13,8 @@ Right now it's just a tiny tool which parse analysis reports and send messages t
 ## Installation
 
 - [Zip netcore](https://github.com/laedit/SemanticReleaseNotesParser/releases): download and extract
-- [Zip win-x86](https://github.com/laedit/SemanticReleaseNotesParser/releases): download and extract
-- [Chocolatey (win-x86)](https://chocolatey.org/packages/nvika/): `choco install nvika`
+- [Zip win-x64](https://github.com/laedit/SemanticReleaseNotesParser/releases): download and extract
+- [Chocolatey (win-x64)](https://chocolatey.org/packages/nvika/): `choco install nvika`
 - [Dotnet tool](https://www.nuget.org/packages/NVika/):  `dotnet tool install NVika`
 - [MSBuild](https://www.nuget.org/packages/NVika.MSBuild/):  `Install-Package NVika.MSBuild`
 
