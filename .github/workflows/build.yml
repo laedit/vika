@@ -74,18 +74,8 @@ jobs:
         path: inspectcodereport.json
         name: inspectcodereport.json
 
-    - name: GendarmeAnalysis
-      run: |
-        nuget install mono.gendarme -ExcludeVersion -OutputDirectory tools
-        ./tools/Mono.Gendarme/tools/gendarme.exe --xml GendarmeReport.xml --ignore gendarme.ignore ${{ steps.build.outputs.release_folder }}/NVika.exe
-
-    - uses: actions/upload-artifact@v4
-      with:
-        path: GendarmeReport.xml
-        name: GendarmeReport.xml
-
     - name: LaunchNVika
-      run: ${{ steps.build.outputs.release_folder }}/NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ${{ steps.build.outputs.release_folder }}/static-analysis.sarif.json GendarmeReport.xml
+      run: ${{ steps.build.outputs.release_folder }}/NVika.exe --debug --includesource inspectcodereport.xml inspectcodereport.json ${{ steps.build.outputs.release_folder }}/static-analysis.sarif.json
 
     - name: Create Nuget package
       run: dotnet pack src --configuration Release --nologo --no-build /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
