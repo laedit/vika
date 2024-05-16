@@ -15,18 +15,6 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-    - name: Set color
-      id: color-selector
-      run: |
-        "SELECTED_COLOR=green" >> $env:GITHUB_OUTPUT
-    - name: Get color
-      env:
-        SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
-      run: |
-        echo "The selected color is $env:SELECTED_COLOR"
-        echo "The selected color is ${{ steps.color-selector.outputs.SELECTED_COLOR }}"
-        exit 1
-
     - uses: actions/checkout@v4
 
     - name: Fetch all history for all tags and branches
@@ -61,8 +49,7 @@ jobs:
       id: build
       run: |
         dotnet build src --configuration Release --no-restore
-        echo "release_folder=./src/NVika/bin/Release/net8.0" >> "$GITHUB_OUTPUT"
-        "SELECTED_COLOR=green" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "release_folder=./src/NVika/bin/Release/net8.0" >> $env:GITHUB_OUTPUT
 
     - name: Test
       run: dotnet test src --configuration Release --no-build --nologo --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
