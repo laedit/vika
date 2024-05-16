@@ -95,7 +95,7 @@ jobs:
 
     - name: Create windows version
       run: |
-        dotnet publish src/NVika --configuration Release --output ./publish --runtime win-x64 -p:PublishAot=true -p:PublishSingleFile=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        dotnet publish src/NVika --configuration Release --output ./publish --runtime win-x64 -p:PublishAot=true -p:PublishTrimmed=true /p:PackAsTool=false /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
         Compress-Archive -Path publish/* -DestinationPath "artifacts/zips/NVika.win-x64.${{ steps.gitversion.outputs.nuGetVersionV2 }}.zip"
 
     - name: Create chocolatey version
