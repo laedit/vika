@@ -3,9 +3,6 @@ name: "Sonar"
 on:
   push:
     branches: [ master ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
 
 jobs:
   Analyze:
@@ -54,7 +51,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.x'
 
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v1.1.1
