@@ -62,7 +62,7 @@
 		<PackageReference Include="Sarif.Sdk" Version="4.5.4" />
 		<PackageReference Include="Serilog" Version="4.2.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.4.0.108396">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
